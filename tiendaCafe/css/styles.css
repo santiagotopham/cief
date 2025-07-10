@@ -1,0 +1,129 @@
+@font-face {
+	font-family: "Dancing Script";
+	src: url("../fonts/DancingScript/DancingScript-Regular.woff2")
+			format("woff2"),
+		url("../fonts/DancingScript/DancingScript-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Lato";
+	src: url("../fonts/Lato/Lato-Regular.woff2") format("woff2"),
+		url("../fonts/Lato/Lato-Regular.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Lato";
+}
+
+#header-image {
+	width: 100%;
+	display: block;
+}
+
+h1,
+h2 {
+	font-family: "Dancing Script";
+}
+
+nav {
+	background-color: #053617;
+	/* text-align: center; */
+	width: 100%;
+	margin: 0 auto;
+
+	li {
+		list-style: none;
+		padding-bottom: 5px;
+		&:hover {
+			border-bottom: 3px solid white;
+		}
+	}
+}
+
+.nav-list {
+	display: flex;
+	justify-content: center;
+}
+
+.nav-button {
+	color: white;
+	text-decoration: none;
+}
+
+ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5rem;
+	height: 60px;
+}
+
+.main-section {
+	display: flex;
+}
+
+.white-section {
+	width: 20%;
+}
+
+.img-column {
+	display: block;
+}
+
+.img-left-column {
+	width: 100%;
+}
+
+.img-rigth-column {
+	width: 100%;
+}
+
+.green-section {
+	background-color: #053617;
+	color: white;
+}
+
+.content-section {
+	width: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.opinions-section h2 {
+	text-align: center;
+	margin: 1rem;
+	font-size: 2rem;
+}
+
+.opinions-container {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.opinion {
+	flex: 1;
+	background-color: white;
+	padding: 1rem;
+}
+
+.opinion-author {
+	color: red;
+}
+
+footer {
+	height: 220px;
+	background-color: #053617;
+}
