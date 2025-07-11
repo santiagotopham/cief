@@ -2,7 +2,8 @@
 	font-family: "Dancing Script";
 	src: url("../fonts/DancingScript/DancingScript-Regular.woff2")
 			format("woff2"),
-		url("../fonts/DancingScript/DancingScript-Regular.woff") format("woff");
+		url("../fonts/DancingScript/DancingScript-Regular.woff") format("woff"),
+		url("../fonts/DancingScript/DancingScript-Regular.ttf");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -11,7 +12,8 @@
 @font-face {
 	font-family: "Lato";
 	src: url("../fonts/Lato/Lato-Regular.woff2") format("woff2"),
-		url("../fonts/Lato/Lato-Regular.woff") format("woff");
+		url("../fonts/Lato/Lato-Regular.woff") format("woff"),
+		url("../fonts/Lato/Lato-Regular.ttf");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -24,6 +26,12 @@
 	font-family: "Lato";
 }
 
+:root {
+	--page_main_color: #053617;
+	--text_alt_color: white;
+	--content_width: 1100px;
+}
+
 #header-image {
 	width: 100%;
 	display: block;
@@ -34,9 +42,12 @@ h2 {
 	font-family: "Dancing Script";
 }
 
+h2 {
+	font-size: 2rem;
+	font-weight: 300;
+}
+
 nav {
-	background-color: #053617;
-	/* text-align: center; */
 	width: 100%;
 	margin: 0 auto;
 
@@ -44,22 +55,22 @@ nav {
 		list-style: none;
 		padding-bottom: 5px;
 		&:hover {
-			border-bottom: 3px solid white;
+			border-bottom: 3px solid var(--text_alt_color);
 		}
 	}
 }
 
-.nav-list {
+/* .nav-list {
 	display: flex;
 	justify-content: center;
-}
+} */
 
 .nav-button {
-	color: white;
+	color: var(--text_alt_color);
 	text-decoration: none;
 }
 
-ul {
+.nav-list {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -67,7 +78,11 @@ ul {
 	height: 60px;
 }
 
-.main-section {
+/* .main-section {
+	width: var(--content_width);
+} */
+
+.coffee-section {
 	display: flex;
 }
 
@@ -88,8 +103,8 @@ ul {
 }
 
 .green-section {
-	background-color: #053617;
-	color: white;
+	background-color: var(--page_main_color);
+	color: var(--text_alt_color);
 }
 
 .content-section {
@@ -100,10 +115,9 @@ ul {
 	flex-direction: column;
 }
 
-.opinions-section h2 {
+.opinions-section {
 	text-align: center;
 	margin: 1rem;
-	font-size: 2rem;
 }
 
 .opinions-container {
@@ -115,7 +129,6 @@ ul {
 
 .opinion {
 	flex: 1;
-	background-color: white;
 	padding: 1rem;
 }
 
@@ -125,5 +138,26 @@ ul {
 
 footer {
 	height: 220px;
-	background-color: #053617;
+}
+
+.social-media-logos {
+	height: 25px;
+	width: 25px;
+}
+
+/* main section:last-child {
+	height: 400px;
+} */
+
+footer > div {
+	max-width: var(--content_width);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+	column-gap: 1rem;
+
+	div {
+		background-color: blueviolet;
+		border: 5px solid black;
+	}
 }
