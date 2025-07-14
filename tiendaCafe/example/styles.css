@@ -119,19 +119,15 @@ section {
 			}
 		}
 	}
-
-	img {
-		width: 50%;
-	}
 }
 
 /* #opiniones {
   height: 400px;
 } */
 
-main section:last-child {
+/* main section:last-child {
 	height: 400px;
-}
+} */
 
 footer > div {
 	padding: 2rem;
