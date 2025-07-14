@@ -38,15 +38,9 @@ h1 {
 	transform: translate(-50%, -50%);
 }
 
-#test {
-	position: absolute;
-	top: 80.5%;
-	width: 100%;
-	opacity: 70%;
-}
-
 h2 {
 	margin-bottom: 2rem;
+	font-size: 2.3rem;
 }
 
 h3 {
@@ -58,6 +52,13 @@ header > picture,
 img {
 	width: 100%;
 	display: block;
+}
+
+#navbar {
+	position: absolute;
+	top: 80.5%;
+	width: 100%;
+	opacity: 70%;
 }
 
 .flex_center {
@@ -74,8 +75,6 @@ nav {
 		display: flex;
 		gap: 6rem;
 		> li > a {
-			color: black;
-			text-decoration: none;
 			&:hover {
 				border-bottom: 1px solid black;
 			}
@@ -83,22 +82,26 @@ nav {
 	}
 }
 
+.hidden_link {
+	text-decoration: none;
+	color: black;
+}
+
+.email {
+	color: black;
+}
+
 .delimited_content {
 	width: var(--content_width);
 }
 
 #main_content {
-	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
 
 .text_content {
-	display: flex;
 	flex-flow: column;
-	justify-content: center;
-	/* align-items: center; */
-	margin: 0 auto;
 
 	> h2 {
 		padding-left: 1rem;
@@ -114,16 +117,11 @@ nav {
 	background-color: var(--alt_color);
 }
 
-.last_content {
+.auto_margin {
 	margin: 0 auto;
-	/* display: flex; */
-	/* justify-content: center;
-	align-items: center; */
 }
 
 #centered_title {
-	display: flex;
-	justify-content: center;
 	align-items: center;
 	margin-top: 1rem;
 }
@@ -142,8 +140,6 @@ footer {
 	background-color: var(--alt_color);
 	height: 200px;
 	margin-top: 2.5rem;
-	display: flex;
-	justify-content: center;
 
 	> div {
 		display: grid;
@@ -157,22 +153,12 @@ footer {
 
 			> ul {
 				list-style: none;
-				> li > a {
-					text-decoration: none;
-					color: black;
-				}
-			}
-
-			> a {
-				/* text-decoration: none; */
-				color: black;
 			}
 		}
 	}
 }
 
 .logo_image {
-	/* display: block; */
 	height: 35px;
 	width: 35px;
 	margin: 0 auto;
