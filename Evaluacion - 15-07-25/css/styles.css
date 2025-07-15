@@ -79,11 +79,11 @@ nav {
 	}
 }
 
-main {
+.content_width {
 	width: var(--content_width);
 }
 
-.content_section {
+.two_columns {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
@@ -117,4 +117,26 @@ footer {
 		display: flex;
 		align-items: center;
 	}
+}
+
+.three_columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+
+	> div {
+		background-color: white;
+		height: 300px;
+		width: 300px;
+		display: flex;
+		flex-flow: wrap;
+		align-items: center;
+		padding: 1rem;
+		margin-bottom: 2rem;
+	}
+}
+
+.alt_section {
+	background-color: var(--alt_color);
+	align-items: center;
+	color: var(--contrast_color);
 }
