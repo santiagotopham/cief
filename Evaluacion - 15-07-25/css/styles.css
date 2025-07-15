@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+	--main_color: bisque;
+	--dark_color: #754c1a;
+	--alt_color: #ffe4c488;
+	--contrast_color: #69c0e4;
+	--content_width: 1200px;
+}
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	font-family: Roboto;
+}
+
+h1,
+h2,
+h3 {
+	font-family: Amita;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+	text-align: center;
+}
+
+h3 {
+	font-size: 1.4rem;
+	text-align: center;
+}
+
+#title_bar {
+	background-color: var(--main_color);
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#header_image {
+	width: 100%;
+}
+
+.hidden_link {
+	text-decoration: none;
+	color: black;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	height: 2.8rem;
+	background-color: var(--main_color);
+
+	> ul {
+		align-items: center;
+		display: flex;
+		list-style: none;
+		gap: 30rem;
+		border-bottom: 4px solid black;
+
+		> li > a {
+			&:hover {
+				background-color: var(--dark_color);
+				padding: 5px;
+				border-radius: 20%;
+				color: white;
+			}
+		}
+	}
+}
+
+main {
+	width: var(--content_width);
+}
+
+.content_section {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.right_article {
+	margin-left: 1.5rem;
+}
+
+.left_article {
+	margin-right: 1.5rem;
+}
+
+article {
+	margin-bottom: 3rem;
+}
+
+.content_image {
+	width: 100%;
+}
+
+#company_logo {
+	height: 2.7rem;
+}
+
+footer {
+	background-color: var(--main_color);
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+
+	> div {
+		display: flex;
+		align-items: center;
+	}
+}
