@@ -41,8 +41,13 @@ h3 {
 	align-content: center;
 }
 
+picture {
+	margin-bottom: 0;
+}
+
 #header_image {
 	width: 100%;
+	display: block;
 }
 
 .hidden_link {
