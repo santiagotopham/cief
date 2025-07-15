@@ -1,0 +1,24 @@
+.caja {
+	height: 300px;
+	width: 100px;
+	background-color: orange;
+	border: 3px solid blue;
+}
+
+/* main > div {
+  width: 800px;
+  border: 2px solid black;
+  margin: 0 auto;
+} */
+
+main {
+	> div {
+		max-width: 800px;
+		border: 2px solid black;
+		margin: 0 auto;
+		display: flex;
+		gap: 10px;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+}
