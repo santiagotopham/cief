@@ -1,0 +1,166 @@
+:root {
+	--greenColor: #27ae60;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+	margin: 0;
+	padding: 20px;
+}
+
+.formContainer {
+	max-width: 750px;
+	margin: 0 auto;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	color: #333;
+}
+
+fieldset {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 25px;
+	background-color: #fafafa;
+}
+
+legend {
+	font-size: 18px;
+	font-weight: bold;
+	color: #555;
+	padding: 0 10px;
+}
+
+.formGroup {
+	margin-bottom: 20px;
+}
+
+.formRow {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 2fr 2fr;
+	gap: 15px;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+label {
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.required {
+	color: #e74c3c;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 12px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+	border-color: #3498db;
+	outline: none;
+}
+
+.numberInput {
+	width: 80px;
+	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.dateInput {
+	width: 140px;
+	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.radioGroup {
+	margin-top: 15px;
+}
+
+.radioOption {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.radioOption input[type="radio"] {
+	margin-right: 10px;
+	transform: scale(1.2);
+}
+
+.radioButton {
+	accent-color: var(--greenColor);
+}
+
+.radioOption label {
+	font-weight: normal;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
+.buttonContainer {
+	display: flex;
+	gap: 15px;
+	margin-top: 30px;
+	justify-content: space-between;
+}
+
+.selected {
+	color: var(--greenColor);
+}
+
+.btn {
+	padding: 12px 30px;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btnReserve {
+	background-color: var(--greenColor);
+	color: white;
+}
+
+.btnReserve:hover {
+	background-color: #219a52;
+}
+
+.btnCancel {
+	background-color: #e8b4cb;
+	color: #333;
+}
+
+.btnCancel:hover {
+	background-color: #d49bb8;
+}
+
+#dialogWindow {
+	width: 900px;
+	height: 400px;
+	background-color: #fffff0;
+}

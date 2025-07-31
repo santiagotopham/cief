@@ -209,3 +209,84 @@ console.log(arrayFiltrado);
 
 let arrayFiltrado2 = [1, 3, 5, 7].filter((x) => x !== 5);
 console.log(arrayFiltrado2);
+
+function cambiarColorTexto() {
+	let parrafo = document.getElementById("parrafo1");
+	parrafo.style.color = "red";
+}
+
+function hoverColorEntrada() {
+	let parrafo = document.getElementById("parrafo2");
+	parrafo.style.color = "red";
+}
+
+function hoverColorSalida() {
+	let parrafo = document.getElementById("parrafo2");
+	parrafo.style.color = "black";
+}
+
+//Modo 1
+let parrafo3 = document.getElementById("parrafo3");
+
+function click1() {
+	parrafo3.style.backgroundColor = "lightblue";
+	parrafo3.textContent = "He cambiado el texto";
+	parrafo3.style.color = "maroon";
+}
+
+//Modo 2
+document.querySelector("#parrafo2").onclick = (event) => {
+	event.srcElement.style.backgroundColor = "green";
+	console.log(event);
+};
+
+//Modo 3
+document.querySelector("#parrafo3").addEventListener("click", () => {
+	parrafo3.style.border = "2px solid blue";
+});
+
+let myButton = document.querySelector("#myButton");
+let myDiv = document.getElementById("myDiv");
+
+myButton.addEventListener("click", () => {
+	myDiv.innerHTML = "<p onclick='ocultarParrafo()'>Pulsa aqui ahora</p>";
+});
+
+function ocultarParrafo() {
+	myDiv.innerHTML = "";
+}
+
+const myForm = document.getElementById("myForm");
+
+myForm.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	let nombre = document.getElementById("nombre").value.trim();
+	console.log(`Nombre: ${nombre}`);
+
+	if (!isNaN(nombre)) {
+		document.getElementById("nameError").textContent = "Error en el nombre";
+	}
+
+	let condiciones = document.getElementById("condiciones").checked;
+	console.log(`Acepto?: ${condiciones}`);
+
+	let checked = document.querySelector('input[name="languaje"]:checked');
+	console.log(checked.value);
+});
+
+// ------------------------------------------
+
+const formBiblio = document.forms["formBiblio"];
+formBiblio.addEventListener("submit", (evento) => {
+	evento.preventDefault();
+	let nombreAutor = formBiblio["nombreAutor"].value.trim();
+	if (nombreAutor.length == 0) {
+		document.getElementById("errorNombreAutor").textContent =
+			"El nombre del autor no puede quedar vacío";
+	}
+	let apellidoAutor = formBiblio.apellidoAutor.value;
+	let anyoEdicion = formBiblio.anyoEdicion.value;
+	let genero = formBiblio.genero.value;
+	alert(genero);
+});

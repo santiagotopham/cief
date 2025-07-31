@@ -12,5 +12,89 @@
             alert("hola mundo");
         </script> -->
 		<h1>Test</h1>
+		<p id="parrafo1" onclick="cambiarColorTexto()">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum,
+			dolor quas quaerat earum quidem id quisquam harum tenetur aliquam
+			beatae!
+		</p>
+		<p
+			id="parrafo2"
+			onmouseenter="hoverColorEntrada()"
+			onmouseleave="hoverColorSalida()"
+		>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus
+			natus voluptas, ea deserunt quidem praesentium nemo delectus quo
+			dolores necessitatibus.
+		</p>
+		<p id="parrafo3" onclick="click1()">
+			Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
+			tenetur vitae placeat quod tempora nulla. Repudiandae reprehenderit
+			laudantium vel fuga.
+		</p>
+		<button type="button" id="myButton">Pulsar</button>
+		<div id="myDiv"></div>
+		<div>
+			<form name="myForm" id="myForm" action="submit">
+				<label for="nombre">Nombre:</label>
+				<input type="text" id="nombre" required />
+				<label id="nameError"></label>
+				<label for="apellido">Apellido:</label>
+				<input type="text" id="apellido" />
+				<label>Email:</label>
+				<input type="email" id="email" />
+				<label>Contraseña:</label>
+				<input type="password" />
+				<label>Lenguaje:</label>
+				<div>
+					<input type="radio" name="languaje" value="HTML">HTML</input>
+					<input type="radio" name="languaje" value="Javascript" checked>Javascript</input>
+					<input type="radio" name="languaje" value="CSS">CSS</input>
+				</div>
+				<label for="fecha">Fecha:</label>
+				<input type="date" id="fecha" />
+				<label for="fecha-tiempo">Fecha-tiempo:</label>
+				<input type="datetime-local" id="fecha-tiempo" />
+				<label for="tiempo">Tiempo:</label>
+				<input type="time" id="tiempo" />
+				<label for="color">Color:</label>
+				<input type="color" id="color" />
+				<label for="rango">Rango:</label>
+				<input type="range" max="10" min="1" id="rango" />
+				<label>Acepta las condiciones</label>
+				<input type="checkbox" id="condiciones" />
+				<input type="submit" value="OK" />
+			</form>
+			<!-- ---------------------------------------------------------------------- -->
+			<form name="formBiblio"> 
+     <fieldset>
+       <legend>Introduce los datos del libro </legend>
+       <div><label for="nombreAutor">Nombre del autor: </label><input type="text" name="nombreAutor" id="nombreAutor">
+         <p id="errorNombreAutor"></p>
+       </div>
+       <div>              <label for="apellidoAutor">Apellido del autor: </label><input type="text" name="apellidoAutor" id="apellidoAutor"></div>
+       <div><label for="anyoEdicion">Año de edición:</label>
+         <input type="number" min="1800" name="anyoEdicion" id="anyoEdicion">
+       </div>
+<div>
+  <label for="genero">Genero:</label>
+ <select name="genero" id="genero">
+   <option value="historia" selected>Historia</option>
+   <option value="cienciaFiccion">Ciencia Ficción</option>
+   <option value="arte">Arte</option>
+  </select>
+  </div>
+  <div id="buttons">
+    <button type="submit">Enviar</button>
+    <button type="reset">Borrar</button>
+    </div>
+
+       
+       
+       
+
+       </fieldset>
+    
+</form>
+		</div>
 	</body>
 </html>

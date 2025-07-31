@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ejercicios varios</title>
+		<link rel="stylesheet" href="css/styles.css" />
+		<script defer src="js/script.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Ejercicios DOM - Objetos - Arrays</h1>
+		</header>
+		<main>
+			<section>
+				<h2>Ejercicio 1</h2>
+				<h3>Nuestras flores</h3>
+				<div id="ejercicio1"></div>
+			</section>
+			<section>
+				<h2>Ejercicio 2</h2>
+				<h3>Flores de color blanco que florecen en verano</h3>
+				<div id="ejercicio2"></div>
+			</section>
+			<section>
+				<h2>Ejercicio 3</h2>
+				<h3>Selección por características</h3>
+				<form id="form-seleccion" name="formEx3">
+					<fieldset>
+						<div>
+							<p>Color:</p>
+							<label
+								><input
+									type="radio"
+									name="color"
+									value="cualquiera"
+									checked
+								/>Cualquiera</label
+							>
+							<label
+								><input
+									type="radio"
+									name="color"
+									value="blanco"
+								/>Blanco</label
+							>
+							<label
+								><input
+									type="radio"
+									name="color"
+									value="rojo"
+								/>Rojo</label
+							>
+							<label
+								><input
+									type="radio"
+									name="color"
+									value="rosa"
+								/>Rosa</label
+							>
+						</div>
+						<div>
+							<p>Floración:</p>
+							<label
+								><input
+									type="radio"
+									name="season"
+									value="cualquiera"
+									checked
+								/>Cualquiera</label
+							>
+							<label
+								><input
+									type="radio"
+									name="season"
+									value="primavera"
+								/>Primavera</label
+							>
+							<label
+								><input
+									type="radio"
+									name="season"
+									value="verano"
+								/>Verano</label
+							>
+							<label
+								><input
+									type="radio"
+									name="season"
+									value="otoño"
+								/>Otoño</label
+							>
+							<label
+								><input
+									type="radio"
+									name="season"
+									value="invierno"
+								/>Invierno</label
+							>
+						</div>
+						<div>
+							<p>Stock</p>
+							<label
+								><input
+									type="radio"
+									name="stock"
+									value="cualquiera"
+									checked
+								/>Cualquiera</label
+							>
+							<label
+								><input
+									type="radio"
+									name="stock"
+									value="true"
+								/>Con stock</label
+							>
+							<label
+								><input
+									type="radio"
+									name="stock"
+									value="false"
+								/>Sin stock</label
+							>
+						</div>
+					</fieldset>
+				</form>
+				<div id="ejercicio3"></div>
+			</section>
+
+			<section>
+				<h2>Ejercicio 4</h2>
+				<p>Seleccionar flor por nombre</p>
+
+				<form name="formEj4">
+					<label for="buscador">Indica el concepto a buscar </label>
+					<input type="text" name="buscador" id="buscador" />
+					<button type="submit" onclick="searchFlower(event)">
+						Buscar
+					</button>
+				</form>
+				<br />
+				<div id="ejercicio4"></div>
+			</section>
+
+			<section>
+				<h2>Ejercicio 5</h2>
+				<p>Añadir flor a la lista</p>
+
+				<form name="formEj5">
+					<br />
+					<div>
+						<label for="nombreEj5">Nombre de la flor</label>
+						<input type="text" name="nombreEj5" id="nombreEj5" />
+					</div>
+					<br />
+					<div>
+						<label for="colorEj5">Color de la flor</label>
+						<input type="text" name="colorEj5" id="colorEj5" />
+					</div>
+					<br />
+					<div>
+						<label for="floracionEj5">Estación :</label>
+						<select name="floracionEj5" id="floracionEj5">
+							<option value="primavera" selected>
+								Primavera
+							</option>
+							<option value="verano">Verano</option>
+							<option value="otoño">Otoño</option>
+							<option value="invierno">Invierno</option>
+						</select>
+					</div>
+					<br />
+					<div>
+						<input
+							type="radio"
+							name="stock"
+							value="true"
+							id="trueEj5"
+							checked
+						/>
+						<label for="trueEj5"> Con stock</label>
+						<input
+							type="radio"
+							name="stock"
+							value="false"
+							id="falseEj5"
+						/>
+						<label for="falseEj5"> Sin stock</label>
+					</div>
+					<br />
+					<div>
+						<button type="submit">Añadir flor</button>
+						<button type="reset">Borrar formulario</button>
+					</div>
+				</form>
+				<div id="ejercicio5"></div>
+			</section>
+			<section>
+				<h2>Ejercicio 6</h2>
+				<p>Añadir precio a una flor:</p>
+				<form name="addPriceForm">
+					<select id="availableFlowers"></select>
+					<input type="number" id="flowerPrice" />
+					<button type="submit">Aceptar</button>
+				</form>
+			</section>
+			<section>
+				<h2>Ejercicio 7</h2>
+				<p>Eliminar una flor:</p>
+				<select id="availableFlowers2"></select>
+				<button type="button" onclick="deleteFlower()">Aceptar</button>
+			</section>
+		</main>
+	</body>
+</html>

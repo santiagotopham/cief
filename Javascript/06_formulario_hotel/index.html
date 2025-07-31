@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script defer src="./js/script.js"></script>
+		<link rel="stylesheet" href="./css/styles.css" />
+		<title>Formulario Hotel</title>
+	</head>
+	<body>
+		<main class="formContainer">
+			<h1>Reserva de habitación de hotel</h1>
+			<form name="hotelForm">
+				<fieldset>
+					<legend>Datos personales</legend>
+					<div class="formGroup">
+						<label for="userName"
+							><span class="required">*</span> Nombre:</label
+						>
+						<input
+							class="onlyTextInput"
+							type="text"
+							name="userName"
+							id="userName"
+							minlength="2"
+							maxlength="60"
+							pattern="[a-zA-Z]*"
+							required
+						/>
+					</div>
+					<div class="formGroup">
+						<label for="lastName"
+							><span class="required">*</span> Apellido/s:</label
+						>
+						<input
+							class="onlyTextInput"
+							type="text"
+							name="lastName"
+							id="lastName"
+							minlength="2"
+							maxlength="60"
+							pattern="[a-zA-Z]*"
+							required
+						/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Datos de la reserva</legend>
+					<div class="formRow">
+						<div>
+							<label for="adultsQuantity">Adultos:</label>
+							<input
+								type="number"
+								class="numberInput"
+								value="1"
+								min="1"
+								max="99"
+								name="adultsQuantity"
+								id="adultsQuantity"
+							/>
+						</div>
+						<div>
+							<label for="kidsQuantity">Niños:</label>
+							<input
+								type="number"
+								class="numberInput"
+								value="0"
+								min="0"
+								max="99"
+								name="kidsQuantity"
+								id="kidsQuantity"
+							/>
+						</div>
+						<div>
+							<label for="fromDate">Entrada</label>
+							<input
+								type="date"
+								class="dateInput"
+								min="2025-07-30"
+								max="2099-12-31"
+								value="2025-07-30"
+								name="fromDate"
+								id="fromDate"
+							/>
+						</div>
+						<div>
+						<div>
+							<label for="toDate">Salida</label>
+							<input
+								type="date"
+								class="dateInput"
+								min="2025-07-30"
+								max="2099-12-31"
+								value="2025-07-30"
+								name="toDate"
+								id="toDate"
+							/>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Tipo de estancia</legend>
+					<div class="radioGroup">
+						<div class="radioOption">
+							<input
+								class="radioButton"
+								type="radio"
+								name="stayType"
+								value="onlyStay"
+								id="onlyStay"
+								checked
+							/>
+							<label class="radioLabel selected" for="onlyStay" id="defaultStay"
+								>Sólo alojamiento</label
+							>
+						</div>
+						<div class="radioOption">
+							<input
+								class="radioButton"
+								type="radio"
+								name="stayType"
+								value="breakfast"
+								id="breakfast"
+							/>
+							<label class="radioLabel" for="breakfast"
+								>Desayuno incluido</label
+							>
+						</div>
+						<div class="radioOption">
+							<input
+								class="radioButton"
+								type="radio"
+								name="stayType"
+								value="halfBoard"
+								id="halfBoard"
+							/>
+							<label class="radioLabel" for="halfBoard"
+								>Media pensión</label
+							>
+						</div>
+						<div class="radioOption">
+							<input
+								class="radioButton"
+								type="radio"
+								name="stayType"
+								value="fullBoard"
+								id="fullBoard"
+							/>
+							<label class="radioLabel" for="fullBoard"
+								>Pensión completa</label
+							>
+						</div>
+					</div>
+				</fieldset>
+				<div class="buttonContainer">
+					<button type="submit" class="btn btnReserve">
+						Reservar
+					</button>
+					<button type="reset" class="btn btnCancel" onclick="resetForm()">Cancelar</button>
+				</div>
+			</form>
+		</main>
+		<dialog id="dialogWindow">
+			<div>
+				<h2>
+					Resumen de la reserva
+				</h2>
+			</div>
+			<hr>
+			<div>
+				<ul class="dialogList"></ul>
+			</div>
+			<hr>
+			<button class="dialogButton">Aceptar</button>
+		</dialog>
+	</body>
+</html>

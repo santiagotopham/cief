@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Sitio web de una biblioteca" />
+		<meta name="author" content="S. Topham" />
+		<title>Biblioteca</title>
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="css/biblioteca.css" />
+	</head>
+
+	<body>
+		<header class="container">
+			<h1>Mini biblioteca</h1>
+		</header>
+		<main class="container">
+			<section>
+				<h2>1. Libros disponibles</h2>
+				<p>Obras de la colección en orden alfabético según el título</p>
+				<div id="ejer1"></div>
+			</section>
+
+			<section>
+				<details>
+					<summary>2. Sugerencias de obras por tema e idioma</summary>
+
+					<form id="form-filtrado" name="form-filtrado">
+						<fieldset>
+							<div>
+								<h2>Categorías:</h2>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="todo"
+										checked
+									/>Sin especificar</label
+								>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="drama"
+									/>Drama</label
+								>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="aventuras"
+									/>Aventuras</label
+								>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="ciencia-ficción"
+									/>Ciencia-ficción</label
+								>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="poesia"
+									/>Poesía</label
+								>
+								<label
+									><input
+										type="radio"
+										name="categoria"
+										value="misterio"
+									/>Misterio</label
+								>
+							</div>
+							<div>
+								<h2>Idioma:</h2>
+								<label
+									><input
+										type="radio"
+										name="idioma"
+										value="todo"
+										checked
+									/>Sin especificar</label
+								>
+								<label
+									><input
+										type="radio"
+										name="idioma"
+										value="català"
+									/>Català</label
+								>
+								<label
+									><input
+										type="radio"
+										name="idioma"
+										value="español"
+									/>Español</label
+								>
+							</div>
+							<div>
+								<h2>Época:</h2>
+								<label
+									><input
+										type="radio"
+										name="epoca"
+										value="todo"
+										checked
+									/>Sin especificar</label
+								>
+								<label
+									><input
+										type="radio"
+										name="epoca"
+										value="clásica"
+									/>Clásica</label
+								>
+								<label
+									><input
+										type="radio"
+										name="epoca"
+										value="s.XIX"
+									/>S. XIX</label
+								>
+								<label
+									><input
+										type="radio"
+										name="epoca"
+										value="s.XX"
+									/>S. XX</label
+								>
+							</div>
+						</fieldset>
+					</form>
+					<div id="ejer2"></div>
+				</details>
+			</section>
+
+			<section>
+				<details>
+					<summary>3. Filtrar por autor</summary>
+					<p>
+						Selección de obras según el nombre o parte del nombre de
+						un autor.
+					</p>
+					<p>
+						Al hacer clic sobre el botón buscar se mostrarán las
+						obras cuyos autores cumplen los requisitos.
+					</p>
+					<form id="form-autor" name="form-autor">
+						<label class="input-autor"
+							>Indica el nombre del autor que buscas :
+							<input type="text" name="autor" id="autor" />
+							<input type="submit" value="Buscar"
+						/></label>
+					</form>
+					<div id="ejer3"></div>
+				</details>
+			</section>
+
+			<section>
+				<details>
+					<summary>4. Añadir obra a la biblioteca</summary>
+
+					<form id="incluirObra" name="incluirObra">
+						<div>
+							<label for="incluir-autor"
+								>Nombre del autor :</label
+							>
+							<input type="text" id="incluir-autor" required />
+						</div>
+						<div>
+							<label for="incluir-titulo">Título :</label>
+							<input type="text" id="incluir-titulo" required />
+						</div>
+						<div>
+							<label for="incluir-categoria">Categoría :</label>
+							<input
+								type="text"
+								id="incluir-categoria"
+								required
+							/>
+						</div>
+						<div>
+							<label for="incluir-idioma">Idioma :</label>
+							<input type="text" id="incluir-idioma" required />
+						</div>
+						<div>
+							<label for="incluir-epoca">Época :</label>
+							<input type="text" id="incluir-epoca" required />
+						</div>
+						<div></div>
+						<div>
+							<button type="submit" class="boton boton-incluir">
+								Incluir obra
+							</button>
+						</div>
+						<div>
+							<button type="reset" class="boton boton-reset">
+								Borrar datos
+							</button>
+						</div>
+					</form>
+				</details>
+			</section>
+
+			<section>
+				<details id="quitarObra">
+					<summary>5. Quitar obra de la biblioteca</summary>
+					<div>
+						<form id="deleteForm" name="deleteForm">
+							<select id="booksToRemove"></select>
+							<button type="submit">Eliminar</button>
+						</form>
+					</div>
+				</details>
+			</section>
+		</main>
+
+		<script src="js/biblioteca.js"></script>
+	</body>
+</html>

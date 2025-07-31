@@ -1,0 +1,6 @@
+Hay que realizar un formulario como se muestra en la imagen formulario_hotel_1_sin_datos.png
+
+Cuando introduzcas datos, 
+como en la imagen formulario_hotel_1_con_datos.png, 
+el programa debería mostrar el resultado como la imagen formulario_hotel_3_reserva_realizada.png
+

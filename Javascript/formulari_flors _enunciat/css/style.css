@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+h1 {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+h2 {
+    margin: 1rem 0;
+    border-bottom: 2px solid darksalmon;
+}
+
+h3 {
+    color: darkgreen;
+    margin: 0.5rem 0;
+}
+
+#ejercicio1, #ejercicio2, #ejercicio3 {
+padding: 1rem;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+section {
+    margin: 3rem;
+}
+
+#form_selection fieldset div {
+    padding: 1rem;
+}
+
+.nombreFlor {
+    color: darkgreen;
+    font-weight: 700;
+}
+
+form[name="formEj3"] {
+
+    fieldset {
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    label {
+        display: block;
+        margin: .5rem 0;
+    }
+
+
+}
