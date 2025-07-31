@@ -326,10 +326,18 @@ formEj4.addEventListener("submit", (e) => {
 		epoca: document.getElementById("incluir-epoca").value,
 	};
 
-	biblioteca.push(newBook);
+	let duplicatedBook = biblioteca.find(
+		(x) => x.titulo == newBook.titulo && x.autor == newBook.autor
+	);
 
-	RefreshLibrary();
-	formEj4.reset();
+	if (duplicatedBook != null) {
+		alert("duplicado");
+	} else {
+		biblioteca.push(newBook);
+
+		RefreshLibrary();
+		formEj4.reset();
+	}
 });
 
 function RefreshLibrary() {
