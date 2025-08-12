@@ -76,9 +76,7 @@
 							<input
 								type="date"
 								class="dateInput"
-								min="2025-07-30"
 								max="2099-12-31"
-								value="2025-07-30"
 								name="fromDate"
 								id="fromDate"
 							/>
@@ -89,9 +87,7 @@
 							<input
 								type="date"
 								class="dateInput"
-								min="2025-07-30"
 								max="2099-12-31"
-								value="2025-07-30"
 								name="toDate"
 								id="toDate"
 							/>
@@ -156,22 +152,23 @@
 					<button type="submit" class="btn btnReserve">
 						Reservar
 					</button>
-					<button type="reset" class="btn btnCancel" onclick="resetForm()">Cancelar</button>
+					<button type="button" class="btn btnCancel" onclick="resetForm()">Cancelar</button>
 				</div>
 			</form>
 		</main>
 		<dialog id="dialogWindow">
-			<div>
+			<div class="dialogCentered">
 				<h2>
 					Resumen de la reserva
 				</h2>
 			</div>
 			<hr>
-			<div>
-				<ul class="dialogList"></ul>
+			<div id="dialogListDiv">
 			</div>
 			<hr>
-			<button class="dialogButton">Aceptar</button>
+			<div class="dialogCentered">
+				<button class="btn dialogButton" onclick="closeModal()">Aceptar</button>
+			</div>
 		</dialog>
 	</body>
 </html>
