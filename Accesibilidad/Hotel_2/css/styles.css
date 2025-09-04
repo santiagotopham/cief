@@ -1,0 +1,152 @@
+@font-face {
+	font-family: "Karla";
+	src: url("../fonts/Karla/Karla-Regular.woff2") format("woff2"),
+		url("../fonts/Karla/Karla-Regular.woff") format("woff"),
+		url("../fonts/Karla/Karla-Regular.ttf") format("ttf");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Marcellus";
+	src: url("../fonts/Marcellus/Marcellus-Regular.woff2") format("woff2"),
+		url("../fonts/Marcellus/Marcellus-Regular.woff") format("woff"),
+		url("../fonts/Marcellus/Marcellus-Regular.ttf") format("ttf");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--page_main_color: #076329;
+	--text_alt_color: white;
+	--content_width: 1100px;
+}
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Marcellus";
+}
+
+h1 {
+	font-family: "Karla";
+}
+
+nav {
+	width: 100%;
+	margin: 0 auto;
+	position: fixed;
+	top: 0px;
+
+	li {
+		list-style: none;
+		padding-bottom: 5px;
+		font-size: 1.4rem;
+		&:hover {
+			border-bottom: 3px solid var(--text_alt_color);
+		}
+	}
+}
+
+.nav-button {
+	color: var(--text_alt_color);
+	text-decoration: none;
+}
+
+.nav-list {
+	background-color: var(--page_main_color);
+	color: var(--text_alt_color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 45px;
+}
+
+#footer_section {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	background-color: var(--page_main_color);
+	padding: 1rem 5%;
+	color: beige;
+}
+
+#us_section {
+	font-size: 1.2rem;
+
+	a {
+		font-size: inherit;
+		text-decoration: none;
+		color: beige;
+	}
+	> div > ul {
+		list-style: none;
+		> li {
+			padding-bottom: 0.5rem;
+		}
+	}
+}
+
+#app_section {
+	font-size: 1.2rem;
+	text-align: center;
+	img {
+		width: 40%;
+	}
+}
+
+#follow_section {
+	font-size: 1.2rem;
+	text-align: center;
+
+	div {
+		display: flex;
+		justify-content: space-around;
+		padding: 1rem;
+	}
+	img {
+		width: 30%;
+	}
+}
+
+#front_picture {
+	display: block;
+	margin-bottom: 2rem;
+	width: 90%;
+}
+
+.flex_center {
+	display: flex;
+	justify-content: center;
+}
+
+.title_area {
+	margin: 4.5rem 0rem 2rem 0rem;
+}
+
+.text_section {
+	width: 90%;
+
+	div {
+		padding-bottom: 1rem;
+	}
+}
+
+.green_text {
+	color: #0aa242;
+}
+
+.red_text {
+	color: rgb(200, 11, 11);
+}
+
+.simple_list {
+	margin: 1rem 0;
+	list-style: none;
+}
+
+.centered_text {
+	text-align: center;
+}

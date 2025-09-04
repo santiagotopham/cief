@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Light&family=Waiting+for+the+Sunrise&display=swap");
+
+:root {
+	--greenColor: #55500f;
+	--alt_background: #c2c1c1;
+	font-family: Arial, sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.barra {
+	display: flex;
+	justify-content: space-around;
+	background-color: var(--greenColor);
+	color: gray;
+	padding: 5px;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	margin-bottom: 4rem;
+
+	ul {
+		list-style: none;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
+}
+
+.barra a {
+	text-decoration: none;
+	color: rgb(235, 232, 232);
+	padding: 5px;
+	font-size: 28px;
+}
+
+.barra a:hover {
+	background-color: darkgreen;
+}
+.container {
+	margin: 1rem auto;
+	max-width: 1200px;
+}
+
+.title {
+	text-align: center;
+	font-size: 40px;
+	font-weight: 900;
+	margin: 1rem 0;
+}
+
+.foto-ppal img {
+	width: 100%;
+}
+
+.detalles {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+
+	p strong {
+		font-weight: bold;
+		font-size: 2rem;
+		color: maroon;
+		margin-bottom: 2rem;
+	}
+
+	p,
+	div {
+		padding: 1rem;
+		font-size: 1.5rem;
+	}
+}
+
+/* .contacto {
+	background-color: gray;
+	display: flex;
+	justify-content: center;
+
+	p strong {
+		font-weight: bold;
+		font-size: 2rem;
+		color: maroon;
+		margin: 1.5rem 0;
+		text-align: center;
+		display: block;
+	}
+
+	input {
+		font-size: 1.5rem;
+	}
+} */
+
+.contacto {
+	width: 100%;
+	background-color: var(--alt_background);
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0;
+
+	p strong {
+		font-weight: bold;
+		font-size: 2rem;
+		color: maroon;
+		margin: 1.5rem 0;
+		text-align: center;
+		display: block;
+	}
+
+	input {
+		font-size: 1.5rem;
+	}
+}
+
+#form {
+	display: block;
+	width: var(--content_width);
+}
+
+.boton {
+	margin-top: 1rem;
+	padding: 5px 20px;
+	text-align: left;
+	border: 1px solid #464eb8;
+	background-color: #464eb8;
+	display: inline-block;
+	border-radius: 5%;
+
+	&:hover {
+		background-color: #464eb8;
+		color: bisque;
+	}
+}
+
+.final {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	background-color: var(--greenColor);
+	padding: 2rem 5%;
+	color: beige;
+}
+
+#nosotros {
+	font-size: 1.2rem;
+
+	a {
+		font-size: inherit;
+		text-decoration: none;
+		color: beige;
+	}
+	> div > ul {
+		list-style: none;
+		> li {
+			padding-bottom: 0.5rem;
+		}
+	}
+}
+
+#app {
+	font-size: 1.2rem;
+	text-align: center;
+	img {
+		width: 40%;
+	}
+}
+
+#siguenos {
+	font-size: 1.2rem;
+	text-align: center;
+
+	div {
+		display: flex;
+		justify-content: space-around;
+		padding: 1rem;
+	}
+	img {
+		width: 30%;
+	}
+}
+
+#errorNombre,
+#errorApellido {
+	height: 1rem;
+}
+
+ul {
+	margin: 1rem 0 1rem 2.5rem;
+}
+
+#skip_link {
+	position: absolute;
+	left: -100000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+}
+
+#hidden_link {
+	margin: 1.5rem 0;
+	display: block;
+}

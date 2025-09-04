@@ -1,0 +1,15 @@
+Aquesta vegada ens passen l'encarrec de fer unes pàgines web per a un hotel de montanya. El model de cadascuna, com pots veure a les imatges, té greus problemes d'accessibilitat i usabilitat. Disposem al menys de les imatges i logos necessaris. Es tracta per tant de presentar una proposta que corregeixi aquest desastre.
+
+Com ho faries per a que les pàgines fossin accessibles?
+
+Pots modificar colors, tamanys, tipografies, estils, disposició dels elements... Inclús si creus que es bona idea afegir alguna cosa més (com ara imatges) també ho pots fer. Totes les idees són ben rebudes!
+
+==============================================================================================
+
+
+Esta vez tenemos el encargo de hacer el sitio web de un hotel de montaña. El modelo de cada una, como puedes ver en las imágenes, tiene graves problemas de accesibilidad y usabilidad. Disponemos al menos de las imágenes y logos necesarios.
+Se trata por tanto de presentar una propuesta que corrija este desastre.
+
+¿Cómo conseguirías que las páginas sean accesibles?
+
+Puedes modificar colores, tamaños, tipografías, estilos, disposición de los elementos,... Incluso si crees que es una buena idea añadir algo más (como imágenes) También lo puedes hacer. ¡Todas las ideas son bien recibidas!  

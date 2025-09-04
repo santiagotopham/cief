@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Hotel Mas dels Avets</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div id="skip_link">
+			<a id="hidden_link" href="#">Ir al inicio</a>
+		</div>
+		<nav class="barra">
+			<ul>
+				<li><a href="#">Inicio</a></li>
+				<li><a href="#habitaciones">Habitaciones</a></li>
+				<li><a href="#restaurante">Restaurante</a></li>
+				<li><a href="#contacto">Contacto</a></li>
+			</ul>
+		</nav>
+		<main>
+			<div class="title">
+				<h1 tabindex="0">Hotel Mas dels Avets</h1>
+			</div>
+			<div class="foto-ppal container">
+				<img tabindex="0" src="img/hotel.jpg" alt="Foto de un Hotel" />
+			</div>
+			<section class="detalles container">
+				<img src="img/dormitori.avif" alt="Foto del dormitorio" />
+				<div id="habitaciones">
+					<h2>Nuestras habitaciones</h2>
+					<p>Todas nuestras habitaciones disponen de:</p>
+					<ul>
+						<li>Baño privado</li>
+						<li>TV conectada a satélite</li>
+						<li>Aire Accondicionado</li>
+						<li>Caja de seguridad</li>
+					</ul>
+				</div>
+			</section>
+			<section class="detalles container">
+				<img src="img/menjador.avif" alt="Foto del restaurante" />
+				<div id="restaurante">
+					<h2>El Restaurante</h2>
+					<div>
+						Ofrecemos menús diarios con productos de temporada
+					</div>
+					<div>
+						Le recomendamos consulte nuestra excelente carta de
+						vinos
+					</div>
+					<div>Elaboramos postres artesanos diariamente</div>
+				</div>
+			</section>
+			<section class="contacto" id="contacto">
+				<h2>Contacte con nosotros</h2>
+				<div>
+					<form class="detalles container" name="formReserva">
+						<div>
+							<p>Datos Personales</p>
+							<p>
+								<label for="userFirstName">Nombre</label> :
+								<input
+									type="text"
+									placeholder="Nombre"
+									id="userFirstName"
+								/>
+							</p>
+							<p id="errorNombre"></p>
+							<p>
+								<label for="userLastName">Apellido :</label>
+								<input
+									type="text"
+									placeholder="Apellido"
+									id="userLastName"
+								/>
+							</p>
+							<p id="errorApellido"></p>
+						</div>
+							<p>Datos de la reserva</p>
+							<p>
+								<label for="entryDate">Fecha entrada :</label>
+								<input type="date" id="entryDate" />
+							</p>
+							<p>
+								<label for="leaveDate">Fecha salida :</label>
+								<input type="date" id="leaveDate" />
+							</p>
+                <fieldset class="form-group">
+                <legend>Tipo de alojamiento</legend>
+								<label for="roomOnly">Sólo Alojamiento</label>
+								<input
+									type="radio"
+									name="estancia"
+									value="alojamiento"
+									id="roomOnly"
+									checked
+								/>
+								<label for="includedBreakfast"
+									>Desayuno incluido</label
+								>
+								<input
+									type="radio"
+									name="estancia"
+									value="desayuno"
+									id="includedBreakfast"
+								/>
+                </fieldset>
+							<div class="boton">Enviar</div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+		<footer class="final">
+			<div id="nosotros">
+				SOBRE NOSOTROS
+				<div>
+          <ul>
+            <li><a href="#">¿Quiénes somos?</a></li>
+            <li><a href="#">Blog Hoteles Rurales</a></li>
+            <li><a href="#">Condiciones legales</a></li>
+            <li><a href="#">Política de cookies</a></li>
+          </ul>
+				</div>
+			</div>
+			<div id="app">
+				DESCARGA LA APP
+				<div>
+					<p>
+						<a href=""
+							><img
+								src="img/google-play2.png"
+								alt="Logo de Google Play Store"
+						/></a>
+					</p>
+					<p>
+						<a href=""
+							><img
+								src="img/apple-store2.png"
+								alt="Logo de Apple App Store"
+						/></a>
+					</p>
+				</div>
+			</div>
+			<div id="siguenos">
+				SÍGUENOS
+				<div>
+					<p>
+						<a href="#"
+							><img
+								src="img/png-transparent-facebook.png"
+								alt="Logo de Facebook"
+						/></a>
+					</p>
+					<p>
+						<a href="#"
+							><img
+								src="img/png-transparent-twitter.png"
+								alt="Logo de Twitter"
+						/></a>
+					</p>
+					<p>
+						<a href="#"
+							><img
+								src="img/png-transparent-instagram.png"
+								alt="Logo de Instagram"
+						/></a>
+					</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
