@@ -29,7 +29,12 @@
 			<section>
 				<img
 					id="front_picture"
-					src="./img/aconit.jpg"
+					src="./img/aconit-100.avif"
+					srcset="
+						./img/aconit-50.avif   512w,
+						./img/aconit-100.avif 1024w
+					"
+					sizes="50vw"
 					alt="Foto de flores Aconit."
 				/>
 			</section>
@@ -37,21 +42,64 @@
 				<p>
 					Hay una serie de recomendaciones que debemos tener muy en
 					cuenta, porque hay
-					<span class="green_text">cosas que se pueden hacer </span> y
-					<span class="red_text">cosas que no se deben hacer</span>,
-					ya que perjudican el medio natural e incluso pueden poner en
-					riesgo nuestras vidas y las de los que nos rodean:
+					<span class="green_text"
+						>cosas que se pueden hacer
+						<img
+							class="small_icon"
+							src="./img/yes_icon.png"
+							alt="Accion permitida"
+					/></span>
+					y
+					<span class="red_text"
+						>cosas que no se deben hacer
+						<img
+							class="small_icon"
+							src="./img/no_icon.png"
+							alt="Accion no permitida" /></span
+					>, ya que perjudican el medio natural e incluso pueden poner
+					en riesgo nuestras vidas y las de los que nos rodean:
 				</p>
 				<div class="flex_center centered_text">
 					<ul class="simple_list">
-						<li class="green_text">Respetar la flora y la fauna</li>
-						<li class="green_text">Mantener limpio el entorno</li>
-						<li class="red_text">Hacer hogueras</li>
+						<li class="green_text">
+							Respetar la flora y la fauna
+							<img
+								class="small_icon"
+								src="./img/yes_icon.png"
+								alt="Accion permitida"
+							/>
+						</li>
+						<li class="green_text">
+							Mantener limpio el entorno
+							<img
+								class="small_icon"
+								src="./img/yes_icon.png"
+								alt="Accion permitida"
+							/>
+						</li>
+						<li class="red_text">
+							Hacer hogueras
+							<img
+								class="small_icon"
+								src="./img/no_icon.png"
+								alt="Accion no permitida"
+							/>
+						</li>
 						<li class="green_text">
 							Ir con calzado y ropa adecuados
+							<img
+								class="small_icon"
+								src="./img/yes_icon.png"
+								alt="Accion permitida"
+							/>
 						</li>
 						<li class="red_text">
 							Recoger y consumir plantas y hongos de la naturaleza
+							<img
+								class="small_icon"
+								src="./img/no_icon.png"
+								alt="Accion no permitida"
+							/>
 						</li>
 					</ul>
 				</div>

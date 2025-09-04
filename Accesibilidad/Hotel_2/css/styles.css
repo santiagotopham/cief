@@ -135,11 +135,11 @@ nav {
 }
 
 .green_text {
-	color: #0aa242;
+	color: #00742b;
 }
 
 .red_text {
-	color: rgb(200, 11, 11);
+	color: #c80b0b;
 }
 
 .simple_list {
@@ -149,4 +149,8 @@ nav {
 
 .centered_text {
 	text-align: center;
+}
+
+.small_icon {
+	height: 20px;
 }
