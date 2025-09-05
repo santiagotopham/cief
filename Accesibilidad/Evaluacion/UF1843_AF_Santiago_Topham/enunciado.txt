@@ -1,0 +1,29 @@
+UF1843 Usabilitat i Accessibilitat, avaluació pràctica
+
+La prova consisteix a refer la pàgina index.html de forma
+que compleixi els màxims requisits d'usabilitat i d'accessibilitat.
+
+S'adjunta un possible model, per si cal una referència,
+encara que pots optar per la teva pròpia configuració de colors de fons
+i de text, tipografies, etc. L'únic requisit és que la pàgina
+resultant sigui clara en la disposició i accessible per als lectors
+de pantalla.
+
+Video explicatiu: https://youtu.be/gGMFgNsbPyw
+
+===============================================================================
+
+UF1843 Usabilidad y Accesibilidad, evaluación práctica
+
+La prueba consiste en rehacer la página index.html de forma 
+que cumpla los máximos requisitos de usabilidad y accesibilidad.
+
+Se adjunta un posible modelo, por si es necesaria una referencia,
+aunque puedes optar por tu propia configuración de colores de fondo 
+y de texto, tipografías, etc. El único requisito es que la página
+resultante sea clara en su disposición y accesible por lectores
+de pantalla.
+
+Video explicativo: https://youtu.be/gGMFgNsbPyw
+
+===============================================================================

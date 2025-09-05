@@ -1,0 +1,108 @@
+[título principal] Casa Batlló
+[subtítulo] Una obra maestra de la arquitectura modernista
+
+[menú de navegación, debe mostrarse en sentido horizontal]
+
+[foto del acceso] Acceso a Casa Batlló.
+
+
+[sección Gaudí] Antoni Gaudí
+[foto de Gaudí] Fotografía de Antoni Gaudí de 1878
+[texto1] 
+Gaudí fue un arquitecto con un sentido innato de la geometría y el
+volumen, así como una gran capacidad imaginativa que le permitía
+proyectar mentalmente la mayoría de sus obras antes de pasarlas a
+planos. De hecho, pocas veces realizaba planos detallados de sus
+obras; prefería recrearlos sobre maquetas tridimensionales,
+moldeando todos los detalles según los iba ideando mentalmente. En
+otras ocasiones, iba improvisando sobre la marcha, dando
+instrucciones a sus colaboradores sobre lo que debían hacer.
+[texto2] 
+Dotado de una fuerte intuición y capacidad creativa, Gaudí
+concebía sus edificios de una forma global, atendiendo tanto a las
+soluciones estructurales como a las funcionales y decorativas.
+Estudiaba hasta el más mínimo detalle de sus creaciones,
+integrando en la arquitectura toda una serie de trabajos
+artesanales que dominaba él mismo a la perfección: cerámica,
+vidriería, forja de hierro, carpintería, etc. Asimismo, introdujo
+nuevas técnicas en el tratamiento de los materiales, como su
+famoso trencadís hecho con piezas de cerámica de desecho.
+
+[sección edificio] El edificio
+[foto de la fachada] La fachada de la Casa Batlló destaca por su mosaico y los balcones en forma de máscaras venecianas.
+
+[texto1] 
+La Casa Batlló es un reflejo de la plenitud artística de Gaudí:
+pertenece a su etapa naturalista (primera década del siglo XX),
+periodo en que el arquitecto perfecciona su estilo personal,
+inspirándose en las formas orgánicas de la naturaleza, para lo que
+puso en práctica toda una serie de nuevas soluciones estructurales
+originadas en los profundos análisis efectuados por Gaudí de la
+geometría reglada. A ello añade el artista catalán una gran
+libertad creativa y una imaginativa creación ornamental: partiendo
+de cierto barroquismo sus obras adquieren gran riqueza
+estructural, de formas y volúmenes desprovistos de rigidez
+racionalista o de cualquier premisa clásica.
+
+[texto2] 
+Sin embargo, como es habitual en las obras de Gaudí, el diseño y
+la innegable artisticidad del conjunto no privan de que el
+edificio esté concebido bajo el prisma de la funcionalidad, a la
+que el arquitecto subordina todos los demás elementos. En ese
+sentido, cabe resaltar la importancia otorgada tanto a la
+iluminación como a la ventilación, dos ejes básicos para una vida
+sana y confortable en un edificio de viviendas. Para ello dispuso
+un gran patio central en el centro del edificio, al que daban las
+habitaciones de servicios, mientras que los salones y los
+dormitorios daban a la fachada. Este patio también articulaba el
+movimiento dentro del edificio, a través de escaleras y un
+ascensor.
+
+[sección galería] Galería de imágenes
+
+[foto1]
+El espacio más relevante era el salón principal, con un techo en forma de cielo 
+raso de formas helicoidales en relieve, y donde destacaba el gran ventanal de la 
+tribuna que daba al paseo de Gracia, decorado con vidrieras en forma de disco de 
+diferentes colores.
+
+[foto2]
+Una gran lámpara circular remata la espiral del cielo raso.
+
+[foto3]
+El patio está revestido de azulejos, con una ingeniosa gradación de color desde 
+el azul de la parte superior hasta el blanco de la inferior, para mejor 
+aprovechamiento de la luz, lo que provoca la sensación de estar en una cueva submarina.
+
+[foto4]
+Una de las interpretaciones simbólicas que se ha dado a esta fachada es la de 
+San Jorge luchando con el dragón, cuyas víctimas se hallan en la fachada 
+representadas por las columnas en forma de hueso y los balcones en forma de calavera. 
+Así, la cruz de cuatro brazos sería la espada clavada en el espinazo del animal, 
+del que brotaría la sangre, presente en la cerámica roja de esta parte de la cubierta.
+
+
+[seccion modernismo] El modernismo
+[texto1] 
+El modernismo rechaza el estilo poco atractivo de la arquitectura
+industrial de la primera mitad del siglo XIX, y desarrolla nuevos
+conceptos arquitectónicos basados en la naturaleza, que consisten
+en los materiales de construcción que se emplean, en las formas de
+los edificios y en las figuras de sus fachadas. Los arquitectos y
+sus escultores colocan en el exterior de los edificios pájaros,
+mariposas, hojas y flores a modo de elementos decorativos, ya sea
+como figuras adosadas o como adorno de la piedra o cerámica.
+También se colocan figuras de tamaño mayor, animales fabulosos o
+personas, y en las cornisas elementos de cerámica de color. Las
+ventanas y los balcones disponen de rejas de hierro forjado, que
+son labradas artísticamente y contienen motivos inspirados en la
+naturaleza.
+
+[texto2] 
+Los arquitectos aprovecharon los materiales nuevos y
+reconvirtieron el uso de los ya conocidos. Algunos comunes en el
+modernismo fueron el hierro (muy presente en diversas obras,
+dejando la herrería al descubierto), la cerámica, el vidrio, los
+cristales, la madera, el yeso, la piedra, los ladrillos y la
+pintura entre otros, también se reintegró la escultura a la
+arquitectura como una de sus principales cualidades.           
