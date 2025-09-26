@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>OpenWeather</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script src="./js/script.js" defer type="module"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Meteo</h1>
+		</header>
+		<main>
+			<form name="formMeteo">
+				<div>
+					<label for="inputCiudad">Ciudad:</label>
+					<input
+						type="text"
+						,
+						id="inputCiudad"
+						name="inputCiudad"
+						value="barcelona"
+					/>
+				</div>
+				<div>
+					<label for="inputPais">Pais:</label>
+					<input
+						type="text"
+						,
+						id="inputPais"
+						name="inputPais"
+						maxlength="2"
+					/>
+				</div>
+				<div>
+					<label for="inputIdioma">Idioma:</label>
+					<select name="inputIdioma" id="inputIdioma">
+						<option value="es" selected>Español</option>
+						<option value="en">Ingles</option>
+						<option value="ca">Catalan</option>
+						<option value="fr">Frances</option>
+					</select>
+				</div>
+				<div>
+					<button type="submit">Aceptar</button>
+				</div>
+			</form>
+			<div id="showResult"></div>
+		</main>
+	</body>
+</html>

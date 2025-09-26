@@ -1,0 +1,9 @@
+Direccion con la info de uso:
+https://openweathermap.org/current#name
+
+URL tipica
+https://api.openweathermap.org/data/2.5/weather?q=barcelona&appid=a651def1302ca653e10f9c58cb3c327a
+
+
+Celsius y español
+https://api.openweathermap.org/data/2.5/weather?q=barcelona&appid=a651def1302ca653e10f9c58cb3c327a&units=metric&lang=es
