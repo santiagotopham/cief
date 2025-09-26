@@ -113,8 +113,13 @@ fecha de nacimiento más reciente. Todos los datos, excepto el id.
 select p.nombre, p.apellido, p.profesion, p.genero, p.oscars, p.fecha_nacimiento
 from people p
 where p.profesion = (select id_profesion from profesion where profesion = 'musica')
-order by p.fecha_nacimiento desc
-limit 1;
+and p.fecha_nacimiento = (select max(p.fecha_nacimiento)
+							from people p
+							where p.profesion = (select id_profesion from profesion where profesion = 'musica'))		
+order by p.fecha_nacimiento desc;
+
+
+
 
 /*
 EJERCICIO #7 : 0.50 puntos
@@ -174,8 +179,12 @@ from people p
 join profesion r on p.profesion = r.id_profesion
 where r.profesion = 'direccion'
 and p.oscars = 0
-order by fecha_nacimiento asc
-limit 1;
+and p.fecha_nacimiento = (select min(p.fecha_nacimiento) 
+						from people p
+						join profesion r on p.profesion = r.id_profesion
+						where r.profesion = 'direccion'
+						and p.oscars = 0)	
+order by fecha_nacimiento asc;
 
 /*
 EJERCICIO #12 : 0.50 puntos
