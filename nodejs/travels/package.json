@@ -1,0 +1,28 @@
+{
+  "name": "node_express_ejs_travels",
+  "version": "1.0.0",
+  "description": "Ejemplo de aplicación con Node, Express, EJS y otros módulos",
+  "keywords": [
+    "Node",
+    "Express",
+    "EJS"
+  ],
+  "homepage": "https://github.com/classesdeferran/node_express_ejs_travels_2025#readme",
+  "bugs": {
+    "url": "https://github.com/classesdeferran/node_express_ejs_travels_2025/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classesdeferran/node_express_ejs_travels_2025.git"
+  },
+  "license": "ISC",
+  "author": "Ferran",
+  "type": "commonjs",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node --watch src/app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

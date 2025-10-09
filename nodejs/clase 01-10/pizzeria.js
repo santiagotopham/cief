@@ -19,7 +19,7 @@ console.log("=".repeat(title.length), "\n");
 
 console.log("Tipo de masa: \n");
 for (const currentDough of ingredientes.DoughTypes) {
-	console.log(`${currentDough.Option}${currentDough.Name}`);
+	console.log(`${currentDough.Option}. ${currentDough.Name}`);
 }
 
 console.log("\n Toppings: \n");
