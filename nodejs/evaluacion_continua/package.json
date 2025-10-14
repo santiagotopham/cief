@@ -1,0 +1,21 @@
+{
+	"name": "evaluacion_continua",
+	"version": "1.0.0",
+	"description": "evaluacion continua UF1844 stopham",
+	"main": "app.js",
+	"scripts": {
+		"start": "node --watch src/app.js"
+	},
+	"keywords": [
+		"evaluacion_continua",
+		"UF1844",
+		"stopham"
+	],
+	"author": "stopham",
+	"license": "ISC",
+	"dependencies": {
+		"ejs": "^3.1.10",
+		"express": "^5.1.0",
+		"morgan": "^1.10.1"
+	}
+}
