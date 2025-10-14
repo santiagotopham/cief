@@ -1,0 +1,175 @@
+@font-face {
+  font-family: Lato;
+  src: url("../fonts/Lato-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Lato;
+}
+
+:root {
+  --color-fondo: #003b95;
+  --color-fondo-oscuro: navy;
+  --color-texto-menu: white;
+  --max-width: 1280px;
+}
+
+h1 {
+  color: var(--color-fondo);
+  text-align: center;
+  font-size: 2.5rem;
+  font-style: italic;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 1rem 0;
+}
+
+nav {
+  background-color: var(--color-fondo);
+  margin-bottom: 2rem;
+  ul {
+    list-style: none;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    color: var(--color-texto-menu);
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 10px 15px;
+
+    &:hover {
+      background-color: var(--color-fondo-oscuro);
+      text-decoration: underline;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: var(--max-width);
+}
+
+main > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.admin_header {
+  h2 {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+
+.admin_main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 2rem;
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .insert, .update {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 2px solid navy;
+    border-radius: 10px;
+    padding: 1rem;
+
+    div {
+      margin: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px 10px;
+    }
+
+    button {
+      padding: 5px 10px;
+      border-radius: .5rem;
+      min-width: 40%;
+    }
+
+    button[type="submit"] {
+      background-color: darkgreen;
+      color:white;
+    }
+    button[type="reset"] {
+      background-color:darkred;
+      color:white;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+    }
+  }
+}
+
+.admin_table {
+  padding: 0 1rem;
+  display: block;
+  table {
+    width: 100%;
+
+  }
+
+  tr {
+    height: 2rem;
+    &:nth-child(even) {
+      background-color: rgb(106,90,205,.3);
+    }
+  }
+
+
+  th, td {
+    text-align: right;
+  }
+
+  th {
+    font-weight: 800;
+  }
+
+  button {
+    border: none;
+    background-color: none;
+  }
+
+  .bi-pencil-fill {
+    fill: green;
+  }
+  .bi-trash-fill{
+    fill:darkred;
+  }
+}
