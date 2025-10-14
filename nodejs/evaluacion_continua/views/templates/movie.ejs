@@ -1,10 +1,8 @@
-<div>
+<div class="movie-card">
 	<a href="/movie/<%= movie.id %>"><img src="<%= movie.image %>" alt="<%= movie.title %>"></a>
-	<div>
-		<h3><a href="/movie/<%= movie.id %>"><%= movie.title %></h3>
-		<p>
-			Género: <a href="/genre/<%= movie.genre %>"><%= movie.genre %></a>
-		</p>
-		<p>Año: <a href="/year/<%= movie.year %>"><%= movie.year %></a></p>
-	</div>
+	<h3><a href="/movie/<%= movie.id %>"><%= movie.title %></h3>
+	<p>
+		Género: <a href="/genre/<%= movie.genre %>"><%= movie.genre %></a>
+	</p>
+	<p>Año: <a href="/year/<%= movie.year %>"><%= movie.year %></a></p>
 </div>
