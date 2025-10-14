@@ -21,6 +21,7 @@ app.use(express.json());
 //Seteo la parametrizacion de datos
 let siteName = "DataFilms";
 let moviesDB = require("../data/pelis.json");
+const { stringify } = require("node:querystring");
 let movieGenres = getGenresList();
 let navBarMenu = buildNavBarMenu();
 
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 		siteName: siteName,
 		subTitle: "Todas las películas",
 		navBarItems: navBarMenu,
+		movies: moviesDB,
 	});
 });
 
@@ -41,8 +43,40 @@ movieGenres.forEach((currentGenre) => {
 			siteName: siteName,
 			subTitle: `Películas del género: ${currentGenre}`,
 			navBarItems: navBarMenu,
-			movies: buildByGenre(currentGenre),
+			movies: filterByGenre(currentGenre),
 		});
+	});
+});
+
+app.get("/year/:year", (req, res) => {
+	let movies = filterByYear(req.params.year);
+
+	if (movies.length == 0) {
+		return res.redirect("/404");
+	}
+
+	res.render("search", {
+		title: siteName,
+		siteName: siteName,
+		subTitle: `Películas del año: ${req.params.year}`,
+		navBarItems: navBarMenu,
+		movies: movies,
+	});
+});
+
+app.get("/movie/:id", (req, res) => {
+	let movie = getMovieById(req.params.id);
+
+	if (movie == null) {
+		return res.redirect("/404");
+	}
+
+	res.render("result", {
+		title: siteName,
+		siteName: siteName,
+		subTitle: movie.title,
+		navBarItems: navBarMenu,
+		movie: movie,
 	});
 });
 
@@ -89,6 +123,10 @@ function buildNavBarMenu() {
 }
 
 function buildMovieList(movies) {
+	if (movies.length == 0) {
+		return null;
+	}
+
 	let list = "<ul>";
 	movies.forEach((currentMovie) => {
 		list += `<li>${currentMovie.title}</li>`;
@@ -100,4 +138,13 @@ function buildMovieList(movies) {
 function buildByGenre(genre) {
 	let movies = filterByGenre(genre);
 	return buildMovieList(movies);
+}
+
+function buildByYear(year) {
+	let movies = filterByYear(year);
+	return buildMovieList(movies);
+}
+
+function getMovieById(id) {
+	return moviesDB.find((x) => x.id == id);
 }

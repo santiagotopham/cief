@@ -1,7 +1,13 @@
 <%- include('./templates/head') %>
 <body>
     <%- include('./templates/navbar') %>
+    <ul>
+        <% movies.forEach(movie => { %>
+            <li>
+            <%- include('./templates/movie', { movie }) %>
+            </li>
+        <% }) %>
+    </ul>
     <%- include('./templates/footer') %>
-    <%- movies %>
 </body>
 </html>
