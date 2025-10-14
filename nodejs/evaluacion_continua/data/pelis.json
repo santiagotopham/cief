@@ -1,362 +1,362 @@
 [
-  {
-    "id": 1,
-    "titulo": "Star Wars IV: Una Nueva Esperanza",
-    "imagen": "https://pics.filmaffinity.com/star_wars-166209019-large.jpg",
-    "fecha": "1977",
-    "director": "George Lucas",
-    "genero": "CienciaFiccion",
-    "presupuesto": "11 millones USD",
-    "sinopsis": "En una galaxia muy, muy lejana, la princesa Leia es capturada por el malvado Imperio Galáctico. Antes de ser apresada, envía un mensaje de auxilio a través del droide R2-D2, quien junto a su compañero C-3PO, escapan al planeta Tatooine. Allí, un joven granjero llamado Luke Skywalker encuentra el mensaje y se embarca en una aventura épica para rescatar a la princesa y derrotar al Imperio con la ayuda del sabio Obi-Wan Kenobi, el contrabandista Han Solo y la valiente Chewbacca."
-  },
-  {
-    "id": 2,
-    "titulo": "El Padrino",
-    "imagen": "https://pics.filmaffinity.com/the_godfather-488102675-large.jpg",
-    "fecha": "1972",
-    "director": "Francis Ford Coppola",
-    "genero": "Crimen",
-    "presupuesto": "6 millones USD",
-    "sinopsis": "La historia de la familia Corleone, una poderosa familia mafiosa en Nueva York, liderada por Vito Corleone. La película sigue la transición del poder dentro de la familia, desde Vito hasta su hijo Michael, quien inicialmente se muestra reacio a involucrarse en los negocios familiares. A medida que Michael se adentra en el mundo del crimen, enfrenta desafíos y traiciones que ponen a prueba su lealtad y moralidad. La película explora temas de poder, familia y la corrupción del sueño americano."
-  },
-  {
-    "id": 3,
-    "titulo": "Cadena Perpetua",
-    "imagen": "https://pics.filmaffinity.com/the_shawshank_redemption-576140557-large.jpg",
-    "fecha": "1994",
-    "director": "Frank Darabont",
-    "genero": "Drama",
-    "presupuesto": "25 millones USD",
-    "sinopsis": "Andy Dufresne, un banquero exitoso, es condenado injustamente por el asesinato de su esposa y su amante, y es enviado a la prisión de Shawshank. Allí, forma una amistad con Red, un preso veterano, y juntos enfrentan los desafíos de la vida en prisión. A lo largo de los años, Andy utiliza su inteligencia y habilidades para mejorar la vida de los presos y planear su escape. La película es una historia conmovedora sobre la esperanza, la redención y la resistencia del espíritu humano."
-  },
-  {
-    "id": 4,
-    "titulo": "Pulp Fiction",
-    "imagen": "https://pics.filmaffinity.com/pulp_fiction-210382116-large.jpg",
-    "fecha": "1994",
-    "director": "Quentin Tarantino",
-    "genero": "Crimen",
-    "presupuesto": "8 millones USD",
-    "sinopsis": "La película entrelaza varias historias de crimen en Los Ángeles, incluyendo a dos asesinos a sueldo, Vincent Vega y Jules Winnfield, que trabajan para el jefe del crimen Marsellus Wallace. También sigue a la esposa de Marsellus, Mia Wallace, y su encuentro con Vincent, así como a un boxeador llamado Butch Coolidge que traiciona a Marsellus. A través de diálogos ingeniosos y situaciones inesperadas, la película explora temas de redención, violencia y moralidad en un estilo único y no lineal."
-  },
-  {
-    "id": 5,
-    "titulo": "El Señor de los Anillos: La Comunidad del Anillo",
-    "imagen": "https://pics.filmaffinity.com/the_lord_of_the_rings_the_fellowship_of_the_ring-952398002-large.jpg",
-    "fecha": "2001",
-    "director": "Peter Jackson",
-    "genero": "Aventura",
-    "presupuesto": "93 millones USD",
-    "sinopsis": "En la Tierra Media, el joven hobbit Frodo Bolsón hereda un anillo mágico que tiene el poder de controlar a todos los demás anillos y corromper a su portador. Junto a un grupo diverso de compañeros, incluyendo humanos, un elfo, un enano y otros hobbits, Frodo emprende una peligrosa misión para destruir el anillo en los fuegos del Monte del Destino, donde fue forjado. A lo largo del viaje, enfrentan numerosos desafíos y enemigos, mientras la sombra del malvado Sauron se extiende por la tierra."
-  },
-  {
-    "id": 6,
-    "titulo": "Forrest Gump",
-    "imagen": "https://pics.filmaffinity.com/forrest_gump-212765827-large.jpg",
-    "fecha": "1994",
-    "director": "Robert Zemeckis",
-    "genero": "Drama",
-    "presupuesto": "55 millones USD",
-    "sinopsis": "Forrest Gump, un hombre con un coeficiente intelectual bajo pero con un corazón puro, narra su vida llena de eventos extraordinarios. Desde su infancia en Alabama, donde supera sus limitaciones físicas, hasta su participación en la guerra de Vietnam y su éxito como corredor de larga distancia, Forrest se encuentra en medio de algunos de los momentos más importantes de la historia estadounidense. A lo largo de su vida, Forrest demuestra que la bondad, la perseverancia y el amor pueden superar cualquier obstáculo."
-  },
-  {
-    "id": 7,
-    "titulo": "Origen",
-    "imagen": "https://pics.filmaffinity.com/inception-652954101-large.jpg",
-    "fecha": "2010",
-    "director": "Christopher Nolan",
-    "genero": "CienciaFiccion",
-    "presupuesto": "160 millones USD",
-    "sinopsis": "Dom Cobb es un ladrón especializado en el arte de la extracción, que consiste en robar secretos valiosos del subconsciente durante el estado de sueño. Su habilidad lo ha convertido en un fugitivo internacional y ha perdido todo lo que amaba. Sin embargo, se le presenta una oportunidad para redimirse: realizar una tarea aparentemente imposible llamada 'origen', que implica implantar una idea en la mente de alguien. Para lograrlo, Cobb reúne a un equipo de especialistas y se embarca en una misión peligrosa que desafía las leyes de la realidad y la percepción."
-  },
-  {
-    "id": 8,
-    "titulo": "Matrix",
-    "imagen": "https://pics.filmaffinity.com/the_matrix-155050517-large.jpg",
-    "fecha": "1999",
-    "director": "Lana Wachowski, Lilly Wachowski",
-    "genero": "CienciaFiccion",
-    "presupuesto": "63 millones USD",
-    "sinopsis": "Thomas Anderson, un programador de computadoras que lleva una doble vida como hacker bajo el alias 'Neo', descubre que la realidad que conoce es en realidad una simulación creada por máquinas inteligentes para controlar a la humanidad. Con la ayuda de Morfeo y Trinity, Neo se une a la resistencia humana para luchar contra las máquinas y descubrir su verdadero potencial como 'El Elegido', destinado a liberar a la humanidad de la opresión de las máquinas."
-  },
-  {
-    "id": 9,
-    "titulo": "El Caballero Oscuro",
-    "imagen": "https://pics.filmaffinity.com/the_dark_knight-102763119-large.jpg",
-    "fecha": "2008",
-    "director": "Christopher Nolan",
-    "genero": "Accion",
-    "presupuesto": "185 millones USD",
-    "sinopsis": "En Gotham City, el vigilante conocido como Batman, junto con el teniente James Gordon y el fiscal de distrito Harvey Dent, lucha contra el crimen y la corrupción. Sin embargo, su misión se ve amenazada por la aparición del Joker, un criminal anárquico que busca sumir a la ciudad en el caos. A medida que Batman enfrenta desafíos morales y personales, debe decidir hasta dónde está dispuesto a llegar para proteger a Gotham y mantener su identidad en secreto."
-  },
-  {
-    "id": 10,
-    "titulo": "Gladiator",
-    "imagen": "https://pics.filmaffinity.com/gladiator-851958258-large.jpg",
-    "fecha": "2000",
-    "director": "Ridley Scott",
-    "genero": "Aventura",
-    "presupuesto": "103 millones USD",
-    "sinopsis": "En el año 180 d.C., el emperador Marco Aurelio es asesinado por su ambicioso hijo Cómodo, quien se proclama emperador. Marco Aurelio, antes de morir, nombra a Máximo, un leal general romano, como su sucesor. Cómodo ordena la ejecución de Máximo y su familia, pero el general logra escapar y es capturado por esclavistas. Convertido en gladiador, Máximo busca venganza contra Cómodo y lucha por restaurar la justicia en Roma."
-  },
-  {
-    "id": 11,
-    "titulo": "Titanic",
-    "imagen": "https://pics.filmaffinity.com/titanic-321994924-large.jpg",
-    "fecha": "1997",
-    "director": "James Cameron",
-    "genero": "Romance",
-    "presupuesto": "200 millones USD",
-    "sinopsis": "En 1912, el lujoso transatlántico Titanic zarpa en su viaje inaugural desde Southampton a Nueva York. A bordo, la joven aristócrata Rose DeWitt Bukater se siente atrapada en un compromiso con el adinerado Cal Hockley. Durante el viaje, Rose conoce a Jack Dawson, un artista bohemio de clase baja. A pesar de las diferencias sociales, surge un romance entre ellos. Sin embargo, su amor se ve amenazado cuando el Titanic choca con un iceberg y comienza a hundirse, poniendo a prueba su valentía y determinación para sobrevivir."
-  },
-  {
-    "id": 12,
-    "titulo": "Interestelar",
-    "imagen": "https://pics.filmaffinity.com/interstellar-366875261-large.jpg",
-    "fecha": "2014",
-    "director": "Christopher Nolan",
-    "genero": "CienciaFiccion",
-    "presupuesto": "165 millones USD",
-    "sinopsis": "En un futuro cercano, la Tierra está al borde del colapso debido a desastres ambientales y la escasez de recursos. Un grupo de astronautas, liderados por el piloto Cooper, emprende una misión a través de un agujero de gusano cerca de Saturno en busca de un nuevo hogar para la humanidad. A medida que exploran planetas desconocidos y enfrentan desafíos inimaginables, Cooper lucha por mantener la conexión con su hija Murph, quien se queda atrás en la Tierra. La película explora temas de amor, sacrificio y la naturaleza del tiempo mientras la humanidad lucha por su supervivencia."
-  },
-  {
-    "id": 13,
-    "titulo": "La Lista de Schindler",
-    "imagen": "https://pics.filmaffinity.com/schindler_s_list-473662617-large.jpg",
-    "fecha": "1993",
-    "director": "Steven Spielberg",
-    "genero": "Drama",
-    "presupuesto": "22 millones USD",
-    "sinopsis": "Durante la Segunda Guerra Mundial, Oskar Schindler, un empresario alemán y miembro del Partido"
-  },
-  {
-    "id": 14,
-    "titulo": "Parásitos",
-    "imagen": "https://pics.filmaffinity.com/gisaengchung-432616131-large.jpg",
-    "fecha": "2019",
-    "director": "Bong Joon-ho",
-    "genero": "Comedia",
-    "presupuesto": "11 millones USD",
-    "sinopsis": "La familia Kim, que vive en la pobreza en un sótano, se infiltra en la vida de la adinerada familia Park al conseguir empleos como tutores y personal doméstico. A medida que los Kim se integran en la vida de los Park, las tensiones entre las dos familias aumentan, revelando secretos oscuros y llevando a un desenlace inesperado y trágico."
-  },
-  {
-    "id": 15,
-    "titulo": "El Rey León",
-    "imagen": "https://pics.filmaffinity.com/the_lion_king-983881776-large.jpg",
-    "fecha": "1994",
-    "director": "Roger Allers, Rob Minkoff",
-    "genero": "Animacion",
-    "presupuesto": "45 millones USD",
-    "sinopsis": "En la sabana africana, el joven león Simba es el heredero al trono de su padre, el rey Mufasa. Sin embargo, su malvado tío Scar trama un plan para asesinar a Mufasa y tomar el trono. Después de la tragedia, Simba huye y se encuentra con nuevos amigos, Timón y Pumba, quienes le enseñan a vivir sin preocupaciones. Con el tiempo, Simba debe enfrentarse a su pasado y regresar para reclamar su lugar como rey, restaurando el equilibrio en el reino."
-  },
-  {
-    "id": 16,
-    "titulo": "Regreso al Futuro",
-    "imagen": "https://pics.filmaffinity.com/back_to_the_future-100822308-large.jpg",
-    "fecha": "1985",
-    "director": "Robert Zemeckis",
-    "genero": "Aventura",
-    "presupuesto": "19 millones USD",
-    "sinopsis": "Marty McFly, un adolescente de 17 años, es accidentalmente enviado al pasado en una máquina del tiempo construida por el excéntrico científico Doc Brown. En 1955, Marty conoce a sus futuros padres y debe asegurarse de que se enamoren para garantizar su propia existencia. Con la ayuda de Doc, Marty enfrenta desafíos y aventuras mientras intenta regresar al futuro antes de que sea demasiado tarde."
-  },
-  {
-    "id": 17,
-    "titulo": "Alien, el octavo pasajero",
-    "imagen": "https://pics.filmaffinity.com/alien-657278575-large.jpg",
-    "fecha": "1979",
-    "director": "Ridley Scott",
-    "genero": "CienciaFiccion",
-    "presupuesto": "11 millones USD",
-    "sinopsis": "La tripulación de la nave espacial Nostromo responde a una señal de socorro en un planeta desconocido. Al investigar, descubren una nave alienígena y una serie de huevos que contienen criaturas mortales. Cuando uno de los miembros de la tripulación es atacado por una de estas criaturas, un alienígena mortal emerge y comienza a cazar a los miembros restantes de la tripulación. La película sigue su lucha por sobrevivir mientras intentan eliminar a la amenaza alienígena antes de que sea demasiado tarde."
-  },
-  {
-    "id": 18,
-    "titulo": "El silencio de los corderos",
-    "imagen": "https://pics.filmaffinity.com/the_silence_of_the_lambs-767447992-large.jpg",
-    "fecha": "1991",
-    "director": "Jonathan Demme",
-    "genero": "Crimen",
-    "presupuesto": "19 millones USD",
-    "sinopsis": "La joven agente del FBI Clarice Starling es asignada a entrevistar al brillante pero peligroso asesino en serie Dr. Hannibal Lecter, quien está encarcelado por sus crímenes. Starling busca la ayuda de Lecter para capturar a otro asesino en serie conocido como Buffalo Bill, que está secuestrando y matando mujeres jóvenes. A medida que Starling se adentra en la mente de Lecter, se desarrolla una relación compleja entre ambos, mientras ella lucha por resolver el caso y enfrentarse a sus propios miedos."
-  },
-  {
-    "id": 19,
-    "titulo": "Salvar al soldado Ryan",
-    "imagen": "https://pics.filmaffinity.com/saving_private_ryan-585301228-large.jpg",
-    "fecha": "1998",
-    "director": "Steven Spielberg",
-    "genero": "Guerra",
-    "presupuesto": "70 millones USD",
-    "sinopsis": "Durante la Segunda Guerra Mundial, un grupo de soldados estadounidenses es enviado en una misión peligrosa para encontrar y rescatar al soldado James Ryan, cuyo tres hermanos han sido asesinados en combate. Liderados por el capitán Miller, el equipo enfrenta numerosos desafíos y peligros mientras atraviesan territorio enemigo. La película destaca los horrores de la guerra y el sacrificio de los soldados, así como la importancia de la camaradería y el deber."
-  },
-  {
-    "id": 20,
-    "titulo": "Blade Runner 2049",
-    "imagen": "https://pics.filmaffinity.com/blade_runner_2049-681477614-large.jpg",
-    "fecha": "2017",
-    "director": "Denis Villeneuve",
-    "genero": "CienciaFiccion",
-    "presupuesto": "150 millones USD",
-    "sinopsis": "En un futuro distópico, el oficial K, un blade runner de la policía de Los Ángeles, descubre un secreto enterrado que tiene el potencial de sumergir lo que queda de la sociedad en el caos. Su investigación lo lleva a buscar al legendario Rick Deckard, un ex blade runner que ha estado desaparecido durante 30 años. A medida que K se adentra en el misterio, se enfrenta a preguntas sobre la identidad, la humanidad y el propósito en un mundo donde la línea entre humanos y replicantes se vuelve cada vez más borrosa."
-  },
-  {
-    "id": 21,
-    "titulo": "Whiplash",
-    "imagen": "https://pics.filmaffinity.com/whiplash-344887410-large.jpg",
-    "fecha": "2014",
-    "director": "Damien Chazelle",
-    "genero": "Drama",
-    "presupuesto": "3.3 millones USD",
-    "sinopsis": "Andrew Neiman, un joven baterista de jazz, ingresa a una prestigiosa escuela de música donde conoce a Terence Fletcher, un exigente y despiadado instructor. Fletcher somete a Andrew a un riguroso entrenamiento y lo empuja al límite para alcanzar la perfección. A medida que la relación entre maestro y alumno se intensifica, Andrew lucha por equilibrar su pasión por la música con su salud mental y emocional, enfrentándose a desafíos que pondrán a prueba su determinación y sacrificio."
-  },
-  {
-    "id": 22,
-    "titulo": "Django Desencadenado",
-    "imagen": "https://pics.filmaffinity.com/django_unchained-956246347-large.jpg",
-    "fecha": "2012",
-    "director": "Quentin Tarantino",
-    "genero": "Western",
-    "presupuesto": "100 millones USD",
-    "sinopsis": "En el sur de Estados Unidos, en la época previa a la Guerra Civil, Django, un esclavo liberado, se une al cazador de recompensas alemán Dr. King Schultz. Juntos, buscan liberar a la esposa de Django, Broomhilda, que está en manos de un brutal terrateniente llamado Calvin Candie. A medida que avanzan en su misión, enfrentan peligros y desafíos, mientras Django lucha por su libertad y justicia en un mundo lleno de violencia y opresión."
-  },
-  {
-    "id": 23,
-    "titulo": "Ciudad de Dios",
-    "imagen": "https://pics.filmaffinity.com/cidade_de_deus-954148413-large.jpg",
-    "fecha": "2002",
-    "director": "Fernando Meirelles, Kátia Lund",
-    "genero": "Crimen",
-    "presupuesto": "3.3 millones USD",
-    "sinopsis": "En las favelas de Río de Janeiro, la historia sigue a dos jóvenes, Buscapé y Zé Pequeño, que toman caminos diferentes en la vida. Buscapé sueña con ser fotógrafo y escapar de la violencia que lo rodea, mientras que Zé Pequeño se convierte en un despiadado líder de una banda criminal. A medida que la violencia y el crimen aumentan en la Ciudad de Dios, la película explora temas de pobreza, corrupción y la lucha por la supervivencia en un entorno peligroso."
-  },
-  {
-    "id": 24,
-    "titulo": "Amelie",
-    "imagen": "https://pics.filmaffinity.com/le_fabuleux_destin_d_amelie_poulain-848337470-large.jpg",
-    "fecha": "2001",
-    "director": "Jean-Pierre Jeunet",
-    "genero": "Comedia",
-    "presupuesto": "10 millones USD",
-    "sinopsis": "Amélie Poulain es una joven camarera en París que decide cambiar la vida de las personas que la rodean para mejor, mientras lucha por encontrar su propio camino hacia la felicidad. A través de pequeños actos de bondad y creatividad, Amélie transforma la vida de sus vecinos y amigos, al tiempo que enfrenta sus propios miedos y anhelos. La película es una celebración de la imaginación, el amor y la magia de los momentos cotidianos."
-  },
-  {
-    "id": 25,
-    "titulo": "El Laberinto del Fauno",
-    "imagen": "https://pics.filmaffinity.com/el_laberinto_del_fauno-222302534-large.jpg",
-    "fecha": "2006",
-    "director": "Guillermo del Toro",
-    "genero": "Drama",
-    "presupuesto": "19 millones USD",
-    "sinopsis": "En la España franquista de 1944, la joven Ofelia se muda con su madre a una zona rural donde su nuevo padrastro, el cruel capitán Vidal, lucha contra los rebeldes. Ofelia descubre un mundo mágico y misterioso cuando encuentra un fauno que le revela que es la reencarnación de una princesa perdida. Para regresar a su reino, Ofelia debe completar tres tareas peligrosas mientras enfrenta la brutal realidad de la guerra y la opresión."
-  },
-  {
-    "id": 26,
-    "titulo": "La Vida es Bella",
-    "imagen": "https://pics.filmaffinity.com/la_vita_e_bella-646167341-large.jpg",
-    "fecha": "1997",
-    "director": "Roberto Benigni",
-    "genero": "Drama",
-    "presupuesto": "20 millones USD",
-    "sinopsis": "Durante la Segunda Guerra Mundial, Guido, un hombre judío italiano, utiliza su imaginación y sentido del humor para proteger a su hijo de los horrores del Holocausto. A pesar de ser enviado a un campo de concentración, Guido crea un mundo de fantasía para su hijo, haciéndole creer que todo es parte de un juego. La película es una conmovedora historia de amor, sacrificio y la capacidad del espíritu humano para encontrar esperanza incluso en las circunstancias más difíciles."
-  },
-  {
-    "id": 27,
-    "titulo": "Sin perdón",
-    "imagen": "https://pics.filmaffinity.com/unforgiven-854755790-large.jpg",
-    "fecha": "1992",
-    "director": "Clint Eastwood",
-    "genero": "Western",
-    "presupuesto": "14 millones USD",
-    "sinopsis": "William Munny, un ex pistolero y asesino a sueldo, vive una vida tranquila como granjero viudo. Sin embargo, cuando una prostituta es brutalmente atacada por dos hombres, Munny se ve obligado a regresar a su antigua vida para buscar justicia. Junto a su viejo amigo Ned Logan y el joven pistolero The Schofield Kid, Munny emprende un viaje peligroso para enfrentarse a los hombres responsables del ataque. La película explora temas de redención, violencia y la naturaleza del bien y el mal en el Salvaje Oeste."
-  },
-  {
-    "id": 28,
-    "titulo": "Gran Torino",
-    "imagen": "https://pics.filmaffinity.com/gran_torino-278262332-large.jpg",
-    "fecha": "2008",
-    "director": "Clint Eastwood",
-    "genero": "Drama",
-    "presupuesto": "33 millones USD",
-    "sinopsis":"Walt Kowalski (Clint Eastwood), un veterano de la guerra de Corea (1950-1953), es un obrero jubilado del sector del automóvil que ha enviudado recientemente. Su máxima pasión es cuidar de su más preciado tesoro: un coche Gran Torino de 1972. Es un hombre inflexible y cascarrabias, al que le cuesta trabajo asimilar los cambios que se producen a su alrededor, especialmente la llegada de multitud de inmigrantes asiáticos a su barrio. Sin embargo, las circustancias harán que se vea obligado a replantearse sus ideas"
-  },
-  {
-    "id": 29,
-    "titulo": "Million Dollar Baby",
-    "imagen": "https://pics.filmaffinity.com/million_dollar_baby-342154413-large.jpg",
-    "fecha": "2004",
-    "director": "Clint Eastwood",
-    "genero": "Drama",
-    "presupuesto": "30 millones USD",
-    "sinopsis": "Maggie Fitzgerald, una joven camarera con un sueño de convertirse en boxeadora profesional, busca la ayuda del veterano entrenador Frankie Dunn. A pesar de las dudas iniciales de Frankie, Maggie demuestra su determinación y talento, ganándose su respeto y apoyo. A medida que Maggie avanza en su carrera, enfrenta desafíos tanto dentro como fuera del ring. La película explora temas de perseverancia, sacrificio y la relación entre maestro y alumno en la búsqueda de la grandeza."
-  },
-  {
-    "id": 30,
-    "titulo": "Mystic River",
-    "imagen": "https://pics.filmaffinity.com/mystic_river-976638525-large.jpg",
-    "fecha": "2003",
-    "director": "Clint Eastwood",
-    "genero": "Crimen",
-    "presupuesto": "25 millones USD",
-    "sinopsis": "Tres amigos de la infancia, Jimmy, Sean y Dave, se reencuentran después de muchos años cuando la hija de Jimmy es asesinada. A medida que la investigación avanza, viejos secretos y traumas del pasado resurgen, poniendo a prueba su amistad y lealtad. La película explora temas de culpa, redención y la complejidad de las relaciones humanas en un contexto de tragedia y misterio."
-  },
-  {
-    "id": 31,
-    "titulo": "Los Puentes de Madison",
-    "imagen": "https://pics.filmaffinity.com/the_bridges_of_madison_county-998728421-large.jpg",
-    "fecha": "1995",
-    "director": "Clint Eastwood",
-    "genero": "Romance",
-    "presupuesto": "22 millones USD",
-    "sinopsis": "Francesca Johnson, una ama de casa italiana que vive en Iowa, se encuentra con Robert Kincaid, un fotógrafo de National Geographic que está en la zona para fotografiar los puentes cubiertos. A medida que pasan cuatro días juntos, Francesca y Robert desarrollan una conexión profunda y apasionada que desafía las convenciones sociales y sus propias responsabilidades. La película explora temas de amor, sacrificio y las decisiones que definen nuestras vidas."
-  },
-  {
-    "id": 32,
-    "titulo": "Con faldas y a lo loco",
-    "imagen": "https://pics.filmaffinity.com/some_like_it_hot-284636981-large.jpg",
-    "fecha": "1959",
-    "director": "Billy Wilder",
-    "genero": "Comedia",
-    "presupuesto": "2.9 millones USD",
-    "sinopsis": "Dos músicos, Joe y Jerry, son testigos de un asesinato de la mafia y deben huir para salvar sus vidas. Para escapar, se disfrazan de mujeres y se unen a una banda femenina que viaja a Florida. Allí, Joe se enamora de Sugar Kane, la cantante de la banda, mientras Jerry, bajo el alias de Daphne, atrae la atención del rico heredero Osgood Fielding III. La película es una comedia de enredos llena de situaciones cómicas y malentendidos, explorando temas de identidad y amor."
-  },
-  {
-    "id": 33,
-    "titulo": "El apartamento",
-    "imagen": "https://pics.filmaffinity.com/the_apartment-815113911-large.jpg",
-    "fecha": "1960",
-    "director": "Billy Wilder",
-    "genero": "Comedia",
-    "presupuesto": "3 millones USD",
-    "sinopsis": "C.C. Baxter, un empleado de oficina en Nueva York, presta su apartamento a sus jefes para sus aventuras amorosas con la esperanza de avanzar en su carrera. Sin embargo, las cosas se complican cuando Baxter se enamora de Fran Kubelik, la amante de uno de sus jefes. A medida que Baxter lucha por equilibrar su vida profesional y personal, la película explora temas de soledad, amor y la búsqueda de la felicidad en un mundo corporativo impersonal."
-  },
-  {
-    "id": 34,
-    "titulo": "El crepúsculo de los dioses",
-    "imagen": "https://pics.filmaffinity.com/sunset_blvd_sunset_boulevard-465026546-large.jpg",
-    "fecha": "1950",
-    "director": "Billy Wilder",
-    "genero": "Drama",
-    "presupuesto": "1.75 millones USD",
-    "sinopsis": "En Hollywood, el guionista Joe Gillis se encuentra accidentalmente con Norma Desmond, una antigua estrella del cine mudo que vive en la opulencia pero en el aislamiento. Norma, obsesionada con su regreso a la pantalla, contrata a Joe para que le ayude a escribir un guion para su gran regreso. A medida que Joe se ve atrapado en el mundo de Norma, la película explora temas de fama, decadencia y la naturaleza efímera del éxito en la industria del cine."
-  },
-  {
-    "id": 35,
-    "titulo": "Testigo de cargo",
-    "imagen": "https://pics.filmaffinity.com/witness_for_the_prosecution-236651370-large.jpg",
-    "fecha": "1957",
-    "director": "Billy Wilder",
-    "genero": "Crimen",
-    "presupuesto": "2 millones USD",
-    "sinopsis": "Leonard Vole es acusado de asesinar a una rica viuda, y su defensa está a cargo del astuto abogado Sir Wilfrid Robarts. A medida que el juicio avanza, surgen testimonios contradictorios y secretos ocultos que ponen en duda la inocencia de Vole. La película es un thriller legal lleno de giros inesperados y revelaciones sorprendentes, explorando temas de justicia, verdad y la complejidad de la naturaleza humana."
-  },
-  {
-    "id": 36,
-    "titulo": "Perdición",
-    "imagen": "https://pics.filmaffinity.com/double_indemnity-575631064-large.jpg",
-    "fecha": "1944",
-    "director": "Billy Wilder",
-    "genero": "Crimen",
-    "presupuesto": "1.2 millones USD",
-    "sinopsis": "Walter Neff, un vendedor de seguros, se ve envuelto en un plan para asesinar al esposo de Phyllis Dietrichson, una mujer seductora que busca cobrar una póliza de seguro. A medida que el plan se desarrolla, Walter se encuentra atrapado en una red de engaños y traiciones. La película es un clásico del cine"
-  }
+	{
+		"id": 1,
+		"title": "Star Wars IV: Una Nueva Esperanza",
+		"image": "https://pics.filmaffinity.com/star_wars-166209019-large.jpg",
+		"year": "1977",
+		"director": "George Lucas",
+		"genre": "CienciaFiccion",
+		"budget": "11 millones USD",
+		"synopsis": "En una galaxia muy, muy lejana, la princesa Leia es capturada por el malvado Imperio Galáctico. Antes de ser apresada, envía un mensaje de auxilio a través del droide R2-D2, quien junto a su compañero C-3PO, escapan al planeta Tatooine. Allí, un joven granjero llamado Luke Skywalker encuentra el mensaje y se embarca en una aventura épica para rescatar a la princesa y derrotar al Imperio con la ayuda del sabio Obi-Wan Kenobi, el contrabandista Han Solo y la valiente Chewbacca."
+	},
+	{
+		"id": 2,
+		"title": "El Padrino",
+		"image": "https://pics.filmaffinity.com/the_godfather-488102675-large.jpg",
+		"year": "1972",
+		"director": "Francis Ford Coppola",
+		"genre": "Crimen",
+		"budget": "6 millones USD",
+		"synopsis": "La historia de la familia Corleone, una poderosa familia mafiosa en Nueva York, liderada por Vito Corleone. La película sigue la transición del poder dentro de la familia, desde Vito hasta su hijo Michael, quien inicialmente se muestra reacio a involucrarse en los negocios familiares. A medida que Michael se adentra en el mundo del crimen, enfrenta desafíos y traiciones que ponen a prueba su lealtad y moralidad. La película explora temas de poder, familia y la corrupción del sueño americano."
+	},
+	{
+		"id": 3,
+		"title": "Cadena Perpetua",
+		"image": "https://pics.filmaffinity.com/the_shawshank_redemption-576140557-large.jpg",
+		"year": "1994",
+		"director": "Frank Darabont",
+		"genre": "Drama",
+		"budget": "25 millones USD",
+		"synopsis": "Andy Dufresne, un banquero exitoso, es condenado injustamente por el asesinato de su esposa y su amante, y es enviado a la prisión de Shawshank. Allí, forma una amistad con Red, un preso veterano, y juntos enfrentan los desafíos de la vida en prisión. A lo largo de los años, Andy utiliza su inteligencia y habilidades para mejorar la vida de los presos y planear su escape. La película es una historia conmovedora sobre la esperanza, la redención y la resistencia del espíritu humano."
+	},
+	{
+		"id": 4,
+		"title": "Pulp Fiction",
+		"image": "https://pics.filmaffinity.com/pulp_fiction-210382116-large.jpg",
+		"year": "1994",
+		"director": "Quentin Tarantino",
+		"genre": "Crimen",
+		"budget": "8 millones USD",
+		"synopsis": "La película entrelaza varias historias de crimen en Los Ángeles, incluyendo a dos asesinos a sueldo, Vincent Vega y Jules Winnfield, que trabajan para el jefe del crimen Marsellus Wallace. También sigue a la esposa de Marsellus, Mia Wallace, y su encuentro con Vincent, así como a un boxeador llamado Butch Coolidge que traiciona a Marsellus. A través de diálogos ingeniosos y situaciones inesperadas, la película explora temas de redención, violencia y moralidad en un estilo único y no lineal."
+	},
+	{
+		"id": 5,
+		"title": "El Señor de los Anillos: La Comunidad del Anillo",
+		"image": "https://pics.filmaffinity.com/the_lord_of_the_rings_the_fellowship_of_the_ring-952398002-large.jpg",
+		"year": "2001",
+		"director": "Peter Jackson",
+		"genre": "Aventura",
+		"budget": "93 millones USD",
+		"synopsis": "En la Tierra Media, el joven hobbit Frodo Bolsón hereda un anillo mágico que tiene el poder de controlar a todos los demás anillos y corromper a su portador. Junto a un grupo diverso de compañeros, incluyendo humanos, un elfo, un enano y otros hobbits, Frodo emprende una peligrosa misión para destruir el anillo en los fuegos del Monte del Destino, donde fue forjado. A lo largo del viaje, enfrentan numerosos desafíos y enemigos, mientras la sombra del malvado Sauron se extiende por la tierra."
+	},
+	{
+		"id": 6,
+		"title": "Forrest Gump",
+		"image": "https://pics.filmaffinity.com/forrest_gump-212765827-large.jpg",
+		"year": "1994",
+		"director": "Robert Zemeckis",
+		"genre": "Drama",
+		"budget": "55 millones USD",
+		"synopsis": "Forrest Gump, un hombre con un coeficiente intelectual bajo pero con un corazón puro, narra su vida llena de eventos extraordinarios. Desde su infancia en Alabama, donde supera sus limitaciones físicas, hasta su participación en la guerra de Vietnam y su éxito como corredor de larga distancia, Forrest se encuentra en medio de algunos de los momentos más importantes de la historia estadounidense. A lo largo de su vida, Forrest demuestra que la bondad, la perseverancia y el amor pueden superar cualquier obstáculo."
+	},
+	{
+		"id": 7,
+		"title": "Origen",
+		"image": "https://pics.filmaffinity.com/inception-652954101-large.jpg",
+		"year": "2010",
+		"director": "Christopher Nolan",
+		"genre": "CienciaFiccion",
+		"budget": "160 millones USD",
+		"synopsis": "Dom Cobb es un ladrón especializado en el arte de la extracción, que consiste en robar secretos valiosos del subconsciente durante el estado de sueño. Su habilidad lo ha convertido en un fugitivo internacional y ha perdido todo lo que amaba. Sin embargo, se le presenta una oportunidad para redimirse: realizar una tarea aparentemente imposible llamada 'origen', que implica implantar una idea en la mente de alguien. Para lograrlo, Cobb reúne a un equipo de especialistas y se embarca en una misión peligrosa que desafía las leyes de la realidad y la percepción."
+	},
+	{
+		"id": 8,
+		"title": "Matrix",
+		"image": "https://pics.filmaffinity.com/the_matrix-155050517-large.jpg",
+		"year": "1999",
+		"director": "Lana Wachowski, Lilly Wachowski",
+		"genre": "CienciaFiccion",
+		"budget": "63 millones USD",
+		"synopsis": "Thomas Anderson, un programador de computadoras que lleva una doble vida como hacker bajo el alias 'Neo', descubre que la realidad que conoce es en realidad una simulación creada por máquinas inteligentes para controlar a la humanidad. Con la ayuda de Morfeo y Trinity, Neo se une a la resistencia humana para luchar contra las máquinas y descubrir su verdadero potencial como 'El Elegido', destinado a liberar a la humanidad de la opresión de las máquinas."
+	},
+	{
+		"id": 9,
+		"title": "El Caballero Oscuro",
+		"image": "https://pics.filmaffinity.com/the_dark_knight-102763119-large.jpg",
+		"year": "2008",
+		"director": "Christopher Nolan",
+		"genre": "Accion",
+		"budget": "185 millones USD",
+		"synopsis": "En Gotham City, el vigilante conocido como Batman, junto con el teniente James Gordon y el fiscal de distrito Harvey Dent, lucha contra el crimen y la corrupción. Sin embargo, su misión se ve amenazada por la aparición del Joker, un criminal anárquico que busca sumir a la ciudad en el caos. A medida que Batman enfrenta desafíos morales y personales, debe decidir hasta dónde está dispuesto a llegar para proteger a Gotham y mantener su identidad en secreto."
+	},
+	{
+		"id": 10,
+		"title": "Gladiator",
+		"image": "https://pics.filmaffinity.com/gladiator-851958258-large.jpg",
+		"year": "2000",
+		"director": "Ridley Scott",
+		"genre": "Aventura",
+		"budget": "103 millones USD",
+		"synopsis": "En el año 180 d.C., el emperador Marco Aurelio es asesinado por su ambicioso hijo Cómodo, quien se proclama emperador. Marco Aurelio, antes de morir, nombra a Máximo, un leal general romano, como su sucesor. Cómodo ordena la ejecución de Máximo y su familia, pero el general logra escapar y es capturado por esclavistas. Convertido en gladiador, Máximo busca venganza contra Cómodo y lucha por restaurar la justicia en Roma."
+	},
+	{
+		"id": 11,
+		"title": "Titanic",
+		"image": "https://pics.filmaffinity.com/titanic-321994924-large.jpg",
+		"year": "1997",
+		"director": "James Cameron",
+		"genre": "Romance",
+		"budget": "200 millones USD",
+		"synopsis": "En 1912, el lujoso transatlántico Titanic zarpa en su viaje inaugural desde Southampton a Nueva York. A bordo, la joven aristócrata Rose DeWitt Bukater se siente atrapada en un compromiso con el adinerado Cal Hockley. Durante el viaje, Rose conoce a Jack Dawson, un artista bohemio de clase baja. A pesar de las diferencias sociales, surge un romance entre ellos. Sin embargo, su amor se ve amenazado cuando el Titanic choca con un iceberg y comienza a hundirse, poniendo a prueba su valentía y determinación para sobrevivir."
+	},
+	{
+		"id": 12,
+		"title": "Interestelar",
+		"image": "https://pics.filmaffinity.com/interstellar-366875261-large.jpg",
+		"year": "2014",
+		"director": "Christopher Nolan",
+		"genre": "CienciaFiccion",
+		"budget": "165 millones USD",
+		"synopsis": "En un futuro cercano, la Tierra está al borde del colapso debido a desastres ambientales y la escasez de recursos. Un grupo de astronautas, liderados por el piloto Cooper, emprende una misión a través de un agujero de gusano cerca de Saturno en busca de un nuevo hogar para la humanidad. A medida que exploran planetas desconocidos y enfrentan desafíos inimaginables, Cooper lucha por mantener la conexión con su hija Murph, quien se queda atrás en la Tierra. La película explora temas de amor, sacrificio y la naturaleza del tiempo mientras la humanidad lucha por su supervivencia."
+	},
+	{
+		"id": 13,
+		"title": "La Lista de Schindler",
+		"image": "https://pics.filmaffinity.com/schindler_s_list-473662617-large.jpg",
+		"year": "1993",
+		"director": "Steven Spielberg",
+		"genre": "Drama",
+		"budget": "22 millones USD",
+		"synopsis": "Durante la Segunda Guerra Mundial, Oskar Schindler, un empresario alemán y miembro del Partido"
+	},
+	{
+		"id": 14,
+		"title": "Parásitos",
+		"image": "https://pics.filmaffinity.com/gisaengchung-432616131-large.jpg",
+		"year": "2019",
+		"director": "Bong Joon-ho",
+		"genre": "Comedia",
+		"budget": "11 millones USD",
+		"synopsis": "La familia Kim, que vive en la pobreza en un sótano, se infiltra en la vida de la adinerada familia Park al conseguir empleos como tutores y personal doméstico. A medida que los Kim se integran en la vida de los Park, las tensiones entre las dos familias aumentan, revelando secretos oscuros y llevando a un desenlace inesperado y trágico."
+	},
+	{
+		"id": 15,
+		"title": "El Rey León",
+		"image": "https://pics.filmaffinity.com/the_lion_king-983881776-large.jpg",
+		"year": "1994",
+		"director": "Roger Allers, Rob Minkoff",
+		"genre": "Animacion",
+		"budget": "45 millones USD",
+		"synopsis": "En la sabana africana, el joven león Simba es el heredero al trono de su padre, el rey Mufasa. Sin embargo, su malvado tío Scar trama un plan para asesinar a Mufasa y tomar el trono. Después de la tragedia, Simba huye y se encuentra con nuevos amigos, Timón y Pumba, quienes le enseñan a vivir sin preocupaciones. Con el tiempo, Simba debe enfrentarse a su pasado y regresar para reclamar su lugar como rey, restaurando el equilibrio en el reino."
+	},
+	{
+		"id": 16,
+		"title": "Regreso al Futuro",
+		"image": "https://pics.filmaffinity.com/back_to_the_future-100822308-large.jpg",
+		"year": "1985",
+		"director": "Robert Zemeckis",
+		"genre": "Aventura",
+		"budget": "19 millones USD",
+		"synopsis": "Marty McFly, un adolescente de 17 años, es accidentalmente enviado al pasado en una máquina del tiempo construida por el excéntrico científico Doc Brown. En 1955, Marty conoce a sus futuros padres y debe asegurarse de que se enamoren para garantizar su propia existencia. Con la ayuda de Doc, Marty enfrenta desafíos y aventuras mientras intenta regresar al futuro antes de que sea demasiado tarde."
+	},
+	{
+		"id": 17,
+		"title": "Alien, el octavo pasajero",
+		"image": "https://pics.filmaffinity.com/alien-657278575-large.jpg",
+		"year": "1979",
+		"director": "Ridley Scott",
+		"genre": "CienciaFiccion",
+		"budget": "11 millones USD",
+		"synopsis": "La tripulación de la nave espacial Nostromo responde a una señal de socorro en un planeta desconocido. Al investigar, descubren una nave alienígena y una serie de huevos que contienen criaturas mortales. Cuando uno de los miembros de la tripulación es atacado por una de estas criaturas, un alienígena mortal emerge y comienza a cazar a los miembros restantes de la tripulación. La película sigue su lucha por sobrevivir mientras intentan eliminar a la amenaza alienígena antes de que sea demasiado tarde."
+	},
+	{
+		"id": 18,
+		"title": "El silencio de los corderos",
+		"image": "https://pics.filmaffinity.com/the_silence_of_the_lambs-767447992-large.jpg",
+		"year": "1991",
+		"director": "Jonathan Demme",
+		"genre": "Crimen",
+		"budget": "19 millones USD",
+		"synopsis": "La joven agente del FBI Clarice Starling es asignada a entrevistar al brillante pero peligroso asesino en serie Dr. Hannibal Lecter, quien está encarcelado por sus crímenes. Starling busca la ayuda de Lecter para capturar a otro asesino en serie conocido como Buffalo Bill, que está secuestrando y matando mujeres jóvenes. A medida que Starling se adentra en la mente de Lecter, se desarrolla una relación compleja entre ambos, mientras ella lucha por resolver el caso y enfrentarse a sus propios miedos."
+	},
+	{
+		"id": 19,
+		"title": "Salvar al soldado Ryan",
+		"image": "https://pics.filmaffinity.com/saving_private_ryan-585301228-large.jpg",
+		"year": "1998",
+		"director": "Steven Spielberg",
+		"genre": "Guerra",
+		"budget": "70 millones USD",
+		"synopsis": "Durante la Segunda Guerra Mundial, un grupo de soldados estadounidenses es enviado en una misión peligrosa para encontrar y rescatar al soldado James Ryan, cuyo tres hermanos han sido asesinados en combate. Liderados por el capitán Miller, el equipo enfrenta numerosos desafíos y peligros mientras atraviesan territorio enemigo. La película destaca los horrores de la guerra y el sacrificio de los soldados, así como la importancia de la camaradería y el deber."
+	},
+	{
+		"id": 20,
+		"title": "Blade Runner 2049",
+		"image": "https://pics.filmaffinity.com/blade_runner_2049-681477614-large.jpg",
+		"year": "2017",
+		"director": "Denis Villeneuve",
+		"genre": "CienciaFiccion",
+		"budget": "150 millones USD",
+		"synopsis": "En un futuro distópico, el oficial K, un blade runner de la policía de Los Ángeles, descubre un secreto enterrado que tiene el potencial de sumergir lo que queda de la sociedad en el caos. Su investigación lo lleva a buscar al legendario Rick Deckard, un ex blade runner que ha estado desaparecido durante 30 años. A medida que K se adentra en el misterio, se enfrenta a preguntas sobre la identidad, la humanidad y el propósito en un mundo donde la línea entre humanos y replicantes se vuelve cada vez más borrosa."
+	},
+	{
+		"id": 21,
+		"title": "Whiplash",
+		"image": "https://pics.filmaffinity.com/whiplash-344887410-large.jpg",
+		"year": "2014",
+		"director": "Damien Chazelle",
+		"genre": "Drama",
+		"budget": "3.3 millones USD",
+		"synopsis": "Andrew Neiman, un joven baterista de jazz, ingresa a una prestigiosa escuela de música donde conoce a Terence Fletcher, un exigente y despiadado instructor. Fletcher somete a Andrew a un riguroso entrenamiento y lo empuja al límite para alcanzar la perfección. A medida que la relación entre maestro y alumno se intensifica, Andrew lucha por equilibrar su pasión por la música con su salud mental y emocional, enfrentándose a desafíos que pondrán a prueba su determinación y sacrificio."
+	},
+	{
+		"id": 22,
+		"title": "Django Desencadenado",
+		"image": "https://pics.filmaffinity.com/django_unchained-956246347-large.jpg",
+		"year": "2012",
+		"director": "Quentin Tarantino",
+		"genre": "Western",
+		"budget": "100 millones USD",
+		"synopsis": "En el sur de Estados Unidos, en la época previa a la Guerra Civil, Django, un esclavo liberado, se une al cazador de recompensas alemán Dr. King Schultz. Juntos, buscan liberar a la esposa de Django, Broomhilda, que está en manos de un brutal terrateniente llamado Calvin Candie. A medida que avanzan en su misión, enfrentan peligros y desafíos, mientras Django lucha por su libertad y justicia en un mundo lleno de violencia y opresión."
+	},
+	{
+		"id": 23,
+		"title": "Ciudad de Dios",
+		"image": "https://pics.filmaffinity.com/cidade_de_deus-954148413-large.jpg",
+		"year": "2002",
+		"director": "Fernando Meirelles, Kátia Lund",
+		"genre": "Crimen",
+		"budget": "3.3 millones USD",
+		"synopsis": "En las favelas de Río de Janeiro, la historia sigue a dos jóvenes, Buscapé y Zé Pequeño, que toman caminos diferentes en la vida. Buscapé sueña con ser fotógrafo y escapar de la violencia que lo rodea, mientras que Zé Pequeño se convierte en un despiadado líder de una banda criminal. A medida que la violencia y el crimen aumentan en la Ciudad de Dios, la película explora temas de pobreza, corrupción y la lucha por la supervivencia en un entorno peligroso."
+	},
+	{
+		"id": 24,
+		"title": "Amelie",
+		"image": "https://pics.filmaffinity.com/le_fabuleux_destin_d_amelie_poulain-848337470-large.jpg",
+		"year": "2001",
+		"director": "Jean-Pierre Jeunet",
+		"genre": "Comedia",
+		"budget": "10 millones USD",
+		"synopsis": "Amélie Poulain es una joven camarera en París que decide cambiar la vida de las personas que la rodean para mejor, mientras lucha por encontrar su propio camino hacia la felicidad. A través de pequeños actos de bondad y creatividad, Amélie transforma la vida de sus vecinos y amigos, al tiempo que enfrenta sus propios miedos y anhelos. La película es una celebración de la imaginación, el amor y la magia de los momentos cotidianos."
+	},
+	{
+		"id": 25,
+		"title": "El Laberinto del Fauno",
+		"image": "https://pics.filmaffinity.com/el_laberinto_del_fauno-222302534-large.jpg",
+		"year": "2006",
+		"director": "Guillermo del Toro",
+		"genre": "Drama",
+		"budget": "19 millones USD",
+		"synopsis": "En la España franquista de 1944, la joven Ofelia se muda con su madre a una zona rural donde su nuevo padrastro, el cruel capitán Vidal, lucha contra los rebeldes. Ofelia descubre un mundo mágico y misterioso cuando encuentra un fauno que le revela que es la reencarnación de una princesa perdida. Para regresar a su reino, Ofelia debe completar tres tareas peligrosas mientras enfrenta la brutal realidad de la guerra y la opresión."
+	},
+	{
+		"id": 26,
+		"title": "La Vida es Bella",
+		"image": "https://pics.filmaffinity.com/la_vita_e_bella-646167341-large.jpg",
+		"year": "1997",
+		"director": "Roberto Benigni",
+		"genre": "Drama",
+		"budget": "20 millones USD",
+		"synopsis": "Durante la Segunda Guerra Mundial, Guido, un hombre judío italiano, utiliza su imaginación y sentido del humor para proteger a su hijo de los horrores del Holocausto. A pesar de ser enviado a un campo de concentración, Guido crea un mundo de fantasía para su hijo, haciéndole creer que todo es parte de un juego. La película es una conmovedora historia de amor, sacrificio y la capacidad del espíritu humano para encontrar esperanza incluso en las circunstancias más difíciles."
+	},
+	{
+		"id": 27,
+		"title": "Sin perdón",
+		"image": "https://pics.filmaffinity.com/unforgiven-854755790-large.jpg",
+		"year": "1992",
+		"director": "Clint Eastwood",
+		"genre": "Western",
+		"budget": "14 millones USD",
+		"synopsis": "William Munny, un ex pistolero y asesino a sueldo, vive una vida tranquila como granjero viudo. Sin embargo, cuando una prostituta es brutalmente atacada por dos hombres, Munny se ve obligado a regresar a su antigua vida para buscar justicia. Junto a su viejo amigo Ned Logan y el joven pistolero The Schofield Kid, Munny emprende un viaje peligroso para enfrentarse a los hombres responsables del ataque. La película explora temas de redención, violencia y la naturaleza del bien y el mal en el Salvaje Oeste."
+	},
+	{
+		"id": 28,
+		"title": "Gran Torino",
+		"image": "https://pics.filmaffinity.com/gran_torino-278262332-large.jpg",
+		"year": "2008",
+		"director": "Clint Eastwood",
+		"genre": "Drama",
+		"budget": "33 millones USD",
+		"synopsis": "Walt Kowalski (Clint Eastwood), un veterano de la guerra de Corea (1950-1953), es un obrero jubilado del sector del automóvil que ha enviudado recientemente. Su máxima pasión es cuidar de su más preciado tesoro: un coche Gran Torino de 1972. Es un hombre inflexible y cascarrabias, al que le cuesta trabajo asimilar los cambios que se producen a su alrededor, especialmente la llegada de multitud de inmigrantes asiáticos a su barrio. Sin embargo, las circustancias harán que se vea obligado a replantearse sus ideas"
+	},
+	{
+		"id": 29,
+		"title": "Million Dollar Baby",
+		"image": "https://pics.filmaffinity.com/million_dollar_baby-342154413-large.jpg",
+		"year": "2004",
+		"director": "Clint Eastwood",
+		"genre": "Drama",
+		"budget": "30 millones USD",
+		"synopsis": "Maggie Fitzgerald, una joven camarera con un sueño de convertirse en boxeadora profesional, busca la ayuda del veterano entrenador Frankie Dunn. A pesar de las dudas iniciales de Frankie, Maggie demuestra su determinación y talento, ganándose su respeto y apoyo. A medida que Maggie avanza en su carrera, enfrenta desafíos tanto dentro como fuera del ring. La película explora temas de perseverancia, sacrificio y la relación entre maestro y alumno en la búsqueda de la grandeza."
+	},
+	{
+		"id": 30,
+		"title": "Mystic River",
+		"image": "https://pics.filmaffinity.com/mystic_river-976638525-large.jpg",
+		"year": "2003",
+		"director": "Clint Eastwood",
+		"genre": "Crimen",
+		"budget": "25 millones USD",
+		"synopsis": "Tres amigos de la infancia, Jimmy, Sean y Dave, se reencuentran después de muchos años cuando la hija de Jimmy es asesinada. A medida que la investigación avanza, viejos secretos y traumas del pasado resurgen, poniendo a prueba su amistad y lealtad. La película explora temas de culpa, redención y la complejidad de las relaciones humanas en un contexto de tragedia y misterio."
+	},
+	{
+		"id": 31,
+		"title": "Los Puentes de Madison",
+		"image": "https://pics.filmaffinity.com/the_bridges_of_madison_county-998728421-large.jpg",
+		"year": "1995",
+		"director": "Clint Eastwood",
+		"genre": "Romance",
+		"budget": "22 millones USD",
+		"synopsis": "Francesca Johnson, una ama de casa italiana que vive en Iowa, se encuentra con Robert Kincaid, un fotógrafo de National Geographic que está en la zona para fotografiar los puentes cubiertos. A medida que pasan cuatro días juntos, Francesca y Robert desarrollan una conexión profunda y apasionada que desafía las convenciones sociales y sus propias responsabilidades. La película explora temas de amor, sacrificio y las decisiones que definen nuestras vidas."
+	},
+	{
+		"id": 32,
+		"title": "Con faldas y a lo loco",
+		"image": "https://pics.filmaffinity.com/some_like_it_hot-284636981-large.jpg",
+		"year": "1959",
+		"director": "Billy Wilder",
+		"genre": "Comedia",
+		"budget": "2.9 millones USD",
+		"synopsis": "Dos músicos, Joe y Jerry, son testigos de un asesinato de la mafia y deben huir para salvar sus vidas. Para escapar, se disfrazan de mujeres y se unen a una banda femenina que viaja a Florida. Allí, Joe se enamora de Sugar Kane, la cantante de la banda, mientras Jerry, bajo el alias de Daphne, atrae la atención del rico heredero Osgood Fielding III. La película es una comedia de enredos llena de situaciones cómicas y malentendidos, explorando temas de identidad y amor."
+	},
+	{
+		"id": 33,
+		"title": "El apartamento",
+		"image": "https://pics.filmaffinity.com/the_apartment-815113911-large.jpg",
+		"year": "1960",
+		"director": "Billy Wilder",
+		"genre": "Comedia",
+		"budget": "3 millones USD",
+		"synopsis": "C.C. Baxter, un empleado de oficina en Nueva York, presta su apartamento a sus jefes para sus aventuras amorosas con la esperanza de avanzar en su carrera. Sin embargo, las cosas se complican cuando Baxter se enamora de Fran Kubelik, la amante de uno de sus jefes. A medida que Baxter lucha por equilibrar su vida profesional y personal, la película explora temas de soledad, amor y la búsqueda de la felicidad en un mundo corporativo impersonal."
+	},
+	{
+		"id": 34,
+		"title": "El crepúsculo de los dioses",
+		"image": "https://pics.filmaffinity.com/sunset_blvd_sunset_boulevard-465026546-large.jpg",
+		"year": "1950",
+		"director": "Billy Wilder",
+		"genre": "Drama",
+		"budget": "1.75 millones USD",
+		"synopsis": "En Hollywood, el guionista Joe Gillis se encuentra accidentalmente con Norma Desmond, una antigua estrella del cine mudo que vive en la opulencia pero en el aislamiento. Norma, obsesionada con su regreso a la pantalla, contrata a Joe para que le ayude a escribir un guion para su gran regreso. A medida que Joe se ve atrapado en el mundo de Norma, la película explora temas de fama, decadencia y la naturaleza efímera del éxito en la industria del cine."
+	},
+	{
+		"id": 35,
+		"title": "Testigo de cargo",
+		"image": "https://pics.filmaffinity.com/witness_for_the_prosecution-236651370-large.jpg",
+		"year": "1957",
+		"director": "Billy Wilder",
+		"genre": "Crimen",
+		"budget": "2 millones USD",
+		"synopsis": "Leonard Vole es acusado de asesinar a una rica viuda, y su defensa está a cargo del astuto abogado Sir Wilfrid Robarts. A medida que el juicio avanza, surgen testimonios contradictorios y secretos ocultos que ponen en duda la inocencia de Vole. La película es un thriller legal lleno de giros inesperados y revelaciones sorprendentes, explorando temas de justicia, verdad y la complejidad de la naturaleza humana."
+	},
+	{
+		"id": 36,
+		"title": "Perdición",
+		"image": "https://pics.filmaffinity.com/double_indemnity-575631064-large.jpg",
+		"year": "1944",
+		"director": "Billy Wilder",
+		"genre": "Crimen",
+		"budget": "1.2 millones USD",
+		"synopsis": "Walter Neff, un vendedor de seguros, se ve envuelto en un plan para asesinar al esposo de Phyllis Dietrichson, una mujer seductora que busca cobrar una póliza de seguro. A medida que el plan se desarrolla, Walter se encuentra atrapado en una red de engaños y traiciones. La película es un clásico del cine"
+	}
 ]

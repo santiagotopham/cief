@@ -1,0 +1,27 @@
+nav {
+	background-color: var(--color-fondo);
+	margin-bottom: 2rem;
+	ul {
+		list-style: none;
+		padding: 20px 40px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	a {
+		color: var(--color-texto-menu);
+		font-size: 1.5rem;
+		text-decoration: none;
+		padding: 10px 15px;
+
+		&:hover {
+			background-color: var(--color-fondo-oscuro);
+			text-decoration: underline;
+		}
+	}
+}
+
+.container {
+	margin: 0 auto;
+	width: var(--max-width);
+}
