@@ -1,26 +1,14 @@
 <%- include('./templates/head') %>
 <body>
     <%- include('./templates/navbar') %>
-    <!-- <ul>
-        <% movies.forEach(movie => { %>
-            <li>
-            <%- include('./templates/movie', { movie }) %>
-            </li>
-        <% }) %>
-    </ul> -->
-    <div class="movies-container">
-    <!-- <% movies.forEach(movie => { %>
-      <div class="movie-card">
-        <img src="<%= movie.image %>" alt="<%= movie.title %>">
-        <h3><%= movie.title %></h3>
-        <p>Género: <%= movie.genre %></p>
-        <p>Año: <%= movie.year %></p>
-      </div>
-    <% }) %> -->
-        <% movies.forEach(movie => { %>
-            <%- include('./templates/movie', { movie }) %>
-        <% }) %>
+    <main>
+        <hr />
+        <div class="movies-container">
+            <% movies.forEach(movie => { %>
+                <%- include('./templates/movie', { movie }) %>
+            <% }) %>
     </div>
+    </main>
     <%- include('./templates/footer') %>
 </body>
 </html>

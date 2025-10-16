@@ -1,8 +1,8 @@
 <%- include('./templates/head') %>
 <body>
     <%- include('./templates/navbar') %>
-    
     <main>
+        <hr />
         <div class="movie-detail">
             <a href="/movie/<%= movie.id %>"><img src="<%= movie.image %>" alt="<%= movie.title %>"></a>
         
@@ -17,7 +17,6 @@
             </div>
         </div>
     </main>
-
     <%- include('./templates/footer') %>
 </body>
 </html>
