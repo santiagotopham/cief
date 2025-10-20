@@ -1,0 +1,20 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/header') %>
+    <main>
+        <hr />
+        <div class="member-detail">
+            <a href="/member/<%= member.id %>"><img src="/img_team/<%= member.foto %>" alt="<%= member.name %>"></a>
+        
+            <div  class="member-info">
+                <p>
+                    <strong>Departamento:</strong> <a href="/department/<%= member.department %>"><%= member.department %></a>
+                </p>
+                <p><strong>Email:</strong> <a href="/year/<%= member.email %>"><%= member.email %></a></p>
+                <p><strong>Sobre mi:</strong> <%= member.about %></p>
+            </div>
+        </div>
+    </main>
+    <%- include('./templates/footer') %>
+</body>
+</html>

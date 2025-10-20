@@ -41,6 +41,39 @@ app.get("/", (req, res) => {
 	});
 });
 
+departments.forEach((currentDepartment) => {
+	app.get(
+		`/department/${currentDepartment.toLocaleLowerCase()}`,
+		(req, res) => {
+			res.render("search", {
+				title: siteName,
+				siteName: siteName,
+				subTitle: `Departamento: ${currentDepartment}`,
+				bannerMessage: bannerMessage,
+				navBarItems: navBarMenu,
+				teamMembers: filterByDepartment(currentDepartment),
+			});
+		}
+	);
+});
+
+app.get("/member/:id", (req, res) => {
+	let member = getMemberById(req.params.id);
+
+	if (member == null) {
+		return res.redirect("/404");
+	}
+
+	res.render("result", {
+		title: siteName,
+		siteName: siteName,
+		subTitle: member.name,
+		bannerMessage: bannerMessage,
+		navBarItems: navBarMenu,
+		member: member,
+	});
+});
+
 //Error handling
 app.use((req, res) => {
 	res.render("404", {
@@ -71,6 +104,13 @@ function getDepartmentsList() {
 	let departmentsList = teamDB.map((currentMember) => {
 		return currentMember.department;
 	});
-	// let temp = ;
 	return [...new Set(departmentsList)];
+}
+
+function filterByDepartment(department) {
+	return teamDB.filter((x) => x.department == department);
+}
+
+function getMemberById(id) {
+	return teamDB.find((x) => x.id == id);
 }
