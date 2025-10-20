@@ -3,6 +3,10 @@
 		<a href="/"><h1><%= siteName %></h1></a>
 		<%- navBarItems %>
 	</nav>
-	<p><%= bannerMessage %></p>
-	<h2><%= subTitle %></h2>
+	<p><% if (bannerMessage) { %>
+		<p><%= bannerMessage %></p>
+	<% } %></p>
+	<h2><% if (subTitle) { %>
+		<p><%= subTitle %></p>
+	<% } %></h2>
 </header>

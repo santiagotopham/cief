@@ -1,0 +1,142 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/header') %>
+    <main class="backoffice_main">
+        <div class="insert">
+            <h2>Formulario para añadir miembros</h2>
+            <form action="/insert" method="post">
+                <div>
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div>
+                    <label for="surname">Apellido:</label>
+                    <input type="text" id="surname" name="surname">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div>
+                    <label for="key">Key:</label>
+                    <input type="text" id="key" name="key">
+                </div>
+                <div>
+                    <label for="dateBirth">Fecha nacimiento:</label>
+                    <input type="date" id="dateBirth" name="dateBirth" step="any">
+                </div>
+                <div>
+                    <label for="department">Departamento:</label>
+                    <select name="department" id="department" required>
+                        <% departments.forEach(currentDepartment => { %>
+                            <option value="<%= currentDepartment %>"><%= currentDepartment %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="about">Acerca de:</label>
+                    <input type="text" id="about" name="about">
+                </div>
+                <div class="buttons">
+                    <button type="submit">Añadir</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="update">
+            <h2>Formulario para actualizar miembros</h2>
+            <form action="/update" method="post">
+                <input type="hidden" id="id" name="id">
+                <div>
+                    <label for="updateName">Nombre:</label>
+                    <input type="text" id="updateName" name="name">
+                </div>
+                <div>
+                    <label for="updateSurname">Apellido:</label>
+                    <input type="text" id="updateSurname" name="surname">
+                </div>
+                <div>
+                    <label for="updateEmail">Email:</label>
+                    <input type="email" id="updateEmail" name="email">
+                </div>
+                <div>
+                    <label for="updateKey">Key:</label>
+                    <input type="text" id="updateKey" name="key">
+                </div>
+                <div>
+                    <label for="updatedateBirth">Fecha nacimiento:</label>
+                    <input type="date" id="updatedateBirth" name="dateBirth" step="any">
+                </div>
+                <div>
+                    <label for="updateDepartment">Departamento:</label>
+                    <select name="department" id="updateDepartment" required>
+                        <% departments.forEach(currentDepartment => { %>
+                            <option value="<%= currentDepartment %>"><%= currentDepartment %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="updateAbout">Acerca de:</label>
+                    <input type="text" id="updateAbout" name="about">
+                </div>
+                <div class="buttons">
+                    <button type="submit">Actualizar</button>
+                    <button type="reset" onclick="toggleForm()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="backoffice_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Departamento</th>
+                        <th>Fecha nacimiento</th>
+                        <th>Email</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% teamMembers.forEach(member => { %>
+                        <tr>
+                            <td><%= member.name %></td>
+                            <td><%= member.surname %></td>
+                            <td><%= member.department %></td>
+                            <td><%= member.dateBirth %> </td>
+                            <td><%= member.email %> </td>
+                            <td>
+                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(member) %>')" title="Editar datos">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    
+                                    class="bi bi-pencil-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deleteMember('<%= member.id %>')" title="Borrar viaje">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    fill="currentColor" 
+                                    class="bi bi-trash-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg>
+                                </button>
+                                
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</body>
+</html>
