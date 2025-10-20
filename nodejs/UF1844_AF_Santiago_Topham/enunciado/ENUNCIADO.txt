@@ -1,0 +1,23 @@
+UF1844 Backend con Node
+
+Dispones de un fichero JSON con los datos de un equipo que desarrolla aplicaciones con NODE, EXPRESS y EJS.
+En otras carpetas están las imágenes necesarias y el favicon.
+Tambiés tienes ya preparados los ficheros package.json y package-lock.json.
+
+Con todo esto, debes:
+
+1) Crear un servidor con Express. Utiliza el .env incluido.
+
+2) En la ruta raíz deben mostrarse todos los miembros del equipo. Fíjate en la imagen de referencia y el vídeo.
+
+3) Hay que crear un menú dinámico, que lea los departamentos para poder filtrar los miembros de cada uno.
+
+4) Hay que definir una ruta para filtrar los miembros por su departamento.
+
+5) Hay que definir la ruta para el error 404.
+
+6) Si te da tiempo, puedes crear una ruta para mostrar de forma individual los datos relevantes de una persona. Otra opción es crear una ruta para añadir, borrar o modificar datos. Si tienes alguna otra propuesta interesante será bien recibida.
+
+La valoración del trabajo hace distinción entre código NODE y estilos. Tenlo en cuenta por si te encallas con el CSS.
+
+El enlace de video es este: https://youtu.be/na2pA1EVVIM

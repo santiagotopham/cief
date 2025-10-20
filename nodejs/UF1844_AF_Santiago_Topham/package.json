@@ -1,0 +1,22 @@
+{
+  "name": "uf1844_af_node_2025-10-17",
+  "version": "1.0.0",
+  "description": "UF1844: Evaluación de conocimientos de backend con Node",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node --watch src/app.js"
+  },
+  "keywords": [
+    "UF1844",
+    "NODE",
+    "EXPRESS",
+    "EJS"
+  ],
+  "author": "Ferran",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1"
+  }
+}

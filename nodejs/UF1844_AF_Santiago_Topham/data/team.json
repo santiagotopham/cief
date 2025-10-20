@@ -1,0 +1,134 @@
+[
+	{
+		"id": 1,
+		"name": "John",
+		"surname": "Bezzos",
+		"email": "john.bezzos@ejs.com",
+		"key": "booksforever",
+		"dateBirth": "2002-05-12",
+		"department": "direccion",
+		"foto": "john.bezzos.png",
+		"about": "John Bezzos es el fundador y CEO de EJS, una empresa líder en tecnología y comercio electrónico. Con una visión innovadora, ha transformado la forma en que las personas compran y venden productos en línea."
+	},
+	{
+		"id": 2,
+		"name": "Bill",
+		"surname": "Jobs",
+		"email": "bill.jobs@ejs.com",
+		"key": "ilikeapples",
+		"dateBirth": "1999-07-02",
+		"department": "ventas",
+		"foto": "bill.jobs.png",
+		"about": "Bill Jobs es el director de ventas de EJS, responsable de liderar el equipo de ventas y desarrollar estrategias para expandir la presencia de la empresa en el mercado global. Su enfoque centrado en el cliente ha impulsado un crecimiento significativo en los ingresos."
+	},
+	{
+		"id": 3,
+		"name": "Steve",
+		"surname": "Windows",
+		"email": "steve.windows@ejs.com",
+		"key": "ilikelinux",
+		"dateBirth": "1990-04-25",
+		"department": "marketing",
+		"foto": "steve.windows.png",
+		"about": "Steve Windows es el director de marketing de EJS, encargado de diseñar y ejecutar campañas de marketing innovadoras que aumentan la visibilidad de la marca y atraen a nuevos clientes. Su creatividad y conocimiento del mercado han sido clave para el éxito de la empresa."
+	},
+	{
+		"id": 4,
+		"name": "Barbara",
+		"surname": "Moneylover",
+		"email": "barbara.moneylover@ejs.com",
+		"key": "blablabla",
+		"dateBirth": "2004-01-03",
+		"department": "direccion",
+		"foto": "barbara.moneylover.png",
+		"about": "Barbara Moneylover es la directora financiera de EJS, responsable de gestionar las finanzas de la empresa y garantizar su estabilidad económica. Su experiencia en análisis financiero y planificación estratégica ha sido fundamental para el crecimiento sostenible de EJS."
+	},
+	{
+		"id": 5,
+		"name": "Maria",
+		"surname": "Blanchard",
+		"email": "maria.blanchard@ejs.com",
+		"key": "diamondsareforever",
+		"dateBirth": "2001-08-22",
+		"department": "marketing",
+		"foto": "maria.blanchard.png",
+		"about": "Maria Blanchard es la directora de recursos humanos de EJS, encargada de atraer, desarrollar y retener el talento dentro de la empresa. Su enfoque en la creación de un ambiente de trabajo positivo y colaborativo ha contribuido a la satisfacción y productividad de los empleados."
+	},
+	{
+		"id": 6,
+		"name": "Violeta",
+		"surname": "Valery",
+		"email": "violeta.valeryd@ejs.com",
+		"key": "diamondsareforever",
+		"dateBirth": "2001-08-22",
+		"department": "marketing",
+		"foto": "violeta.valery.png",
+		"about": "Violeta Valery es la directora de operaciones de EJS, responsable de supervisar las operaciones diarias de la empresa y garantizar la eficiencia en todos los departamentos. Su liderazgo y habilidades organizativas han sido clave para optimizar los procesos internos y mejorar la productividad."
+	},
+	{
+		"id": 7,
+		"name": "Robin",
+		"surname": "Hood",
+		"email": "robin.hood@ejs.com",
+		"key": "ilikeapples",
+		"dateBirth": "1999-07-02",
+		"department": "ventas",
+		"foto": "robin.hood.png",
+		"about": "Robin Hood es el gerente de ventas de EJS, encargado de liderar el equipo de ventas y desarrollar estrategias para alcanzar los objetivos comerciales. Su enfoque en la construcción de relaciones sólidas con los clientes ha sido fundamental para el éxito de la empresa en el mercado competitivo."
+	},
+	{
+		"id": 8,
+		"name": "Alice",
+		"surname": "Wonderland",
+		"email": "alice.wonderland@ejs.com",
+		"key": "ilikelinux",
+		"dateBirth": "1990-04-25",
+		"department": "desarrollo",
+		"foto": "alice.wonderland.png",
+		"about": "Alice Wonderland es la jefa de desarrollo de EJS, responsable de liderar el equipo de desarrollo de productos y garantizar la entrega de soluciones innovadoras. Su experiencia en tecnología y gestión de proyectos ha sido clave para el éxito de los productos de EJS en el mercado."
+	},
+	{
+		"id": 9,
+		"name": "Charlie",
+		"surname": "Brown",
+		"email": "charlie.brown@ejs.com",
+		"key": "blablabla",
+		"dateBirth": "2004-01-03",
+		"department": "desarrollo",
+		"foto": "charlie.brown.png",
+		"about": "Charlie Brown es el ingeniero de software principal de EJS, encargado de diseñar y desarrollar soluciones tecnológicas avanzadas. Su pasión por la innovación y su habilidad para resolver problemas complejos han sido fundamentales para el éxito de los proyectos de EJS."
+	},
+	{
+		"id": 10,
+		"name": "Ada",
+		"surname": "Lovelace",
+		"email": "ada.lovelace@ejs.com",
+		"key": "diamondsareforever",
+		"dateBirth": "2001-08-22",
+		"department": "desarrollo",
+		"foto": "ada.lovelace.png",
+		"about": "Ada Lovelace es la arquitecta de soluciones de EJS, responsable de diseñar la arquitectura técnica de los productos y garantizar su escalabilidad y rendimiento. Su visión estratégica y su conocimiento profundo de la tecnología han sido clave para el éxito a largo plazo de EJS."
+	},
+	{
+		"id": 11,
+		"name": "Elena",
+		"surname": "Nito",
+		"email": "elena.nito@ejs.com",
+		"key": "ilikeapples",
+		"dateBirth": "1999-07-02",
+		"department": "ventas",
+		"foto": "elena.nito.png",
+		"about": "Elena Nito es la especialista en ventas internacionales de EJS, encargada de expandir la presencia de la empresa en mercados globales. Su conocimiento de las tendencias del mercado y su habilidad para negociar acuerdos estratégicos han sido fundamentales para el crecimiento internacional de EJS."
+	},
+	{
+		"id": 12,
+		"name": "Steve",
+		"surname": "Wozniak",
+		"email": "steve.wozniak@ejs.com",
+		"key": "diamondsareforever",
+		"dateBirth": "2001-08-22",
+		"department": "desarrollo",
+		"foto": "steve.wozniak.png",
+		"about": "Steve Wozniak es el ingeniero de hardware principal de EJS, responsable de diseñar y desarrollar soluciones de hardware innovadoras. Su experiencia en ingeniería y su pasión por la tecnología han sido fundamentales para el éxito de los productos de EJS en el mercado."
+	}
+]

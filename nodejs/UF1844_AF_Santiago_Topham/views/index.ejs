@@ -1,0 +1,12 @@
+<%- include('./templates/head') %>
+<body>
+	<%- include('./templates/header') %>
+	<main>
+		<hr />
+		<div class="team-grid">
+			<% teamMembers.forEach(member => { %> <%-
+			include('./templates/card_small', { member }) %> <% }) %>
+		</div>
+	</main>
+	<%- include('./templates/footer') %>
+</body>
