@@ -10,7 +10,7 @@
                 <p>
                     <strong>Departamento:</strong> <a href="/department/<%= member.department %>"><%= member.department %></a>
                 </p>
-                <p><strong>Email:</strong> <a href="/year/<%= member.email %>"><%= member.email %></a></p>
+                <p><strong>Email:</strong> <a href="mailto:<%= member.email %>"><%= member.email %></a></p>
                 <p><strong>Sobre mi:</strong> <%= member.about %></p>
             </div>
         </div>
