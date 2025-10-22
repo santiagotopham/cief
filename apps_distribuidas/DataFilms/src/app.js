@@ -239,7 +239,7 @@ function buildNavBarMenu() {
 	for (const currentGenre of movieGenres) {
 		list += `<li><a href="/genre/${currentGenre.toLowerCase()}">${currentGenre}</a></li>`;
 	}
-	list += '<li><a href="/backoffice">backoffice</a></li></ul>';
+	list += '<li><a href="/backoffice">Backoffice</a></li></ul>';
 	return list;
 }
 

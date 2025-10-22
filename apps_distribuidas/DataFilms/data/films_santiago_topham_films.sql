@@ -17,12 +17,6 @@ USE `films_santiago_topham`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE USER 'node'@'localhost' identified BY 'node';
-
-GRANT SELECT ON films_santiago_topham.* TO 'node'@'localhost';
-GRANT INSERT ON films_santiago_topham.* TO 'node'@'localhost';
-GRANT UPDATE, DELETE ON films_santiago_topham.* TO 'node'@'localhost';
-
 --
 -- Table structure for table `films`
 --
