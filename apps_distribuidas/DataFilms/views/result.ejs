@@ -1,0 +1,22 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main>
+        <hr />
+        <div class="movie-detail">
+            <a href="/movie/<%= movie.id %>"><img src="<%= movie.image_url %>" alt="<%= movie.title %>"></a>
+        
+            <div  class="movie-info">
+                <p>
+                    <strong>Género:</strong> <a href="/genre/<%= movie.genre %>"><%= movie.genre %></a>
+                </p>
+                <p><strong>Año:</strong> <a href="/year/<%= movie.year %>"><%= movie.year %></a></p>
+                <p><strong>Director:</strong> <%= movie.director %></p>
+                <p><strong>Presupuesto:</strong> <%= movie.budget %></p>
+                <p><strong>Sinopsis:</strong> <%= movie.synopsis %></p>
+            </div>
+        </div>
+    </main>
+    <%- include('./templates/footer') %>
+</body>
+</html>

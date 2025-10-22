@@ -1,0 +1,14 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main>
+        <hr />
+        <div class="movie-grid">
+            <% movies.forEach(movie => { %>
+                <%- include('./templates/movie', { movie }) %>
+            <% }) %>
+        </div>
+    </main>
+    <%- include('./templates/footer') %>
+</body>
+</html>
