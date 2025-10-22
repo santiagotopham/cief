@@ -32,7 +32,7 @@ app.use(express.json());
 
 //Seteo la parametrizacion de datos inicial
 let siteName = "DataFilms";
-let movieGenres = await getGenresList();
+let movieGenres = await getGenresListFromDb();
 let navBarMenu = buildNavBarMenu();
 
 //Configuro rutas posible
@@ -90,6 +90,42 @@ app.get("/movie/:id", async (req, res) => {
 	});
 });
 
+//Backoffices
+app.get("/backoffice", async (req, res) => {
+	res.render("backoffice", {
+		title: siteName,
+		siteName: siteName,
+		subTitle: "Backoffice",
+		navBarItems: navBarMenu,
+		movies: await getMoviesFromDb(),
+		genres: await getGenresListFromDb(),
+	});
+});
+
+app.post("/insert", async (req, res) => {
+	const newMovie = req.body;
+
+	await createMovie(newMovie);
+
+	res.redirect("/backoffice");
+});
+
+app.post("/update", async (req, res) => {
+	const updatedMovie = req.body;
+
+	await updateMovie(updatedMovie.id, updatedMovie);
+
+	res.redirect("/backoffice");
+});
+
+app.delete("/delete/:id", async (req, res) => {
+	const id = req.params.id;
+
+	await deleteMovie(id);
+
+	res.redirect("/backoffice");
+});
+
 //Manejo error 404
 app.use((req, res) => {
 	res.render("404", {
@@ -120,7 +156,7 @@ async function getMoviesFromDb() {
 	return movies;
 }
 
-async function getGenresList() {
+async function getGenresListFromDb() {
 	const connection = await openDbConnection();
 	const query = "SELECT distinct genre FROM films";
 
@@ -151,13 +187,59 @@ async function getMovieById(id) {
 	return movies[0];
 }
 
+async function createMovie(newMovie) {
+	const connection = await openDbConnection();
+	const sql =
+		"INSERT INTO `films`(`title`, `image_url`, `year`, `director`, `genre`, `budget`, `synopsis`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	const values = [
+		newMovie.title,
+		newMovie.image_url,
+		newMovie.year,
+		newMovie.director,
+		newMovie.genre,
+		newMovie.budget,
+		newMovie.synopsis,
+	];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function updateMovie(id, updatedMovie) {
+	const connection = await openDbConnection();
+	const sql =
+		"UPDATE `films` SET `title` = ?, `image_url` = ?, `year` = ?, `director` = ?, `genre` = ?, `budget` = ?, `synopsis` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [
+		updatedMovie.title,
+		updatedMovie.image_url,
+		updatedMovie.year,
+		updatedMovie.director,
+		updatedMovie.genre,
+		updatedMovie.budget,
+		updatedMovie.synopsis,
+		id,
+	];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function deleteMovie(id) {
+	const connection = await openDbConnection();
+	const sql = "DELETE FROM `films` WHERE `Id` = ? LIMIT 1";
+	const values = [id];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
 //Construccion de contenido
 function buildNavBarMenu() {
 	let list = '<ul class="container">';
 	for (const currentGenre of movieGenres) {
 		list += `<li><a href="/genre/${currentGenre.toLowerCase()}">${currentGenre}</a></li>`;
 	}
-	list += "</ul>";
+	list += '<li><a href="/backoffice">backoffice</a></li></ul>';
 	return list;
 }
 

@@ -1,0 +1,142 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main class="backoffice_main">
+        <div class="insert">
+            <h2>Formulario para añadir peliculas</h2>
+            <form action="/insert" method="post">
+                <div>
+                    <label for="title">Titulo:</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div>
+                    <label for="image_url">Enlace imagen:</label>
+                    <input type="text" id="image_url" name="image_url">
+                </div>
+                <div>
+                    <label for="year">Year:</label>
+                    <input type="number" min="1800" max="2050" id="year" name="year">
+                </div>
+                <div>
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" name="director">
+                </div>
+                <div>
+                    <label for="genre">Genero:</label>
+                    <select name="genre" id="genre" required>
+                        <% genres.forEach(currentGenre => { %>
+                            <option value="<%= currentGenre %>"><%= currentGenre %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="budget">Presupuesto:</label>
+                    <input type="text" id="budget" name="budget">
+                </div>
+                <div>
+                    <label for="synopsis">Sinopsis:</label>
+                    <textarea type="text" id="synopsis" name="synopsis"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit">Añadir</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="update">
+            <h2>Formulario para actualizar peliculas</h2>
+            <form action="/update" method="post">
+                <input type="hidden" id="id" name="id">
+                <div>
+                    <label for="updateTitle">Titulo:</label>
+                    <input type="text" id="updateTitle" name="title">
+                </div>
+                <div>
+                    <label for="updateImage_url">Enlace imagen:</label>
+                    <input type="text" id="updateImage_url" name="image_url">
+                </div>
+                <div>
+                    <label for="updateYear">Year:</label>
+                    <input type="number" min="1800" max="2050" id="updateYear" name="year">
+                </div>
+                <div>
+                    <label for="updateDirector">Director:</label>
+                    <input type="text" id="updateDirector" name="director">
+                </div>
+                <div>
+                    <label for="updateGenre">Genero:</label>
+                    <select name="genre" id="updateGenre" required>
+                        <% genres.forEach(currentGenre => { %>
+                            <option value="<%= currentGenre %>"><%= currentGenre %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="updateBudget">Presupuesto:</label>
+                    <input type="text" id="updateBudget" name="budget">
+                </div>
+                <div>
+                    <label for="updateSynopsis">Sinopsis:</label>
+                    <textarea type="text" id="updateSynopsis" name="synopsis"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit">Actualizar</button>
+                    <button type="reset" onclick="toggleForm()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="backoffice_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Genre</th>
+                        <th>Budget</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% movies.forEach(currentMovie => { %>
+                        <tr>
+                            <td><%= currentMovie.title %></td>
+                            <td><%= currentMovie.year %></td>
+                            <td><%= currentMovie.director %></td>
+                            <td><%= currentMovie.genre %> </td>
+                            <td><%= currentMovie.budget %> </td>
+                            <td>
+                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(currentMovie) %>')" title="Editar datos">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    
+                                    class="bi bi-pencil-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deleteMovie('<%= currentMovie.id %>')" title="Borrar viaje">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    fill="currentColor" 
+                                    class="bi bi-trash-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg>
+                                </button>
+                                
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</body>
+</html>
