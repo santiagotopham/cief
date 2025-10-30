@@ -1,0 +1,33 @@
+<%- include('./templates/head') %>
+<body>
+
+<%- include('./templates/header', {lang : "ESP"}) %>
+    <main class="amplada">
+        <section>
+            <h2>Benvinguts a la nostra pastisseria artesanal!</h2>
+            <p>Descobreix els nostres productes frescos i deliciosos, fets amb ingredients de primera qualitat i molt d'amor. Tant si busques un pastís especial per a una ocasió com un dolç per acompanyar el teu cafè, tenim tot el que necessites per satisfer els teus desitjos més dolços.</p>
+            <p>Explora els nostres meravellosos sabors i deixa't temptar. Estem segurs que trobaràs alguna cosa que t'encantarà!</p>
+        </section>
+        <section>
+            <h2>Els nostres productes</h2>
+            <div class="productes-grid">
+                <% productes.forEach(producte => { %>
+                    <div class="producte-card">
+                        <h3><%= producte.name_cat %></h3>
+                        <img src="/img/<%= producte.img %>" alt=""<%= producte.name_cat %>">                        
+                        <p><%= producte.descripcio_cat %></p>
+                        <p class="preu">Preu: <%= producte.preu %></p>
+                    </div>
+                <% }); %>
+            </div>  
+        </section>
+    </main>
+    <footer>
+        <div class="amplada">
+            <p>&copy; 2024 Umm...! Què bo! Tots els drets reservats.</p>
+            <p><a href="/admin">Afegir productes</a></p>
+        </div>
+</body>
+</html>
+
+   

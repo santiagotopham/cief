@@ -1,0 +1,17 @@
+    <header>        
+        <nav class="amplada">
+            <div>
+                <h1><a href="/">Umm...! Què bo!</a> </h1>                               
+            </div>
+            <div>
+                <%- menu %>
+                <div class="idiomes">
+                    <% if (lang === "ESP") { %>
+                        <p><a href="/esp"><%= lang %></a></p>
+                    <% } else { %>
+                    <p><a href="/"><%= lang %></a></p>
+                    <% } %>
+                </div>
+            </div>            
+        </nav>
+    </header>

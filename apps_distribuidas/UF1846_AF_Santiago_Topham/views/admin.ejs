@@ -1,0 +1,57 @@
+<%- include('./templates/head') %>
+<body>
+
+<%- include('./templates/header', { lang: "CAT"}) %>
+          <main class="admin_main">
+            
+            <div class="insert">
+                <h2>+ Productes</h2>
+                <form action="/insert" method="post" class="form">
+                    <div>
+                        <label for="menu_name_cat">Tipus (cat):</label>
+                        <input type="text" id="menu_name_cat" name="menu_name_cat" placeholder="per exemple: Pastissos">
+                    </div>
+                                        <div>
+                        <label for="menu_name_esp">Tipo (esp):</label>
+                        <input type="text" id="menu_name_esp" name="menu_name_esp" placeholder="por ejemplo: Pasteles">
+                    </div>
+                    <div>
+                        <label for="name_cat">Nom del producte:</label>
+                        <input type="text" id="name_cat" name="name_cat">
+                    </div>
+                    <div>
+                        <label for="name_esp">Nombre del producto:</label>
+                        <input type="text" id="name_esp" name="name_esp">
+                    </div>
+                                       <div>
+                        <label for="descripcio_cat">Descripció (cat):</label>
+                        <input type="text" id="descripcio_cat" name="descripcio_cat">
+                    </div>
+                                       <div>
+                        <label for="descripcio_esp">Descripción (esp):</label>
+                        <input type="text" id="descripcio_esp" name="descripcio_esp">
+                    </div>
+                    <div>
+                        <label for="preu">Preu:</label>
+                        <input type="text" id="preu" name="preu">
+                    </div>
+ 
+                    <div>
+                        <label for="img">Ruta img:</label>
+                        <input type="text" id="img" name="img" >
+                    </div>
+ 
+                    <div class="buttons">
+                        <button type="submit">Ok</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            
+  
+
+</main>
+        
+</body>
+</html>

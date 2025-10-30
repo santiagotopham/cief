@@ -1,0 +1,33 @@
+<%- include('./templates/head') %>
+<body>
+
+<%- include('./templates/header', { lang: "CAT"}) %>
+    <main class="amplada">
+        <section>
+            <h2>Bienvenidos a nuestra pastelería artesanal!</h2>
+            <p>Descubre nuestros productos frescos y deliciosos, hechos con ingredientes de primera calidad y mucho amor. 
+                Tanto si buscas un pastel especial para una ocasión como un dulce para acompañar tu café, 
+                tenemos todo lo que necesitas para satisfacer tus deseos más dulces.</p>
+            <p>Explora nuestras maravillosos sabores y déjate tentar. Estamos seguros que encontrarás alguna cosa que te encantará.</p>
+        </section>
+        <section>
+            <h2>Nuestros productos</h2>
+            <div class="productes-grid">
+                <% productes.forEach(producte => { %>
+                    <div class="producte-card">
+                        <h3><%= producte.name_esp %></h3>
+                        <img src="/img/<%= producte.img %>" alt=""<%= producte.name_esp %>">                        
+                        <p><%= producte.descripcio_esp %></p>
+                        <p class="preu">Precio: <%= producte.preu %></p>
+                    </div>
+                <% }); %>
+            </div>  
+        </section>
+    </main>
+    <footer>
+        <div class="amplada">
+            <p>&copy; 2024 Umm...! Què bo! Todos los derechos reservados.</p>
+            <p><a href="/admin">Añadir productos</a></p>
+        </div>
+</body>
+</html>
