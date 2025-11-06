@@ -1,0 +1,23 @@
+{
+	"name": "proyecto_final",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "Proyecto Final MF0493 - Santiago Topham",
+	"main": "app.js",
+	"scripts": {
+		"start": "node --watch src/app.js"
+	},
+	"keywords": [
+		"Proyecto_final",
+		"MF0493",
+		"STopham"
+	],
+	"author": "S.Topham",
+	"license": "ISC",
+	"dependencies": {
+		"ejs": "3.1.10",
+		"express": "5.1.0",
+		"morgan": "1.10.1",
+		"mysql2": "3.15.3"
+	}
+}

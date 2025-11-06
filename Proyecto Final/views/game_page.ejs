@@ -1,0 +1,21 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main>
+        <hr />
+        <div class="game_detail">
+            <a href="/game/<%= game.Id %>"><img src="<%= game.ImageUrl %>" alt="<%= game.Title %>"></a>
+        
+            <div  class="game_info">
+                <p>
+                    <strong>Desarrolladora:</strong><%= game.Developer %>
+                </p>
+                <p><strong>Lanzamiento:</strong> <%= game.LaunchDate %></p>
+                <p><strong>Categoria:</strong> <%= game.Category %></p>
+                <p><strong>Sinopsis:</strong> <%= game.Synopsis %></p>
+            </div>
+        </div>
+    </main>
+    <%- include('./templates/footer') %>
+</body>
+</html>

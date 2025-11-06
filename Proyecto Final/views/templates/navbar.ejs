@@ -1,0 +1,13 @@
+<header>
+	<nav>
+		<a class="purple_link" href="/"><h1><%= siteName %></h1></a>
+		<%- navBarItems %>
+	</nav>
+	<% if (showMessage) { %>
+	<p>
+		Bienvenido a <%= siteName %>, tu portal para conocer los mas reciente
+		lanzamientos de juegos y compartir opiniones.
+	</p>
+	<% } %>
+	<h2><%= subTitle %></h2>
+</header>

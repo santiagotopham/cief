@@ -1,0 +1,14 @@
+<div class="game_card">
+	<a href="/game/<%= currentGame.Id %>"
+		><img src="<%= currentGame.ImageUrl %>" alt="<%= currentGame.Title %>"
+	/></a>
+	<a href="/game/<%= currentGame.Id %>"><h3><%= currentGame.Title %></h3></a>
+
+	<p>
+		Lanzamiento:
+		<a href="/year/<%= currentGame.LaunchDate %>"
+			><%= currentGame.LaunchDate %></a
+		>
+	</p>
+	<p>Likes: <%= currentGame.ThumbsUpCounter %></p>
+</div>

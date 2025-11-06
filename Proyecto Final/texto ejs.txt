@@ -1,0 +1,3 @@
+<!-- <% movies.forEach(movie => { %>
+                <%- include('./templates/movie', { movie }) %>
+            <% }) %> -->

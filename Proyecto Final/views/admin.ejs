@@ -1,0 +1,184 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main class="backoffice_main">
+        <div class="insert">
+            <h2>Formulario para añadir Juegos</h2>
+            <form action="/game/add" method="post">
+                <div>
+                    <label for="title">Titulo:</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div>
+                    <label for="imageUrl">Enlace imagen:</label>
+                    <input type="text" id="imageUrl" name="imageUrl">
+                </div>
+                <div>
+                    <label for="launchDate">Fecha lanzamiento:</label>
+                    <input type="date" id="launchDate" name="launchDate">
+                </div>
+                <div>
+                    <label for="developer">Desarrolladora:</label>
+                    <input type="text" id="developer" name="developer">
+                </div>
+                <div>
+                    <label for="category">Categoria:</label>
+                    <input type="text" id="category" minlength="1" maxlength="3" name="category">
+                </div>
+                <div class="genres-container">
+                    <label for="genres">Géneros:</label>
+
+                    <select class="selectedGenres" name="genres" id="genres" multiple required>
+                        <% genres.forEach(currentGenre => { %>
+                            <option value="<%= currentGenre.Id %>"><%= currentGenre.Name %></option>
+                        <% }) %>
+                    </select>
+
+                    <button type="button" onclick="selectGenres()">Añadir</button>
+
+                    <div id="selectedGenresList" class="selected-genres"></div>
+
+                    <input type="hidden" name="selectedGenresIds" id="selectedGenresIds" value="">
+                </div>
+                <div class="genres-container">
+                    <label for="platforms">Plataformas:</label>
+
+                    <select class="selectedPlatforms" name="platforms" id="platforms" multiple required>
+                        <% platforms.forEach(currentPlatform => { %>
+                            <option value="<%= currentPlatform.Id %>"><%= currentPlatform.Name %></option>
+                        <% }) %>
+                    </select>
+
+                    <button type="button" onclick="selectPlatforms()">Añadir</button>
+
+                    <div id="selectedPlatformsList" class="selected-genres"></div>
+
+                    <input type="hidden" name="selectedPlatformsIds" id="selectedPlatformsIds" value="">
+                </div>
+                <div>
+                    <label for="synopsis">Sinopsis:</label>
+                    <textarea type="text" id="synopsis" name="synopsis"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit">Crear</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="update">
+            <h2>Formulario para actualizar Juegos</h2>
+            <form action="/game/edit" method="post">
+                <input type="hidden" id="id" name="id">
+                <div>
+                    <label for="updateTitle">Titulo:</label>
+                    <input type="text" id="updateTitle" name="title">
+                </div>
+                <div>
+                    <label for="updateImageUrl">Enlace imagen:</label>
+                    <input type="text" id="updateImageUrl" name="imageUrl">
+                </div>
+                <div>
+                    <label for="updateLaunchDate">Fecha lanzamiento:</label>
+                    <input type="date" id="updateLaunchDate" name="launchDate">
+                </div>
+                <div>
+                    <label for="updateDeveloper">Desarolladora:</label>
+                    <input type="text" id="updateDeveloper" name="Developer">
+                </div>
+                <div>
+                    <label for="updateCategory">Categoria:</label>
+                    <input type="text" id="updateCategory" name="updateCategory">
+                </div>
+                <div class="genres-container">
+                    <label for="updateGenres">Géneros:</label>
+
+                    <select class="selectedGenres" name="updateGenres" id="updateGenres" multiple required>
+                        <% genres.forEach(currentGenre => { %>
+                            <option value="<%= currentGenre.Id %>"><%= currentGenre.Name %></option>
+                        <% }) %>
+                    </select>
+
+                    <button type="button" onclick="selectGenres()">Añadir</button>
+
+                    <div id="updateSelectedGenresList" class="selected-genres"></div>
+
+                    <input type="hidden" name="updateSelectedGenresIds" id="updateSelectedGenresIds" value="">
+                </div>
+                <div class="genres-container">
+                    <label for="updatePlatforms">Plataformas:</label>
+
+                    <select class="selectedPlatforms" name="updatePlatforms" id="updatePlatforms" multiple required>
+                        <% platforms.forEach(currentPlatform => { %>
+                            <option value="<%= currentPlatform.Id %>"><%= currentPlatform.Name %></option>
+                        <% }) %>
+                    </select>
+
+                    <button type="button" onclick="selectPlatforms()">Añadir</button>
+
+                    <div id="updateSelectedPlatformsList" class="selected-genres"></div>
+
+                    <input type="hidden" name="updateSelectedPlatformsIds" id="updateSelectedPlatformsIds" value="">
+                </div>
+                <div>
+                    <label for="updateSynopsis">Sinopsis:</label>
+                    <textarea type="text" id="updateSynopsis" name="synopsis"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit">Actualizar</button>
+                    <button type="reset" onclick="toggleForm()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="backoffice_table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Fecha lanzamiento</th>
+                        <th>Desarrolladora</th>
+                        <th>Categoria</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% games.forEach(currentGame => { %>
+                        <tr>
+                            <td><%= currentGame.Title %></td>
+                            <td><%= currentGame.LaunchDate %></td>
+                            <td><%= currentGame.Developer %></td>
+                            <td><%= currentGame.Category %> </td>
+                            <td>
+                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar datos">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    
+                                    class="bi bi-pencil-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/></svg>
+                                </button>
+                            </td>
+                            <td>
+                                <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    fill="currentColor" 
+                                    class="bi bi-trash-fill" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg>
+                                </button>
+                                
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</body>
+</html>
