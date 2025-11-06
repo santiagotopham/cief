@@ -163,3 +163,14 @@ function removeEditPlatform(id) {
 	selectedEditPlatforms.delete(id);
 	renderEditPlatforms();
 }
+
+function searchGame(event) {
+	event.preventDefault();
+	const input = document.getElementById("searchInput");
+	const name = input.value.trim();
+	if (name) {
+		// redirige al endpoint con encodeURIComponent por seguridad
+		window.location.href = `/search/${encodeURIComponent(name)}`;
+	}
+	return false;
+}

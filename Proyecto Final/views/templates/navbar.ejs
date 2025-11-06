@@ -1,6 +1,16 @@
 <header>
 	<nav>
 		<a class="purple_link" href="/"><h1><%= siteName %></h1></a>
+		<form class="search-form" onsubmit="return searchGame(event)">
+			<input
+				type="text"
+				id="searchInput"
+				name="name"
+				placeholder="Buscar juego..."
+				required
+			/>
+			<button type="submit">🔍</button>
+		</form>
 		<%- navBarItems %>
 	</nav>
 	<% if (showMessage) { %>

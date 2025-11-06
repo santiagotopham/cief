@@ -62,21 +62,22 @@ for (const currentPlatform of mainPlatforms) {
 	);
 }
 
-// app.get("/year/:year", async (req, res) => {
-// 	let movies = await filterByYear(req.params.year);
+app.get("/search/:name", async (req, res) => {
+	let games = await getGamesByNameFromDb(req.params.name);
 
-// 	if (movies.length == 0) {
-// 		return res.redirect("/404");
-// 	}
+	if (games.length == 0) {
+		return res.redirect("/404");
+	}
 
-// 	res.render("search", {
-// 		title: siteName,
-// 		siteName: siteName,
-// 		subTitle: `Películas del año: ${req.params.year}`,
-// 		navBarItems: navBarMenu,
-// 		movies: movies,
-// 	});
-// });
+	res.render("search", {
+		title: siteName,
+		siteName: siteName,
+		showMessage: true,
+		subTitle: `Busqueda: ${req.params.name}`,
+		navBarItems: navBarMenu,
+		games: games,
+	});
+});
 
 app.get("/game/:id", async (req, res) => {
 	let game = await getGameById(req.params.id);
@@ -161,11 +162,37 @@ async function getGamesFromDb(shouldFormatDate) {
 	let [games] = await connection.query(query);
 	await connection.end();
 
+	games = await composeGames(games);
+
+	if (shouldFormatDate) {
+		games = setGameListDateFormat(games);
+	}
+
+	return games;
+}
+
+async function getGamesByNameFromDb(name, shouldFormatDate) {
+	const connection = await openDbConnection();
+	const query = `select * from Games g where g.Title like '%${name}%'`;
+
+	let [games] = await connection.query(query);
+	await connection.end();
+
+	games = await composeGames(games);
+
+	if (shouldFormatDate) {
+		games = setGameListDateFormat(games);
+	}
+
+	return games;
+}
+
+async function composeGames(games) {
 	const gameIds = games.map((x) => x.Id);
 	const gameGenres = await getGenresByGameIdFromDb(gameIds);
 	const gamePlatforms = await getPlatformsByGameIdFromDb(gameIds);
 
-	games = games.map((currentGame) => {
+	return games.map((currentGame) => {
 		let currentGameGenres = gameGenres.filter(
 			(y) => y.GameId == currentGame.Id
 		);
@@ -187,12 +214,6 @@ async function getGamesFromDb(shouldFormatDate) {
 		];
 		return currentGame;
 	});
-
-	if (shouldFormatDate) {
-		games = setGameListDateFormat(games);
-	}
-
-	return games;
 }
 
 async function getMainPlatformsFromDb() {
@@ -275,10 +296,10 @@ async function filterByMainPlatform(mainPlatformId) {
 	return games;
 }
 
-// async function filterByYear(year) {
-// 	const moviesDB = await getMoviesFromDb();
-// 	return moviesDB.filter((x) => x.year == year);
-// }
+async function filterByName(name) {
+	// const games = await getMoviesFromDb();
+	// return games.filter((x) => x.year == year);
+}
 
 async function getGameById(id) {
 	const connection = await openDbConnection();
@@ -305,6 +326,8 @@ async function getGamesByIdList(idsList) {
 
 	let [games] = await connection.query(query);
 	await connection.end();
+
+	games = await composeGames(games);
 
 	games = setGameListDateFormat(games);
 
