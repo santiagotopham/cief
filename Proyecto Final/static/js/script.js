@@ -126,16 +126,10 @@ function getCorrectDateFormat(unformattedDate) {
 	return date.toISOString().split("T")[0];
 }
 
-function renderSelectedMap(
-	selectedMap,
-	renderDivId,
-	hiddenInputId,
-	removeFnName
-) {
+function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 	const containerDiv = document.getElementById(renderDivId);
-	const hiddenInput = document.getElementById(hiddenInputId);
 
-	if (!containerDiv || !hiddenInput) return;
+	if (!containerDiv) return;
 
 	// Limpiar contenedor
 	containerDiv.innerHTML = "";
@@ -147,54 +141,40 @@ function renderSelectedMap(
 		chip.innerHTML = `${name} <button type="button" class="remove-chip" onclick="${removeFnName}('${id}')">×</button>`;
 		containerDiv.appendChild(chip);
 	});
-
-	// Actualizar campo oculto con IDs
-	hiddenInput.value = Array.from(selectedMap.keys()).join(",");
 }
 
 function addGenresFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
-	let selectedIds = "";
 
 	if (isInsert) {
 		selectorName = "genres";
 		selectedList = "selectedGenresList";
-		selectedIds = "selectedGenresIds";
 	} else {
 		selectorName = "updateGenres";
 		selectedList = "updateSelectedGenresList";
-		selectedIds = "updateSelectedGenresIds";
 	}
 
 	addFromSelectorToMap(selectedGenres, selectorName);
 
-	renderSelectedMap(selectedGenres, selectedList, selectedIds, "removeGenre");
+	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
 }
 
 function addPlatformsFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
-	let selectedIds = "";
 
 	if (isInsert) {
 		selectorName = "platforms";
 		selectedList = "selectedPlatformsList";
-		selectedIds = "selectedPlatformsIds";
 	} else {
 		selectorName = "updatePlatforms";
 		selectedList = "updateSelectedPlatformsList";
-		selectedIds = "updateSelectedPlatformsIds";
 	}
 
 	addFromSelectorToMap(selectedPlatforms, selectorName);
 
-	renderSelectedMap(
-		selectedPlatforms,
-		selectedList,
-		selectedIds,
-		"removePlatform"
-	);
+	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
 }
 
 function addFromSelectorToMap(selectedMap, selectorName) {
@@ -212,20 +192,17 @@ function removeGenre(id) {
 	selectedGenres.delete(String(id));
 	let selectorName = "";
 	let selectedList = "";
-	let selectedIds = "";
 
 	if (isInsert) {
 		selectorName = "genres";
 		selectedList = "selectedGenresList";
-		selectedIds = "selectedGenresIds";
 	} else {
 		selectorName = "updateGenres";
 		selectedList = "updateSelectedGenresList";
-		selectedIds = "updateSelectedGenresIds";
 	}
 
 	toggleOptionInSelector(selectorName, id, false);
-	renderSelectedMap(selectedGenres, selectedList, selectedIds, "removeGenre");
+	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
 }
 
 // --- Remove para create ---
@@ -233,25 +210,17 @@ function removePlatform(id) {
 	selectedPlatforms.delete(String(id));
 	let selectorName = "";
 	let selectedList = "";
-	let selectedIds = "";
 
 	if (isInsert) {
 		selectorName = "platforms";
 		selectedList = "selectedPlatformsList";
-		selectedIds = "selectedPlatformsIds";
 	} else {
 		selectorName = "updatePlatforms";
 		selectedList = "updateSelectedPlatformsList";
-		selectedIds = "updateSelectedPlatformsIds";
 	}
 
 	toggleOptionInSelector(selectorName, id, false);
-	renderSelectedMap(
-		selectedPlatforms,
-		selectedList,
-		selectedIds,
-		"removePlatform"
-	);
+	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
 }
 
 //Cambio seleccionados en selector
