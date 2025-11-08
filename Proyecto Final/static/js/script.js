@@ -88,16 +88,21 @@ function resetForm() {
 	selectedGenres.clear();
 	selectedPlatforms.clear();
 
-	document.querySelectorAll("select[multiple]").forEach((sel) => {
-		Array.from(sel.options).forEach((opt) => (opt.selected = false));
-	});
+	for (const currentSelector of document.querySelectorAll(
+		"select[multiple]"
+	)) {
+		for (const currentOption of currentSelector.options) {
+			currentOption.selected = false;
+		}
+	}
 
-	document
-		.querySelectorAll(".selected-items")
-		.forEach((div) => (div.innerHTML = ""));
-	document
-		.querySelectorAll('input[type="hidden"]')
-		.forEach((inp) => (inp.value = ""));
+	for (const div of document.querySelectorAll(".selected-items")) {
+		div.innerHTML = "";
+	}
+
+	for (const input of document.querySelectorAll('input[type="hidden"]')) {
+		input.value = "";
+	}
 }
 
 //Interaccion con backend
@@ -135,12 +140,12 @@ function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 	containerDiv.innerHTML = "";
 
 	// Renderizar chips
-	selectedMap.forEach((name, id) => {
+	for (const currentItem of selectedMap) {
 		const chip = document.createElement("span");
 		chip.className = "item-chip";
-		chip.innerHTML = `${name} <button type="button" class="remove-chip" onclick="${removeFnName}('${id}')">×</button>`;
+		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
 		containerDiv.appendChild(chip);
-	});
+	}
 }
 
 function addGenresFromSelect() {
@@ -182,9 +187,9 @@ function addFromSelectorToMap(selectedMap, selectorName) {
 
 	if (!selector) return;
 
-	Array.from(selector.selectedOptions).forEach((opt) => {
-		selectedMap.set(opt.value, opt.text);
-	});
+	for (const currentOption of selector.selectedOptions) {
+		selectedMap.set(currentOption.value, currentOption.text);
+	}
 }
 
 // --- Remove para create ---
