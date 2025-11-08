@@ -400,23 +400,20 @@ async function saveGameToDb(newGame) {
 	const result = await connection.execute(sql, values);
 	await connection.end();
 
-	await linkGameToGenresDb(result[0].insertId, newGame.selectedGenresIds);
-	await linkGameToPlatformsDb(
-		result[0].insertId,
-		newGame.selectedPlatformsIds
-	);
+	await linkGameToGenresDb(result[0].insertId, newGame.genres);
+	await linkGameToPlatformsDb(result[0].insertId, newGame.platforms);
 }
 
-async function linkGameToGenresDb(gameId, genresId) {
+async function linkGameToGenresDb(gameId, genresToLink) {
 	const connection = await openDbConnection();
 
 	const genreArray =
-		typeof genresId === "string"
-			? genresId
+		typeof genresToLink === "string"
+			? genresToLink
 					.split(",")
 					.map((id) => parseInt(id.trim()))
 					.filter(Boolean)
-			: genresId;
+			: genresToLink;
 
 	if (!Array.isArray(genreArray) || genreArray.length === 0) {
 		await connection.end();
@@ -433,16 +430,18 @@ async function linkGameToGenresDb(gameId, genresId) {
 	await connection.end();
 }
 
-async function linkGameToPlatformsDb(gameId, platformIds) {
+async function linkGameToPlatformsDb(gameId, platformsToLink) {
 	const connection = await openDbConnection();
 
+	console.log(platformsToLink);
+
 	const platformArray =
-		typeof platformIds === "string"
-			? platformIds
+		typeof platformsToLink === "string"
+			? platformsToLink
 					.split(",")
 					.map((id) => parseInt(id.trim()))
 					.filter(Boolean)
-			: platformIds;
+			: platformsToLink;
 
 	if (!Array.isArray(platformArray) || platformArray.length === 0) {
 		await connection.end();
@@ -462,14 +461,11 @@ async function linkGameToPlatformsDb(gameId, platformIds) {
 async function updateGameInDb(id, updatedGame) {
 	const connection = await openDbConnection();
 
-	console.log(`id = ${id}`);
-	console.log(`updatedGame = ${updatedGame}`);
-
 	await deleteGenresFromGame(connection, id);
 	await deletePlatformsFromGame(connection, id);
 
 	const sql =
-		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ?, `ThumbsUpCounter` = ? WHERE `Id` = ? LIMIT 1";
+		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ? WHERE `Id` = ? LIMIT 1";
 	const values = [
 		updatedGame.title,
 		updatedGame.imageUrl,
@@ -477,15 +473,14 @@ async function updateGameInDb(id, updatedGame) {
 		updatedGame.developer,
 		updatedGame.category,
 		updatedGame.synopsis,
-		updatedGame.thumbsUpCounter,
 		id,
 	];
 
 	await connection.execute(sql, values);
 	await connection.end();
 
-	await linkGameToGenresDb(id, updatedGame.selectedGenresIds);
-	await linkGameToPlatformsDb(id, updatedGame.selectedPlatformsIds);
+	await linkGameToGenresDb(id, updatedGame.updateGenres);
+	await linkGameToPlatformsDb(id, updatedGame.updatePlatforms);
 }
 
 async function deleteGameFromDb(id) {

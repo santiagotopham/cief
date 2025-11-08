@@ -42,8 +42,6 @@ function loadAndShowEditForm(game) {
 	if (game.Genres && Array.isArray(game.Genres)) {
 		selectedGenres.clear();
 
-		console.log(game.Genres);
-
 		for (const currentGenre of game.Genres) {
 			toggleOptionInSelector("updateGenres", currentGenre.Id, true);
 		}
@@ -164,7 +162,6 @@ function addGenresFromSelect() {
 		selectedList = "selectedGenresList";
 		selectedIds = "selectedGenresIds";
 	} else {
-		console.log("entro");
 		selectorName = "updateGenres";
 		selectedList = "updateSelectedGenresList";
 		selectedIds = "updateSelectedGenresIds";
@@ -264,8 +261,6 @@ function toggleOptionInSelector(selectorName, id, isEnabled) {
 		const option = selector.querySelector(`option[value="${id}"]`);
 		if (option) option.selected = isEnabled;
 	}
-
-	console.log(selector.selectedOptions);
 }
 
 // async function voteGame(gameId, direction) {
