@@ -39,42 +39,39 @@ function loadAndShowEditForm(game) {
 	document.getElementById("updateCategory").value = game.Category;
 	document.getElementById("updateSynopsis").value = game.Synopsis;
 
-	if (game.Genres && Array.isArray(game.Genres)) {
-		selectedGenres.clear();
+	loadEditChipItems(
+		game.Genres,
+		selectedGenres,
+		"updateGenres",
+		addGenresFromSelect
+	);
 
-		for (const currentGenre of game.Genres) {
-			toggleOptionInSelector("updateGenres", currentGenre.Id, true);
+	loadEditChipItems(
+		game.Platforms,
+		selectedPlatforms,
+		"updatePlatforms",
+		addPlatformsFromSelect
+	);
+}
+
+function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {
+	if (itemsArray && Array.isArray(itemsArray)) {
+		selectedMap.clear();
+
+		for (const currentItem of itemsArray) {
+			toggleOptionInSelector(selectorName, currentItem.Id, true);
 		}
 
-		addGenresFromSelect();
-	}
-
-	if (game.Platforms && Array.isArray(game.Platforms)) {
-		selectedPlatforms.clear();
-
-		for (const currentPlatform of game.Platforms) {
-			toggleOptionInSelector("updatePlatforms", currentPlatform.Id, true);
-		}
-
-		addPlatformsFromSelect();
+		callback();
 	}
 }
 
+//Seteo eventos al inicio
 document.addEventListener("DOMContentLoaded", () => {
-	const addGenreBtn = document.getElementById("addGenresBtn");
-	if (addGenreBtn) addGenreBtn.addEventListener("click", addGenresFromSelect);
-
-	const updateGenreBtn = document.getElementById("updateAddGenresBtn");
-	if (updateGenreBtn)
-		updateGenreBtn.addEventListener("click", addGenresFromSelect);
-
-	const addPlatformBtn = document.getElementById("addPlatformsBtn");
-	if (addPlatformBtn)
-		addPlatformBtn.addEventListener("click", addPlatformsFromSelect);
-
-	const updatePlatformBtn = document.getElementById("updateAddPlatformsBtn");
-	if (updatePlatformBtn)
-		updatePlatformBtn.addEventListener("click", addPlatformsFromSelect);
+	addClickFunction("addGenresBtn", addGenresFromSelect);
+	addClickFunction("updateAddGenresBtn", addGenresFromSelect);
+	addClickFunction("addPlatformsBtn", addPlatformsFromSelect);
+	addClickFunction("updateAddPlatformsBtn", addPlatformsFromSelect);
 
 	const createForm = document.querySelector(".insert form");
 	if (createForm) {
@@ -83,6 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 });
+
+function addClickFunction(elementId, callback) {
+	const element = document.getElementById(elementId);
+	if (element) element.addEventListener("click", callback);
+}
 
 function resetForm() {
 	selectedGenres.clear();
@@ -131,23 +133,6 @@ function getCorrectDateFormat(unformattedDate) {
 	return date.toISOString().split("T")[0];
 }
 
-function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
-	const containerDiv = document.getElementById(renderDivId);
-
-	if (!containerDiv) return;
-
-	// Limpiar contenedor
-	containerDiv.innerHTML = "";
-
-	// Renderizar chips
-	for (const currentItem of selectedMap) {
-		const chip = document.createElement("span");
-		chip.className = "item-chip";
-		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
-		containerDiv.appendChild(chip);
-	}
-}
-
 function addGenresFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
@@ -192,7 +177,23 @@ function addFromSelectorToMap(selectedMap, selectorName) {
 	}
 }
 
-// --- Remove para create ---
+function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
+	const containerDiv = document.getElementById(renderDivId);
+
+	if (!containerDiv) return;
+
+	// Limpiar contenedor
+	containerDiv.innerHTML = "";
+
+	// Renderizar chips
+	for (const currentItem of selectedMap) {
+		const chip = document.createElement("span");
+		chip.className = "item-chip";
+		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
+		containerDiv.appendChild(chip);
+	}
+}
+
 function removeGenre(id) {
 	selectedGenres.delete(String(id));
 	let selectorName = "";
@@ -210,7 +211,6 @@ function removeGenre(id) {
 	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
 }
 
-// --- Remove para create ---
 function removePlatform(id) {
 	selectedPlatforms.delete(String(id));
 	let selectorName = "";
