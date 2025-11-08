@@ -118,23 +118,77 @@ app.post("/game/add", async (req, res) => {
 	res.redirect("/admin");
 });
 
-// app.post("/game/edit", async (req, res) => {
-// 	const updatedMovie = req.body;
+app.post("/game/edit", async (req, res) => {
+	const updatedGame = req.body;
 
-// 	await updateMovie(updatedMovie.id, updatedMovie);
-
-// 	res.redirect("/admin");
-// });
-
-app.delete("/game/delete/:id", async (req, res) => {
-	const id = req.params.id;
-
-	await deleteGame(id);
+	await updateGameInDb(updatedGame.id, updatedGame);
 
 	res.redirect("/admin");
 });
 
-//Error 404 handling
+app.post("/game/vote/:id", async (req, res) => {
+	await updateGameLikes(req.params.id, req.body.likesCount);
+
+	res.redirect("/admin");
+});
+
+app.delete("/game/delete/:id", async (req, res) => {
+	const id = req.params.id;
+
+	await deleteGameFromDb(id);
+
+	res.redirect("/admin");
+});
+
+app.post("/genre/add", async (req, res) => {
+	const newGenre = req.body;
+
+	await saveGenreToDb(newGenre);
+
+	res.redirect("/admin");
+});
+
+app.post("/genre/edit", async (req, res) => {
+	const updatedGenre = req.body;
+
+	await updateGenreInDb(updatedGenre.id, updatedGenre);
+
+	res.redirect("/admin");
+});
+
+app.delete("/genre/delete/:id", async (req, res) => {
+	const id = req.params.id;
+
+	await deleteGenreFromDb(id);
+
+	res.redirect("/admin");
+});
+
+app.post("/platform/add", async (req, res) => {
+	const newPlatform = req.body;
+
+	await savePlatformToDb(newPlatform);
+
+	res.redirect("/admin");
+});
+
+app.post("/platform/edit", async (req, res) => {
+	const updatedPlatform = req.body;
+
+	await updatePlatformInDb(updatedPlatform.id, updatedPlatform);
+
+	res.redirect("/admin");
+});
+
+app.delete("/platform/delete/:id", async (req, res) => {
+	const id = req.params.id;
+
+	await deletePlatformFromDb(id);
+
+	res.redirect("/admin");
+});
+
+//Manejo error 404
 app.use((req, res) => {
 	res.render("404", {
 		title: "Error 404",
@@ -144,17 +198,17 @@ app.use((req, res) => {
 	});
 });
 
-//Server startup
+//Inicio servidor
 app.listen(PORT, () => {
 	console.log(`Servidor funcionando en http://localhost:${PORT}`);
 });
 
-//Data management
+//Conexion con BD
 async function openDbConnection() {
 	return await mysql.createConnection(configConnection);
 }
 
-//Retrieve games
+//Metodos de gestion de datos
 async function getGamesFromDb(shouldFormatDate) {
 	const connection = await openDbConnection();
 	const query = `select * from Games g`;
@@ -296,11 +350,6 @@ async function filterByMainPlatform(mainPlatformId) {
 	return games;
 }
 
-async function filterByName(name) {
-	// const games = await getMoviesFromDb();
-	// return games.filter((x) => x.year == year);
-}
-
 async function getGameById(id) {
 	const connection = await openDbConnection();
 	const query = `SELECT * FROM Games where Id = ${id}`;
@@ -349,14 +398,13 @@ async function saveGameToDb(newGame) {
 	];
 
 	const result = await connection.execute(sql, values);
+	await connection.end();
 
 	await linkGameToGenresDb(result[0].insertId, newGame.selectedGenresIds);
 	await linkGameToPlatformsDb(
 		result[0].insertId,
 		newGame.selectedPlatformsIds
 	);
-
-	await connection.end();
 }
 
 async function linkGameToGenresDb(gameId, genresId) {
@@ -411,26 +459,36 @@ async function linkGameToPlatformsDb(gameId, platformIds) {
 	await connection.end();
 }
 
-// async function updateMovie(id, updatedMovie) {
-// 	const connection = await openDbConnection();
-// 	const sql =
-// 		"UPDATE `films` SET `title` = ?, `image_url` = ?, `year` = ?, `director` = ?, `genre` = ?, `budget` = ?, `synopsis` = ? WHERE `Id` = ? LIMIT 1";
-// 	const values = [
-// 		updatedMovie.title,
-// 		updatedMovie.image_url,
-// 		updatedMovie.year,
-// 		updatedMovie.director,
-// 		updatedMovie.genre,
-// 		updatedMovie.budget,
-// 		updatedMovie.synopsis,
-// 		id,
-// 	];
+async function updateGameInDb(id, updatedGame) {
+	const connection = await openDbConnection();
 
-// 	await connection.execute(sql, values);
-// 	await connection.end();
-// }
+	console.log(`id = ${id}`);
+	console.log(`updatedGame = ${updatedGame}`);
 
-async function deleteGame(id) {
+	await deleteGenresFromGame(connection, id);
+	await deletePlatformsFromGame(connection, id);
+
+	const sql =
+		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ?, `ThumbsUpCounter` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [
+		updatedGame.title,
+		updatedGame.imageUrl,
+		updatedGame.launchDate,
+		updatedGame.developer,
+		updatedGame.category,
+		updatedGame.synopsis,
+		updatedGame.thumbsUpCounter,
+		id,
+	];
+
+	await connection.execute(sql, values);
+	await connection.end();
+
+	await linkGameToGenresDb(id, updatedGame.selectedGenresIds);
+	await linkGameToPlatformsDb(id, updatedGame.selectedPlatformsIds);
+}
+
+async function deleteGameFromDb(id) {
 	const connection = await openDbConnection();
 
 	await deleteGenresFromGame(connection, id);
@@ -457,11 +515,66 @@ async function deleteRelatedToGame(connection, gameId, tableName) {
 	let sql = `DELETE FROM ${tableName} WHERE GameId = ?`;
 	let values = [gameId];
 
-	console.log(sql);
-	console.log(values);
-
 	let result = await connection.execute(sql, values);
 	console.log(result[0]);
+}
+
+async function saveGenreToDb(newGenre) {
+	const connection = await openDbConnection();
+	const sql = "INSERT INTO `Genres`(`Name`) VALUES (?)";
+	const values = [newGenre.name];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function updateGenreInDb(id, updatedGenre) {
+	const connection = await openDbConnection();
+	const sql = "UPDATE `Genres` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [updatedGenre.name, id];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function deleteGenreFromDb(id) {
+	const connection = await openDbConnection();
+
+	let sql = "DELETE FROM `Genres` WHERE `Id` = ? LIMIT 1";
+	let values = [id];
+
+	await connection.execute(sql, values);
+
+	await connection.end();
+}
+
+async function savePlatformToDb(newPlatform) {
+	const connection = await openDbConnection();
+	const sql = "INSERT INTO `Platforms`(`Name`) VALUES (?)";
+	const values = [newPlatform.name];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function updatePlatformInDb(id, updatedPlatform) {
+	const connection = await openDbConnection();
+	const sql = "UPDATE `Platforms` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [updatedPlatform.name, id];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function deletePlatformFromDb(id) {
+	const connection = await openDbConnection();
+
+	let sql = "DELETE FROM `Platforms` WHERE `Id` = ? LIMIT 1";
+	let values = [id];
+
+	await connection.execute(sql, values);
+
+	await connection.end();
 }
 
 //Content building
@@ -472,32 +585,8 @@ function buildNavBarMenu() {
 			currentPlatform.Name
 		}</a></li>`;
 	}
-	// list += '<li><a href="/backoffice">Backoffice</a></li></ul>';
 	return list;
 }
-
-// function buildMovieList(movies) {
-// 	if (movies.length == 0) {
-// 		return null;
-// 	}
-
-// 	let list = "<ul>";
-// 	for (const currentMovie of movies) {
-// 		list += `<li>${currentMovie.title}</li>`;
-// 	}
-// 	list += "</ul>";
-// 	return list;
-// }
-
-// function buildByGenre(genre) {
-// 	let movies = filterByGenre(genre);
-// 	return buildMovieList(movies);
-// }
-
-// function buildByYear(year) {
-// 	let movies = filterByYear(year);
-// 	return buildMovieList(movies);
-// }
 
 //Auxiliar methods
 function setGameListDateFormat(games) {
