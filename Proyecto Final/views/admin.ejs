@@ -2,8 +2,40 @@
 <body>
     <%- include('./templates/navbar') %>
     <main class="backoffice_main">
-        <div class="insert">
-            <h2>Formulario para añadir Juegos</h2>
+        <div class="game_section">
+            <h2>Juegos</h2>
+            <table class="data_table">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Fecha lanzamiento</th>
+                        <th>Desarrolladora</th>
+                        <th>Categoria</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% games.forEach(currentGame => { %>
+                        <tr>
+                            <td><%= currentGame.Title %></td>
+                            <td><%= currentGame.LaunchDate %></td>
+                            <td><%= currentGame.Developer %></td>
+                            <td><%= currentGame.Category %> </td>
+                            <td>
+                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar datos">
+                                    Editar
+                                </button>
+                                <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
+                                    Eliminar
+                                </button>
+                                
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <div class="insert">
+            <h2>Nuevo Juego</h2>
             <form action="/game/add" method="post">
                 <div>
                     <label for="title">Titulo:</label>
@@ -63,7 +95,7 @@
         </div>
 
         <div class="update">
-            <h2>Formulario para actualizar Juegos</h2>
+            <h2>Actualizar Juego</h2>
             <form action="/game/edit" method="post">
                 <input type="hidden" id="id" name="id">
                 <div>
@@ -118,58 +150,103 @@
                 </div>
                 <div class="buttons">
                     <button type="submit">Actualizar</button>
-                    <button type="reset" onclick="toggleForm()">Cancelar</button>
+                    <button type="reset" onclick="toggleGameForm()">Cancelar</button>
                 </div>
             </form>
         </div>
-
-        <div class="backoffice_table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Fecha lanzamiento</th>
-                        <th>Desarrolladora</th>
-                        <th>Categoria</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% games.forEach(currentGame => { %>
-                        <tr>
-                            <td><%= currentGame.Title %></td>
-                            <td><%= currentGame.LaunchDate %></td>
-                            <td><%= currentGame.Developer %></td>
-                            <td><%= currentGame.Category %> </td>
-                            <td>
-                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar datos">
-                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                    width="16" 
-                                    height="16" 
-                                    
-                                    class="bi bi-pencil-fill" 
-                                    viewBox="0 0 16 16">
-                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/></svg>
-                                </button>
-                            </td>
-                            <td>
-                                <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
-                                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                    width="16" 
-                                    height="16" 
-                                    fill="currentColor" 
-                                    class="bi bi-trash-fill" 
-                                    viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/></svg>
-                                </button>
-                                
-                            </td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
         </div>
+        <section class="backoffice_main">
+
+            <!-- Tabla de Géneros -->
+            <div class="genre_section">
+                <h2>Géneros</h2>
+
+                <table class="data_table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="genresTableBody">
+                        <!-- Rellenado dinámicamente por JS -->
+                    </tbody>
+                </table>
+
+                <!-- Formulario de crear género -->
+                <form id="createGenreForm" class="insert">
+                    <h3>Nuevo Género</h3>
+                    <div>
+                        <label for="genreName">Nombre:</label>
+                        <input type="text" id="genreName" name="name" required />
+                    </div>
+                    <div class="buttons">
+                        <button type="submit">Crear</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+
+                <!-- Formulario de editar género -->
+                <form id="updateGenreForm" class="update" style="display: none;">
+                    <h3>Editar Género</h3>
+                    <input type="hidden" id="updateGenreId" />
+                    <div>
+                        <label for="updateGenreName">Nombre:</label>
+                        <input type="text" id="updateGenreName" name="name" required />
+                    </div>
+                    <div class="buttons">
+                        <button type="submit">Guardar</button>
+                        <button type="button" onclick="cancelGenreEdit()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tabla de Plataformas -->
+            <div class="platform_section">
+                <h2>Plataformas</h2>
+
+                <table class="data_table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="platformsTableBody">
+                        <!-- Rellenado dinámicamente por JS -->
+                    </tbody>
+                </table>
+
+                <!-- Formulario de crear plataforma -->
+                <form id="createPlatformForm" class="insert">
+                    <h3>Nueva Plataforma</h3>
+                    <div>
+                        <label for="platformName">Nombre:</label>
+                        <input type="text" id="platformName" name="name" required />
+                    </div>
+                    <div class="buttons">
+                        <button type="submit">Crear</button>
+                        <button type="reset">Limpiar</button>
+                    </div>
+                </form>
+
+                <!-- Formulario de editar plataforma -->
+                <form id="updatePlatformForm" class="update" style="display: none;">
+                    <h3>Editar Plataforma</h3>
+                    <input type="hidden" id="updatePlatformId" />
+                    <div>
+                        <label for="updatePlatformName">Nombre:</label>
+                        <input type="text" id="updatePlatformName" name="name" required />
+                    </div>
+                    <div class="buttons">
+                        <button type="submit">Guardar</button>
+                        <button type="button" onclick="cancelPlatformEdit()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
     </main>
 </body>

@@ -104,7 +104,7 @@ app.get("/admin", async (req, res) => {
 		showMessage: false,
 		subTitle: "admin",
 		navBarItems: navBarMenu,
-		games: await getGamesFromDb(false),
+		games: await getGamesFromDb(true),
 		genres: await getGenresFromDb(),
 		platforms: await getPlatformsFromDb(),
 	});
@@ -140,6 +140,10 @@ app.delete("/game/delete/:id", async (req, res) => {
 	res.redirect("/admin");
 });
 
+app.get("/genre/all", async (req, res) => {
+	res.json(await getGenresFromDb());
+});
+
 app.post("/genre/add", async (req, res) => {
 	const newGenre = req.body;
 
@@ -162,6 +166,10 @@ app.delete("/genre/delete/:id", async (req, res) => {
 	await deleteGenreFromDb(id);
 
 	res.redirect("/admin");
+});
+
+app.get("/platform/all", async (req, res) => {
+	res.json(await getPlatformsFromDb());
 });
 
 app.post("/platform/add", async (req, res) => {
@@ -517,7 +525,7 @@ async function deleteRelatedToGame(connection, gameId, tableName) {
 async function saveGenreToDb(newGenre) {
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Genres`(`Name`) VALUES (?)";
-	const values = [newGenre.name];
+	const values = [newGenre.Name];
 
 	await connection.execute(sql, values);
 	await connection.end();
@@ -526,7 +534,7 @@ async function saveGenreToDb(newGenre) {
 async function updateGenreInDb(id, updatedGenre) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Genres` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
-	const values = [updatedGenre.name, id];
+	const values = [updatedGenre.Name, id];
 
 	await connection.execute(sql, values);
 	await connection.end();
@@ -544,9 +552,10 @@ async function deleteGenreFromDb(id) {
 }
 
 async function savePlatformToDb(newPlatform) {
+	console.log(newPlatform);
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Platforms`(`Name`) VALUES (?)";
-	const values = [newPlatform.name];
+	const values = [newPlatform.Name];
 
 	await connection.execute(sql, values);
 	await connection.end();
@@ -555,7 +564,7 @@ async function savePlatformToDb(newPlatform) {
 async function updatePlatformInDb(id, updatedPlatform) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Platforms` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
-	const values = [updatedPlatform.name, id];
+	const values = [updatedPlatform.Name, id];
 
 	await connection.execute(sql, values);
 	await connection.end();

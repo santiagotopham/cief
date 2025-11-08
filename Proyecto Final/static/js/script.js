@@ -5,10 +5,10 @@ const selectedPlatforms = new Map();
 const sectionInsert = document.querySelector(".insert");
 const sectionUpdate = document.querySelector(".update");
 let isInsert = true;
-toggleForm();
+toggleGameForm();
 
 //Gestiono formularios
-function toggleForm() {
+function toggleGameForm() {
 	if (sectionInsert) {
 		if (sectionInsert.style.display == "block") {
 			sectionInsert.style.display = "none";
@@ -25,7 +25,7 @@ function toggleForm() {
 }
 
 function loadAndShowEditForm(game) {
-	if (isInsert) toggleForm();
+	if (isInsert) toggleGameForm();
 	resetForm();
 	game = JSON.parse(game);
 
@@ -263,3 +263,162 @@ function toggleOptionInSelector(selectorName, id, isEnabled) {
 // 		console.error("Error en la votación:", err);
 // 	}
 // }
+
+document.addEventListener("DOMContentLoaded", () => {
+	loadGenres();
+	loadPlatforms();
+
+	document
+		.getElementById("createGenreForm")
+		.addEventListener("submit", createGenre);
+	document
+		.getElementById("updateGenreForm")
+		.addEventListener("submit", updateGenre);
+
+	document
+		.getElementById("createPlatformForm")
+		.addEventListener("submit", createPlatform);
+	document
+		.getElementById("updatePlatformForm")
+		.addEventListener("submit", updatePlatform);
+});
+
+/* ======== GÉNEROS ======== */
+
+async function loadGenres() {
+	const res = await fetch("/genre/all");
+	const data = await res.json();
+
+	const tbody = document.getElementById("genresTableBody");
+	tbody.innerHTML = "";
+
+	for (const genre of data) {
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td>${genre.Id}</td>
+			<td>${genre.Name}</td>
+			<td>
+				<button onclick="editGenre(${genre.Id}, '${genre.Name}')">Editar</button>
+				<button onclick="deleteGenre(${genre.Id})">Eliminar</button>
+			</td>`;
+		tbody.appendChild(tr);
+	}
+}
+
+async function createGenre(e) {
+	e.preventDefault();
+	const name = document.getElementById("genreName").value.trim();
+	if (!name) return;
+
+	await fetch("/genre/add", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ Name: name }),
+	});
+
+	document.getElementById("createGenreForm").reset();
+	loadGenres();
+}
+
+function editGenre(id, name) {
+	document.getElementById("updateGenreId").value = id;
+	document.getElementById("updateGenreName").value = name;
+	document.getElementById("updateGenreForm").style.display = "grid";
+}
+
+async function updateGenre(e) {
+	e.preventDefault();
+
+	const id = document.getElementById("updateGenreId").value;
+	const name = document.getElementById("updateGenreName").value.trim();
+
+	await fetch("/genre/edit", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ Id: id, Name: name }),
+	});
+
+	cancelGenreEdit();
+	loadGenres();
+}
+
+async function deleteGenre(id) {
+	if (!confirm("¿Eliminar este género?")) return;
+	await fetch(`/genre/delete/${id}`, { method: "DELETE" });
+	loadGenres();
+}
+
+function cancelGenreEdit() {
+	document.getElementById("updateGenreForm").reset();
+	document.getElementById("updateGenreForm").style.display = "none";
+}
+
+/* ======== PLATAFORMAS ======== */
+
+async function loadPlatforms() {
+	const res = await fetch("/platform/all");
+	const data = await res.json();
+
+	const tbody = document.getElementById("platformsTableBody");
+	tbody.innerHTML = "";
+
+	for (const platform of data) {
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td>${platform.Id}</td>
+			<td>${platform.Name}</td>
+			<td>
+				<button onclick="editPlatform(${platform.Id}, '${platform.Name}')">Editar</button>
+				<button onclick="deletePlatform(${platform.Id})">Eliminar</button>
+			</td>`;
+		tbody.appendChild(tr);
+	}
+}
+
+async function createPlatform(e) {
+	e.preventDefault();
+	const name = document.getElementById("platformName").value.trim();
+	if (!name) return;
+
+	await fetch("/platform/add", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ Name: name }),
+	});
+
+	document.getElementById("createPlatformForm").reset();
+	loadPlatforms();
+}
+
+function editPlatform(id, name) {
+	document.getElementById("updatePlatformId").value = id;
+	document.getElementById("updatePlatformName").value = name;
+	document.getElementById("updatePlatformForm").style.display = "grid";
+}
+
+async function updatePlatform(e) {
+	e.preventDefault();
+
+	const id = document.getElementById("updatePlatformId").value;
+	const name = document.getElementById("updatePlatformName").value.trim();
+
+	await fetch("/platform/edit", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ Id: id, Name: name }),
+	});
+
+	cancelPlatformEdit();
+	loadPlatforms();
+}
+
+async function deletePlatform(id) {
+	if (!confirm("¿Eliminar esta plataforma?")) return;
+	await fetch(`/platform/delete/${id}`, { method: "DELETE" });
+	loadPlatforms();
+}
+
+function cancelPlatformEdit() {
+	document.getElementById("updatePlatformForm").reset();
+	document.getElementById("updatePlatformForm").style.display = "none";
+}
