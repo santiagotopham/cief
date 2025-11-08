@@ -351,7 +351,7 @@ footer p {
 	color: var(--link_hover_color);
 }
 
-.genres-container {
+.selector-container {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
@@ -376,14 +376,14 @@ button[type="button"]:hover {
 	background-color: var(--link_hover_color);
 }
 
-.selected-genres {
+.selected-items {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 	margin-top: 0.5rem;
 }
 
-.genre-chip {
+.item-chip {
 	background-color: var(--page_main_color);
 	color: var(--page_white_color);
 	border-radius: 20px;
@@ -394,7 +394,7 @@ button[type="button"]:hover {
 	gap: 6px;
 }
 
-.genre-chip .remove-chip {
+.item-chip .remove-chip {
 	background: none;
 	border: none;
 	color: var(--page_white_color);
@@ -403,6 +403,13 @@ button[type="button"]:hover {
 	cursor: pointer;
 	padding: 0;
 }
-.genre-chip:hover {
+.item-chip:hover {
 	color: var(--link_hover_color);
+}
+
+.search-filter-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	position: relative;
 }
