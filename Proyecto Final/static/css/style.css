@@ -254,97 +254,21 @@ footer p {
 }
 
 .backoffice_main {
-	display: grid;
-	grid-template-columns: 1fr 3fr;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 	padding: 2rem;
-	align-items: start;
-
-	h2 {
-		font-size: 1.2rem;
-	}
-
-	.insert,
-	.update {
-		display: grid;
-		grid-template-columns: 1fr;
-		border: 2px solid navy;
-		border-radius: 10px;
-		padding: 1rem;
-
-		div {
-			margin: 1rem;
-		}
-
-		input {
-			width: 100%;
-			padding: 5px 10px;
-		}
-
-		button {
-			padding: 5px 10px;
-			border-radius: 0.5rem;
-			min-width: 40%;
-		}
-
-		button[type="submit"] {
-			background-color: darkgreen;
-			color: white;
-		}
-		button[type="reset"] {
-			background-color: darkred;
-			color: white;
-		}
-		.buttons {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-		}
-	}
+	max-width: 1400px;
+	margin: 0 auto;
 }
-
-/* .backoffice_table {
-	padding: 0 1rem;
-	display: block;
-	table {
-		width: 100%;
-	}
-
-	tr {
-		height: 2rem;
-		&:nth-child(even) {
-			background-color: rgb(106, 90, 205, 0.3);
-		}
-	}
-
-	th,
-	td {
-		text-align: right;
-	}
-
-	th {
-		font-weight: 800;
-	}
-
-	button {
-		border: none;
-		background-color: none;
-	}
-
-	.bi-pencil-fill {
-		fill: green;
-	}
-	.bi-trash-fill {
-		fill: darkred;
-	}
-} */
 
 .error_image {
 	margin: 0 auto;
 	width: var(--max-width);
+}
 
-	> img {
-		height: 500px;
-	}
+.error_image > img {
+	height: 500px;
 }
 
 .purple_link:hover {
@@ -358,7 +282,10 @@ footer p {
 	margin: 1rem 0;
 }
 
-#genres {
+#genres,
+#platforms,
+#updateGenres,
+#updatePlatforms {
 	min-width: 200px;
 	padding: 5px;
 }
@@ -450,19 +377,204 @@ button[type="button"]:hover {
 	color: white;
 }
 
+/* Secciones principales */
 .game_section,
 .genre_section,
 .platform_section {
-	margin-top: 2rem;
 	border: 2px solid var(--page_main_color);
 	border-radius: 10px;
-	padding: 1rem;
+	padding: 1.5rem;
 	background: var(--page_white_color);
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-.game_section h2,
-.genre_section h2,
-.platform_section h2 {
+
+.section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.section-header h2 {
 	color: var(--page_main_color);
-	margin-bottom: 0.5rem;
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+.new-btn {
+	background-color: var(--accent_color);
+	color: var(--page_white_color);
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 0.95rem;
+	transition: background-color 0.2s ease;
+}
+
+.new-btn:hover {
+	background-color: var(--accent_color_darker);
+}
+
+/* Modal styles */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow: auto;
+}
+
+.modal.active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background-color: var(--page_white_color);
+	border-radius: 10px;
+	padding: 2rem;
+	max-width: 600px;
+	width: 90%;
+	max-height: 90vh;
+	overflow-y: auto;
+	position: relative;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	border-bottom: 2px solid var(--page_main_color);
+	padding-bottom: 0.5rem;
+}
+
+.modal-header h2 {
+	color: var(--page_main_color);
+	margin: 0;
+	font-size: 1.4rem;
+}
+
+.close-modal {
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: var(--page_main_color);
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.close-modal:hover {
+	color: var(--accent_color);
+}
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.modal-form div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.modal-form label {
+	font-weight: bold;
+	color: var(--page_main_color);
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 0.95rem;
+	font-family: inherit;
+}
+
+.modal-form textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.modal-buttons {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.modal-buttons button {
+	flex: 1;
+	padding: 10px 20px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: opacity 0.2s ease;
+}
+
+.modal-buttons button[type="submit"] {
+	background-color: darkgreen;
+	color: white;
+}
+
+.modal-buttons button[type="button"],
+.modal-buttons button[type="reset"] {
+	background-color: darkred;
+	color: white;
+}
+
+.modal-buttons button:hover {
+	opacity: 0.8;
+}
+
+/* Toast notifications */
+.toast {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #28a745;
+	color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 1rem;
+	animation: slideIn 0.3s ease-out;
+}
+
+.toast.error {
+	background-color: #dc3545;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(400px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
