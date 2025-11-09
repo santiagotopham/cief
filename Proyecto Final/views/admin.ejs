@@ -7,7 +7,7 @@
         <div class="game_section">
             <div class="section-header">
                 <h2>Juegos</h2>
-                <button class="new-btn" onclick="openGameModal('create')">+ Nuevo Juego</button>
+                <button class="new-btn" onclick="openGameModal('add')">+ Nuevo Juego</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -27,7 +27,7 @@
                             <td><%= currentGame.Developer %></td>
                             <td><%= currentGame.Category %> </td>
                             <td>
-                                <button onclick="loadAndShowEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar datos">
+                                <button onclick="loadAndShowGameEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar juego">
                                     Editar
                                 </button>
                                 <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
@@ -44,7 +44,7 @@
         <div class="genre_section">
             <div class="section-header">
                 <h2>Géneros</h2>
-                <button class="new-btn" onclick="openGenreModal('create')">+ Nuevo Género</button>
+                <button class="new-btn" onclick="openGenreModal('add')">+ Nuevo Género</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -77,7 +77,7 @@
         <div class="platform_section">
             <div class="section-header">
                 <h2>Plataformas</h2>
-                <button class="new-btn" onclick="openPlatformModal('create')">+ Nueva Plataforma</button>
+                <button class="new-btn" onclick="openPlatformModal('add')">+ Nueva Plataforma</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -113,7 +113,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="gameModalTitle">Nuevo Juego</h2>
-                <button class="close-modal" onclick="closeGameModal()">&times;</button>
+                <button class="close-modal" onclick="closeModal('gameForm')">&times;</button>
             </div>
             <form id="gameForm" class="modal-form">
                 <input type="hidden" id="gameId" name="id">
@@ -163,7 +163,7 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit">Guardar</button>
-                    <button type="button" onclick="closeGameModal()">Cancelar</button>
+                    <button type="button" onclick="closeModal('gameForm')">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -174,7 +174,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="genreModalTitle">Nuevo Género</h2>
-                <button class="close-modal" onclick="closeGenreModal()">&times;</button>
+                <button class="close-modal" onclick="closeModal('genreModal')">&times;</button>
             </div>
             <form id="genreForm" class="modal-form" method="post">
                 <input type="hidden" id="genreId" name="id">
@@ -184,7 +184,7 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit">Guardar</button>
-                    <button type="button" onclick="closeGenreModal()">Cancelar</button>
+                    <button type="button" onclick="closeModal('genreModal')">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -195,7 +195,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="platformModalTitle">Nueva Plataforma</h2>
-                <button class="close-modal" onclick="closePlatformModal()">&times;</button>
+                <button class="close-modal" onclick="closeModal('platformModal')">&times;</button>
             </div>
             <form id="platformForm" class="modal-form" method="post">
                 <input type="hidden" id="platformId" name="id">
@@ -205,7 +205,7 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit">Guardar</button>
-                    <button type="button" onclick="closePlatformModal()">Cancelar</button>
+                    <button type="button" onclick="closeModal('platformModal')">Cancelar</button>
                 </div>
             </form>
         </div>

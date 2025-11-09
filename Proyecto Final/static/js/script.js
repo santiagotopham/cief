@@ -1,12 +1,13 @@
 //////////////////////////////////////////////////////////////////////////////	CONFIGURACIONES INICIALES	/////////////////////////////////////////////////////////////////////////////
-// key = id, value = nombre
-const selectedGenres = new Map();
-const selectedPlatforms = new Map();
+// Key = Id, Value = Name
+const selectedGenresMap = new Map();
+const selectedPlatformsMap = new Map();
 
-const sectionInsert = document.querySelector(".insert");
-const sectionUpdate = document.querySelector(".update");
+const gameForm = document.getElementById("gameForm");
+const genreForm = document.getElementById("genreForm");
+const platformForm = document.getElementById("platformForm");
+
 let isInsert = true;
-toggleGameForm();
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,7 +44,7 @@ function addEventListener(elementId, callback, event) {
 
 //////////////////////  	JUEGOS	   //////////////////////
 
-function loadAndShowEditForm(game) {
+function loadAndShowGameEditForm(game) {
 	if (isInsert) toggleGameForm();
 	resetForm();
 	game = JSON.parse(game);
@@ -60,38 +61,38 @@ function loadAndShowEditForm(game) {
 
 	loadEditChipItems(
 		game.Genres,
-		selectedGenres,
+		selectedGenresMap,
 		"updateGenres",
 		addGenresFromSelect
 	);
 
 	loadEditChipItems(
 		game.Platforms,
-		selectedPlatforms,
+		selectedPlatformsMap,
 		"updatePlatforms",
 		addPlatformsFromSelect
 	);
 }
 
 function toggleGameForm() {
-	if (sectionInsert) {
-		if (sectionInsert.style.display == "block") {
-			sectionInsert.style.display = "none";
+	if (gameForm) {
+		if (gameForm.style.display == "block") {
+			gameForm.style.display = "none";
 			sectionUpdate.style.display = "block";
 			isInsert = false;
 		} else {
-			sectionInsert.style.display = "block";
+			gameForm.style.display = "block";
 			sectionUpdate.style.display = "none";
 			isInsert = true;
 		}
 	}
-	selectedGenres.clear();
-	selectedPlatforms.clear();
+	selectedGenresMap.clear();
+	selectedPlatformsMap.clear();
 }
 
 function resetForm() {
-	selectedGenres.clear();
-	selectedPlatforms.clear();
+	selectedGenresMap.clear();
+	selectedPlatformsMap.clear();
 
 	for (const currentSelector of document.querySelectorAll(
 		"select[multiple]"
@@ -110,27 +111,28 @@ function resetForm() {
 	}
 }
 
-//////////////////////  	GENEROS	   //////////////////////
-
 function addGenresFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
 
-	if (isInsert) {
-		selectorName = "genres";
-		selectedList = "selectedGenresList";
-	} else {
-		selectorName = "updateGenres";
-		selectedList = "updateSelectedGenresList";
-	}
+	// if (isInsert) {
+	// 	selectorName = "gameGenres";
+	// 	selectedList = "selectedGenresList";
+	// } else {
+	// 	selectorName = "updateGenres";
+	// 	selectedList = "updateSelectedGenresList";
+	// }
 
-	addFromSelectorToMap(selectedGenres, selectorName);
+	selectorName = "gameGenres";
+	selectedList = "selectedGenresList";
 
-	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
+	addFromSelectorToMap(selectedGenresMap, selectorName);
+
+	renderSelectedMap(selectedGenresMap, selectedList, "removeGenre");
 }
 
 function removeGenre(id) {
-	selectedGenres.delete(String(id));
+	selectedGenresMap.delete(String(id));
 	let selectorName = "";
 	let selectedList = "";
 
@@ -143,8 +145,44 @@ function removeGenre(id) {
 	}
 
 	toggleOptionInSelector(selectorName, id, false);
-	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
+	renderSelectedMap(selectedGenresMap, selectedList, "removeGenre");
 }
+
+function addPlatformsFromSelect() {
+	let selectorName = "";
+	let selectedList = "";
+
+	if (isInsert) {
+		selectorName = "platforms";
+		selectedList = "selectedPlatformsList";
+	} else {
+		selectorName = "updatePlatforms";
+		selectedList = "updateSelectedPlatformsList";
+	}
+
+	addFromSelectorToMap(selectedPlatformsMap, selectorName);
+
+	renderSelectedMap(selectedPlatformsMap, selectedList, "removePlatform");
+}
+
+function removePlatform(id) {
+	selectedPlatformsMap.delete(String(id));
+	let selectorName = "";
+	let selectedList = "";
+
+	if (isInsert) {
+		selectorName = "platforms";
+		selectedList = "selectedPlatformsList";
+	} else {
+		selectorName = "updatePlatforms";
+		selectedList = "updateSelectedPlatformsList";
+	}
+
+	toggleOptionInSelector(selectorName, id, false);
+	renderSelectedMap(selectedPlatformsMap, selectedList, "removePlatform");
+}
+
+//////////////////////  	GENEROS	   //////////////////////
 
 function editGenre(id, name) {
 	document.getElementById("updateGenreId").value = id;
@@ -159,40 +197,6 @@ function cancelGenreEdit() {
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
-function addPlatformsFromSelect() {
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "platforms";
-		selectedList = "selectedPlatformsList";
-	} else {
-		selectorName = "updatePlatforms";
-		selectedList = "updateSelectedPlatformsList";
-	}
-
-	addFromSelectorToMap(selectedPlatforms, selectorName);
-
-	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
-}
-
-function removePlatform(id) {
-	selectedPlatforms.delete(String(id));
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "platforms";
-		selectedList = "selectedPlatformsList";
-	} else {
-		selectorName = "updatePlatforms";
-		selectedList = "updateSelectedPlatformsList";
-	}
-
-	toggleOptionInSelector(selectorName, id, false);
-	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
-}
-
 function editPlatform(id, name) {
 	document.getElementById("updatePlatformId").value = id;
 	document.getElementById("updatePlatformName").value = name;
@@ -203,6 +207,70 @@ function cancelPlatformEdit() {
 	document.getElementById("updatePlatformForm").reset();
 	document.getElementById("updatePlatformForm").style.display = "none";
 }
+
+//////////////////////////////////////////////////////////////////////////////	MODALES	/////////////////////////////////////////////////////////////////////////////
+
+//////////////////////  	JUEGOS	   //////////////////////
+function openGameModal(mode) {
+	if (mode === "add") {
+		isInsert = true;
+		gameForm.action = "/game/add";
+		gameForm.reset();
+		document.getElementById("gameModalTitle").textContent = "Nuevo Juego";
+		resetForm();
+	}
+
+	openModal("gameModal");
+}
+
+//////////////////////  	GENEROS	   //////////////////////
+function openGenreModal(mode) {
+	if (mode === "add") {
+		isInsert = true;
+		genreForm.action = "/genre/add";
+		genreForm.reset();
+		document.getElementById("genreModalTitle").textContent = "Nuevo Género";
+		document.getElementById("genreId").value = "";
+	}
+
+	openModal("genreModal");
+}
+
+//////////////////////  	PLATAFORMAS	   //////////////////////
+function openPlatformModal(mode) {
+	if (mode === "add") {
+		isInsert = true;
+		platformForm.action = "/platform/add";
+		platformForm.reset();
+		document.getElementById("platformModalTitle").textContent =
+			"Nueva Plataforma";
+		document.getElementById("platformId").value = "";
+	}
+
+	openModal("platformModal");
+}
+
+//////////////////////  	AUX	   //////////////////////
+function openModal(modalName) {
+	document.getElementById(modalName).classList.add("active");
+}
+
+function closeModal(modalName) {
+	document.getElementById(modalName).classList.remove("active");
+}
+
+// Cerrar modal al clickear afuera
+window.onclick = function (event) {
+	if (event.target === document.getElementById("gameModal")) {
+		closeModal("gameModal");
+	}
+	if (event.target === document.getElementById("genreModal")) {
+		closeModal("genreModal");
+	}
+	if (event.target === document.getElementById("platformModal")) {
+		closeModal("platformModal");
+	}
+};
 
 //////////////////////////////////////////////////////////////////////////////	BACKEND	/////////////////////////////////////////////////////////////////////////////
 
@@ -424,4 +492,17 @@ function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
 		containerDiv.appendChild(chip);
 	}
+}
+
+//Creo notificaciones Toast
+function showToast(message, isError = false) {
+	const toast = document.createElement("div");
+	toast.className = `toast ${isError ? "error" : ""}`;
+	toast.textContent = message;
+
+	document.body.appendChild(toast);
+
+	setTimeout(() => {
+		toast.remove();
+	}, 3000);
 }
