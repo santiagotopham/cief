@@ -8,22 +8,48 @@ const sectionUpdate = document.querySelector(".update");
 let isInsert = true;
 toggleGameForm();
 
-//////////////////////////////////////////////////////////////////////////////	TRANSFORMO FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
-function toggleGameForm() {
-	if (sectionInsert) {
-		if (sectionInsert.style.display == "block") {
-			sectionInsert.style.display = "none";
-			sectionUpdate.style.display = "block";
-			isInsert = false;
-		} else {
-			sectionInsert.style.display = "block";
-			sectionUpdate.style.display = "none";
-			isInsert = true;
-		}
+//////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+	addClickFunction("addGenresBtn", addGenresFromSelect);
+	addClickFunction("updateAddGenresBtn", addGenresFromSelect);
+	addClickFunction("addPlatformsBtn", addPlatformsFromSelect);
+	addClickFunction("updateAddPlatformsBtn", addPlatformsFromSelect);
+
+	const createForm = document.querySelector(".insert form");
+	if (createForm) {
+		createForm.addEventListener("reset", () => {
+			resetForm();
+		});
 	}
-	selectedGenres.clear();
-	selectedPlatforms.clear();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+	loadGenres();
+	loadPlatforms();
+
+	document
+		.getElementById("createGenreForm")
+		.addEventListener("submit", createGenre);
+	document
+		.getElementById("updateGenreForm")
+		.addEventListener("submit", updateGenre);
+
+	document
+		.getElementById("createPlatformForm")
+		.addEventListener("submit", createPlatform);
+	document
+		.getElementById("updatePlatformForm")
+		.addEventListener("submit", updatePlatform);
+});
+
+function addClickFunction(elementId, callback) {
+	const element = document.getElementById(elementId);
+	if (element) element.addEventListener("click", callback);
 }
+
+//////////////////////////////////////////////////////////////////////////////	GESTIONO FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
+
+//////////////////////  	JUEGOS	   //////////////////////
 
 function loadAndShowEditForm(game) {
 	if (isInsert) toggleGameForm();
@@ -55,36 +81,20 @@ function loadAndShowEditForm(game) {
 	);
 }
 
-function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {
-	if (itemsArray && Array.isArray(itemsArray)) {
-		selectedMap.clear();
-
-		for (const currentItem of itemsArray) {
-			toggleOptionInSelector(selectorName, currentItem.Id, true);
+function toggleGameForm() {
+	if (sectionInsert) {
+		if (sectionInsert.style.display == "block") {
+			sectionInsert.style.display = "none";
+			sectionUpdate.style.display = "block";
+			isInsert = false;
+		} else {
+			sectionInsert.style.display = "block";
+			sectionUpdate.style.display = "none";
+			isInsert = true;
 		}
-
-		callback();
 	}
-}
-
-//////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
-document.addEventListener("DOMContentLoaded", () => {
-	addClickFunction("addGenresBtn", addGenresFromSelect);
-	addClickFunction("updateAddGenresBtn", addGenresFromSelect);
-	addClickFunction("addPlatformsBtn", addPlatformsFromSelect);
-	addClickFunction("updateAddPlatformsBtn", addPlatformsFromSelect);
-
-	const createForm = document.querySelector(".insert form");
-	if (createForm) {
-		createForm.addEventListener("reset", () => {
-			resetForm();
-		});
-	}
-});
-
-function addClickFunction(elementId, callback) {
-	const element = document.getElementById(elementId);
-	if (element) element.addEventListener("click", callback);
+	selectedGenres.clear();
+	selectedPlatforms.clear();
 }
 
 function resetForm() {
@@ -108,31 +118,7 @@ function resetForm() {
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////	BACKEND	/////////////////////////////////////////////////////////////////////////////
-function deleteGame(id) {
-	fetch(`/game/delete/${id}`, {
-		method: "DELETE",
-	})
-		.then((response) => response.json())
-		.then(setTimeout(() => location.reload(), 300))
-		.catch((error) => console.error("Error:", error));
-}
-
-function searchGame(event) {
-	event.preventDefault();
-	const input = document.getElementById("searchInput");
-	const name = input.value.trim();
-	if (name) {
-		globalThis.location.href = `/search/${encodeURIComponent(name)}`;
-	}
-	return false;
-}
-
-//////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
-function getCorrectDateFormat(unformattedDate) {
-	const date = new Date(unformattedDate);
-	return date.toISOString().split("T")[0];
-}
+//////////////////////  	GENEROS	   //////////////////////
 
 function addGenresFromSelect() {
 	let selectorName = "";
@@ -149,50 +135,6 @@ function addGenresFromSelect() {
 	addFromSelectorToMap(selectedGenres, selectorName);
 
 	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
-}
-
-function addPlatformsFromSelect() {
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "platforms";
-		selectedList = "selectedPlatformsList";
-	} else {
-		selectorName = "updatePlatforms";
-		selectedList = "updateSelectedPlatformsList";
-	}
-
-	addFromSelectorToMap(selectedPlatforms, selectorName);
-
-	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
-}
-
-function addFromSelectorToMap(selectedMap, selectorName) {
-	const selector = document.getElementById(selectorName);
-
-	if (!selector) return;
-
-	for (const currentOption of selector.selectedOptions) {
-		selectedMap.set(currentOption.value, currentOption.text);
-	}
-}
-
-function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
-	const containerDiv = document.getElementById(renderDivId);
-
-	if (!containerDiv) return;
-
-	// Limpiar contenedor
-	containerDiv.innerHTML = "";
-
-	// Renderizar chips
-	for (const currentItem of selectedMap) {
-		const chip = document.createElement("span");
-		chip.className = "item-chip";
-		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
-		containerDiv.appendChild(chip);
-	}
 }
 
 function removeGenre(id) {
@@ -212,6 +154,36 @@ function removeGenre(id) {
 	renderSelectedMap(selectedGenres, selectedList, "removeGenre");
 }
 
+function editGenre(id, name) {
+	document.getElementById("updateGenreId").value = id;
+	document.getElementById("updateGenreName").value = name;
+	document.getElementById("updateGenreForm").style.display = "grid";
+}
+
+function cancelGenreEdit() {
+	document.getElementById("updateGenreForm").reset();
+	document.getElementById("updateGenreForm").style.display = "none";
+}
+
+//////////////////////  	PLATAFORMAS	   //////////////////////
+
+function addPlatformsFromSelect() {
+	let selectorName = "";
+	let selectedList = "";
+
+	if (isInsert) {
+		selectorName = "platforms";
+		selectedList = "selectedPlatformsList";
+	} else {
+		selectorName = "updatePlatforms";
+		selectedList = "updateSelectedPlatformsList";
+	}
+
+	addFromSelectorToMap(selectedPlatforms, selectorName);
+
+	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
+}
+
 function removePlatform(id) {
 	selectedPlatforms.delete(String(id));
 	let selectorName = "";
@@ -229,13 +201,37 @@ function removePlatform(id) {
 	renderSelectedMap(selectedPlatforms, selectedList, "removePlatform");
 }
 
-//Cambio seleccionados en selector
-function toggleOptionInSelector(selectorName, id, isEnabled) {
-	const selector = document.getElementById(selectorName);
-	if (selector) {
-		const option = selector.querySelector(`option[value="${id}"]`);
-		if (option) option.selected = isEnabled;
+function editPlatform(id, name) {
+	document.getElementById("updatePlatformId").value = id;
+	document.getElementById("updatePlatformName").value = name;
+	document.getElementById("updatePlatformForm").style.display = "grid";
+}
+
+function cancelPlatformEdit() {
+	document.getElementById("updatePlatformForm").reset();
+	document.getElementById("updatePlatformForm").style.display = "none";
+}
+
+//////////////////////////////////////////////////////////////////////////////	BACKEND	/////////////////////////////////////////////////////////////////////////////
+
+//////////////////////  	JUEGOS	   //////////////////////
+function deleteGame(id) {
+	fetch(`/game/delete/${id}`, {
+		method: "DELETE",
+	})
+		.then((response) => response.json())
+		.then(setTimeout(() => location.reload(), 300))
+		.catch((error) => console.error("Error:", error));
+}
+
+function searchGame(event) {
+	event.preventDefault();
+	const input = document.getElementById("searchInput");
+	const name = input.value.trim();
+	if (name) {
+		globalThis.location.href = `/search/${encodeURIComponent(name)}`;
 	}
+	return false;
 }
 
 // async function voteGame(gameId, direction) {
@@ -265,26 +261,7 @@ function toggleOptionInSelector(selectorName, id, isEnabled) {
 // 	}
 // }
 
-document.addEventListener("DOMContentLoaded", () => {
-	loadGenres();
-	loadPlatforms();
-
-	document
-		.getElementById("createGenreForm")
-		.addEventListener("submit", createGenre);
-	document
-		.getElementById("updateGenreForm")
-		.addEventListener("submit", updateGenre);
-
-	document
-		.getElementById("createPlatformForm")
-		.addEventListener("submit", createPlatform);
-	document
-		.getElementById("updatePlatformForm")
-		.addEventListener("submit", updatePlatform);
-});
-
-/* ======== GÉNEROS ======== */
+//////////////////////  	GENEROS	   //////////////////////
 
 async function loadGenres() {
 	const res = await fetch("/genre/all");
@@ -321,12 +298,6 @@ async function createGenre(e) {
 	loadGenres();
 }
 
-function editGenre(id, name) {
-	document.getElementById("updateGenreId").value = id;
-	document.getElementById("updateGenreName").value = name;
-	document.getElementById("updateGenreForm").style.display = "grid";
-}
-
 async function updateGenre(e) {
 	e.preventDefault();
 
@@ -349,12 +320,7 @@ async function deleteGenre(id) {
 	loadGenres();
 }
 
-function cancelGenreEdit() {
-	document.getElementById("updateGenreForm").reset();
-	document.getElementById("updateGenreForm").style.display = "none";
-}
-
-/* ======== PLATAFORMAS ======== */
+//////////////////////  	PLATAFORMAS	   //////////////////////
 
 async function loadPlatforms() {
 	const res = await fetch("/platform/all");
@@ -391,12 +357,6 @@ async function createPlatform(e) {
 	loadPlatforms();
 }
 
-function editPlatform(id, name) {
-	document.getElementById("updatePlatformId").value = id;
-	document.getElementById("updatePlatformName").value = name;
-	document.getElementById("updatePlatformForm").style.display = "grid";
-}
-
 async function updatePlatform(e) {
 	e.preventDefault();
 
@@ -419,7 +379,57 @@ async function deletePlatform(id) {
 	loadPlatforms();
 }
 
-function cancelPlatformEdit() {
-	document.getElementById("updatePlatformForm").reset();
-	document.getElementById("updatePlatformForm").style.display = "none";
+//////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
+
+function getCorrectDateFormat(unformattedDate) {
+	const date = new Date(unformattedDate);
+	return date.toISOString().split("T")[0];
+}
+
+function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {
+	if (itemsArray && Array.isArray(itemsArray)) {
+		selectedMap.clear();
+
+		for (const currentItem of itemsArray) {
+			toggleOptionInSelector(selectorName, currentItem.Id, true);
+		}
+
+		callback();
+	}
+}
+
+function addFromSelectorToMap(selectedMap, selectorName) {
+	const selector = document.getElementById(selectorName);
+
+	if (!selector) return;
+
+	for (const currentOption of selector.selectedOptions) {
+		selectedMap.set(currentOption.value, currentOption.text);
+	}
+}
+
+//Cambio seleccionados en selector
+function toggleOptionInSelector(selectorName, id, isEnabled) {
+	const selector = document.getElementById(selectorName);
+	if (selector) {
+		const option = selector.querySelector(`option[value="${id}"]`);
+		if (option) option.selected = isEnabled;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////	CONSTRUCCION DE CONTENIDO	/////////////////////////////////////////////////////////////////////////////
+
+function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
+	const containerDiv = document.getElementById(renderDivId);
+
+	if (!containerDiv) return;
+
+	containerDiv.innerHTML = "";
+
+	for (const currentItem of selectedMap) {
+		const chip = document.createElement("span");
+		chip.className = "item-chip";
+		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
+		containerDiv.appendChild(chip);
+	}
 }

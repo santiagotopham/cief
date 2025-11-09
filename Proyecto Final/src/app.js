@@ -228,7 +228,7 @@ async function openDbConnection() {
 	return await mysql.createConnection(configConnection);
 }
 
-//////////////////////  	Gestion de Juegos	   //////////////////////
+//////////////////////  	JUEGOS	   //////////////////////
 async function getGamesFromDb(shouldFormatDate) {
 	const connection = await openDbConnection();
 	const query = `select * from Games g`;
@@ -423,7 +423,7 @@ async function getPlatformsByGameIdFromDb(gameIds) {
 	return platforms;
 }
 
-//////////////////////  	Gestion de Generos	   //////////////////////
+//////////////////////  	GENEROS	   //////////////////////
 
 async function getGenresFromDb() {
 	const connection = await openDbConnection();
@@ -506,7 +506,7 @@ async function linkGameToGenresDb(gameId, genresToLink) {
 	await connection.end();
 }
 
-//////////////////////  	Gestion de Plataformas	   //////////////////////
+//////////////////////  	PLATAFORMAS	   //////////////////////
 
 async function getMainPlatformsFromDb() {
 	const connection = await openDbConnection();
