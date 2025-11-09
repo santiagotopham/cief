@@ -7,6 +7,7 @@ import mysql from "mysql2/promise";
 const app = express();
 
 //////////////////////////////////////////////////////////////////////////////	CONFIGURACIONES INICIALES	/////////////////////////////////////////////////////////////////////////////
+
 process.loadEnvFile();
 const PORT = process.env.PORT;
 const configConnection = {
@@ -34,6 +35,8 @@ let mainPlatforms = await getMainPlatformsFromDb();
 let navBarMenu = buildNavBarMenu();
 
 //////////////////////////////////////////////////////////////////////////////	RUTAS	///////////////////////////////////////////////////////////////////////////////////////////
+
+//Index
 app.get("/", async (req, res) => {
 	res.render("index", {
 		title: siteName,
@@ -45,6 +48,7 @@ app.get("/", async (req, res) => {
 	});
 });
 
+//Categorias del Navbar
 for (const currentPlatform of mainPlatforms) {
 	app.get(
 		`/mainplatform/${currentPlatform.Name.toLocaleLowerCase()}`,
@@ -61,6 +65,7 @@ for (const currentPlatform of mainPlatforms) {
 	);
 }
 
+//Buscador por nombre
 app.get("/search/:name", async (req, res) => {
 	let games = await getGamesByNameFromDb(req.params.name);
 
@@ -78,6 +83,7 @@ app.get("/search/:name", async (req, res) => {
 	});
 });
 
+//Paginas individuales
 app.get("/game/:id", async (req, res) => {
 	let game = await getGameById(req.params.id);
 
@@ -96,6 +102,8 @@ app.get("/game/:id", async (req, res) => {
 });
 
 //////////////////////////////////////////////////////////////////////////////	PANEL ADMIN    //////////////////////////////////////////////////////////////////////////////
+
+//Panel
 app.get("/admin", async (req, res) => {
 	res.render("admin", {
 		title: siteName,
@@ -109,6 +117,7 @@ app.get("/admin", async (req, res) => {
 	});
 });
 
+//////////////////////  	Gestion de Juegos	   //////////////////////
 app.post("/game/add", async (req, res) => {
 	const newGame = req.body;
 
@@ -139,6 +148,7 @@ app.delete("/game/delete/:id", async (req, res) => {
 	res.json({ success: true, message: "Juego borrado" });
 });
 
+//////////////////////  	Gestion de Generos	   //////////////////////
 app.get("/genre/all", async (req, res) => {
 	res.json(await getGenresFromDb());
 });
@@ -167,6 +177,7 @@ app.delete("/genre/delete/:id", async (req, res) => {
 	res.json({ success: true, message: "Genero borrado" });
 });
 
+//////////////////////  	Gestion de Plataformas	   //////////////////////
 app.get("/platform/all", async (req, res) => {
 	res.json(await getPlatformsFromDb());
 });
@@ -211,11 +222,13 @@ app.listen(PORT, () => {
 });
 
 //////////////////////////////////////////////////////////////////////////////	BASE DE DATOS    //////////////////////////////////////////////////////////////////////////////
+
+//Apertura de conexion
 async function openDbConnection() {
 	return await mysql.createConnection(configConnection);
 }
 
-//Metodos de gestion de datos
+//////////////////////  	Gestion de Juegos	   //////////////////////
 async function getGamesFromDb(shouldFormatDate) {
 	const connection = await openDbConnection();
 	const query = `select * from Games g`;
@@ -223,7 +236,10 @@ async function getGamesFromDb(shouldFormatDate) {
 	let [games] = await connection.query(query);
 	await connection.end();
 
-	games = await composeGames(games);
+	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
+		games
+	);
+	games = await composeGames(games, gameGenres, gamePlatforms);
 
 	if (shouldFormatDate) {
 		games = setGameListDateFormat(games);
@@ -239,120 +255,14 @@ async function getGamesByNameFromDb(name, shouldFormatDate) {
 	let [games] = await connection.query(query);
 	await connection.end();
 
-	games = await composeGames(games);
+	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
+		games
+	);
+	games = await composeGames(games, gameGenres, gamePlatforms);
 
 	if (shouldFormatDate) {
 		games = setGameListDateFormat(games);
 	}
-
-	return games;
-}
-
-async function composeGames(games) {
-	const gameIds = games.map((x) => x.Id);
-	const gameGenres = await getGenresByGameIdFromDb(gameIds);
-	const gamePlatforms = await getPlatformsByGameIdFromDb(gameIds);
-
-	return games.map((currentGame) => {
-		let currentGameGenres = gameGenres.filter(
-			(y) => y.GameId == currentGame.Id
-		);
-
-		let currentGamePlatforms = gamePlatforms.filter(
-			(y) => y.GameId == currentGame.Id
-		);
-
-		currentGame.Genres = [
-			...currentGameGenres.map((z) => {
-				return { Id: z.GenreId, Name: z.Name };
-			}),
-		];
-
-		currentGame.Platforms = [
-			...currentGamePlatforms.map((z) => {
-				return { Id: z.PlatformId, Name: z.Name };
-			}),
-		];
-		return currentGame;
-	});
-}
-
-async function getMainPlatformsFromDb() {
-	const connection = await openDbConnection();
-	const query = "SELECT * FROM MainPlatforms";
-
-	let [mainPlatforms] = await connection.query(query);
-	await connection.end();
-
-	return mainPlatforms;
-}
-
-async function getGenresFromDb() {
-	const connection = await openDbConnection();
-	const query = "SELECT * FROM Genres";
-
-	let [genres] = await connection.query(query);
-	await connection.end();
-
-	return genres;
-}
-
-async function getGenresByGameIdFromDb(gameIds) {
-	const idsString = arrayToString(gameIds);
-
-	const connection = await openDbConnection();
-	const query = `select g.Id as GameId, n.Id as GenreId, n.Name
-					from Games g
-					join GenresPerGame gpg on g.Id = gpg.GameId
-					join Genres n on gpg.GenreId = n.Id
-					where g.Id in (${idsString})`;
-
-	let [genres] = await connection.query(query);
-	await connection.end();
-
-	return genres;
-}
-
-async function getPlatformsFromDb() {
-	const connection = await openDbConnection();
-	const query = "SELECT * FROM Platforms";
-
-	let [platforms] = await connection.query(query);
-	await connection.end();
-
-	return platforms;
-}
-
-async function getPlatformsByGameIdFromDb(gameIds) {
-	const idsString = arrayToString(gameIds);
-
-	const connection = await openDbConnection();
-	const query = `select g.Id as GameId, p.Id as PlatformId, p.Name
-					from Games g
-					join PlatformsPerGame ppg on g.Id = ppg.GameId
-					join Platforms p on ppg.PlatformId = p.Id
-					where g.Id in (${idsString})`;
-
-	let [platforms] = await connection.query(query);
-	await connection.end();
-
-	return platforms;
-}
-
-async function filterByMainPlatform(mainPlatformId) {
-	const connection = await openDbConnection();
-
-	const query = `SELECT ppg.GameId FROM mainplatforms mp
-					join Platforms p on mp.Id = p.MainPlatformId
-					join PlatformsPerGame ppg on p.Id = ppg.PlatformId
-					where mp.Id = ${mainPlatformId}`;
-
-	let [gameIds] = await connection.query(query);
-
-	gameIds = gameIds.map((x) => x.GameId);
-	await connection.end();
-
-	const games = await getGamesByIdList(gameIds);
 
 	return games;
 }
@@ -383,7 +293,10 @@ async function getGamesByIdList(idsList) {
 	let [games] = await connection.query(query);
 	await connection.end();
 
-	games = await composeGames(games);
+	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
+		games
+	);
+	games = await composeGames(games, gameGenres, gamePlatforms);
 
 	games = setGameListDateFormat(games);
 
@@ -409,60 +322,6 @@ async function saveGameToDb(newGame) {
 
 	await linkGameToGenresDb(result[0].insertId, newGame.genres);
 	await linkGameToPlatformsDb(result[0].insertId, newGame.platforms);
-}
-
-async function linkGameToGenresDb(gameId, genresToLink) {
-	const connection = await openDbConnection();
-
-	const genreArray =
-		typeof genresToLink === "string"
-			? genresToLink
-					.split(",")
-					.map((id) => parseInt(id.trim()))
-					.filter(Boolean)
-			: genresToLink;
-
-	if (!Array.isArray(genreArray) || genreArray.length === 0) {
-		await connection.end();
-		return;
-	}
-
-	const sql =
-		"INSERT INTO `GenresPerGame`(`GenreId`, `GameId`) VALUES (?, ?)";
-
-	for (const genreId of genreArray) {
-		await connection.execute(sql, [genreId, gameId]);
-	}
-
-	await connection.end();
-}
-
-async function linkGameToPlatformsDb(gameId, platformsToLink) {
-	const connection = await openDbConnection();
-
-	console.log(platformsToLink);
-
-	const platformArray =
-		typeof platformsToLink === "string"
-			? platformsToLink
-					.split(",")
-					.map((id) => parseInt(id.trim()))
-					.filter(Boolean)
-			: platformsToLink;
-
-	if (!Array.isArray(platformArray) || platformArray.length === 0) {
-		await connection.end();
-		return;
-	}
-
-	const sql =
-		"INSERT INTO `PlatformsPerGame`(`PlatformId`, `GameId`) VALUES (?, ?)";
-
-	for (const platformId of platformArray) {
-		await connection.execute(sql, [platformId, gameId]);
-	}
-
-	await connection.end();
 }
 
 async function updateGameInDb(id, updatedGame) {
@@ -505,6 +364,15 @@ async function deleteGameFromDb(id) {
 	await connection.end();
 }
 
+async function getRelatedEntitesFromGames(games) {
+	const gameIds = games.map((x) => x.Id);
+
+	const gameGenres = await getGenresByGameIdFromDb(gameIds);
+	const gamePlatforms = await getPlatformsByGameIdFromDb(gameIds);
+
+	return { gameGenres, gamePlatforms };
+}
+
 async function deleteGenresFromGame(connection, gameId) {
 	await deleteRelatedToGame(connection, gameId, "GenresPerGame");
 }
@@ -519,6 +387,68 @@ async function deleteRelatedToGame(connection, gameId, tableName) {
 
 	let result = await connection.execute(sql, values);
 	console.log(result[0]);
+}
+
+async function filterByMainPlatform(mainPlatformId) {
+	const connection = await openDbConnection();
+
+	const query = `SELECT ppg.GameId FROM mainplatforms mp
+					join Platforms p on mp.Id = p.MainPlatformId
+					join PlatformsPerGame ppg on p.Id = ppg.PlatformId
+					where mp.Id = ${mainPlatformId}`;
+
+	let [gameIds] = await connection.query(query);
+
+	gameIds = gameIds.map((x) => x.GameId);
+	await connection.end();
+
+	const games = await getGamesByIdList(gameIds);
+
+	return games;
+}
+
+async function getPlatformsByGameIdFromDb(gameIds) {
+	const idsString = arrayToString(gameIds);
+
+	const connection = await openDbConnection();
+	const query = `select g.Id as GameId, p.Id as PlatformId, p.Name
+					from Games g
+					join PlatformsPerGame ppg on g.Id = ppg.GameId
+					join Platforms p on ppg.PlatformId = p.Id
+					where g.Id in (${idsString})`;
+
+	let [platforms] = await connection.query(query);
+	await connection.end();
+
+	return platforms;
+}
+
+//////////////////////  	Gestion de Generos	   //////////////////////
+
+async function getGenresFromDb() {
+	const connection = await openDbConnection();
+	const query = "SELECT * FROM Genres";
+
+	let [genres] = await connection.query(query);
+	await connection.end();
+
+	return genres;
+}
+
+async function getGenresByGameIdFromDb(gameIds) {
+	const idsString = arrayToString(gameIds);
+
+	const connection = await openDbConnection();
+	const query = `select g.Id as GameId, n.Id as GenreId, n.Name
+					from Games g
+					join GenresPerGame gpg on g.Id = gpg.GameId
+					join Genres n on gpg.GenreId = n.Id
+					where g.Id in (${idsString})`;
+
+	let [genres] = await connection.query(query);
+	await connection.end();
+
+	return genres;
 }
 
 async function saveGenreToDb(newGenre) {
@@ -548,6 +478,54 @@ async function deleteGenreFromDb(id) {
 	await connection.execute(sql, values);
 
 	await connection.end();
+}
+
+async function linkGameToGenresDb(gameId, genresToLink) {
+	const connection = await openDbConnection();
+
+	const genreArray =
+		typeof genresToLink === "string"
+			? genresToLink
+					.split(",")
+					.map((id) => parseInt(id.trim()))
+					.filter(Boolean)
+			: genresToLink;
+
+	if (!Array.isArray(genreArray) || genreArray.length === 0) {
+		await connection.end();
+		return;
+	}
+
+	const sql =
+		"INSERT INTO `GenresPerGame`(`GenreId`, `GameId`) VALUES (?, ?)";
+
+	for (const genreId of genreArray) {
+		await connection.execute(sql, [genreId, gameId]);
+	}
+
+	await connection.end();
+}
+
+//////////////////////  	Gestion de Plataformas	   //////////////////////
+
+async function getMainPlatformsFromDb() {
+	const connection = await openDbConnection();
+	const query = "SELECT * FROM MainPlatforms";
+
+	let [mainPlatforms] = await connection.query(query);
+	await connection.end();
+
+	return mainPlatforms;
+}
+
+async function getPlatformsFromDb() {
+	const connection = await openDbConnection();
+	const query = "SELECT * FROM Platforms";
+
+	let [platforms] = await connection.query(query);
+	await connection.end();
+
+	return platforms;
 }
 
 async function savePlatformToDb(newPlatform) {
@@ -580,7 +558,37 @@ async function deletePlatformFromDb(id) {
 	await connection.end();
 }
 
+async function linkGameToPlatformsDb(gameId, platformsToLink) {
+	const connection = await openDbConnection();
+
+	console.log(platformsToLink);
+
+	const platformArray =
+		typeof platformsToLink === "string"
+			? platformsToLink
+					.split(",")
+					.map((id) => parseInt(id.trim()))
+					.filter(Boolean)
+			: platformsToLink;
+
+	if (!Array.isArray(platformArray) || platformArray.length === 0) {
+		await connection.end();
+		return;
+	}
+
+	const sql =
+		"INSERT INTO `PlatformsPerGame`(`PlatformId`, `GameId`) VALUES (?, ?)";
+
+	for (const platformId of platformArray) {
+		await connection.execute(sql, [platformId, gameId]);
+	}
+
+	await connection.end();
+}
+
 //////////////////////////////////////////////////////////////////////////////	CONSTRUCCION DE CONTENIDO    //////////////////////////////////////////////////////////////////////////////
+
+//Armo items del Navbar
 function buildNavBarMenu() {
 	let list = '<ul class="container">';
 	for (const currentPlatform of mainPlatforms) {
@@ -592,6 +600,8 @@ function buildNavBarMenu() {
 }
 
 //////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES    //////////////////////////////////////////////////////////////////////////////
+
+//Coloca formato de fecha  a lista de Juegos
 function setGameListDateFormat(games) {
 	games = games.map((currentGame) => {
 		currentGame.LaunchDate = getCorrectDateFormat(currentGame.LaunchDate);
@@ -601,11 +611,39 @@ function setGameListDateFormat(games) {
 	return games;
 }
 
+//Retorna fecha formateada
 function getCorrectDateFormat(unformattedDate) {
 	const date = new Date(unformattedDate);
 	return date.toLocaleDateString("es-ES").replaceAll(/\//g, "-");
 }
 
+//Convierte string separado por comas en array
 function arrayToString(array) {
 	return array.join(",");
+}
+
+//Armo un objeto de los Juegos con sus entidades relacionadas
+async function composeGames(games, gameGenres, gamePlatforms) {
+	return games.map((currentGame) => {
+		let currentGameGenres = gameGenres.filter(
+			(y) => y.GameId == currentGame.Id
+		);
+
+		let currentGamePlatforms = gamePlatforms.filter(
+			(y) => y.GameId == currentGame.Id
+		);
+
+		currentGame.Genres = [
+			...currentGameGenres.map((z) => {
+				return { Id: z.GenreId, Name: z.Name };
+			}),
+		];
+
+		currentGame.Platforms = [
+			...currentGamePlatforms.map((z) => {
+				return { Id: z.PlatformId, Name: z.Name };
+			}),
+		];
+		return currentGame;
+	});
 }
