@@ -31,7 +31,7 @@ app.use(express.json());
 
 //Inicio datos base de la aplicacion
 let siteName = "GameRanking";
-let mainPlatforms = await getMainPlatformsFromDb();
+let mainPlatforms = await getMainPlatforms();
 let navBarMenu = buildNavBarMenu();
 
 //////////////////////////////////////////////////////////////////////////////	RUTAS	///////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +114,7 @@ app.get("/admin", async (req, res) => {
 		games: await getGamesFromDb(false),
 		genres: await getGenresFromDb(),
 		platforms: await getPlatformsFromDb(),
+		mainPlatforms: await getMainPlatforms(),
 	});
 });
 
@@ -203,6 +204,10 @@ app.delete("/platform/delete/:id", async (req, res) => {
 	await deletePlatform(req.params.id);
 
 	res.json({ success: true, message: "Plataforma borrada" });
+});
+
+app.get("/mainplatform/all", async (req, res) => {
+	res.json(await getMainPlatforms());
 });
 
 //////////////////////////////////////////////////////////////////////////////	404   //////////////////////////////////////////////////////////////////////////////
@@ -506,19 +511,28 @@ async function linkGameToGenresDb(gameId, genresToLink) {
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
-async function getMainPlatformsFromDb() {
-	const connection = await openDbConnection();
-	const query = "SELECT * FROM MainPlatforms order by Id";
-
-	let [mainPlatforms] = await connection.query(query);
-	await connection.end();
-
-	return mainPlatforms;
-}
-
 async function getPlatformsFromDb() {
 	const connection = await openDbConnection();
-	const query = "SELECT * FROM Platforms order by Id";
+	const query = `
+        SELECT 
+            p.Id,
+            p.Name,
+            p.MainPlatformId,
+            mp.Name AS MainPlatformName
+        FROM Platforms p
+        INNER JOIN MainPlatforms mp ON p.MainPlatformId = mp.Id
+        ORDER BY p.Id
+    `;
+
+	let [platforms] = await connection.query(query);
+	await connection.end();
+
+	return platforms;
+}
+
+async function getMainPlatforms() {
+	const connection = await openDbConnection();
+	const query = "SELECT * FROM `MainPlatforms` ORDER BY Id";
 
 	let [platforms] = await connection.query(query);
 	await connection.end();
@@ -528,8 +542,12 @@ async function getPlatformsFromDb() {
 
 async function savePlatform(newPlatform) {
 	const connection = await openDbConnection();
-	const sql = "INSERT INTO `Platforms`(`Name`) VALUES (?)";
-	const values = [newPlatform.name || newPlatform.Name];
+	const sql =
+		"INSERT INTO `Platforms`(`Name`, `MainPlatformId`) VALUES (?, ?)";
+	const values = [
+		newPlatform.name || newPlatform.Name,
+		newPlatform.mainPlatformId || newPlatform.MainPlatformId,
+	];
 
 	await connection.execute(sql, values);
 	await connection.end();
@@ -537,8 +555,13 @@ async function savePlatform(newPlatform) {
 
 async function updatePlatform(id, updatedPlatform) {
 	const connection = await openDbConnection();
-	const sql = "UPDATE `Platforms` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
-	const values = [updatedPlatform.name || updatedPlatform.Name, id];
+	const sql =
+		"UPDATE `Platforms` SET `Name` = ?, `MainPlatformId` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [
+		updatedPlatform.name || updatedPlatform.Name,
+		updatedPlatform.mainPlatformId || updatedPlatform.MainPlatformId,
+		id,
+	];
 
 	await connection.execute(sql, values);
 	await connection.end();

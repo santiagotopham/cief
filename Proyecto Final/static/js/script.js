@@ -188,10 +188,12 @@ function cancelGenreEdit() {
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
-function editPlatform(id, name) {
+function editPlatform(id, name, mainPlatformId) {
 	isInsert = false;
 	document.getElementById("platformId").value = id;
 	document.getElementById("platformName").value = name;
+	document.getElementById("platformMainPlatform").value =
+		mainPlatformId || "";
 	document.getElementById("platformModalTitle").textContent =
 		"Editar Plataforma";
 	// document.getElementById("platformForm").style.display = "grid";
@@ -235,11 +237,11 @@ function openGenreModal(mode) {
 function openPlatformModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		// platformForm.action = "/platform/add";
 		platformForm.reset();
 		document.getElementById("platformModalTitle").textContent =
 			"Nueva Plataforma";
 		document.getElementById("platformId").value = "";
+		document.getElementById("platformMainPlatform").value = "";
 	}
 
 	openModal("platformModal");
@@ -485,22 +487,34 @@ async function deleteGenre(id) {
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
 async function loadPlatforms() {
-	const res = await fetch("/platform/all");
-	const data = await res.json();
+	try {
+		const response = await fetch("/platform/all");
+		if (!response.ok) throw new Error("Error al cargar plataformas");
 
-	const tbody = document.getElementById("platformsTableBody");
-	tbody.innerHTML = "";
+		const data = await response.json();
 
-	for (const platform of data) {
-		const tr = document.createElement("tr");
-		tr.innerHTML = `
-			<td>${platform.Id}</td>
-			<td>${platform.Name}</td>
-			<td>
-				<button onclick="editPlatform(${platform.Id}, '${platform.Name}')">Editar</button>
-				<button onclick="deletePlatform(${platform.Id})">Eliminar</button>
-			</td>`;
-		tbody.appendChild(tr);
+		const tbody = document.getElementById("platformsTableBody");
+		if (!tbody) return;
+
+		tbody.innerHTML = "";
+
+		for (const platform of data) {
+			const tr = document.createElement("tr");
+			tr.innerHTML = `
+				<td>${platform.Id}</td>
+				<td>${platform.Name}</td>
+				<td>${platform.MainPlatformName || "N/A"}</td>
+				<td>
+					<button onclick="editPlatform(${platform.Id}, '${platform.Name}', ${
+				platform.MainPlatformId
+			})">Editar</button>
+					<button onclick="deletePlatform(${platform.Id})">Eliminar</button>
+				</td>`;
+			tbody.appendChild(tr);
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al cargar las plataformas", true);
 	}
 }
 
@@ -509,8 +523,14 @@ async function handlePlatformFormSubmit(e) {
 
 	const id = document.getElementById("platformId").value;
 	const name = document.getElementById("platformName").value.trim();
+	const mainPlatformId = document.getElementById(
+		"platformMainPlatform"
+	).value;
 
-	if (!name) return;
+	if (!name || !mainPlatformId) {
+		showToast("Por favor completa todos los campos", true);
+		return;
+	}
 
 	try {
 		let response;
@@ -518,13 +538,13 @@ async function handlePlatformFormSubmit(e) {
 			response = await fetch("/platform/edit", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ id, name }),
+				body: JSON.stringify({ id, name, mainPlatformId }),
 			});
 		} else {
 			response = await fetch("/platform/add", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ name }),
+				body: JSON.stringify({ name, mainPlatformId }),
 			});
 		}
 
@@ -538,7 +558,7 @@ async function handlePlatformFormSubmit(e) {
 					: "Plataforma creada correctamente")
 		);
 
-		closePlatformModal();
+		closeModal("platformModal");
 		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);

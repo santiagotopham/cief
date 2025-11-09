@@ -2,8 +2,7 @@
 <body>
     <%- include('./templates/navbar') %>
     <main class="backoffice_main">
-        
-        <!-- Sección de Juegos -->
+<!-------------------------------------------------   TABLA JUEGOS  ------------------------------------------->
         <div class="game_section">
             <div class="section-header">
                 <h2>Juegos</h2>
@@ -42,7 +41,7 @@
             </table>
         </div>
 
-        <!-- Sección de Géneros -->
+<!-------------------------------------------------   TABLA GENEROS  ------------------------------------------->
         <div class="genre_section">
             <div class="section-header">
                 <h2>Géneros</h2>
@@ -75,17 +74,18 @@
             </table>
         </div>
 
-        <!-- Sección de Plataformas -->
+<!-------------------------------------------------   TABLA PLATAFORMAS  ------------------------------------------->
         <div class="platform_section">
             <div class="section-header">
                 <h2>Plataformas</h2>
-                <button class="new-btn" onclick="openPlatformModal('add')">+ Nueva Plataforma</button>
+                <button class="new-btn" onclick="openPlatformModal('create')">+ Nueva Plataforma</button>
             </div>
             <table class="data_table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Plataforma Principal</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -94,8 +94,9 @@
                         <tr>
                             <td><%= currentPlatform.Id %></td>
                             <td><%= currentPlatform.Name %></td>
+                            <td><%= currentPlatform.MainPlatformName || 'N/A' %></td>
                             <td>
-                                <button onclick="editPlatform('<%= currentPlatform.Id %>', '<%= currentPlatform.Name %>')" title="Editar plataforma">
+                                <button onclick="editPlatform('<%= currentPlatform.Id %>', '<%= currentPlatform.Name %>', '<%= currentPlatform.MainPlatformId %>')" title="Editar plataforma">
                                     Editar
                                 </button>
                                 <button onclick="deletePlatform('<%= currentPlatform.Id %>')" title="Borrar plataforma">
@@ -110,7 +111,7 @@
 
     </main>
 
-    <!-- Modal para Juegos (Crear/Editar) -->
+    <!-------------------------------------------------   MODAL JUEGOS  ------------------------------------------->
     <div id="gameModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -171,7 +172,7 @@
         </div>
     </div>
 
-    <!-- Modal para Géneros (Crear/Editar) -->
+    <!-------------------------------------------------   MODAL GEENROS  ------------------------------------------->
     <div id="genreModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -191,19 +192,27 @@
             </form>
         </div>
     </div>
-
-    <!-- Modal para Plataformas (Crear/Editar) -->
+<!-------------------------------------------------   MODAL PLATAFORMAS  ------------------------------------------->
     <div id="platformModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="platformModalTitle">Nueva Plataforma</h2>
                 <button class="close-modal" onclick="closeModal('platformModal')">&times;</button>
             </div>
-            <form id="platformForm" class="modal-form">
+            <form id="platformForm" class="modal-form" method="post">
                 <input type="hidden" id="platformId" name="id">
                 <div>
                     <label for="platformName">Nombre:</label>
                     <input type="text" id="platformName" name="name" required>
+                </div>
+                <div>
+                    <label for="platformMainPlatform">Plataforma Principal:</label>
+                    <select id="platformMainPlatform" name="mainPlatformId" required>
+                        <option value="">Selecciona una plataforma principal</option>
+                        <% mainPlatforms.forEach(mainPlatform => { %>
+                            <option value="<%= mainPlatform.Id %>"><%= mainPlatform.Name %></option>
+                        <% }) %>
+                    </select>
                 </div>
                 <div class="modal-buttons">
                     <button type="submit">Guardar</button>
