@@ -301,7 +301,7 @@ async function handleGameFormSubmit(e) {
 		showToast(data.message);
 
 		closeModal("gameModal");
-		setTimeout(() => location.reload(), 1500);
+		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al guardar el juego", true);
@@ -322,7 +322,7 @@ function deleteGame(id) {
 		})
 		.then((data) => {
 			showToast(data.message || "Juego eliminado correctamente");
-			setTimeout(() => location.reload(), 1500);
+			setTimeout(() => location.reload(), 1000);
 		})
 		.catch((error) => {
 			console.error("Error:", error);
@@ -424,7 +424,7 @@ async function handleGenreFormSubmit(e) {
 		showToast(data.message);
 
 		closeModal("genreModal");
-		setTimeout(() => loadGenres(), 1000);
+		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al guardar el género", true);
@@ -444,7 +444,7 @@ async function deleteGenre(id) {
 		const data = await response.json();
 		showToast(data.message || "Género eliminado correctamente");
 
-		setTimeout(() => loadGenres(), 1000);
+		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al eliminar el género", true);
@@ -521,14 +521,12 @@ async function handlePlatformFormSubmit(e) {
 	try {
 		let response;
 		if (id) {
-			// Actualizar
 			response = await fetch("/platform/edit", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ id, name }),
 			});
 		} else {
-			// Crear
 			response = await fetch("/platform/add", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -547,7 +545,7 @@ async function handlePlatformFormSubmit(e) {
 		);
 
 		closePlatformModal();
-		await loadPlatforms();
+		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al guardar la plataforma", true);
@@ -567,7 +565,7 @@ async function deletePlatform(id) {
 		const data = await response.json();
 		showToast(data.message || "Plataforma eliminada correctamente");
 
-		setTimeout(() => loadPlatforms(), 1000);
+		setTimeout(() => location.reload(), 1000);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al eliminar la plataforma", true);
