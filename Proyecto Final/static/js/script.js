@@ -10,41 +10,33 @@ toggleGameForm();
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
-	addClickFunction("addGenresBtn", addGenresFromSelect);
-	addClickFunction("updateAddGenresBtn", addGenresFromSelect);
-	addClickFunction("addPlatformsBtn", addPlatformsFromSelect);
-	addClickFunction("updateAddPlatformsBtn", addPlatformsFromSelect);
-
 	const createForm = document.querySelector(".insert form");
 	if (createForm) {
 		createForm.addEventListener("reset", () => {
 			resetForm();
 		});
+
+		addEventListener("addGenresBtn", addGenresFromSelect, "click");
+		addEventListener("updateAddGenresBtn", addGenresFromSelect, "click");
+		addEventListener("addPlatformsBtn", addPlatformsFromSelect, "click");
+		addEventListener(
+			"updateAddPlatformsBtn",
+			addPlatformsFromSelect,
+			"click"
+		);
+		addEventListener("createGenreForm", createGenre, "submit");
+		addEventListener("updateGenreForm", updateGenre, "submit");
+		addEventListener("createPlatformForm", createPlatform, "submit");
+		addEventListener("updatePlatformForm", updatePlatform, "submit");
+
+		loadGenres();
+		loadPlatforms();
 	}
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-	loadGenres();
-	loadPlatforms();
-
-	document
-		.getElementById("createGenreForm")
-		.addEventListener("submit", createGenre);
-	document
-		.getElementById("updateGenreForm")
-		.addEventListener("submit", updateGenre);
-
-	document
-		.getElementById("createPlatformForm")
-		.addEventListener("submit", createPlatform);
-	document
-		.getElementById("updatePlatformForm")
-		.addEventListener("submit", updatePlatform);
-});
-
-function addClickFunction(elementId, callback) {
+function addEventListener(elementId, callback, event) {
 	const element = document.getElementById(elementId);
-	if (element) element.addEventListener("click", callback);
+	if (element) element.addEventListener(event, callback);
 }
 
 //////////////////////////////////////////////////////////////////////////////	GESTIONO FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
