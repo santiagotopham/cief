@@ -115,7 +115,7 @@ app.post("/game/add", async (req, res) => {
 
 	await saveGameToDb(newGame);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Juego creado" });
 });
 
 app.post("/game/edit", async (req, res) => {
@@ -123,13 +123,13 @@ app.post("/game/edit", async (req, res) => {
 
 	await updateGameInDb(updatedGame.id, updatedGame);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Juego editado" });
 });
 
-app.post("/game/vote/:id", async (req, res) => {
-	await updateGameLikes(req.params.id, req.body.likesCount);
+app.post("/game/vote/:gameId", async (req, res) => {
+	await updateGameLikes(req.params.gameId, req.body.direction);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Voto aceptado" });
 });
 
 app.delete("/game/delete/:id", async (req, res) => {
@@ -137,7 +137,7 @@ app.delete("/game/delete/:id", async (req, res) => {
 
 	await deleteGameFromDb(id);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Juego borrado" });
 });
 
 app.get("/genre/all", async (req, res) => {
@@ -149,7 +149,7 @@ app.post("/genre/add", async (req, res) => {
 
 	await saveGenreToDb(newGenre);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Genero creado" });
 });
 
 app.post("/genre/edit", async (req, res) => {
@@ -157,7 +157,7 @@ app.post("/genre/edit", async (req, res) => {
 
 	await updateGenreInDb(updatedGenre.id, updatedGenre);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Genero editado" });
 });
 
 app.delete("/genre/delete/:id", async (req, res) => {
@@ -165,7 +165,7 @@ app.delete("/genre/delete/:id", async (req, res) => {
 
 	await deleteGenreFromDb(id);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Genero borrado" });
 });
 
 app.get("/platform/all", async (req, res) => {
@@ -177,7 +177,7 @@ app.post("/platform/add", async (req, res) => {
 
 	await savePlatformToDb(newPlatform);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Plataforma creada" });
 });
 
 app.post("/platform/edit", async (req, res) => {
@@ -185,7 +185,7 @@ app.post("/platform/edit", async (req, res) => {
 
 	await updatePlatformInDb(updatedPlatform.id, updatedPlatform);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Plataforma editada" });
 });
 
 app.delete("/platform/delete/:id", async (req, res) => {
@@ -193,7 +193,7 @@ app.delete("/platform/delete/:id", async (req, res) => {
 
 	await deletePlatformFromDb(id);
 
-	res.redirect("/admin");
+	res.json({ success: true, message: "Plataforma borrada" });
 });
 
 //Manejo error 404
