@@ -46,7 +46,12 @@ function loadAndShowGameEditForm(game) {
 	// if (isInsert) toggleGameForm();
 	isInsert = false;
 	resetForm();
+
+	console.log(game);
+
 	game = JSON.parse(game);
+
+	console.log(game);
 
 	// document.getElementById("id").value = game.Id;
 	// document.getElementById("updateTitle").value = game.Title;
@@ -82,6 +87,8 @@ function loadAndShowGameEditForm(game) {
 		"gamePlatforms",
 		addPlatformsFromSelect
 	);
+
+	openModal("gameModal");
 }
 
 function toggleGameForm() {
@@ -612,8 +619,28 @@ async function deletePlatform(id) {
 //////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
 
 function getCorrectDateFormat(unformattedDate) {
+	if (!unformattedDate) return "";
+
+	// Si ya viene en formato YYYY-MM-DD, devolverlo directamente
+	if (/^\d{4}-\d{2}-\d{2}$/.test(unformattedDate)) {
+		return unformattedDate;
+	}
+
+	// Crear fecha sin conversión de zona horaria
 	const date = new Date(unformattedDate);
-	return date.toISOString().split("T")[0];
+
+	// Verificar si la fecha es válida
+	if (isNaN(date.getTime())) {
+		console.error("Fecha inválida:", unformattedDate);
+		return "";
+	}
+
+	// Obtener componentes de fecha en zona horaria local
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+
+	return `${year}-${month}-${day}`;
 }
 
 function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {

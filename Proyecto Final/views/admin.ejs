@@ -29,7 +29,7 @@
                             <td><%= currentGame.Developer %></td>
                             <td><%= currentGame.Category %> </td>
                             <td>
-                                <button onclick='loadAndShowGameEditForm(<%= JSON.stringify(currentGame) %>)' title="Editar juego">
+                                <button onclick="loadAndShowGameEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar juego">
                                     Editar
                                 </button>
                                 <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
