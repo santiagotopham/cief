@@ -43,21 +43,10 @@ function addEventListener(elementId, callback, event) {
 //////////////////////  	JUEGOS	   //////////////////////
 
 function loadAndShowGameEditForm(game) {
-	// if (isInsert) toggleGameForm();
 	isInsert = false;
 	resetForm();
 
 	game = JSON.parse(game);
-
-	// document.getElementById("id").value = game.Id;
-	// document.getElementById("updateTitle").value = game.Title;
-	// document.getElementById("updateImageUrl").value = game.ImageUrl;
-	// document.getElementById("updateLaunchDate").value = getCorrectDateFormat(
-	// 	game.LaunchDate
-	// );
-	// document.getElementById("updateDeveloper").value = game.Developer;
-	// document.getElementById("updateCategory").value = game.Category;
-	// document.getElementById("updateSynopsis").value = game.Synopsis;
 
 	document.getElementById("gameModalTitle").textContent = "Editar Juego";
 	document.getElementById("gameId").value = game.Id;
@@ -128,14 +117,6 @@ function addGenresFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
 
-	// if (isInsert) {
-	// 	selectorName = "gameGenres";
-	// 	selectedList = "selectedGenresList";
-	// } else {
-	// 	selectorName = "updateGenres";
-	// 	selectedList = "updateSelectedGenresList";
-	// }
-
 	selectorName = "gameGenres";
 	selectedList = "selectedGenresList";
 
@@ -177,7 +158,6 @@ function editGenre(id, name) {
 	document.getElementById("genreId").value = id;
 	document.getElementById("genreName").value = name;
 	document.getElementById("genreModalTitle").textContent = "Editar Género";
-	// document.getElementById("updateGenreForm").style.display = "grid";
 	openModal("genreModal");
 }
 
@@ -196,7 +176,6 @@ function editPlatform(id, name, mainPlatformId) {
 		mainPlatformId || "";
 	document.getElementById("platformModalTitle").textContent =
 		"Editar Plataforma";
-	// document.getElementById("platformForm").style.display = "grid";
 	openModal("platformModal");
 }
 
@@ -211,7 +190,6 @@ function cancelPlatformEdit() {
 function openGameModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		// gameForm.action = "/game/add";
 		gameForm.reset();
 		document.getElementById("gameModalTitle").textContent = "Nuevo Juego";
 		resetForm();
@@ -224,7 +202,6 @@ function openGameModal(mode) {
 function openGenreModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		// genreForm.action = "/genre/add";
 		genreForm.reset();
 		document.getElementById("genreModalTitle").textContent = "Nuevo Género";
 		document.getElementById("genreId").value = "";
@@ -447,43 +424,6 @@ async function deleteGenre(id) {
 	}
 }
 
-// async function createGenre(e) {
-// 	e.preventDefault();
-// 	const name = document.getElementById("genreName").value.trim();
-// 	if (!name) return;
-
-// 	await fetch("/genre/add", {
-// 		method: "POST",
-// 		headers: { "Content-Type": "application/json" },
-// 		body: JSON.stringify({ Name: name }),
-// 	});
-
-// 	document.getElementById("createGenreForm").reset();
-// 	loadGenres();
-// }
-
-// async function updateGenre(e) {
-// 	e.preventDefault();
-
-// 	const id = document.getElementById("updateGenreId").value;
-// 	const name = document.getElementById("updateGenreName").value.trim();
-
-// 	await fetch("/genre/edit", {
-// 		method: "POST",
-// 		headers: { "Content-Type": "application/json" },
-// 		body: JSON.stringify({ Id: id, Name: name }),
-// 	});
-
-// 	cancelGenreEdit();
-// 	loadGenres();
-// }
-
-// async function deleteGenre(id) {
-// 	if (!confirm("¿Eliminar este género?")) return;
-// 	await fetch(`/genre/delete/${id}`, { method: "DELETE" });
-// 	loadGenres();
-// }
-
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
 async function loadPlatforms() {
@@ -585,43 +525,6 @@ async function deletePlatform(id) {
 		showToast("Error al eliminar la plataforma", true);
 	}
 }
-
-// async function createPlatform(e) {
-// 	e.preventDefault();
-// 	const name = document.getElementById("platformName").value.trim();
-// 	if (!name) return;
-
-// 	await fetch("/platform/add", {
-// 		method: "POST",
-// 		headers: { "Content-Type": "application/json" },
-// 		body: JSON.stringify({ Name: name }),
-// 	});
-
-// 	document.getElementById("createPlatformForm").reset();
-// 	loadPlatforms();
-// }
-
-// async function updatePlatform(e) {
-// 	e.preventDefault();
-
-// 	const id = document.getElementById("updatePlatformId").value;
-// 	const name = document.getElementById("updatePlatformName").value.trim();
-
-// 	await fetch("/platform/edit", {
-// 		method: "POST",
-// 		headers: { "Content-Type": "application/json" },
-// 		body: JSON.stringify({ Id: id, Name: name }),
-// 	});
-
-// 	cancelPlatformEdit();
-// 	loadPlatforms();
-// }
-
-// async function deletePlatform(id) {
-// 	if (!confirm("¿Eliminar esta plataforma?")) return;
-// 	await fetch(`/platform/delete/${id}`, { method: "DELETE" });
-// 	loadPlatforms();
-// }
 
 //////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
 
