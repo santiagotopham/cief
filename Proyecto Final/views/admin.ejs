@@ -2,8 +2,13 @@
 <body>
     <%- include('./templates/navbar') %>
     <main class="backoffice_main">
+        
+        <!-- Sección de Juegos -->
         <div class="game_section">
-            <h2>Juegos</h2>
+            <div class="section-header">
+                <h2>Juegos</h2>
+                <button class="new-btn" onclick="openGameModal('create')">+ Nuevo Juego</button>
+            </div>
             <table class="data_table">
                 <thead>
                     <tr>
@@ -18,7 +23,7 @@
                     <% games.forEach(currentGame => { %>
                         <tr>
                             <td><%= currentGame.Title %></td>
-                            <td><%= currentGame.LaunchDate %></td>
+                            <td><%= new Date(currentGame.LaunchDate).toLocaleDateString('es-ES') %></td>
                             <td><%= currentGame.Developer %></td>
                             <td><%= currentGame.Category %> </td>
                             <td>
@@ -28,226 +33,182 @@
                                 <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
                                     Eliminar
                                 </button>
-                                
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <div class="insert">
-            <h2>Nuevo Juego</h2>
-            <form action="/game/add" method="post">
+        </div>
+
+        <!-- Sección de Géneros -->
+        <div class="genre_section">
+            <div class="section-header">
+                <h2>Géneros</h2>
+                <button class="new-btn" onclick="openGenreModal('create')">+ Nuevo Género</button>
+            </div>
+            <table class="data_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="genresTableBody">
+                    <% genres.forEach(currentGenre => { %>
+                        <tr>
+                            <td><%= currentGenre.Id %></td>
+                            <td><%= currentGenre.Name %></td>
+                            <td>
+                                <button onclick="editGenre('<%= currentGenre.Id %>', '<%= currentGenre.Name %>')" title="Editar género">
+                                    Editar
+                                </button>
+                                <button onclick="deleteGenre('<%= currentGenre.Id %>')" title="Borrar género">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Plataformas -->
+        <div class="platform_section">
+            <div class="section-header">
+                <h2>Plataformas</h2>
+                <button class="new-btn" onclick="openPlatformModal('create')">+ Nueva Plataforma</button>
+            </div>
+            <table class="data_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="platformsTableBody">
+                    <% platforms.forEach(currentPlatform => { %>
+                        <tr>
+                            <td><%= currentPlatform.Id %></td>
+                            <td><%= currentPlatform.Name %></td>
+                            <td>
+                                <button onclick="editPlatform('<%= currentPlatform.Id %>', '<%= currentPlatform.Name %>')" title="Editar plataforma">
+                                    Editar
+                                </button>
+                                <button onclick="deletePlatform('<%= currentPlatform.Id %>')" title="Borrar plataforma">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- Modal para Juegos (Crear/Editar) -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gameModalTitle">Nuevo Juego</h2>
+                <button class="close-modal" onclick="closeGameModal()">&times;</button>
+            </div>
+            <form id="gameForm" class="modal-form">
+                <input type="hidden" id="gameId" name="id">
                 <div>
-                    <label for="title">Titulo:</label>
-                    <input type="text" id="title" name="title">
+                    <label for="gameTitle">Título:</label>
+                    <input type="text" id="gameTitle" name="title" required>
                 </div>
                 <div>
-                    <label for="imageUrl">Enlace imagen:</label>
-                    <input type="text" id="imageUrl" name="imageUrl">
+                    <label for="gameImageUrl">Enlace imagen:</label>
+                    <input type="text" id="gameImageUrl" name="imageUrl" required>
                 </div>
                 <div>
-                    <label for="launchDate">Fecha lanzamiento:</label>
-                    <input type="date" id="launchDate" name="launchDate">
+                    <label for="gameLaunchDate">Fecha lanzamiento:</label>
+                    <input type="date" id="gameLaunchDate" name="launchDate" required>
                 </div>
                 <div>
-                    <label for="developer">Desarrolladora:</label>
-                    <input type="text" id="developer" name="developer">
+                    <label for="gameDeveloper">Desarrolladora:</label>
+                    <input type="text" id="gameDeveloper" name="developer" required>
                 </div>
                 <div>
-                    <label for="category">Categoria:</label>
-                    <input type="text" id="category" minlength="1" maxlength="3" name="category">
+                    <label for="gameCategory">Categoría:</label>
+                    <input type="text" id="gameCategory" name="category" minlength="1" maxlength="3" required>
                 </div>
                 <div class="selector-container">
-                    <label for="genres">Géneros:</label>
-
-                    <select class="selectedGenres" name="genres" id="genres" multiple required>
+                    <label for="gameGenres">Géneros:</label>
+                    <select id="gameGenres" name="genres" multiple>
                         <% genres.forEach(currentGenre => { %>
                             <option value="<%= currentGenre.Id %>"><%= currentGenre.Name %></option>
                         <% }) %>
                     </select>
-
-                    <button type="button" id="addGenresBtn">Añadir</button>
-
+                    <button type="button" onclick="addGenresFromSelect()">Añadir</button>
                     <div id="selectedGenresList" class="selected-items"></div>
                 </div>
                 <div class="selector-container">
-                    <label for="platforms">Plataformas:</label>
-
-                    <select class="selectedPlatforms" name="platforms" id="platforms" multiple required>
+                    <label for="gamePlatforms">Plataformas:</label>
+                    <select id="gamePlatforms" name="platforms" multiple>
                         <% platforms.forEach(currentPlatform => { %>
                             <option value="<%= currentPlatform.Id %>"><%= currentPlatform.Name %></option>
                         <% }) %>
                     </select>
-
-                    <button type="button" id="addPlatformsBtn">Añadir</button>
-
+                    <button type="button" onclick="addPlatformsFromSelect()">Añadir</button>
                     <div id="selectedPlatformsList" class="selected-items"></div>
                 </div>
                 <div>
-                    <label for="synopsis">Sinopsis:</label>
-                    <textarea type="text" id="synopsis" name="synopsis"></textarea>
+                    <label for="gameSynopsis">Sinopsis:</label>
+                    <textarea id="gameSynopsis" name="synopsis" required></textarea>
                 </div>
-                <div class="buttons">
-                    <button type="submit">Crear</button>
-                    <button type="reset">Cancelar</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="update">
-            <h2>Actualizar Juego</h2>
-            <form action="/game/edit" method="post">
-                <input type="hidden" id="id" name="id">
-                <div>
-                    <label for="updateTitle">Titulo:</label>
-                    <input type="text" id="updateTitle" name="title">
-                </div>
-                <div>
-                    <label for="updateImageUrl">Enlace imagen:</label>
-                    <input type="text" id="updateImageUrl" name="imageUrl">
-                </div>
-                <div>
-                    <label for="updateLaunchDate">Fecha lanzamiento:</label>
-                    <input type="date" id="updateLaunchDate" name="launchDate">
-                </div>
-                <div>
-                    <label for="updateDeveloper">Desarolladora:</label>
-                    <input type="text" id="updateDeveloper" name="developer">
-                </div>
-                <div>
-                    <label for="updateCategory">Categoria:</label>
-                    <input type="text" id="updateCategory" name="category">
-                </div>
-                <div class="selector-container">
-                    <label for="updateGenres">Géneros:</label>
-
-                    <select class="selectedGenres" name="updateGenres" id="updateGenres" multiple required>
-                        <% genres.forEach(currentGenre => { %>
-                            <option value="<%= currentGenre.Id %>"><%= currentGenre.Name %></option>
-                        <% }) %>
-                    </select>
-
-                    <button type="button" id="updateAddGenresBtn">Añadir</button>
-
-                    <div id="updateSelectedGenresList" class="selected-items"></div>
-                </div>
-                <div class="selector-container">
-                    <label for="updatePlatforms">Plataformas:</label>
-
-                    <select class="selectedPlatforms" name="updatePlatforms" id="updatePlatforms" multiple required>
-                        <% platforms.forEach(currentPlatform => { %>
-                            <option value="<%= currentPlatform.Id %>"><%= currentPlatform.Name %></option>
-                        <% }) %>
-                    </select>
-
-                    <button type="button" id="updateAddPlatformsBtn">Añadir</button>
-
-                    <div id="updateSelectedPlatformsList" class="selected-items"></div>
-                </div>
-                <div>
-                    <label for="updateSynopsis">Sinopsis:</label>
-                    <textarea type="text" id="updateSynopsis" name="synopsis"></textarea>
-                </div>
-                <div class="buttons">
-                    <button type="submit">Actualizar</button>
-                    <button type="reset" onclick="toggleGameForm()">Cancelar</button>
+                <div class="modal-buttons">
+                    <button type="submit">Guardar</button>
+                    <button type="button" onclick="closeGameModal()">Cancelar</button>
                 </div>
             </form>
         </div>
+    </div>
+
+    <!-- Modal para Géneros (Crear/Editar) -->
+    <div id="genreModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="genreModalTitle">Nuevo Género</h2>
+                <button class="close-modal" onclick="closeGenreModal()">&times;</button>
+            </div>
+            <form id="genreForm" class="modal-form" method="post">
+                <input type="hidden" id="genreId" name="id">
+                <div>
+                    <label for="genreName">Nombre:</label>
+                    <input type="text" id="genreName" name="name" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit">Guardar</button>
+                    <button type="button" onclick="closeGenreModal()">Cancelar</button>
+                </div>
+            </form>
         </div>
-        <section class="backoffice_main">
+    </div>
 
-            <!-- Tabla de Géneros -->
-            <div class="genre_section">
-                <h2>Géneros</h2>
-
-                <table class="data_table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="genresTableBody">
-                        <!-- Rellenado dinámicamente por JS -->
-                    </tbody>
-                </table>
-
-                <!-- Formulario de crear género -->
-                <form id="createGenreForm" class="insert">
-                    <h3>Nuevo Género</h3>
-                    <div>
-                        <label for="genreName">Nombre:</label>
-                        <input type="text" id="genreName" name="name" required />
-                    </div>
-                    <div class="buttons">
-                        <button type="submit">Crear</button>
-                        <button type="reset">Limpiar</button>
-                    </div>
-                </form>
-
-                <!-- Formulario de editar género -->
-                <form id="updateGenreForm" class="update" style="display: none;">
-                    <h3>Editar Género</h3>
-                    <input type="hidden" id="updateGenreId" />
-                    <div>
-                        <label for="updateGenreName">Nombre:</label>
-                        <input type="text" id="updateGenreName" name="name" required />
-                    </div>
-                    <div class="buttons">
-                        <button type="submit">Guardar</button>
-                        <button type="button" onclick="cancelGenreEdit()">Cancelar</button>
-                    </div>
-                </form>
+    <!-- Modal para Plataformas (Crear/Editar) -->
+    <div id="platformModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="platformModalTitle">Nueva Plataforma</h2>
+                <button class="close-modal" onclick="closePlatformModal()">&times;</button>
             </div>
-
-            <!-- Tabla de Plataformas -->
-            <div class="platform_section">
-                <h2>Plataformas</h2>
-
-                <table class="data_table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="platformsTableBody">
-                        <!-- Rellenado dinámicamente por JS -->
-                    </tbody>
-                </table>
-
-                <!-- Formulario de crear plataforma -->
-                <form id="createPlatformForm" class="insert">
-                    <h3>Nueva Plataforma</h3>
-                    <div>
-                        <label for="platformName">Nombre:</label>
-                        <input type="text" id="platformName" name="name" required />
-                    </div>
-                    <div class="buttons">
-                        <button type="submit">Crear</button>
-                        <button type="reset">Limpiar</button>
-                    </div>
-                </form>
-
-                <!-- Formulario de editar plataforma -->
-                <form id="updatePlatformForm" class="update" style="display: none;">
-                    <h3>Editar Plataforma</h3>
-                    <input type="hidden" id="updatePlatformId" />
-                    <div>
-                        <label for="updatePlatformName">Nombre:</label>
-                        <input type="text" id="updatePlatformName" name="name" required />
-                    </div>
-                    <div class="buttons">
-                        <button type="submit">Guardar</button>
-                        <button type="button" onclick="cancelPlatformEdit()">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-    </main>
+            <form id="platformForm" class="modal-form" method="post">
+                <input type="hidden" id="platformId" name="id">
+                <div>
+                    <label for="platformName">Nombre:</label>
+                    <input type="text" id="platformName" name="name" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit">Guardar</button>
+                    <button type="button" onclick="closePlatformModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
