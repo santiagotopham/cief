@@ -47,11 +47,7 @@ function loadAndShowGameEditForm(game) {
 	isInsert = false;
 	resetForm();
 
-	console.log(game);
-
 	game = JSON.parse(game);
-
-	console.log(game);
 
 	// document.getElementById("id").value = game.Id;
 	// document.getElementById("updateTitle").value = game.Title;
@@ -278,8 +274,6 @@ window.onclick = function (event) {
 async function handleGameFormSubmit(e) {
 	e.preventDefault();
 
-	console.log("entro send game");
-
 	const gameData = {
 		id: document.getElementById("gameId").value,
 		title: document.getElementById("gameTitle").value.trim(),
@@ -291,8 +285,6 @@ async function handleGameFormSubmit(e) {
 		genres: Array.from(selectedGenresMap.keys()),
 		platforms: Array.from(selectedPlatformsMap.keys()),
 	};
-
-	console.log(gameData);
 
 	try {
 		const url = gameData.id ? "/game/edit" : "/game/add";
@@ -399,13 +391,8 @@ async function loadGenres() {
 async function handleGenreFormSubmit(e) {
 	e.preventDefault();
 
-	console.log("entro add genre");
-
 	const id = document.getElementById("genreId").value;
 	const name = document.getElementById("genreName").value.trim();
-
-	console.log(id);
-	console.log(name);
 
 	if (!name) return;
 

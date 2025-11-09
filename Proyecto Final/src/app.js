@@ -344,8 +344,8 @@ async function updateGame(id, updatedGame) {
 	await connection.execute(sql, values);
 	await connection.end();
 
-	await linkGameToGenresDb(id, updatedGame.updateGenres);
-	await linkGameToPlatformsDb(id, updatedGame.updatePlatforms);
+	await linkGameToGenresDb(id, updatedGame.genres);
+	await linkGameToPlatformsDb(id, updatedGame.platforms);
 }
 
 async function deleteGame(id) {
@@ -385,7 +385,6 @@ async function deleteRelatedToGame(connection, gameId, tableName) {
 	let values = [gameId];
 
 	let result = await connection.execute(sql, values);
-	console.log(result[0]);
 }
 
 async function filterByMainPlatform(mainPlatformId) {
@@ -463,8 +462,6 @@ async function updateGenre(id, updatedGenre) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Genres` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
 	const values = [updatedGenre.name || updatedGenre.Name, id];
-	console.log("values");
-	console.log(values);
 
 	await connection.execute(sql, values);
 	await connection.end();
@@ -530,7 +527,6 @@ async function getPlatformsFromDb() {
 }
 
 async function savePlatform(newPlatform) {
-	console.log(newPlatform);
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Platforms`(`Name`) VALUES (?)";
 	const values = [newPlatform.name || newPlatform.Name];
@@ -561,8 +557,6 @@ async function deletePlatform(id) {
 
 async function linkGameToPlatformsDb(gameId, platformsToLink) {
 	const connection = await openDbConnection();
-
-	console.log(platformsToLink);
 
 	const platformArray =
 		typeof platformsToLink === "string"
