@@ -111,17 +111,17 @@ app.get("/admin", async (req, res) => {
 		showMessage: false,
 		subTitle: "admin",
 		navBarItems: navBarMenu,
-		games: await getGamesFromDb(true),
+		games: await getGamesFromDb(false),
 		genres: await getGenresFromDb(),
 		platforms: await getPlatformsFromDb(),
 	});
 });
 
-//////////////////////  	Gestion de Juegos	   //////////////////////
+//////////////////////  	JUEGOS	   //////////////////////
 app.post("/game/add", async (req, res) => {
 	const newGame = req.body;
 
-	await saveGameToDb(newGame);
+	await saveGame(newGame);
 
 	res.json({ success: true, message: "Juego creado" });
 });
@@ -129,7 +129,7 @@ app.post("/game/add", async (req, res) => {
 app.post("/game/edit", async (req, res) => {
 	const updatedGame = req.body;
 
-	await updateGameInDb(updatedGame.id, updatedGame);
+	await updateGame(updatedGame.id || updatedGame.Id, updatedGame);
 
 	res.json({ success: true, message: "Juego editado" });
 });
@@ -143,12 +143,12 @@ app.post("/game/vote/:gameId", async (req, res) => {
 app.delete("/game/delete/:id", async (req, res) => {
 	const id = req.params.id;
 
-	await deleteGameFromDb(id);
+	await deleteGame(id);
 
 	res.json({ success: true, message: "Juego borrado" });
 });
 
-//////////////////////  	Gestion de Generos	   //////////////////////
+//////////////////////  	GENEROS	   //////////////////////
 app.get("/genre/all", async (req, res) => {
 	res.json(await getGenresFromDb());
 });
@@ -156,7 +156,7 @@ app.get("/genre/all", async (req, res) => {
 app.post("/genre/add", async (req, res) => {
 	const newGenre = req.body;
 
-	await saveGenreToDb(newGenre);
+	await saveGenre(newGenre);
 
 	res.json({ success: true, message: "Genero creado" });
 });
@@ -164,20 +164,18 @@ app.post("/genre/add", async (req, res) => {
 app.post("/genre/edit", async (req, res) => {
 	const updatedGenre = req.body;
 
-	await updateGenreInDb(updatedGenre.id, updatedGenre);
+	await updateGenre(updatedGenre.id || updatedGenre.Id, updatedGenre);
 
 	res.json({ success: true, message: "Genero editado" });
 });
 
 app.delete("/genre/delete/:id", async (req, res) => {
-	const id = req.params.id;
-
-	await deleteGenreFromDb(id);
+	await deleteGenre(req.params.id);
 
 	res.json({ success: true, message: "Genero borrado" });
 });
 
-//////////////////////  	Gestion de Plataformas	   //////////////////////
+//////////////////////  	PLATAFORMAS	   //////////////////////
 app.get("/platform/all", async (req, res) => {
 	res.json(await getPlatformsFromDb());
 });
@@ -185,7 +183,7 @@ app.get("/platform/all", async (req, res) => {
 app.post("/platform/add", async (req, res) => {
 	const newPlatform = req.body;
 
-	await savePlatformToDb(newPlatform);
+	await savePlatform(newPlatform);
 
 	res.json({ success: true, message: "Plataforma creada" });
 });
@@ -193,15 +191,16 @@ app.post("/platform/add", async (req, res) => {
 app.post("/platform/edit", async (req, res) => {
 	const updatedPlatform = req.body;
 
-	await updatePlatformInDb(updatedPlatform.id, updatedPlatform);
+	await updatePlatform(
+		updatedPlatform.id || updatedPlatform.Id,
+		updatedPlatform
+	);
 
 	res.json({ success: true, message: "Plataforma editada" });
 });
 
 app.delete("/platform/delete/:id", async (req, res) => {
-	const id = req.params.id;
-
-	await deletePlatformFromDb(id);
+	await deletePlatform(req.params.id);
 
 	res.json({ success: true, message: "Plataforma borrada" });
 });
@@ -303,7 +302,7 @@ async function getGamesByIdList(idsList) {
 	return games;
 }
 
-async function saveGameToDb(newGame) {
+async function saveGame(newGame) {
 	const connection = await openDbConnection();
 	const sql =
 		"INSERT INTO `Games`(`Title`, `ImageUrl`, `LaunchDate`, `Developer`, `Category`, `Synopsis`, `ThumbsUpCounter`) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -324,7 +323,7 @@ async function saveGameToDb(newGame) {
 	await linkGameToPlatformsDb(result[0].insertId, newGame.platforms);
 }
 
-async function updateGameInDb(id, updatedGame) {
+async function updateGame(id, updatedGame) {
 	const connection = await openDbConnection();
 
 	await deleteGenresFromGame(connection, id);
@@ -333,12 +332,12 @@ async function updateGameInDb(id, updatedGame) {
 	const sql =
 		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ? WHERE `Id` = ? LIMIT 1";
 	const values = [
-		updatedGame.title,
-		updatedGame.imageUrl,
-		updatedGame.launchDate,
-		updatedGame.developer,
-		updatedGame.category,
-		updatedGame.synopsis,
+		updatedGame.title || updatedGame.Title,
+		updatedGame.imageUrl || updatedGame.ImageUrl,
+		updatedGame.launchDate || updatedGame.LaunchDate,
+		updatedGame.developer || updatedGame.Developer,
+		updatedGame.category || updatedGame.Category,
+		updatedGame.synopsis || updatedGame.Synopsis,
 		id,
 	];
 
@@ -349,7 +348,7 @@ async function updateGameInDb(id, updatedGame) {
 	await linkGameToPlatformsDb(id, updatedGame.updatePlatforms);
 }
 
-async function deleteGameFromDb(id) {
+async function deleteGame(id) {
 	const connection = await openDbConnection();
 
 	await deleteGenresFromGame(connection, id);
@@ -427,7 +426,7 @@ async function getPlatformsByGameIdFromDb(gameIds) {
 
 async function getGenresFromDb() {
 	const connection = await openDbConnection();
-	const query = "SELECT * FROM Genres";
+	const query = "SELECT * FROM Genres order by Id";
 
 	let [genres] = await connection.query(query);
 	await connection.end();
@@ -451,25 +450,27 @@ async function getGenresByGameIdFromDb(gameIds) {
 	return genres;
 }
 
-async function saveGenreToDb(newGenre) {
+async function saveGenre(newGenre) {
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Genres`(`Name`) VALUES (?)";
-	const values = [newGenre.Name];
+	const values = [newGenre.name || newGenre.Name];
 
 	await connection.execute(sql, values);
 	await connection.end();
 }
 
-async function updateGenreInDb(id, updatedGenre) {
+async function updateGenre(id, updatedGenre) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Genres` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
-	const values = [updatedGenre.Name, id];
+	const values = [updatedGenre.name || updatedGenre.Name, id];
+	console.log("values");
+	console.log(values);
 
 	await connection.execute(sql, values);
 	await connection.end();
 }
 
-async function deleteGenreFromDb(id) {
+async function deleteGenre(id) {
 	const connection = await openDbConnection();
 
 	let sql = "DELETE FROM `Genres` WHERE `Id` = ? LIMIT 1";
@@ -510,7 +511,7 @@ async function linkGameToGenresDb(gameId, genresToLink) {
 
 async function getMainPlatformsFromDb() {
 	const connection = await openDbConnection();
-	const query = "SELECT * FROM MainPlatforms";
+	const query = "SELECT * FROM MainPlatforms order by Id";
 
 	let [mainPlatforms] = await connection.query(query);
 	await connection.end();
@@ -520,7 +521,7 @@ async function getMainPlatformsFromDb() {
 
 async function getPlatformsFromDb() {
 	const connection = await openDbConnection();
-	const query = "SELECT * FROM Platforms";
+	const query = "SELECT * FROM Platforms order by Id";
 
 	let [platforms] = await connection.query(query);
 	await connection.end();
@@ -528,26 +529,26 @@ async function getPlatformsFromDb() {
 	return platforms;
 }
 
-async function savePlatformToDb(newPlatform) {
+async function savePlatform(newPlatform) {
 	console.log(newPlatform);
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Platforms`(`Name`) VALUES (?)";
-	const values = [newPlatform.Name];
+	const values = [newPlatform.name || newPlatform.Name];
 
 	await connection.execute(sql, values);
 	await connection.end();
 }
 
-async function updatePlatformInDb(id, updatedPlatform) {
+async function updatePlatform(id, updatedPlatform) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Platforms` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
-	const values = [updatedPlatform.Name, id];
+	const values = [updatedPlatform.name || updatedPlatform.Name, id];
 
 	await connection.execute(sql, values);
 	await connection.end();
 }
 
-async function deletePlatformFromDb(id) {
+async function deletePlatform(id) {
 	const connection = await openDbConnection();
 
 	let sql = "DELETE FROM `Platforms` WHERE `Id` = ? LIMIT 1";

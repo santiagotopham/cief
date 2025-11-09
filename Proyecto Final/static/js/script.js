@@ -11,9 +11,8 @@ let isInsert = true;
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
-	const createForm = document.querySelector(".insert form");
-	if (createForm) {
-		createForm.addEventListener("reset", () => {
+	if (gameForm) {
+		gameForm.addEventListener("reset", () => {
 			resetForm();
 		});
 
@@ -25,10 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			addPlatformsFromSelect,
 			"click"
 		);
-		addEventListener("createGenreForm", createGenre, "submit");
-		addEventListener("updateGenreForm", updateGenre, "submit");
-		addEventListener("createPlatformForm", createPlatform, "submit");
-		addEventListener("updatePlatformForm", updatePlatform, "submit");
+		addEventListener("gameForm", handleGameFormSubmit, "submit");
+		addEventListener("genreForm", handleGenreFormSubmit, "submit");
+		addEventListener("platformForm", handlePlatformFormSubmit, "submit");
 
 		loadGenres();
 		loadPlatforms();
@@ -45,31 +43,43 @@ function addEventListener(elementId, callback, event) {
 //////////////////////  	JUEGOS	   //////////////////////
 
 function loadAndShowGameEditForm(game) {
-	if (isInsert) toggleGameForm();
+	// if (isInsert) toggleGameForm();
+	isInsert = false;
 	resetForm();
 	game = JSON.parse(game);
 
-	document.getElementById("id").value = game.Id;
-	document.getElementById("updateTitle").value = game.Title;
-	document.getElementById("updateImageUrl").value = game.ImageUrl;
-	document.getElementById("updateLaunchDate").value = getCorrectDateFormat(
+	// document.getElementById("id").value = game.Id;
+	// document.getElementById("updateTitle").value = game.Title;
+	// document.getElementById("updateImageUrl").value = game.ImageUrl;
+	// document.getElementById("updateLaunchDate").value = getCorrectDateFormat(
+	// 	game.LaunchDate
+	// );
+	// document.getElementById("updateDeveloper").value = game.Developer;
+	// document.getElementById("updateCategory").value = game.Category;
+	// document.getElementById("updateSynopsis").value = game.Synopsis;
+
+	document.getElementById("gameModalTitle").textContent = "Editar Juego";
+	document.getElementById("gameId").value = game.Id;
+	document.getElementById("gameTitle").value = game.Title;
+	document.getElementById("gameImageUrl").value = game.ImageUrl;
+	document.getElementById("gameLaunchDate").value = getCorrectDateFormat(
 		game.LaunchDate
 	);
-	document.getElementById("updateDeveloper").value = game.Developer;
-	document.getElementById("updateCategory").value = game.Category;
-	document.getElementById("updateSynopsis").value = game.Synopsis;
+	document.getElementById("gameDeveloper").value = game.Developer;
+	document.getElementById("gameCategory").value = game.Category;
+	document.getElementById("gameSynopsis").value = game.Synopsis;
 
 	loadEditChipItems(
 		game.Genres,
 		selectedGenresMap,
-		"updateGenres",
+		"gameGenres",
 		addGenresFromSelect
 	);
 
 	loadEditChipItems(
 		game.Platforms,
 		selectedPlatformsMap,
-		"updatePlatforms",
+		"gamePlatforms",
 		addPlatformsFromSelect
 	);
 }
@@ -133,50 +143,25 @@ function addGenresFromSelect() {
 
 function removeGenre(id) {
 	selectedGenresMap.delete(String(id));
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "genres";
-		selectedList = "selectedGenresList";
-	} else {
-		selectorName = "updateGenres";
-		selectedList = "updateSelectedGenresList";
-	}
+	let selectorName = "gameGenres";
+	let selectedList = "selectedGenresList";
 
 	toggleOptionInSelector(selectorName, id, false);
 	renderSelectedMap(selectedGenresMap, selectedList, "removeGenre");
 }
 
 function addPlatformsFromSelect() {
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "platforms";
-		selectedList = "selectedPlatformsList";
-	} else {
-		selectorName = "updatePlatforms";
-		selectedList = "updateSelectedPlatformsList";
-	}
+	let selectorName = "gamePlatforms";
+	let selectedList = "selectedPlatformsList";
 
 	addFromSelectorToMap(selectedPlatformsMap, selectorName);
-
 	renderSelectedMap(selectedPlatformsMap, selectedList, "removePlatform");
 }
 
 function removePlatform(id) {
 	selectedPlatformsMap.delete(String(id));
-	let selectorName = "";
-	let selectedList = "";
-
-	if (isInsert) {
-		selectorName = "platforms";
-		selectedList = "selectedPlatformsList";
-	} else {
-		selectorName = "updatePlatforms";
-		selectedList = "updateSelectedPlatformsList";
-	}
+	let selectorName = "gamePlatforms";
+	let selectedList = "selectedPlatformsList";
 
 	toggleOptionInSelector(selectorName, id, false);
 	renderSelectedMap(selectedPlatformsMap, selectedList, "removePlatform");
@@ -185,9 +170,12 @@ function removePlatform(id) {
 //////////////////////  	GENEROS	   //////////////////////
 
 function editGenre(id, name) {
-	document.getElementById("updateGenreId").value = id;
-	document.getElementById("updateGenreName").value = name;
-	document.getElementById("updateGenreForm").style.display = "grid";
+	isInsert = false;
+	document.getElementById("genreId").value = id;
+	document.getElementById("genreName").value = name;
+	document.getElementById("genreModalTitle").textContent = "Editar Género";
+	// document.getElementById("updateGenreForm").style.display = "grid";
+	openModal("genreModal");
 }
 
 function cancelGenreEdit() {
@@ -198,9 +186,13 @@ function cancelGenreEdit() {
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
 function editPlatform(id, name) {
-	document.getElementById("updatePlatformId").value = id;
-	document.getElementById("updatePlatformName").value = name;
-	document.getElementById("updatePlatformForm").style.display = "grid";
+	isInsert = false;
+	document.getElementById("platformId").value = id;
+	document.getElementById("platformName").value = name;
+	document.getElementById("platformModalTitle").textContent =
+		"Editar Plataforma";
+	// document.getElementById("platformForm").style.display = "grid";
+	openModal("platformModal");
 }
 
 function cancelPlatformEdit() {
@@ -214,7 +206,7 @@ function cancelPlatformEdit() {
 function openGameModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		gameForm.action = "/game/add";
+		// gameForm.action = "/game/add";
 		gameForm.reset();
 		document.getElementById("gameModalTitle").textContent = "Nuevo Juego";
 		resetForm();
@@ -227,7 +219,7 @@ function openGameModal(mode) {
 function openGenreModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		genreForm.action = "/genre/add";
+		// genreForm.action = "/genre/add";
 		genreForm.reset();
 		document.getElementById("genreModalTitle").textContent = "Nuevo Género";
 		document.getElementById("genreId").value = "";
@@ -240,7 +232,7 @@ function openGenreModal(mode) {
 function openPlatformModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
-		platformForm.action = "/platform/add";
+		// platformForm.action = "/platform/add";
 		platformForm.reset();
 		document.getElementById("platformModalTitle").textContent =
 			"Nueva Plataforma";
@@ -275,13 +267,67 @@ window.onclick = function (event) {
 //////////////////////////////////////////////////////////////////////////////	BACKEND	/////////////////////////////////////////////////////////////////////////////
 
 //////////////////////  	JUEGOS	   //////////////////////
+
+async function handleGameFormSubmit(e) {
+	e.preventDefault();
+
+	console.log("entro send game");
+
+	const gameData = {
+		id: document.getElementById("gameId").value,
+		title: document.getElementById("gameTitle").value.trim(),
+		imageUrl: document.getElementById("gameImageUrl").value.trim(),
+		launchDate: document.getElementById("gameLaunchDate").value,
+		developer: document.getElementById("gameDeveloper").value.trim(),
+		category: document.getElementById("gameCategory").value.trim(),
+		synopsis: document.getElementById("gameSynopsis").value.trim(),
+		genres: Array.from(selectedGenresMap.keys()),
+		platforms: Array.from(selectedPlatformsMap.keys()),
+	};
+
+	console.log(gameData);
+
+	try {
+		const url = gameData.id ? "/game/edit" : "/game/add";
+		const response = await fetch(url, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(gameData),
+		});
+
+		if (!response.ok) throw new Error("Error al guardar el juego");
+
+		const data = await response.json();
+		showToast(data.message);
+
+		closeModal("gameModal");
+		setTimeout(() => location.reload(), 1500);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al guardar el juego", true);
+	}
+}
+
 function deleteGame(id) {
+	if (!confirm("¿Estás seguro de que quieres eliminar este juego?")) return;
+
 	fetch(`/game/delete/${id}`, {
 		method: "DELETE",
 	})
-		.then((response) => response.json())
-		.then(setTimeout(() => location.reload(), 300))
-		.catch((error) => console.error("Error:", error));
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error("Error al eliminar el juego");
+			}
+			return response.json();
+		})
+		.then((data) => {
+			showToast(data.message || "Juego eliminado correctamente");
+			setTimeout(() => location.reload(), 1500);
+		})
+		.catch((error) => {
+			console.error("Error:", error);
+			showToast("Error al eliminar el juego", true);
+		});
 }
 
 function searchGame(event) {
@@ -343,42 +389,104 @@ async function loadGenres() {
 	}
 }
 
-async function createGenre(e) {
+async function handleGenreFormSubmit(e) {
 	e.preventDefault();
+
+	console.log("entro add genre");
+
+	const id = document.getElementById("genreId").value;
 	const name = document.getElementById("genreName").value.trim();
+
+	console.log(id);
+	console.log(name);
+
 	if (!name) return;
 
-	await fetch("/genre/add", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ Name: name }),
-	});
+	try {
+		let response;
+		if (id) {
+			response = await fetch("/genre/edit", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id, name }),
+			});
+		} else {
+			response = await fetch("/genre/add", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ name }),
+			});
+		}
 
-	document.getElementById("createGenreForm").reset();
-	loadGenres();
-}
+		if (!response.ok) throw new Error("Error al guardar género");
 
-async function updateGenre(e) {
-	e.preventDefault();
+		const data = await response.json();
+		showToast(data.message);
 
-	const id = document.getElementById("updateGenreId").value;
-	const name = document.getElementById("updateGenreName").value.trim();
-
-	await fetch("/genre/edit", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ Id: id, Name: name }),
-	});
-
-	cancelGenreEdit();
-	loadGenres();
+		closeModal("genreModal");
+		setTimeout(() => loadGenres(), 1000);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al guardar el género", true);
+	}
 }
 
 async function deleteGenre(id) {
 	if (!confirm("¿Eliminar este género?")) return;
-	await fetch(`/genre/delete/${id}`, { method: "DELETE" });
-	loadGenres();
+
+	try {
+		const response = await fetch(`/genre/delete/${id}`, {
+			method: "DELETE",
+		});
+
+		if (!response.ok) throw new Error("Error al eliminar género");
+
+		const data = await response.json();
+		showToast(data.message || "Género eliminado correctamente");
+
+		setTimeout(() => loadGenres(), 1000);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al eliminar el género", true);
+	}
 }
+
+// async function createGenre(e) {
+// 	e.preventDefault();
+// 	const name = document.getElementById("genreName").value.trim();
+// 	if (!name) return;
+
+// 	await fetch("/genre/add", {
+// 		method: "POST",
+// 		headers: { "Content-Type": "application/json" },
+// 		body: JSON.stringify({ Name: name }),
+// 	});
+
+// 	document.getElementById("createGenreForm").reset();
+// 	loadGenres();
+// }
+
+// async function updateGenre(e) {
+// 	e.preventDefault();
+
+// 	const id = document.getElementById("updateGenreId").value;
+// 	const name = document.getElementById("updateGenreName").value.trim();
+
+// 	await fetch("/genre/edit", {
+// 		method: "POST",
+// 		headers: { "Content-Type": "application/json" },
+// 		body: JSON.stringify({ Id: id, Name: name }),
+// 	});
+
+// 	cancelGenreEdit();
+// 	loadGenres();
+// }
+
+// async function deleteGenre(id) {
+// 	if (!confirm("¿Eliminar este género?")) return;
+// 	await fetch(`/genre/delete/${id}`, { method: "DELETE" });
+// 	loadGenres();
+// }
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
@@ -402,42 +510,106 @@ async function loadPlatforms() {
 	}
 }
 
-async function createPlatform(e) {
+async function handlePlatformFormSubmit(e) {
 	e.preventDefault();
+
+	const id = document.getElementById("platformId").value;
 	const name = document.getElementById("platformName").value.trim();
+
 	if (!name) return;
 
-	await fetch("/platform/add", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ Name: name }),
-	});
+	try {
+		let response;
+		if (id) {
+			// Actualizar
+			response = await fetch("/platform/edit", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id, name }),
+			});
+		} else {
+			// Crear
+			response = await fetch("/platform/add", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ name }),
+			});
+		}
 
-	document.getElementById("createPlatformForm").reset();
-	loadPlatforms();
-}
+		if (!response.ok) throw new Error("Error al guardar plataforma");
 
-async function updatePlatform(e) {
-	e.preventDefault();
+		const data = await response.json();
+		showToast(
+			data.message ||
+				(id
+					? "Plataforma actualizada correctamente"
+					: "Plataforma creada correctamente")
+		);
 
-	const id = document.getElementById("updatePlatformId").value;
-	const name = document.getElementById("updatePlatformName").value.trim();
-
-	await fetch("/platform/edit", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ Id: id, Name: name }),
-	});
-
-	cancelPlatformEdit();
-	loadPlatforms();
+		closePlatformModal();
+		await loadPlatforms();
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al guardar la plataforma", true);
+	}
 }
 
 async function deletePlatform(id) {
 	if (!confirm("¿Eliminar esta plataforma?")) return;
-	await fetch(`/platform/delete/${id}`, { method: "DELETE" });
-	loadPlatforms();
+
+	try {
+		const response = await fetch(`/platform/delete/${id}`, {
+			method: "DELETE",
+		});
+
+		if (!response.ok) throw new Error("Error al eliminar plataforma");
+
+		const data = await response.json();
+		showToast(data.message || "Plataforma eliminada correctamente");
+
+		setTimeout(() => loadPlatforms(), 1000);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al eliminar la plataforma", true);
+	}
 }
+
+// async function createPlatform(e) {
+// 	e.preventDefault();
+// 	const name = document.getElementById("platformName").value.trim();
+// 	if (!name) return;
+
+// 	await fetch("/platform/add", {
+// 		method: "POST",
+// 		headers: { "Content-Type": "application/json" },
+// 		body: JSON.stringify({ Name: name }),
+// 	});
+
+// 	document.getElementById("createPlatformForm").reset();
+// 	loadPlatforms();
+// }
+
+// async function updatePlatform(e) {
+// 	e.preventDefault();
+
+// 	const id = document.getElementById("updatePlatformId").value;
+// 	const name = document.getElementById("updatePlatformName").value.trim();
+
+// 	await fetch("/platform/edit", {
+// 		method: "POST",
+// 		headers: { "Content-Type": "application/json" },
+// 		body: JSON.stringify({ Id: id, Name: name }),
+// 	});
+
+// 	cancelPlatformEdit();
+// 	loadPlatforms();
+// }
+
+// async function deletePlatform(id) {
+// 	if (!confirm("¿Eliminar esta plataforma?")) return;
+// 	await fetch(`/platform/delete/${id}`, { method: "DELETE" });
+// 	loadPlatforms();
+// }
 
 //////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
 

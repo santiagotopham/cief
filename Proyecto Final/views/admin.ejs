@@ -12,6 +12,7 @@
             <table class="data_table">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Titulo</th>
                         <th>Fecha lanzamiento</th>
                         <th>Desarrolladora</th>
@@ -22,12 +23,13 @@
                 <tbody>
                     <% games.forEach(currentGame => { %>
                         <tr>
+                            <td><%= currentGame.Id %></td>
                             <td><%= currentGame.Title %></td>
                             <td><%= new Date(currentGame.LaunchDate).toLocaleDateString('es-ES') %></td>
                             <td><%= currentGame.Developer %></td>
                             <td><%= currentGame.Category %> </td>
                             <td>
-                                <button onclick="loadAndShowGameEditForm('<%= JSON.stringify(currentGame) %>')" title="Editar juego">
+                                <button onclick='loadAndShowGameEditForm(<%= JSON.stringify(currentGame) %>)' title="Editar juego">
                                     Editar
                                 </button>
                                 <button onclick="deleteGame('<%= currentGame.Id %>')" title="Borrar juego">
@@ -113,7 +115,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="gameModalTitle">Nuevo Juego</h2>
-                <button class="close-modal" onclick="closeModal('gameForm')">&times;</button>
+                <button class="close-modal" onclick="closeModal('gameModal')">&times;</button>
             </div>
             <form id="gameForm" class="modal-form">
                 <input type="hidden" id="gameId" name="id">
@@ -163,7 +165,7 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit">Guardar</button>
-                    <button type="button" onclick="closeModal('gameForm')">Cancelar</button>
+                    <button type="button" onclick="closeModal('gameModal')">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -176,7 +178,7 @@
                 <h2 id="genreModalTitle">Nuevo Género</h2>
                 <button class="close-modal" onclick="closeModal('genreModal')">&times;</button>
             </div>
-            <form id="genreForm" class="modal-form" method="post">
+            <form id="genreForm" class="modal-form">
                 <input type="hidden" id="genreId" name="id">
                 <div>
                     <label for="genreName">Nombre:</label>
@@ -197,7 +199,7 @@
                 <h2 id="platformModalTitle">Nueva Plataforma</h2>
                 <button class="close-modal" onclick="closeModal('platformModal')">&times;</button>
             </div>
-            <form id="platformForm" class="modal-form" method="post">
+            <form id="platformForm" class="modal-form">
                 <input type="hidden" id="platformId" name="id">
                 <div>
                     <label for="platformName">Nombre:</label>
