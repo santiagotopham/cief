@@ -268,7 +268,7 @@ async function handleGameFormSubmit(e) {
 	try {
 		const url = gameData.id ? "/game/edit" : "/game/add";
 		const response = await fetch(url, {
-			method: "POST",
+			method: gameData.id ? "PUT" : "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(gameData),
 		});
@@ -318,32 +318,33 @@ function searchGame(event) {
 	return false;
 }
 
-// async function voteGame(gameId, direction) {
-// 	try {
-// 		// Realiza un PUT al endpoint de edición
-// 		const res = await fetch(`/game/vote/${gameId}`, {
-// 			method: "PUT",
-// 			headers: { "Content-Type": "application/json" },
-// 			body: JSON.stringify({
-// 				likesCount: direction, // 'up' o 'down'
-// 			}),
-// 		});
+async function voteGame(gameId, vote) {
+	try {
+		const res = await fetch(`/game/vote/${gameId}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				vote: vote,
+			}),
+		});
 
-// 		if (!res.ok) {
-// 			console.error("Error al actualizar el voto");
-// 			return;
-// 		}
+		if (!res.ok) {
+			showToast("Error al votar");
+			return;
+		} else {
+			const data = await res.json();
+			if (data.ThumbsUpCounter !== undefined) {
+				document.getElementById("thumbsCounter").textContent =
+					data.ThumbsUpCounter;
+			}
 
-// 		// Asumimos que el backend devuelve el nuevo contador
-// 		const data = await res.json();
-// 		if (data.ThumbsUpCounter !== undefined) {
-// 			document.getElementById("thumbsCounter").textContent =
-// 				data.ThumbsUpCounter;
-// 		}
-// 	} catch (err) {
-// 		console.error("Error en la votación:", err);
-// 	}
-// }
+			showToast("Votado");
+		}
+	} catch (error) {
+		showToast("Error al votar");
+		console.error(error);
+	}
+}
 
 //////////////////////  	GENEROS	   //////////////////////
 
@@ -379,7 +380,7 @@ async function handleGenreFormSubmit(e) {
 		let response;
 		if (id) {
 			response = await fetch("/genre/edit", {
-				method: "POST",
+				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ id, name }),
 			});
@@ -476,7 +477,7 @@ async function handlePlatformFormSubmit(e) {
 		let response;
 		if (id) {
 			response = await fetch("/platform/edit", {
-				method: "POST",
+				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ id, name, mainPlatformId }),
 			});

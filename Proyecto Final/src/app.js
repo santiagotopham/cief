@@ -127,7 +127,7 @@ app.post("/game/add", async (req, res) => {
 	res.json({ success: true, message: "Juego creado" });
 });
 
-app.post("/game/edit", async (req, res) => {
+app.put("/game/edit", async (req, res) => {
 	const updatedGame = req.body;
 
 	await updateGame(updatedGame.id || updatedGame.Id, updatedGame);
@@ -136,7 +136,7 @@ app.post("/game/edit", async (req, res) => {
 });
 
 app.post("/game/vote/:gameId", async (req, res) => {
-	await updateGameLikes(req.params.gameId, req.body.direction);
+	await updateGameLikes(req.params.gameId, req.body.vote);
 
 	res.json({ success: true, message: "Voto aceptado" });
 });
@@ -162,7 +162,7 @@ app.post("/genre/add", async (req, res) => {
 	res.json({ success: true, message: "Genero creado" });
 });
 
-app.post("/genre/edit", async (req, res) => {
+app.put("/genre/edit", async (req, res) => {
 	const updatedGenre = req.body;
 
 	await updateGenre(updatedGenre.id || updatedGenre.Id, updatedGenre);
@@ -189,7 +189,7 @@ app.post("/platform/add", async (req, res) => {
 	res.json({ success: true, message: "Plataforma creada" });
 });
 
-app.post("/platform/edit", async (req, res) => {
+app.put("/platform/edit", async (req, res) => {
 	const updatedPlatform = req.body;
 
 	await updatePlatform(
@@ -353,6 +353,23 @@ async function updateGame(id, updatedGame) {
 	await linkGameToPlatformsDb(id, updatedGame.platforms);
 }
 
+async function updateGameLikes(id, vote) {
+	const connection = await openDbConnection();
+
+	const query = `SELECT ThumbsUpCounter FROM Games WHERE Id = ${id} LIMIT 1`;
+
+	let [result] = await connection.query(query);
+	let likes = result[0].ThumbsUpCounter;
+	likes += vote;
+
+	const sql =
+		"UPDATE `Games` SET `ThumbsUpCounter` = ? WHERE `Id` = ? LIMIT 1";
+	const values = [likes, id];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
 async function deleteGame(id) {
 	const connection = await openDbConnection();
 
@@ -389,7 +406,7 @@ async function deleteRelatedToGame(connection, gameId, tableName) {
 	let sql = `DELETE FROM ${tableName} WHERE GameId = ?`;
 	let values = [gameId];
 
-	let result = await connection.execute(sql, values);
+	await connection.execute(sql, values);
 }
 
 async function filterByMainPlatform(mainPlatformId) {
