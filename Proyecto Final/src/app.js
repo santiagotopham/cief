@@ -367,8 +367,6 @@ async function updateGame(id, updatedGame) {
 }
 
 async function updateGameLikes(id, vote) {
-	console.log("llego");
-	console.log(vote);
 	const connection = await openDbConnection();
 
 	const query = "SELECT ThumbsUpCounter FROM Games WHERE Id = ? LIMIT 1";
