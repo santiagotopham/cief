@@ -1,0 +1,56 @@
+# Pagina para calificacion de juegos
+
+## Lista de tareas a realizar
+
+-   [x] Base de datos
+-   [x] Datos
+    -   [x] juegos
+    -   [x] generos
+    -   [x] plataformas
+    -   [x] comentarios
+    -   [ ] users
+-   [x] index - galeria
+-   [x] banner con plataformas principales
+-   [x] paginas por plataforma principal
+-   [x] calificar juego
+-   [x] poner comentario
+-   [ ] plataformas como chips en pagina detalle
+-   [ ] filtro por genero
+-   [ ] filtro por plataforma especifica
+-   [x] buscador por like de nombre
+-   [x] CRUD juegos
+    -   [x] alta
+    -   [x] alta generos asociados
+    -   [x] alta plataformas asociadas
+    -   [x] editar
+    -   [x] editar generos asociados
+    -   [x] editar plataformas asociadas
+    -   [x] eliminar
+    -   [x] eliminar generos asociados
+    -   [x] eliminar plataformas asociadas
+-   [x] CRUD generos
+    -   [x] alta
+    -   [x] editar
+    -   [x] eliminar
+-   [x] CRUD plataformas
+    -   [x] alta
+    -   [x] editar
+    -   [x] eliminar
+-   [ ] login
+-   [x] toast de si salio bien la operation del CRUD
+-   [ ] rediseño
+    -   [ ] boton cancelar en modal chico
+    -   [ ] sacar emote de navbar
+    -   [x] confirmacion para eliminar
+    -   [ ] categoria que sea un radiobutton
+    -   [x] mover forms a modal
+    -   [ ] rediseñar pagina index
+    -   [ ] rediseñar pagina detalle
+-   [ ] ordenar codigo (hecho pero en script queda refactor para reuso con generacion de contenido)
+-   [x] setear comentarios
+-   [ ] lista de mejoras pendientes
+    -   [ ] manejo de errores
+    -   [ ] alert bonito de confirmacion
+    -   [ ] validacion de duplicados
+    -   [ ] separar logica en diferentes archivos
+    -   [ ] como admin borrar comentarios
