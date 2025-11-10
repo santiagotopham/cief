@@ -564,6 +564,7 @@ button[type="button"]:hover {
 
 .modal-buttons button {
 	flex: 1;
+	width: 100%;
 	padding: 10px 20px;
 	border-radius: 4px;
 	border: none;
