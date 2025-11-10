@@ -16,26 +16,37 @@ document.addEventListener("DOMContentLoaded", () => {
 			resetForm();
 		});
 
-		addEventListener("addGenresBtn", addGenresFromSelect, "click");
-		addEventListener("updateAddGenresBtn", addGenresFromSelect, "click");
-		addEventListener("addPlatformsBtn", addPlatformsFromSelect, "click");
-		addEventListener(
+		addListenerById("addGenresBtn", addGenresFromSelect, "click");
+		addListenerById("updateAddGenresBtn", addGenresFromSelect, "click");
+		addListenerById("addPlatformsBtn", addPlatformsFromSelect, "click");
+		addListenerById(
 			"updateAddPlatformsBtn",
 			addPlatformsFromSelect,
 			"click"
 		);
-		addEventListener("gameForm", handleGameFormSubmit, "submit");
-		addEventListener("genreForm", handleGenreFormSubmit, "submit");
-		addEventListener("platformForm", handlePlatformFormSubmit, "submit");
+		addListenerById("gameForm", handleGameFormSubmit, "submit");
+		addListenerById("genreForm", handleGenreFormSubmit, "submit");
+		addListenerById("platformForm", handlePlatformFormSubmit, "submit");
 
 		loadGenres();
 		loadPlatforms();
 	}
+
+	const commentForm = addListenerById(
+		"commentForm",
+		handleCommentFormSubmit,
+		"submit"
+	);
+	if (commentForm) {
+		const gameId = document.getElementById("commentGameId").value;
+		loadComments(gameId);
+	}
 });
 
-function addEventListener(elementId, callback, event) {
+function addListenerById(elementId, callback, event) {
 	const element = document.getElementById(elementId);
 	if (element) element.addEventListener(event, callback);
+	return element;
 }
 
 //////////////////////////////////////////////////////////////////////////////	GESTIONO FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
@@ -346,6 +357,76 @@ async function voteGame(gameId, vote) {
 	}
 }
 
+//////////////////////  	COMENTARIOS	   //////////////////////
+
+async function loadComments(gameId) {
+	console.log("entro cargar comments");
+	try {
+		const response = await fetch(`/comment/game/${gameId}`);
+		if (!response.ok) throw new Error("Error al cargar comentarios");
+
+		const comments = await response.json();
+		renderComments(comments);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al cargar los comentarios", true);
+	}
+}
+
+async function handleCommentFormSubmit(e) {
+	e.preventDefault();
+
+	const gameId = document.getElementById("commentGameId").value;
+	const userName = document.getElementById("commentUserName").value.trim();
+	const text = document.getElementById("commentText").value.trim();
+
+	// if (!userName || !text) {
+	// 	showToast("Por favor completa todos los campos", true);
+	// 	return;
+	// }
+
+	try {
+		const response = await fetch("/comment/add", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ gameId, userName, text }),
+		});
+
+		if (!response.ok) throw new Error("Error al guardar comentario");
+
+		const data = await response.json();
+		showToast(data.message);
+
+		document.getElementById("commentUserName").value = "";
+		document.getElementById("commentText").value = "";
+
+		await loadComments(gameId);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al guardar el comentario", true);
+	}
+}
+
+async function deleteComment(id, gameId) {
+	if (!confirm("¿Eliminar este comentario?")) return;
+
+	try {
+		const response = await fetch(`/comment/delete/${id}`, {
+			method: "DELETE",
+		});
+
+		if (!response.ok) throw new Error("Error al eliminar comentario");
+
+		const data = await response.json();
+		showToast(data.message);
+
+		await loadComments(gameId);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al eliminar el comentario", true);
+	}
+}
+
 //////////////////////  	GENEROS	   //////////////////////
 
 async function loadGenres() {
@@ -613,4 +694,34 @@ function showToast(message, isError = false) {
 	setTimeout(() => {
 		toast.remove();
 	}, 3000);
+}
+
+function renderComments(comments) {
+	const container = document.getElementById("commentsContainer");
+
+	if (!container) return;
+
+	if (comments.length === 0) {
+		container.innerHTML =
+			'<p class="no-comments">No hay comentarios aún. ¡Sé el primero en comentar!</p>';
+		return;
+	}
+
+	container.innerHTML = "";
+
+	for (const comment of comments) {
+		const commentDiv = document.createElement("div");
+		commentDiv.className = "comment-item";
+		commentDiv.innerHTML = `
+			<div class="comment-header">
+				<span class="comment-author">${comment.UserName}</span>
+				<span class="comment-date">${comment.PublishedDate}</span>
+			</div>
+			<p class="comment-text">${comment.Text}</p>
+			<button class="comment-delete-btn" onclick="deleteComment(${comment.Id}, ${comment.GameId})" title="Eliminar comentario">
+				×
+			</button>
+		`;
+		container.appendChild(commentDiv);
+	}
 }

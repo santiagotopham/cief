@@ -162,6 +162,25 @@ app.delete("/game/delete/:id", async (req, res) => {
 	res.json({ success: true, message: "Juego borrado" });
 });
 
+//////////////////////  	COMENTARIOS	   //////////////////////
+app.get("/comment/game/:gameId", async (req, res) => {
+	res.json(await getCommentsByGameId(req.params.gameId));
+});
+
+app.post("/comment/add", async (req, res) => {
+	const newComment = req.body;
+
+	await saveComment(newComment);
+
+	res.json({ success: true, message: "Comentario agregado" });
+});
+
+// app.delete("/comment/delete/:id", async (req, res) => {
+// 	await deleteComment(req.params.id);
+
+// 	res.json({ success: true, message: "Comentario eliminado" });
+// });
+
 //////////////////////  	GENEROS	   //////////////////////
 app.get("/genre/all", async (req, res) => {
 	res.json(await getGenresFromDb());
@@ -456,6 +475,48 @@ async function getPlatformsByGameIdFromDb(gameIds) {
 	await connection.end();
 
 	return platforms;
+}
+
+//////////////////////  	COMENTARIOS	   //////////////////////
+
+async function getCommentsByGameId(gameId) {
+	const connection = await openDbConnection();
+	const query = `
+		SELECT * FROM Comments 
+		WHERE GameId = ? 
+		ORDER BY PublishedDate DESC
+	`;
+
+	let [comments] = await connection.query(query, [gameId]);
+	await connection.end();
+
+	// Formatear las fechas
+	comments = comments.map((comment) => {
+		comment.PublishedDate = getCorrectDateFormat(comment.PublishedDate);
+		return comment;
+	});
+
+	return comments;
+}
+
+async function saveComment(newComment) {
+	console.log("nuevo comment");
+	console.log(newComment);
+	const connection = await openDbConnection();
+	const sql = `INSERT INTO Comments (GameId, UserName, PublishedDate, Text) VALUES (?, ?, NOW(), ?)`;
+	const values = [newComment.gameId, newComment.userName, newComment.text];
+
+	await connection.execute(sql, values);
+	await connection.end();
+}
+
+async function deleteComment(id) {
+	const connection = await openDbConnection();
+	const sql = "DELETE FROM Comments WHERE Id = ? LIMIT 1";
+	const values = [id];
+
+	await connection.execute(sql, values);
+	await connection.end();
 }
 
 //////////////////////  	GENEROS	   //////////////////////
