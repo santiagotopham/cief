@@ -7,6 +7,7 @@ const gameForm = document.getElementById("gameForm");
 const genreForm = document.getElementById("genreForm");
 const platformForm = document.getElementById("platformForm");
 
+let isLoggedIn = false;
 let isInsert = true;
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////

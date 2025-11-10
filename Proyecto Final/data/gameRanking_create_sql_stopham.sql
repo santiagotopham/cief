@@ -70,6 +70,14 @@ create table Comments (
     foreign key (GameId) references Games(Id)
 );
 
+create table Users (
+	Id int auto_increment not null,
+	UserName varchar(50) not null,
+	Password varchar(50) not null,
+    primary key (Id),
+    unique (UserName)
+);
+
 -- Data
 
 insert into Genres
@@ -169,5 +177,7 @@ values
 ((select Id from Platforms p where p.Name = 'PC'), (select Id from Games g where g.Title = 'Clair Obscur: Expedition 33')),
 ((select Id from Platforms p where p.Name = 'PlayStation 5'), (select Id from Games g where g.Title = 'Clair Obscur: Expedition 33'));
 
-
-
+insert into Users
+(UserName, Password)
+values
+('admin', 'admin');
