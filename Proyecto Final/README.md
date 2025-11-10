@@ -39,10 +39,11 @@
 -   [ ] login
 -   [x] toast de si salio bien la operation del CRUD
 -   [ ] rediseño
-    -   [ ] boton cancelar en modal chico
+    -   [x] chips pequeños
+    -   [x] boton cancelar en modal chico
     -   [ ] sacar emote de navbar
     -   [x] confirmacion para eliminar
-    -   [ ] categoria que sea un radiobutton
+    -   [x] categoria que sea un radiobutton
     -   [x] mover forms a modal
     -   [ ] rediseñar pagina index
     -   [ ] rediseñar pagina detalle

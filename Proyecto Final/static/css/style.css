@@ -344,11 +344,12 @@ button[type="button"]:hover {
 	background-color: var(--link_hover_color);
 }
 
-.selected-items {
+.modal-form .selected-items {
 	display: flex;
+	flex-direction: row !important;
 	flex-wrap: wrap;
 	gap: 8px;
-	margin-top: 0.5rem;
+	align-items: center;
 }
 
 .item-chip {
@@ -357,9 +358,10 @@ button[type="button"]:hover {
 	border-radius: 20px;
 	padding: 4px 10px;
 	font-size: 0.85rem;
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	gap: 6px;
+	width: auto;
 }
 
 .item-chip .remove-chip {
