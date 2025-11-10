@@ -135,10 +135,23 @@ app.put("/game/edit", async (req, res) => {
 	res.json({ success: true, message: "Juego editado" });
 });
 
-app.post("/game/vote/:gameId", async (req, res) => {
-	await updateGameLikes(req.params.gameId, req.body.vote);
+app.put("/game/vote/:gameId", async (req, res) => {
+	if (req.body.vote !== 1 && req.body.vote !== -1) {
+		return res
+			.status(400)
+			.json({ success: false, message: "Voto inválido" });
+	}
 
-	res.json({ success: true, message: "Voto aceptado" });
+	const updatedLikes = await updateGameLikes(
+		req.params.gameId,
+		req.body.vote
+	);
+
+	res.json({
+		success: true,
+		message: "Voto aceptado",
+		ThumbsUpCounter: updatedLikes,
+	});
 });
 
 app.delete("/game/delete/:id", async (req, res) => {
@@ -354,12 +367,14 @@ async function updateGame(id, updatedGame) {
 }
 
 async function updateGameLikes(id, vote) {
+	console.log("llego");
+	console.log(vote);
 	const connection = await openDbConnection();
 
-	const query = `SELECT ThumbsUpCounter FROM Games WHERE Id = ${id} LIMIT 1`;
+	const query = "SELECT ThumbsUpCounter FROM Games WHERE Id = ? LIMIT 1";
 
-	let [result] = await connection.query(query);
-	let likes = result[0].ThumbsUpCounter;
+	let [result] = await connection.query(query, [id]);
+	let likes = result[0].ThumbsUpCounter || 0;
 	likes += vote;
 
 	const sql =
@@ -368,6 +383,8 @@ async function updateGameLikes(id, vote) {
 
 	await connection.execute(sql, values);
 	await connection.end();
+
+	return likes;
 }
 
 async function deleteGame(id) {

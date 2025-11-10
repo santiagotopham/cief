@@ -7,6 +7,15 @@
             <a href="/game/<%= game.Id %>"><img src="<%= game.ImageUrl %>" alt="<%= game.Title %>"></a>
         
             <div  class="game_info">
+                <div class="vote_container">
+                    <button class="vote_btn" onclick="voteGame('<%= game.Id %>', 1)" title="Me gusta">
+                        <img src="/img/thumb_up.png" alt="Like">
+                    </button>
+                    <span id="thumbsCounter"><%= game.ThumbsUpCounter || 0 %></span>
+                    <button class="vote_btn" onclick="voteGame('<%= game.Id %>', -1)" title="No me gusta">
+                        <img src="/img/thumb_down.png" alt="Dislike">
+                    </button>
+                </div>
                 <p>
                     <strong>Desarrolladora:</strong><%= game.Developer %>
                 </p>

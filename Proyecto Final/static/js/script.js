@@ -320,6 +320,9 @@ function searchGame(event) {
 
 async function voteGame(gameId, vote) {
 	try {
+		console.log("voto");
+		console.log(gameId);
+		console.log(vote);
 		const res = await fetch(`/game/vote/${gameId}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -328,19 +331,23 @@ async function voteGame(gameId, vote) {
 			}),
 		});
 
+		console.log(res);
+
 		if (!res.ok) {
 			showToast("Error al votar");
 			return;
-		} else {
-			const data = await res.json();
-			if (data.ThumbsUpCounter !== undefined) {
-				document.getElementById("thumbsCounter").textContent =
-					data.ThumbsUpCounter;
-			}
-
-			showToast("Votado");
 		}
+
+		const data = await res.json();
+		console.log(data);
+		if (data.ThumbsUpCounter !== undefined) {
+			document.getElementById("thumbsCounter").textContent =
+				data.ThumbsUpCounter;
+		}
+
+		showToast("Votado");
 	} catch (error) {
+		console.log("error");
 		showToast("Error al votar");
 		console.error(error);
 	}
