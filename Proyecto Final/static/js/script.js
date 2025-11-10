@@ -68,7 +68,10 @@ function loadAndShowGameEditForm(game) {
 		game.LaunchDate
 	);
 	document.getElementById("gameDeveloper").value = game.Developer;
-	document.getElementById("gameCategory").value = game.Category;
+	document.querySelectorAll('input[name="category"]').forEach((r) => {
+		r.checked = r.value === game.Category;
+	});
+
 	document.getElementById("gameSynopsis").value = game.Synopsis;
 
 	loadEditChipItems(
@@ -271,7 +274,8 @@ async function handleGameFormSubmit(e) {
 		imageUrl: document.getElementById("gameImageUrl").value.trim(),
 		launchDate: document.getElementById("gameLaunchDate").value,
 		developer: document.getElementById("gameDeveloper").value.trim(),
-		category: document.getElementById("gameCategory").value.trim(),
+		category: document.querySelector('input[name="category"]:checked')
+			.value,
 		synopsis: document.getElementById("gameSynopsis").value.trim(),
 		genres: Array.from(selectedGenresMap.keys()),
 		platforms: Array.from(selectedPlatformsMap.keys()),

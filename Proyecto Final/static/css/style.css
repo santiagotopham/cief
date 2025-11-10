@@ -787,3 +787,31 @@ button[type="button"]:hover {
 		opacity: 1;
 	}
 }
+
+.category-group {
+	margin: 1rem 0;
+}
+
+.category-options {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+.category-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	font-weight: 500;
+	color: var(--page_main_color);
+}
+
+.category-options input[type="radio"] {
+	accent-color: var(--accent_color);
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	margin: 0;
+}

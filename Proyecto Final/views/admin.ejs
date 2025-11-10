@@ -136,9 +136,22 @@
                     <label for="gameDeveloper">Desarrolladora:</label>
                     <input type="text" id="gameDeveloper" name="developer" required>
                 </div>
-                <div>
-                    <label for="gameCategory">Categoría:</label>
-                    <input type="text" id="gameCategory" name="category" minlength="1" maxlength="3" required>
+                <div class="category-group">
+                    <label for="category">Categoría:</label>
+                    <div class="category-options">
+                        <label>
+                            <input type="radio" name="category" value="A" required>
+                            A
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="AA">
+                            AA
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="AAA">
+                            AAA
+                        </label>
+                    </div>
                 </div>
                 <div class="selector-container">
                     <label for="gameGenres">Géneros:</label>
