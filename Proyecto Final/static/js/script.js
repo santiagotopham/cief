@@ -381,11 +381,6 @@ async function handleCommentFormSubmit(e) {
 	const userName = document.getElementById("commentUserName").value.trim();
 	const text = document.getElementById("commentText").value.trim();
 
-	// if (!userName || !text) {
-	// 	showToast("Por favor completa todos los campos", true);
-	// 	return;
-	// }
-
 	try {
 		const response = await fetch("/comment/add", {
 			method: "POST",

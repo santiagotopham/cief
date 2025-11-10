@@ -175,11 +175,11 @@ app.post("/comment/add", async (req, res) => {
 	res.json({ success: true, message: "Comentario agregado" });
 });
 
-// app.delete("/comment/delete/:id", async (req, res) => {
-// 	await deleteComment(req.params.id);
+app.delete("/comment/delete/:id", async (req, res) => {
+	await deleteComment(req.params.id);
 
-// 	res.json({ success: true, message: "Comentario eliminado" });
-// });
+	res.json({ success: true, message: "Comentario eliminado" });
+});
 
 //////////////////////  	GENEROS	   //////////////////////
 app.get("/genre/all", async (req, res) => {
