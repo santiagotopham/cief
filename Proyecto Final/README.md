@@ -16,8 +16,8 @@
 -   [x] poner comentario
 -   [x] plataformas como chips en pagina detalle
 -   [x] generos como lista en pagina detalle
--   [ ] filtro por genero
--   [ ] filtro por plataforma especifica
+-   [x] filtro por genero
+-   [x] filtro por plataforma especifica
 -   [x] buscador por like de nombre
 -   [x] CRUD juegos
     -   [x] alta
