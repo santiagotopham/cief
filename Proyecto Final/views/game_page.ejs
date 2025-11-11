@@ -22,6 +22,18 @@
                 <p><strong>Lanzamiento:</strong> <%= game.LaunchDate %></p>
                 <p><strong>Categoria:</strong> <%= game.Category %></p>
                 <p><strong>Sinopsis:</strong> <%= game.Synopsis %></p>
+
+                <% if (game.Genres && game.Genres.length > 0) { %>
+                    <div class="game-genres">
+                        <strong>Géneros:</strong>
+                        <ul>
+                            <% game.Genres.forEach(genre => { %>
+                                <li><%= genre.Name %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
+
                 <% if (game.Platforms && game.Platforms.length > 0) { %>
                     <div class="chips-container top_space">
                         <% game.Platforms.forEach(platform => { %>
