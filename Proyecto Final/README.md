@@ -42,7 +42,7 @@
 -   [ ] rediseño
     -   [x] chips pequeños
     -   [x] boton cancelar en modal chico
-    -   [ ] sacar emote de navbar
+    -   [x] sacar emote de navbar
     -   [x] confirmacion para eliminar
     -   [x] categoria que sea un radiobutton
     -   [x] mover forms a modal
