@@ -7,6 +7,10 @@
             <% games.forEach(currentGame => { %>
                 <%- include('./templates/game_card', { currentGame }) %>
             <% }) %>
+
+            <% if (games && games.length == 0) { %>
+                <span>Upps, parece que aun no hay juegos...</span> 
+            <% } %>
     </div>
     </main>
     <%- include('./templates/footer') %>

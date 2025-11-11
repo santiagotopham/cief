@@ -9,9 +9,10 @@ const platformForm = document.getElementById("platformForm");
 
 let isLoggedIn = false;
 let isInsert = true;
+let filtersOpen = false;
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 	if (gameForm) {
 		gameForm.addEventListener("reset", () => {
 			resetForm();
@@ -32,6 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		loadGenres();
 		loadPlatforms();
 	}
+
+	document.addEventListener("click", (e) => {
+		const filtersContainer = document.querySelector(".filters-container");
+		if (!filtersContainer.contains(e.target) && filtersOpen) {
+			toggleFilters();
+		}
+	});
+
+	await loadFilters();
 
 	const commentForm = addListenerById(
 		"commentForm",
@@ -733,4 +743,38 @@ function renderComments(comments) {
 		`;
 		container.appendChild(commentDiv);
 	}
+}
+
+async function loadFilters() {
+	try {
+		// Cargar géneros
+		const genresResponse = await fetch("/genre/all");
+		const genres = await genresResponse.json();
+		const genresList = document.getElementById("genresList");
+		genresList.innerHTML = genres
+			.map(
+				(genre) =>
+					`<li><a href="/search/genre/${genre.Id}">${genre.Name}</a></li>`
+			)
+			.join("");
+
+		// Cargar plataformas
+		const platformsResponse = await fetch("/platform/all");
+		const platforms = await platformsResponse.json();
+		const platformsList = document.getElementById("platformsList");
+		platformsList.innerHTML = platforms
+			.map(
+				(platform) =>
+					`<li><a href="/search/platform/${platform.Id}">${platform.Name}</a></li>`
+			)
+			.join("");
+	} catch (error) {
+		console.error("Error cargando filtros:", error);
+	}
+}
+
+function toggleFilters() {
+	const dropdown = document.getElementById("filtersDropdown");
+	filtersOpen = !filtersOpen;
+	dropdown.style.display = filtersOpen ? "block" : "none";
 }
