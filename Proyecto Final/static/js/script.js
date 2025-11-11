@@ -119,7 +119,7 @@ function resetForm() {
 		}
 	}
 
-	for (const div of document.querySelectorAll(".selected-items")) {
+	for (const div of document.querySelectorAll(".chips-container")) {
 		div.innerHTML = "";
 	}
 
@@ -365,7 +365,6 @@ async function voteGame(gameId, vote) {
 //////////////////////  	COMENTARIOS	   //////////////////////
 
 async function loadComments(gameId) {
-	console.log("entro cargar comments");
 	try {
 		const response = await fetch(`/comment/game/${gameId}`);
 		if (!response.ok) throw new Error("Error al cargar comentarios");
@@ -676,11 +675,21 @@ function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 	containerDiv.innerHTML = "";
 
 	for (const currentItem of selectedMap) {
-		const chip = document.createElement("span");
-		chip.className = "item-chip";
-		chip.innerHTML = `${currentItem[1]} <button type="button" class="remove-chip" onclick="${removeFnName}('${currentItem[0]}')">×</button>`;
+		const chip = createChip(currentItem[1], currentItem[0], removeFnName);
 		containerDiv.appendChild(chip);
 	}
+}
+
+function createChip(text, id = null, removeFnName = null) {
+	const chip = document.createElement("span");
+	chip.className = "item-chip";
+
+	chip.innerHTML = `${text} `;
+
+	if (id && removeFnName)
+		chip.innerHTML += `<button type="button" class="remove-chip" onclick="${removeFnName}(${id})">×</button>`;
+
+	return chip;
 }
 
 //Creo notificaciones Toast

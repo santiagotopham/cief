@@ -14,7 +14,7 @@
 -   [x] paginas por plataforma principal
 -   [x] calificar juego
 -   [x] poner comentario
--   [ ] plataformas como chips en pagina detalle
+-   [x] plataformas como chips en pagina detalle
 -   [ ] filtro por genero
 -   [ ] filtro por plataforma especifica
 -   [x] buscador por like de nombre
@@ -47,7 +47,8 @@
     -   [x] mover forms a modal
     -   [ ] rediseñar pagina index
     -   [ ] rediseñar pagina detalle
--   [ ] ordenar codigo (hecho pero en script queda refactor para reuso con generacion de contenido)
+-   [ ] ordenar codigo
+-   [ ] refactorizar codigo para reusar (script.js)
 -   [x] setear comentarios
 -   [ ] lista de mejoras pendientes
     -   [ ] manejo de errores

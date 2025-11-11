@@ -307,12 +307,17 @@ async function getGameById(id) {
 	const connection = await openDbConnection();
 	const query = `SELECT * FROM Games where Id = ${id}`;
 
-	const [games] = await connection.query(query);
+	let [games] = await connection.query(query);
 	await connection.end();
 
 	if (games[0] == null) {
 		return res.redirect("/404");
 	}
+
+	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
+		games
+	);
+	games = await composeGames(games, gameGenres, gamePlatforms);
 
 	games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
 

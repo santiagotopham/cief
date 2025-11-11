@@ -22,6 +22,13 @@
                 <p><strong>Lanzamiento:</strong> <%= game.LaunchDate %></p>
                 <p><strong>Categoria:</strong> <%= game.Category %></p>
                 <p><strong>Sinopsis:</strong> <%= game.Synopsis %></p>
+                <% if (game.Platforms && game.Platforms.length > 0) { %>
+                    <div class="chips-container top_space">
+                        <% game.Platforms.forEach(platform => { %>
+                            <span class="item-chip"><%= platform.Name %></span>
+                        <% }) %>
+                    </div>
+                <% } %>
             </div>
         </div>
         <div class="comments_section">

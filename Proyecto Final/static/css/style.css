@@ -344,7 +344,7 @@ button[type="button"]:hover {
 	background-color: var(--link_hover_color);
 }
 
-.modal-form .selected-items {
+.modal-form .chips-container {
 	display: flex;
 	flex-direction: row !important;
 	flex-wrap: wrap;
@@ -816,4 +816,8 @@ button[type="button"]:hover {
 	height: 16px;
 	cursor: pointer;
 	margin: 0;
+}
+
+.top_space {
+	margin-top: 2rem;
 }
