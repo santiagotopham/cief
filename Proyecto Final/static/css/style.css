@@ -24,6 +24,37 @@ body {
 	min-height: 100vh;
 }
 
+/* //////////////////////  	GENERALES	   ////////////////////// */
+
+main {
+	flex: 1;
+	width: 80%;
+	max-width: 1200px;
+	margin: 2rem auto;
+	text-align: center;
+}
+
+hr {
+	margin-bottom: 1rem;
+	border: none;
+	height: 2px;
+	color: var(--page_main_color);
+	background-color: var(--page_main_color);
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.purple_link:hover {
+	color: var(--link_hover_color);
+}
+
+.top_space {
+	margin-top: 2rem;
+}
+
 /* //////////////////////  	CABEZAL	   ////////////////////// */
 
 header {
@@ -133,37 +164,6 @@ nav::after {
 .search_form button .icon {
 	width: 22px;
 	height: 22px;
-}
-
-/* //////////////////////  	GENERALES	   ////////////////////// */
-
-main {
-	flex: 1;
-	width: 80%;
-	max-width: 1200px;
-	margin: 2rem auto;
-	text-align: center;
-}
-
-hr {
-	margin-bottom: 1rem;
-	border: none;
-	height: 2px;
-	color: var(--page_main_color);
-	background-color: var(--page_main_color);
-}
-
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-.purple_link:hover {
-	color: var(--link_hover_color);
-}
-
-.top_space {
-	margin-top: 2rem;
 }
 
 /* //////////////////////  	FOOTER	   ////////////////////// */
@@ -328,6 +328,14 @@ footer p {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.vote_container span {
+	font-weight: bold;
+	font-size: 1rem;
+	color: var(--page_main_color);
+	min-width: 30px;
+	text-align: center;
+}
+
 .vote_btn {
 	background: none;
 	border: none;
@@ -347,14 +355,6 @@ footer p {
 	height: 24px;
 }
 
-.vote_container span {
-	font-weight: bold;
-	font-size: 1rem;
-	color: var(--page_main_color);
-	min-width: 30px;
-	text-align: center;
-}
-
 /* //////////////////////  	PANEL ADMIN	   ////////////////////// */
 
 .backoffice_main {
@@ -364,17 +364,6 @@ footer p {
 	padding: 2rem;
 	max-width: 1400px;
 	margin: 0 auto;
-}
-
-/* //////////////////////  	PAGINA DE ERROR	   ////////////////////// */
-
-.error_image {
-	margin: 0 auto;
-	width: var(--max-width);
-}
-
-.error_image > img {
-	height: 500px;
 }
 
 /* //////////////////////  	FORMULARIOS	   ////////////////////// */
