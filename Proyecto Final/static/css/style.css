@@ -1,4 +1,5 @@
 /* //////////////////////  	CONFIGURACION BASE	   ////////////////////// */
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -431,6 +432,7 @@ button[type="button"]:hover {
 }
 
 /* //////////////////////  	CHIPS	////////////////////// */
+
 .modal_form .chips_container {
 	display: flex;
 	flex-direction: row !important;
@@ -858,6 +860,7 @@ button[type="button"]:hover {
 }
 
 /* //////////////////////  	FILTROS	////////////////////// */
+
 .filters_container {
 	position: relative;
 	display: inline-block;

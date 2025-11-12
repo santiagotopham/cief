@@ -29,7 +29,6 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Inicio datos base de la aplicacion
 let siteName = "GameRanking";
 let mainPlatforms = await getMainPlatforms();
 let navBarMenu = buildNavBarMenu();

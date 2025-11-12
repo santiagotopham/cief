@@ -630,13 +630,11 @@ async function deletePlatform(id) {
 //Cargado de filtros
 async function loadFilters() {
 	try {
-		// Cargar géneros
 		const genresResponse = await fetch("/genre/all");
 		const genres = await genresResponse.json();
 
 		buildFilterList("genresList", genres, "genre");
 
-		// Cargar plataformas
 		const platformsResponse = await fetch("/platform/all");
 		const platforms = await platformsResponse.json();
 
