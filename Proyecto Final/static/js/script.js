@@ -442,22 +442,15 @@ async function deleteComment(id, gameId) {
 
 //Carga de generos desde backend
 async function loadGenres() {
-	const res = await fetch("/genre/all");
-	const data = await res.json();
+	try {
+		const response = await fetch("/genre/all");
+		if (!response.ok) throw new Error("Error al cargar generos");
+		const data = await response.json();
 
-	const tbody = document.getElementById("genresTableBody");
-	tbody.innerHTML = "";
-
-	for (const genre of data) {
-		const tr = document.createElement("tr");
-		tr.innerHTML = `
-			<td>${genre.Id}</td>
-			<td>${genre.Name}</td>
-			<td>
-				<button onclick="editGenre(${genre.Id}, '${genre.Name}')">Editar</button>
-				<button onclick="deleteGenre(${genre.Id})">Eliminar</button>
-			</td>`;
-		tbody.appendChild(tr);
+		buildGenresTables("genresTableBody", data);
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Error al cargar los generos", true);
 	}
 }
 
@@ -530,25 +523,7 @@ async function loadPlatforms() {
 
 		const data = await response.json();
 
-		const tbody = document.getElementById("platformsTableBody");
-		if (!tbody) return;
-
-		tbody.innerHTML = "";
-
-		for (const platform of data) {
-			const tr = document.createElement("tr");
-			tr.innerHTML = `
-				<td>${platform.Id}</td>
-				<td>${platform.Name}</td>
-				<td>${platform.MainPlatformName || "N/A"}</td>
-				<td>
-					<button onclick="editPlatform(${platform.Id}, '${platform.Name}', ${
-				platform.MainPlatformId
-			})">Editar</button>
-					<button onclick="deletePlatform(${platform.Id})">Eliminar</button>
-				</td>`;
-			tbody.appendChild(tr);
-		}
+		buildPlatformsTable("platformsTableBody", data);
 	} catch (error) {
 		console.error("Error:", error);
 		showToast("Error al cargar las plataformas", true);
@@ -717,6 +692,7 @@ function renderComments(comments) {
 	}
 }
 
+//Construye lista de filtros
 function buildFilterList(htmlListId, items, path) {
 	const htmlList = document.getElementById(htmlListId);
 
@@ -726,6 +702,45 @@ function buildFilterList(htmlListId, items, path) {
 				`<li><a href="/search/${path}/${currentItem.Id}">${currentItem.Name}</a></li>`
 		)
 		.join("");
+}
+
+//Construye tabla de generos
+function buildGenresTables(tableId, genres) {
+	const table = document.getElementById(tableId);
+	table.innerHTML = "";
+
+	for (const currentGenre of genres) {
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td>${currentGenre.Id}</td>
+			<td>${currentGenre.Name}</td>
+			<td>
+				<button onclick="editGenre(${currentGenre.Id}, '${currentGenre.Name}')">Editar</button>
+				<button onclick="deleteGenre(${currentGenre.Id})">Eliminar</button>
+			</td>`;
+		table.appendChild(tr);
+	}
+}
+
+//Construye tabla de plataformas
+function buildPlatformsTable(tableId, platforms) {
+	const table = document.getElementById(tableId);
+	table.innerHTML = "";
+
+	for (const currentPlatform of platforms) {
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td>${currentPlatform.Id}</td>
+			<td>${currentPlatform.Name}</td>
+			<td>${currentPlatform.MainPlatformName || "N/A"}</td>
+			<td>
+				<button onclick="editPlatform(${currentPlatform.Id}, '${
+			currentPlatform.Name
+		}', ${currentPlatform.MainPlatformId})">Editar</button>
+				<button onclick="deletePlatform(${currentPlatform.Id})">Eliminar</button>
+			</td>`;
+		table.appendChild(tr);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
