@@ -12,10 +12,12 @@ let isInsert = true;
 let filtersOpen = false;
 
 //////////////////////////////////////////////////////////////////////////////	CARGO EVENTOS	/////////////////////////////////////////////////////////////////////////////
+
+//Seteo eventos
 document.addEventListener("DOMContentLoaded", async () => {
 	if (gameForm) {
 		gameForm.addEventListener("reset", () => {
-			resetForm();
+			resetGameForm();
 		});
 
 		addListenerById("addGenresBtn", addGenresFromSelect, "click");
@@ -41,32 +43,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 		}
 	});
 
-	await loadFilters();
-
 	const commentForm = addListenerById(
 		"commentForm",
 		handleCommentFormSubmit,
 		"submit"
 	);
+
 	if (commentForm) {
 		const gameId = document.getElementById("commentGameId").value;
 		loadComments(gameId);
 	}
+
+	await loadFilters();
 });
 
+//Agrega evento a item de html
 function addListenerById(elementId, callback, event) {
 	const element = document.getElementById(elementId);
 	if (element) element.addEventListener(event, callback);
 	return element;
 }
 
-//////////////////////////////////////////////////////////////////////////////	GESTIONO FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////	FORMULARIOS	/////////////////////////////////////////////////////////////////////////////
 
 //////////////////////  	JUEGOS	   //////////////////////
 
+//Cargo formulario de edicion de juegos
 function loadAndShowGameEditForm(game) {
 	isInsert = false;
-	resetForm();
+	resetGameForm();
 
 	game = JSON.parse(game);
 
@@ -78,9 +83,10 @@ function loadAndShowGameEditForm(game) {
 		game.LaunchDate
 	);
 	document.getElementById("gameDeveloper").value = game.Developer;
-	document.querySelectorAll('input[name="category"]').forEach((r) => {
-		r.checked = r.value === game.Category;
-	});
+
+	for (const input of document.querySelectorAll('input[name="category"]')) {
+		input.checked = input.value === game.Category;
+	}
 
 	document.getElementById("gameSynopsis").value = game.Synopsis;
 
@@ -101,25 +107,9 @@ function loadAndShowGameEditForm(game) {
 	openModal("gameModal");
 }
 
-function toggleGameForm() {
-	if (gameForm) {
-		if (gameForm.style.display == "block") {
-			gameForm.style.display = "none";
-			sectionUpdate.style.display = "block";
-			isInsert = false;
-		} else {
-			gameForm.style.display = "block";
-			sectionUpdate.style.display = "none";
-			isInsert = true;
-		}
-	}
-	selectedGenresMap.clear();
-	selectedPlatformsMap.clear();
-}
-
-function resetForm() {
-	selectedGenresMap.clear();
-	selectedPlatformsMap.clear();
+//Limpia formulario de juegos
+function resetGameForm() {
+	cleanMaps();
 
 	for (const currentSelector of document.querySelectorAll(
 		"select[multiple]"
@@ -138,6 +128,7 @@ function resetForm() {
 	}
 }
 
+//Agrego generos desde el selector
 function addGenresFromSelect() {
 	let selectorName = "";
 	let selectedList = "";
@@ -150,6 +141,7 @@ function addGenresFromSelect() {
 	renderSelectedMap(selectedGenresMap, selectedList, "removeGenre");
 }
 
+//Borro genero selecionado
 function removeGenre(id) {
 	selectedGenresMap.delete(String(id));
 	let selectorName = "gameGenres";
@@ -159,6 +151,7 @@ function removeGenre(id) {
 	renderSelectedMap(selectedGenresMap, selectedList, "removeGenre");
 }
 
+//Agrego plataformas desde el selector
 function addPlatformsFromSelect() {
 	let selectorName = "gamePlatforms";
 	let selectedList = "selectedPlatformsList";
@@ -167,6 +160,7 @@ function addPlatformsFromSelect() {
 	renderSelectedMap(selectedPlatformsMap, selectedList, "removePlatform");
 }
 
+//Borro plataforma selecionada
 function removePlatform(id) {
 	selectedPlatformsMap.delete(String(id));
 	let selectorName = "gamePlatforms";
@@ -178,6 +172,7 @@ function removePlatform(id) {
 
 //////////////////////  	GENEROS	   //////////////////////
 
+//Cargo formulario de edicion de generos
 function editGenre(id, name) {
 	isInsert = false;
 	document.getElementById("genreId").value = id;
@@ -186,13 +181,9 @@ function editGenre(id, name) {
 	openModal("genreModal");
 }
 
-function cancelGenreEdit() {
-	document.getElementById("updateGenreForm").reset();
-	document.getElementById("updateGenreForm").style.display = "none";
-}
-
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
+//Cargo formulario de edicion de plataformas
 function editPlatform(id, name, mainPlatformId) {
 	isInsert = false;
 	document.getElementById("platformId").value = id;
@@ -204,26 +195,25 @@ function editPlatform(id, name, mainPlatformId) {
 	openModal("platformModal");
 }
 
-function cancelPlatformEdit() {
-	document.getElementById("updatePlatformForm").reset();
-	document.getElementById("updatePlatformForm").style.display = "none";
-}
-
 //////////////////////////////////////////////////////////////////////////////	MODALES	/////////////////////////////////////////////////////////////////////////////
 
 //////////////////////  	JUEGOS	   //////////////////////
+
+//Abro modal de juegos
 function openGameModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
 		gameForm.reset();
 		document.getElementById("gameModalTitle").textContent = "Nuevo Juego";
-		resetForm();
+		resetGameForm();
 	}
 
 	openModal("gameModal");
 }
 
 //////////////////////  	GENEROS	   //////////////////////
+
+//Abro modal de generos
 function openGenreModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
@@ -236,6 +226,8 @@ function openGenreModal(mode) {
 }
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
+
+//Abro modal de plataformas
 function openPlatformModal(mode) {
 	if (mode === "add") {
 		isInsert = true;
@@ -250,16 +242,19 @@ function openPlatformModal(mode) {
 }
 
 //////////////////////  	AUX	   //////////////////////
+
+//Abro modal
 function openModal(modalName) {
 	document.getElementById(modalName).classList.add("active");
 }
 
+//Cierro modal
 function closeModal(modalName) {
 	document.getElementById(modalName).classList.remove("active");
 }
 
 // Cerrar modal al clickear afuera
-window.onclick = function (event) {
+globalThis.onclick = function (event) {
 	if (event.target === document.getElementById("gameModal")) {
 		closeModal("gameModal");
 	}
@@ -275,6 +270,7 @@ window.onclick = function (event) {
 
 //////////////////////  	JUEGOS	   //////////////////////
 
+//Envio form de juego al backend
 async function handleGameFormSubmit(e) {
 	e.preventDefault();
 
@@ -312,6 +308,7 @@ async function handleGameFormSubmit(e) {
 	}
 }
 
+//Envio borrado de juego al backend
 function deleteGame(id) {
 	if (!confirm("¿Estás seguro de que quieres eliminar este juego?")) return;
 
@@ -334,6 +331,7 @@ function deleteGame(id) {
 		});
 }
 
+//Envio de busqueda por nombre al backend
 function searchGame(event) {
 	event.preventDefault();
 	const input = document.getElementById("searchInput");
@@ -344,6 +342,7 @@ function searchGame(event) {
 	return false;
 }
 
+//Envio de votacion al backend
 async function voteGame(gameId, vote) {
 	try {
 		const res = await fetch(`/game/vote/${gameId}`, {
@@ -374,6 +373,7 @@ async function voteGame(gameId, vote) {
 
 //////////////////////  	COMENTARIOS	   //////////////////////
 
+//Carga de comentarios segun juego desde el backend
 async function loadComments(gameId) {
 	try {
 		const response = await fetch(`/comment/game/${gameId}`);
@@ -387,6 +387,7 @@ async function loadComments(gameId) {
 	}
 }
 
+//Envio form de comentarios al backend
 async function handleCommentFormSubmit(e) {
 	e.preventDefault();
 
@@ -416,6 +417,7 @@ async function handleCommentFormSubmit(e) {
 	}
 }
 
+//Envio borrado de comentario al backend
 async function deleteComment(id, gameId) {
 	if (!confirm("¿Eliminar este comentario?")) return;
 
@@ -438,6 +440,7 @@ async function deleteComment(id, gameId) {
 
 //////////////////////  	GENEROS	   //////////////////////
 
+//Carga de generos desde backend
 async function loadGenres() {
 	const res = await fetch("/genre/all");
 	const data = await res.json();
@@ -458,6 +461,7 @@ async function loadGenres() {
 	}
 }
 
+//Envio form de generos al backend
 async function handleGenreFormSubmit(e) {
 	e.preventDefault();
 
@@ -495,6 +499,7 @@ async function handleGenreFormSubmit(e) {
 	}
 }
 
+//Envio borrado de genero al backend
 async function deleteGenre(id) {
 	if (!confirm("¿Eliminar este género?")) return;
 
@@ -517,6 +522,7 @@ async function deleteGenre(id) {
 
 //////////////////////  	PLATAFORMAS	   //////////////////////
 
+//Carga de plataformas desde el backend
 async function loadPlatforms() {
 	try {
 		const response = await fetch("/platform/all");
@@ -549,6 +555,7 @@ async function loadPlatforms() {
 	}
 }
 
+//Envio form de plataformas al backend
 async function handlePlatformFormSubmit(e) {
 	e.preventDefault();
 
@@ -597,6 +604,7 @@ async function handlePlatformFormSubmit(e) {
 	}
 }
 
+//Envio borrado de plataforma al backend
 async function deletePlatform(id) {
 	if (!confirm("¿Eliminar esta plataforma?")) return;
 
@@ -617,66 +625,30 @@ async function deletePlatform(id) {
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
+//////////////////////  	FILTROS	   //////////////////////
 
-function getCorrectDateFormat(unformattedDate) {
-	if (!unformattedDate) return "";
+//Cargado de filtros
+async function loadFilters() {
+	try {
+		// Cargar géneros
+		const genresResponse = await fetch("/genre/all");
+		const genres = await genresResponse.json();
 
-	// Si ya viene en formato YYYY-MM-DD, devolverlo directamente
-	if (/^\d{4}-\d{2}-\d{2}$/.test(unformattedDate)) {
-		return unformattedDate;
-	}
+		buildFilterList("genresList", genres, "genre");
 
-	// Crear fecha sin conversión de zona horaria
-	const date = new Date(unformattedDate);
+		// Cargar plataformas
+		const platformsResponse = await fetch("/platform/all");
+		const platforms = await platformsResponse.json();
 
-	// Verificar si la fecha es válida
-	if (isNaN(date.getTime())) {
-		console.error("Fecha inválida:", unformattedDate);
-		return "";
-	}
-
-	// Obtener componentes de fecha en zona horaria local
-	const year = date.getFullYear();
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const day = String(date.getDate()).padStart(2, "0");
-
-	return `${year}-${month}-${day}`;
-}
-
-function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {
-	if (itemsArray && Array.isArray(itemsArray)) {
-		selectedMap.clear();
-
-		for (const currentItem of itemsArray) {
-			toggleOptionInSelector(selectorName, currentItem.Id, true);
-		}
-
-		callback();
-	}
-}
-
-function addFromSelectorToMap(selectedMap, selectorName) {
-	const selector = document.getElementById(selectorName);
-
-	if (!selector) return;
-
-	for (const currentOption of selector.selectedOptions) {
-		selectedMap.set(currentOption.value, currentOption.text);
-	}
-}
-
-//Cambio seleccionados en selector
-function toggleOptionInSelector(selectorName, id, isEnabled) {
-	const selector = document.getElementById(selectorName);
-	if (selector) {
-		const option = selector.querySelector(`option[value="${id}"]`);
-		if (option) option.selected = isEnabled;
+		buildFilterList("platformsList", platforms, "platform");
+	} catch (error) {
+		console.error("Error cargando filtros:", error);
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////////	CONSTRUCCION DE CONTENIDO	/////////////////////////////////////////////////////////////////////////////
 
+//Construye listado de chips
 function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 	const containerDiv = document.getElementById(renderDivId);
 
@@ -690,6 +662,7 @@ function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 	}
 }
 
+//Construye chip
 function createChip(text, id = null, removeFnName = null) {
 	const chip = document.createElement("span");
 	chip.className = "item-chip";
@@ -715,6 +688,7 @@ function showToast(message, isError = false) {
 	}, 3000);
 }
 
+//Construye lista de comentarios
 function renderComments(comments) {
 	const container = document.getElementById("commentsContainer");
 
@@ -745,36 +719,83 @@ function renderComments(comments) {
 	}
 }
 
-async function loadFilters() {
-	try {
-		// Cargar géneros
-		const genresResponse = await fetch("/genre/all");
-		const genres = await genresResponse.json();
-		const genresList = document.getElementById("genresList");
-		genresList.innerHTML = genres
-			.map(
-				(genre) =>
-					`<li><a href="/search/genre/${genre.Id}">${genre.Name}</a></li>`
-			)
-			.join("");
+function buildFilterList(htmlListId, items, path) {
+	const htmlList = document.getElementById(htmlListId);
 
-		// Cargar plataformas
-		const platformsResponse = await fetch("/platform/all");
-		const platforms = await platformsResponse.json();
-		const platformsList = document.getElementById("platformsList");
-		platformsList.innerHTML = platforms
-			.map(
-				(platform) =>
-					`<li><a href="/search/platform/${platform.Id}">${platform.Name}</a></li>`
-			)
-			.join("");
-	} catch (error) {
-		console.error("Error cargando filtros:", error);
+	htmlList.innerHTML = items
+		.map(
+			(currentItem) =>
+				`<li><a href="/search/${path}/${currentItem.Id}">${currentItem.Name}</a></li>`
+		)
+		.join("");
+}
+
+//////////////////////////////////////////////////////////////////////////////	METODOS AUXILIARES	/////////////////////////////////////////////////////////////////////////////
+
+//Formateo de fechas
+function getCorrectDateFormat(unformattedDate) {
+	if (!unformattedDate) return "";
+
+	if (/^\d{4}-\d{2}-\d{2}$/.test(unformattedDate)) {
+		return unformattedDate;
+	}
+
+	const date = new Date(unformattedDate);
+
+	if (isNaN(date.getTime())) {
+		console.error("Fecha inválida:", unformattedDate);
+		return "";
+	}
+
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+
+	return `${year}-${month}-${day}`;
+}
+
+//Carga chips en form de edicion de juegos
+function loadEditChipItems(itemsArray, selectedMap, selectorName, callback) {
+	if (itemsArray && Array.isArray(itemsArray)) {
+		selectedMap.clear();
+
+		for (const currentItem of itemsArray) {
+			toggleOptionInSelector(selectorName, currentItem.Id, true);
+		}
+
+		callback();
 	}
 }
 
+//Agrega items desde un selector a un Map
+function addFromSelectorToMap(selectedMap, selectorName) {
+	const selector = document.getElementById(selectorName);
+
+	if (!selector) return;
+
+	for (const currentOption of selector.selectedOptions) {
+		selectedMap.set(currentOption.value, currentOption.text);
+	}
+}
+
+//Muestra o esconde los filtros
 function toggleFilters() {
 	const dropdown = document.getElementById("filtersDropdown");
 	filtersOpen = !filtersOpen;
 	dropdown.style.display = filtersOpen ? "block" : "none";
+}
+
+//Cambio seleccionados en selector
+function toggleOptionInSelector(selectorName, id, isEnabled) {
+	const selector = document.getElementById(selectorName);
+	if (selector) {
+		const option = selector.querySelector(`option[value="${id}"]`);
+		if (option) option.selected = isEnabled;
+	}
+}
+
+//Vacio mapas de selectores
+function cleanMaps() {
+	selectedGenresMap.clear();
+	selectedPlatformsMap.clear();
 }
