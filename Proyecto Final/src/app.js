@@ -69,10 +69,6 @@ for (const currentPlatform of mainPlatforms) {
 app.get("/search/:name", async (req, res) => {
 	const games = await getGamesByName(req.params.name);
 
-	if (games.length == 0) {
-		return res.redirect("/404");
-	}
-
 	res.render("search", {
 		title: siteName,
 		siteName: siteName,
@@ -349,6 +345,8 @@ async function getGamesByName(name, shouldFormatDate) {
 
 	let [games] = await connection.query(query);
 	await connection.end();
+
+	if (!games || games.length == 0) return [];
 
 	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 		games
