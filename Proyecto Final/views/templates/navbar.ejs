@@ -3,30 +3,30 @@
 		<a class="purple_link" href="/"><h1><%= siteName %></h1></a>
 
 		<!-- Botón de filtros -->
-		<div class="filters-container">
-			<button class="filters-button" onclick="toggleFilters()">
+		<div class="filters_container">
+			<button class="filters_button" onclick="toggleFilters()">
 				<svg class="icon" viewBox="0 0 24 24" fill="currentColor">
 					<path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
 				</svg>
 				Filtros
 			</button>
-			<div id="filtersDropdown" class="filters-dropdown">
-				<div class="filters-section">
+			<div id="filtersDropdown" class="filters_dropdown">
+				<div class="filters_section">
 					<h3>Géneros</h3>
-					<ul id="genresList" class="filters-list">
+					<ul id="genresList" class="filters_list">
 						<!-- Se llenará dinámicamente -->
 					</ul>
 				</div>
-				<div class="filters-section">
+				<div class="filters_section">
 					<h3>Plataformas</h3>
-					<ul id="platformsList" class="filters-list">
+					<ul id="platformsList" class="filters_list">
 						<!-- Se llenará dinámicamente -->
 					</ul>
 				</div>
 			</div>
 		</div>
 
-		<form class="search-form" onsubmit="return searchGame(event)">
+		<form class="search_form" onsubmit="return searchGame(event)">
 			<input
 				type="text"
 				id="searchInput"

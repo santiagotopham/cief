@@ -4,9 +4,9 @@
     <main class="backoffice_main">
 <!-------------------------------------------------   TABLA JUEGOS  ------------------------------------------->
         <div class="game_section">
-            <div class="section-header">
+            <div class="section_header">
                 <h2>Juegos</h2>
-                <button class="new-btn" onclick="openGameModal('add')">+ Nuevo Juego</button>
+                <button class="new_btn" onclick="openGameModal('add')">+ Nuevo Juego</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -43,9 +43,9 @@
 
 <!-------------------------------------------------   TABLA GENEROS  ------------------------------------------->
         <div class="genre_section">
-            <div class="section-header">
+            <div class="section_header">
                 <h2>Géneros</h2>
-                <button class="new-btn" onclick="openGenreModal('add')">+ Nuevo Género</button>
+                <button class="new_btn" onclick="openGenreModal('add')">+ Nuevo Género</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -76,9 +76,9 @@
 
 <!-------------------------------------------------   TABLA PLATAFORMAS  ------------------------------------------->
         <div class="platform_section">
-            <div class="section-header">
+            <div class="section_header">
                 <h2>Plataformas</h2>
-                <button class="new-btn" onclick="openPlatformModal('create')">+ Nueva Plataforma</button>
+                <button class="new_btn" onclick="openPlatformModal('create')">+ Nueva Plataforma</button>
             </div>
             <table class="data_table">
                 <thead>
@@ -113,12 +113,12 @@
 
     <!-------------------------------------------------   MODAL JUEGOS  ------------------------------------------->
     <div id="gameModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal_content">
+            <div class="modal_header">
                 <h2 id="gameModalTitle">Nuevo Juego</h2>
-                <button class="close-modal" onclick="closeModal('gameModal')">&times;</button>
+                <button class="close_modal" onclick="closeModal('gameModal')">&times;</button>
             </div>
-            <form id="gameForm" class="modal-form">
+            <form id="gameForm" class="modal_form">
                 <input type="hidden" id="gameId" name="id">
                 <div>
                     <label for="gameTitle">Título:</label>
@@ -136,9 +136,9 @@
                     <label for="gameDeveloper">Desarrolladora:</label>
                     <input type="text" id="gameDeveloper" name="developer" required>
                 </div>
-                <div class="category-group">
+                <div class="category_group">
                     <label for="category">Categoría:</label>
-                    <div class="category-options">
+                    <div class="category_options">
                         <label>
                             <input type="radio" name="category" value="A" required>
                             A
@@ -153,7 +153,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="selector-container">
+                <div class="selector_container">
                     <label for="gameGenres">Géneros:</label>
                     <select id="gameGenres" name="genres" multiple>
                         <% genres.forEach(currentGenre => { %>
@@ -161,9 +161,9 @@
                         <% }) %>
                     </select>
                     <button type="button" onclick="addGenresFromSelect()">Añadir</button>
-                    <div id="selectedGenresList" class="chips-container"></div>
+                    <div id="selectedGenresList" class="chips_container"></div>
                 </div>
-                <div class="selector-container">
+                <div class="selector_container">
                     <label for="gamePlatforms">Plataformas:</label>
                     <select id="gamePlatforms" name="platforms" multiple>
                         <% platforms.forEach(currentPlatform => { %>
@@ -171,13 +171,13 @@
                         <% }) %>
                     </select>
                     <button type="button" onclick="addPlatformsFromSelect()">Añadir</button>
-                    <div id="selectedPlatformsList" class="chips-container"></div>
+                    <div id="selectedPlatformsList" class="chips_container"></div>
                 </div>
                 <div>
                     <label for="gameSynopsis">Sinopsis:</label>
                     <textarea id="gameSynopsis" name="synopsis" required></textarea>
                 </div>
-                <div class="modal-buttons">
+                <div class="modal_buttons">
                     <button type="submit">Guardar</button>
                     <button type="button" onclick="closeModal('gameModal')">Cancelar</button>
                 </div>
@@ -187,18 +187,18 @@
 
     <!-------------------------------------------------   MODAL GEENROS  ------------------------------------------->
     <div id="genreModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal_content">
+            <div class="modal_header">
                 <h2 id="genreModalTitle">Nuevo Género</h2>
-                <button class="close-modal" onclick="closeModal('genreModal')">&times;</button>
+                <button class="close_modal" onclick="closeModal('genreModal')">&times;</button>
             </div>
-            <form id="genreForm" class="modal-form">
+            <form id="genreForm" class="modal_form">
                 <input type="hidden" id="genreId" name="id">
                 <div>
                     <label for="genreName">Nombre:</label>
                     <input type="text" id="genreName" name="name" required>
                 </div>
-                <div class="modal-buttons">
+                <div class="modal_buttons">
                     <button type="submit">Guardar</button>
                     <button type="button" onclick="closeModal('genreModal')">Cancelar</button>
                 </div>
@@ -207,12 +207,12 @@
     </div>
 <!-------------------------------------------------   MODAL PLATAFORMAS  ------------------------------------------->
     <div id="platformModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal_content">
+            <div class="modal_header">
                 <h2 id="platformModalTitle">Nueva Plataforma</h2>
-                <button class="close-modal" onclick="closeModal('platformModal')">&times;</button>
+                <button class="close_modal" onclick="closeModal('platformModal')">&times;</button>
             </div>
-            <form id="platformForm" class="modal-form" method="post">
+            <form id="platformForm" class="modal_form" method="post">
                 <input type="hidden" id="platformId" name="id">
                 <div>
                     <label for="platformName">Nombre:</label>
@@ -227,7 +227,7 @@
                         <% }) %>
                     </select>
                 </div>
-                <div class="modal-buttons">
+                <div class="modal_buttons">
                     <button type="submit">Guardar</button>
                     <button type="button" onclick="closeModal('platformModal')">Cancelar</button>
                 </div>

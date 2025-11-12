@@ -24,7 +24,7 @@
                 <p><strong>Sinopsis:</strong> <%= game.Synopsis %></p>
 
                 <% if (game.Genres && game.Genres.length > 0) { %>
-                    <div class="game-genres">
+                    <div class="game_genres">
                         <strong>Géneros:</strong>
                         <ul>
                             <% game.Genres.forEach(genre => { %>
@@ -35,9 +35,9 @@
                 <% } %>
 
                 <% if (game.Platforms && game.Platforms.length > 0) { %>
-                    <div class="chips-container top_space">
+                    <div class="chips_container top_space">
                         <% game.Platforms.forEach(platform => { %>
-                            <span class="item-chip"><%= platform.Name %></span>
+                            <span class="item_chip"><%= platform.Name %></span>
                         <% }) %>
                     </div>
                 <% } %>
@@ -55,10 +55,10 @@
                     <label for="commentText">Comentario:</label>
                     <textarea id="commentText" name="text" maxlength="1000" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="comment-submit-btn">Publicar Comentario</button>
+                <button type="submit" class="comment_submit_btn">Publicar Comentario</button>
             </form>
             <div id="commentsContainer" class="comments_list">
-                <p class="loading-comments">Cargando comentarios...</p>
+                <p class="loading_comments">Cargando comentarios...</p>
             </div>
         </div>
     </main>

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	}
 
 	document.addEventListener("click", (e) => {
-		const filtersContainer = document.querySelector(".filters-container");
+		const filtersContainer = document.querySelector(".filters_container");
 		if (!filtersContainer.contains(e.target) && filtersOpen) {
 			toggleFilters();
 		}
@@ -119,7 +119,7 @@ function resetGameForm() {
 		}
 	}
 
-	for (const div of document.querySelectorAll(".chips-container")) {
+	for (const div of document.querySelectorAll(".chips_container")) {
 		div.innerHTML = "";
 	}
 
@@ -665,12 +665,12 @@ function renderSelectedMap(selectedMap, renderDivId, removeFnName) {
 //Construye chip
 function createChip(text, id = null, removeFnName = null) {
 	const chip = document.createElement("span");
-	chip.className = "item-chip";
+	chip.className = "item_chip";
 
 	chip.innerHTML = `${text} `;
 
 	if (id && removeFnName)
-		chip.innerHTML += `<button type="button" class="remove-chip" onclick="${removeFnName}(${id})">×</button>`;
+		chip.innerHTML += `<button type="button" class="remove_chip" onclick="${removeFnName}(${id})">×</button>`;
 
 	return chip;
 }
@@ -696,7 +696,7 @@ function renderComments(comments) {
 
 	if (comments.length === 0) {
 		container.innerHTML =
-			'<p class="no-comments">No hay comentarios aún. ¡Sé el primero en comentar!</p>';
+			'<p class="no_comments">No hay comentarios aún. ¡Sé el primero en comentar!</p>';
 		return;
 	}
 
@@ -704,14 +704,14 @@ function renderComments(comments) {
 
 	for (const comment of comments) {
 		const commentDiv = document.createElement("div");
-		commentDiv.className = "comment-item";
+		commentDiv.className = "comment_item";
 		commentDiv.innerHTML = `
-			<div class="comment-header">
-				<span class="comment-author">${comment.UserName}</span>
-				<span class="comment-date">${comment.PublishedDate}</span>
+			<div class="comment_header">
+				<span class="comment_author">${comment.UserName}</span>
+				<span class="comment_date">${comment.PublishedDate}</span>
 			</div>
-			<p class="comment-text">${comment.Text}</p>
-			<button class="comment-delete-btn" onclick="deleteComment(${comment.Id}, ${comment.GameId})" title="Eliminar comentario">
+			<p class="comment_text">${comment.Text}</p>
+			<button class="comment_delete_btn" onclick="deleteComment(${comment.Id}, ${comment.GameId})" title="Eliminar comentario">
 				×
 			</button>
 		`;
