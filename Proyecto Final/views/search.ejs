@@ -3,15 +3,14 @@
     <%- include('./templates/navbar') %>
     <main>
         <hr />
-        <div class="games_container">
+        <div class="game_grid">
             <% games.forEach(currentGame => { %>
                 <%- include('./templates/game_card', { currentGame }) %>
             <% }) %>
-
-            <% if (games && games.length == 0) { %>
-                <span>Upps, parece que aun no hay juegos...</span> 
-            <% } %>
-    </div>
+        </div>
+        <% if (games && games.length == 0) { %>
+            <span>Upps, parece que aun no hay juegos...</span> 
+        <% } %>
     </main>
     <%- include('./templates/footer') %>
 </body>

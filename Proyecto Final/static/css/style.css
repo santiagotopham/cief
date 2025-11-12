@@ -1,3 +1,4 @@
+/* //////////////////////  	CONFIGURACION BASE	   ////////////////////// */
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -23,6 +24,8 @@ body {
 	min-height: 100vh;
 }
 
+/* //////////////////////  	CABEZAL	   ////////////////////// */
+
 header {
 	text-align: center;
 }
@@ -36,6 +39,8 @@ header p {
 	color: var(--page_main_color);
 	margin-bottom: 1rem;
 }
+
+/* //////////////////////  	NAVBAR	   ////////////////////// */
 
 nav {
 	background-color: var(--page_main_color);
@@ -88,6 +93,8 @@ nav::after {
 	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* //////////////////////  	BUSCADOR EN NAVBAR	   ////////////////////// */
+
 .search-form {
 	display: flex;
 	align-items: center;
@@ -95,11 +102,11 @@ nav::after {
 }
 
 .search-form input {
-	padding: 8px 12px; /* Aumentado de 5px 10px */
+	padding: 8px 12px;
 	border-radius: 4px;
 	border: none;
-	font-size: 0.95rem; /* Aumentado de 0.9rem */
-	min-height: 38px; /* Altura mínima para más consistencia */
+	font-size: 0.95rem;
+	min-height: 38px;
 }
 
 .search-form button {
@@ -107,12 +114,12 @@ nav::after {
 	color: var(--page_white_color);
 	border: none;
 	border-radius: 4px;
-	padding: 8px 12px; /* Aumentado de 5px 10px */
+	padding: 8px 12px;
 	cursor: pointer;
 	font-size: 1rem;
 	line-height: 1;
 	transition: background-color 0.2s ease;
-	min-height: 38px; /* Misma altura que el input */
+	min-height: 38px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -127,6 +134,8 @@ nav::after {
 	width: 22px;
 	height: 22px;
 }
+
+/* //////////////////////  	GENERALES	   ////////////////////// */
 
 main {
 	flex: 1;
@@ -149,6 +158,16 @@ a {
 	color: inherit;
 }
 
+.purple_link:hover {
+	color: var(--link_hover_color);
+}
+
+.top_space {
+	margin-top: 2rem;
+}
+
+/* //////////////////////  	FOOTER	   ////////////////////// */
+
 footer {
 	background-color: var(--page_main_color);
 	color: var(--page_white_color);
@@ -162,12 +181,15 @@ footer p {
 	margin: 0.2rem 0;
 }
 
-.games_container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+/* //////////////////////  	INDICE / GALERIA DE JUEGOS	   ////////////////////// */
+
+.game_grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	gap: 1.5rem;
+	justify-items: center;
 }
+
 .game_card {
 	background-color: var(--page_white_color);
 	border-radius: 8px;
@@ -211,6 +233,8 @@ footer p {
 	font-size: 0.85rem;
 	color: var(--page_main_color);
 }
+
+/* //////////////////////  	PAGINA DE JUEGO	   ////////////////////// */
 
 .game_detail {
 	background-color: var(--page_white_color);
@@ -257,6 +281,40 @@ footer p {
 	color: var(--accent_color);
 }
 
+.game-genres {
+	margin-top: 1rem;
+}
+
+.game-genres strong {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--accent_color);
+	font-size: 0.95rem;
+}
+
+.game-genres ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.game-genres li {
+	color: var(--accent_color);
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+
+.game-genres li:not(:last-child)::after {
+	content: "•";
+	margin-left: 0.5rem;
+	color: var(--page_main_color);
+}
+
+/* //////////////////////  	VOTACION	   ////////////////////// */
+
 .vote_container {
 	position: absolute;
 	top: 1rem;
@@ -297,12 +355,7 @@ footer p {
 	text-align: center;
 }
 
-.game_grid {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 1.5rem;
-	justify-items: center;
-}
+/* //////////////////////  	PANEL ADMIN	   ////////////////////// */
 
 .backoffice_main {
 	display: flex;
@@ -313,6 +366,8 @@ footer p {
 	margin: 0 auto;
 }
 
+/* //////////////////////  	PAGINA DE ERROR	   ////////////////////// */
+
 .error_image {
 	margin: 0 auto;
 	width: var(--max-width);
@@ -322,9 +377,7 @@ footer p {
 	height: 500px;
 }
 
-.purple_link:hover {
-	color: var(--link_hover_color);
-}
+/* //////////////////////  	FORMULARIOS	   ////////////////////// */
 
 .selector-container {
 	display: flex;
@@ -334,9 +387,7 @@ footer p {
 }
 
 #genres,
-#platforms,
-#updateGenres,
-#updatePlatforms {
+#platforms {
 	min-width: 200px;
 	padding: 5px;
 }
@@ -350,10 +401,40 @@ button[type="button"] {
 	border-radius: 4px;
 	cursor: pointer;
 }
+
 button[type="button"]:hover {
 	background-color: var(--link_hover_color);
 }
 
+.category-group {
+	margin: 1rem 0;
+}
+
+.category-options {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+.category-options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	font-weight: 500;
+	color: var(--page_main_color);
+}
+
+.category-options input[type="radio"] {
+	accent-color: var(--accent_color);
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	margin: 0;
+}
+
+/* //////////////////////  	CHIPS	////////////////////// */
 .modal-form .chips-container {
 	display: flex;
 	flex-direction: row !important;
@@ -387,12 +468,7 @@ button[type="button"]:hover {
 	color: var(--link_hover_color);
 }
 
-.search-filter-container {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	position: relative;
-}
+/* //////////////////////  	TABLAS   ////////////////////// */
 
 .data_table {
 	width: 100%;
@@ -430,7 +506,6 @@ button[type="button"]:hover {
 	color: white;
 }
 
-/* Secciones principales */
 .game_section,
 .genre_section,
 .platform_section {
@@ -469,7 +544,8 @@ button[type="button"]:hover {
 	background-color: var(--accent_color_darker);
 }
 
-/* Modal styles */
+/* //////////////////////  	MODALES   ////////////////////// */
+
 .modal {
 	display: none;
 	position: fixed;
@@ -600,7 +676,8 @@ button[type="button"]:hover {
 	opacity: 0.8;
 }
 
-/* Toast notifications */
+/* //////////////////////  	NOTIFICACIONES	////////////////////// */
+
 .toast {
 	position: fixed;
 	top: 20px;
@@ -633,6 +710,8 @@ button[type="button"]:hover {
 	}
 }
 
+/* //////////////////////  	COMENTARIOS	////////////////////// */
+
 .comments_section {
 	background-color: var(--page_white_color);
 	border-radius: 8px;
@@ -651,7 +730,6 @@ button[type="button"]:hover {
 	padding-bottom: 0.5rem;
 }
 
-/* Formulario de comentarios */
 .comment_form {
 	background-color: #f0f0f0;
 	padding: 1.5rem;
@@ -701,7 +779,6 @@ button[type="button"]:hover {
 	background-color: var(--accent_color_darker);
 }
 
-/* Lista de comentarios */
 .comments_list {
 	display: flex;
 	flex-direction: column;
@@ -784,87 +861,7 @@ button[type="button"]:hover {
 	background-color: #a71d2a;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-	.comments_section {
-		width: 95%;
-		padding: 1rem;
-	}
-
-	.comment_form {
-		padding: 1rem;
-	}
-
-	.comment-delete-btn {
-		opacity: 1;
-	}
-}
-
-.category-group {
-	margin: 1rem 0;
-}
-
-.category-options {
-	display: flex;
-	flex-direction: row;
-	gap: 1.5rem;
-	margin-top: 0.5rem;
-}
-
-.category-options label {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.4rem;
-	cursor: pointer;
-	font-weight: 500;
-	color: var(--page_main_color);
-}
-
-.category-options input[type="radio"] {
-	accent-color: var(--accent_color);
-	width: 16px;
-	height: 16px;
-	cursor: pointer;
-	margin: 0;
-}
-
-.top_space {
-	margin-top: 2rem;
-}
-
-.game-genres {
-	margin-top: 1rem;
-}
-
-.game-genres strong {
-	display: block;
-	margin-bottom: 0.5rem;
-	color: var(--accent_color);
-	font-size: 0.95rem;
-}
-
-.game-genres ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-
-.game-genres li {
-	color: var(--accent_color);
-	font-size: 0.9rem;
-	font-weight: 500;
-}
-
-.game-genres li:not(:last-child)::after {
-	content: "•";
-	margin-left: 0.5rem;
-	color: var(--page_main_color);
-}
-
-/* Contenedor de filtros */
+/* //////////////////////  	FILTROS	////////////////////// */
 .filters-container {
 	position: relative;
 	display: inline-block;
@@ -894,7 +891,6 @@ button[type="button"]:hover {
 	height: 20px;
 }
 
-/* Dropdown de filtros */
 .filters-dropdown {
 	display: none;
 	position: absolute;
@@ -909,7 +905,6 @@ button[type="button"]:hover {
 	overflow-y: auto;
 	z-index: 1000;
 	padding: 16px;
-	display: none;
 }
 
 .filters-section {
@@ -952,15 +947,3 @@ button[type="button"]:hover {
 	color: #7c3aed;
 	transform: translateX(4px);
 }
-
-/* @media (max-width: 768px) {
-	.filters-dropdown {
-		min-width: 300px;
-		left: auto;
-		right: 0;
-	}
-
-	.filters-list {
-		grid-template-columns: 1fr;
-	}
-} */
