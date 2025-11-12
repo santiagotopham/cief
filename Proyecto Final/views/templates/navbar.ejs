@@ -1,43 +1,41 @@
 <header>
 	<nav>
 		<a class="purple_link" href="/"><h1><%= siteName %></h1></a>
-
-		<!-- Botón de filtros -->
-		<div class="filters_container">
-			<button class="filters_button" onclick="toggleFilters()">
-				<svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
-				</svg>
-				Filtros
-			</button>
-			<div id="filtersDropdown" class="filters_dropdown">
-				<div class="filters_section">
-					<h3>Géneros</h3>
-					<ul id="genresList" class="filters_list">
-						<!-- Se llenará dinámicamente -->
-					</ul>
-				</div>
-				<div class="filters_section">
-					<h3>Plataformas</h3>
-					<ul id="platformsList" class="filters_list">
-						<!-- Se llenará dinámicamente -->
-					</ul>
+		<div class="nav_center_group">
+			<div class="filters_container">
+				<button class="filters_button" onclick="toggleFilters()">
+					<svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+						/>
+					</svg>
+					Filtros
+				</button>
+				<div id="filtersDropdown" class="filters_dropdown">
+					<div class="filters_section">
+						<h3>Géneros</h3>
+						<ul id="genresList" class="filters_list"></ul>
+					</div>
+					<div class="filters_section">
+						<h3>Plataformas</h3>
+						<ul id="platformsList" class="filters_list"></ul>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<form class="search_form" onsubmit="return searchGame(event)">
-			<input
-				type="text"
-				id="searchInput"
-				name="name"
-				placeholder="Buscar juego..."
-				required
-			/>
-			<button type="submit">
-				<img class="icon" src="/img/search_icon.png" alt="Buscar" />
-			</button>
-		</form>
+			<form class="search_form" onsubmit="return searchGame(event)">
+				<input
+					type="text"
+					id="searchInput"
+					name="name"
+					placeholder="Buscar juego..."
+					required
+				/>
+				<button type="submit">
+					<img class="icon" src="/img/search_icon.png" alt="Buscar" />
+				</button>
+			</form>
+		</div>
 		<%- navBarItems %>
 	</nav>
 	<% if (showMessage) { %>
