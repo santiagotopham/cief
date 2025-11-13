@@ -8,17 +8,17 @@
     -   [x] generos
     -   [x] plataformas
     -   [x] comentarios
-    -   [ ] users
+    -   [x] users
 -   [x] index - galeria
 -   [x] banner con plataformas principales
 -   [x] paginas por plataforma principal
--   [x] calificar juego
--   [x] poner comentario
 -   [x] plataformas como chips en pagina detalle
 -   [x] generos como lista en pagina detalle
+-   [x] calificar juego
+-   [x] poner comentario
+-   [x] buscador por like de nombre
 -   [x] filtro por genero
 -   [x] filtro por plataforma especifica
--   [x] buscador por like de nombre
 -   [x] CRUD juegos
     -   [x] alta
     -   [x] alta generos asociados
@@ -37,23 +37,12 @@
     -   [x] alta
     -   [x] editar
     -   [x] eliminar
--   [ ] login
--   [x] toast de si salio bien la operation del CRUD
--   [ ] rediseño
-    -   [x] chips pequeños
-    -   [x] boton cancelar en modal chico
-    -   [x] sacar emote de navbar
-    -   [x] confirmacion para eliminar
-    -   [x] categoria que sea un radiobutton
-    -   [x] mover forms a modal
-    -   [ ] rediseñar pagina index
-    -   [ ] rediseñar pagina detalle
--   [ ] ordenar codigo
--   [ ] refactorizar codigo para reusar (script.js)
--   [x] setear comentarios
+-   [x] login
+-   [x] notificaciones Toast
+-   [x] como admin borrar comentarios
 -   [ ] lista de mejoras pendientes
     -   [ ] manejo de errores
     -   [ ] alert bonito de confirmacion
     -   [ ] validacion de duplicados
+    -   [ ] manejo real de sesion desde el backend
     -   [ ] separar logica en diferentes archivos
-    -   [ ] como admin borrar comentarios

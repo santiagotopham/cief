@@ -739,10 +739,15 @@ function renderComments(comments) {
 				<span class="comment_date">${comment.PublishedDate}</span>
 			</div>
 			<p class="comment_text">${comment.Text}</p>
+		`;
+
+		if (isLoggedIn) {
+			commentDiv.innerHTML += `
 			<button class="comment_delete_btn" onclick="deleteComment(${comment.Id}, ${comment.GameId})" title="Eliminar comentario">
 				×
-			</button>
-		`;
+			</button>`;
+		}
+
 		container.appendChild(commentDiv);
 	}
 }
