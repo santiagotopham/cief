@@ -1,7 +1,7 @@
 <%- include('./templates/head') %>
 <body>
     <%- include('./templates/navbar') %>
-    <main class="backoffice_main">
+    <main class="backoffice_main" style="display: none;">
         <div class="section_header">
             <h2>Panel de Administración</h2>
             <button class="logout_btn" onclick="logout()">Cerrar Sesión</button>
@@ -233,5 +233,17 @@
             </form>
         </div>
     </div>
+    <script>
+        (function() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = "/login";
+            } else {
+                document.querySelector('.backoffice_main').style.display = 'block';
+            }
+        })();
+    </script>
+    
+    <%- include('./templates/footer') %>
 </body>
 </html>
