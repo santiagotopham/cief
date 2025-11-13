@@ -46,3 +46,8 @@
     -   [ ] validacion de duplicados
     -   [ ] manejo real de sesion desde el backend
     -   [ ] separar logica en diferentes archivos
+    -   [ ] responsive
+    -   [ ] scroll en tablas panel admin
+    -   [ ] que solo pueda votar una vez cada persona
+
+que generos y plataformas en pagina detalle sean links a los filtros
