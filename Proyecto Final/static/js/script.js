@@ -641,7 +641,7 @@ async function handleLoginSubmit(e) {
 	}
 
 	try {
-		const hashedPassword = password;
+		const hashedPassword = await hashPassword(password);
 
 		const response = await fetch("/login", {
 			method: "POST",

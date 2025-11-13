@@ -130,7 +130,7 @@ app.get("/game/:id", async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////	PANEL ADMIN    //////////////////////////////////////////////////////////////////////////////
 
-// Ruta para la página de login
+//Login
 app.get("/login", (req, res) => {
 	res.render("login", {
 		title: siteName,
@@ -141,18 +141,14 @@ app.get("/login", (req, res) => {
 	});
 });
 
-//Login
+//Iniciar sesion
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
 
 	try {
-		console.log("user", username);
-		console.log("pass", password);
 		const isValid = await isUserValid(username, password);
-		console.log(isValid);
 
 		if (isValid) {
-			// activeSessions.add(username); // Guardar en memoria (se pierde al reiniciar)
 			res.json({ success: true, message: "Login exitoso" });
 		} else {
 			res.status(401).json({
