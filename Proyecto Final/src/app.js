@@ -130,13 +130,49 @@ app.get("/game/:id", async (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////	PANEL ADMIN    //////////////////////////////////////////////////////////////////////////////
 
+// Ruta para la página de login
+app.get("/login", (req, res) => {
+	res.render("login", {
+		title: siteName,
+		siteName: siteName,
+		showMessage: false,
+		subTitle: "Login",
+		navBarItems: navBarMenu,
+	});
+});
+
+//Login
+app.post("/login", async (req, res) => {
+	const { username, password } = req.body;
+
+	try {
+		console.log("user", username);
+		console.log("pass", password);
+		const isValid = await isUserValid(username, password);
+		console.log(isValid);
+
+		if (isValid) {
+			// activeSessions.add(username); // Guardar en memoria (se pierde al reiniciar)
+			res.json({ success: true, message: "Login exitoso" });
+		} else {
+			res.status(401).json({
+				success: false,
+				message: "Credenciales inválidas",
+			});
+		}
+	} catch (error) {
+		console.error("Error en login:", error);
+		res.status(500).json({ success: false, message: "Error del servidor" });
+	}
+});
+
 //Panel
 app.get("/admin", async (req, res) => {
 	res.render("admin", {
 		title: siteName,
 		siteName: siteName,
 		showMessage: false,
-		subTitle: "admin",
+		subTitle: "",
 		navBarItems: navBarMenu,
 		games: await getGamesList(false),
 		genres: await getGenresList(),

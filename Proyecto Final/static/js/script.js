@@ -7,7 +7,7 @@ const gameForm = document.getElementById("gameForm");
 const genreForm = document.getElementById("genreForm");
 const platformForm = document.getElementById("platformForm");
 
-let isLoggedIn = false;
+let isLoggedIn = sessionStorage.getItem("adminLoggedIn") === "true";
 let isInsert = true;
 let filtersOpen = false;
 
@@ -53,6 +53,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 		const gameId = document.getElementById("commentGameId").value;
 		loadComments(gameId);
 	}
+
+	const loginForm = document.getElementById("loginForm");
+	if (loginForm) {
+		loginForm.addEventListener("submit", handleLoginSubmit);
+	}
+
+	checkAdminAccess();
 
 	await loadFilters();
 });
@@ -619,6 +626,54 @@ async function loadFilters() {
 	}
 }
 
+//////////////////////  	LOGIN	   //////////////////////
+
+//Iniciar sesion
+async function handleLoginSubmit(e) {
+	e.preventDefault();
+
+	const username = document.getElementById("username").value.trim();
+	const password = document.getElementById("password").value;
+
+	if (!username || !password) {
+		showToast("Complete todos los campos", true);
+		return;
+	}
+
+	try {
+		const hashedPassword = password;
+
+		const response = await fetch("/login", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ username, password: hashedPassword }),
+		});
+
+		if (!response.ok) {
+			throw new Error("Credenciales inválidas");
+		}
+
+		const data = await response.json();
+
+		if (data.success) {
+			sessionStorage.setItem("adminLoggedIn", "true");
+			isLoggedIn = true;
+
+			showToast("Login exitoso");
+			setTimeout(() => {
+				globalThis.location.href = "/admin";
+			}, 1000);
+		} else {
+			throw new Error("Credenciales inválidas");
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		showToast("Usuario o contraseña incorrectos", true);
+		sessionStorage.removeItem("adminLoggedIn");
+		isLoggedIn = false;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////////	CONSTRUCCION DE CONTENIDO	/////////////////////////////////////////////////////////////////////////////
 
 //Construye listado de chips
@@ -811,4 +866,32 @@ function toggleOptionInSelector(selectorName, id, isEnabled) {
 function cleanMaps() {
 	selectedGenresMap.clear();
 	selectedPlatformsMap.clear();
+}
+
+//Verificar login
+function checkAdminAccess() {
+	const isLoggedIn = sessionStorage.getItem("adminLoggedIn") === "true";
+
+	if (!isLoggedIn && globalThis.location.pathname === "/admin") {
+		globalThis.location.href = "/login";
+	}
+}
+
+//Cerrar sesion
+function logout() {
+	sessionStorage.removeItem("adminLoggedIn");
+	isLoggedIn = false;
+	globalThis.location.href = "/";
+}
+
+// Función para hashear la contraseña con MD5 simple
+async function hashPassword(password) {
+	const encoder = new TextEncoder();
+	const data = encoder.encode(password);
+	const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+	const hashArray = Array.from(new Uint8Array(hashBuffer));
+	const hashHex = hashArray
+		.map((b) => b.toString(16).padStart(2, "0"))
+		.join("");
+	return hashHex;
 }

@@ -1,0 +1,27 @@
+<%- include('./templates/head') %>
+<body>
+    <%- include('./templates/navbar') %>
+    <main>
+        <div class="login_overlay">
+            <div class="login_modal">
+                <h2>Acceso al Panel Admin</h2>
+                <form id="loginForm" class="login_form">
+                    <div>
+                        <label for="username">Usuario:</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                    </div>
+                    <div>
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </div>
+                    <div class="login_buttons">
+                        <button type="submit">Iniciar Sesión</button>
+                        <button type="button" onclick="window.location.href='/'">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <%- include('./templates/footer') %>
+</body>
+</html>
