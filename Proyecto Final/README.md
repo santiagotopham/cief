@@ -49,5 +49,10 @@
     -   [ ] responsive
     -   [ ] scroll en tablas panel admin
     -   [ ] que solo pueda votar una vez cada persona
-
-que generos y plataformas en pagina detalle sean links a los filtros
+    -   [ ] generos y plataformas en pagina detalle sean links a los filtros
+    -   [ ] permitir combinar filtros, agregar mas filtros (lanzamiento, like ratio, idioma, etc)
+    -   [ ] mas info de los juegos en pag detalle (logros, time to beat, idiomas, links a tiendas oficiales?)
+    -   [ ] mas paginas agregando mas contenido
+        -   [ ] proximos lanzamientos
+        -   [ ] listas top 100
+        -   [ ] noticias relacionadas y eventos
