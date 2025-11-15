@@ -60,10 +60,25 @@ export async function getById(id) {
 
 //Obtener segun lista de ids
 export async function getGamesByIdList(idsList) {
-	const idsString = arrayToString(idsList);
-	const query = `SELECT * FROM Games where Id in (${idsString})`;
+	// Validar y sanitizar los IDs
+	if (!Array.isArray(idsList) || idsList.length === 0) {
+		return [];
+	}
 
-	let games = await executeQuery(query);
+	// Filtrar solo valores numéricos válidos
+	const validIds = idsList
+		.map((id) => parseInt(id, 10))
+		.filter((id) => Number.isInteger(id) && id > 0);
+
+	if (validIds.length === 0) {
+		return [];
+	}
+
+	// Crear placeholders seguros: ?, ?, ?
+	const placeholders = validIds.map(() => "?").join(",");
+	const query = `SELECT * FROM Games where Id in (${placeholders})`;
+
+	let games = await executeQuery(query, validIds);
 
 	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 		games
@@ -169,6 +184,12 @@ export async function deletePlatformsFromGame(gameId) {
 
 //Disociar entidades relacionadas
 export async function deleteRelatedToGame(gameId, tableName) {
+	// Whitelist de tablas permitidas para prevenir SQL injection
+	const allowedTables = ["GenresPerGame", "PlatformsPerGame"];
+	if (!allowedTables.includes(tableName)) {
+		throw new Error("Invalid table name");
+	}
+
 	let sql = `DELETE FROM ${tableName} WHERE GameId = ?`;
 	let values = [gameId];
 

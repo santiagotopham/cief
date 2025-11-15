@@ -19,10 +19,19 @@ function createChip(text, id = null, removeFnName = null) {
 	const chip = document.createElement("span");
 	chip.className = "item_chip";
 
-	chip.innerHTML = `${text} `;
+	chip.innerHTML = `${escapeHtml(text)} `;
 
-	if (id && removeFnName)
-		chip.innerHTML += `<button type="button" class="remove_chip" onclick="${removeFnName}(${id})">×</button>`;
+	if (id && removeFnName) {
+		// Validar que removeFnName es seguro (solo letras y números)
+		const safeFnName = /^[a-zA-Z0-9_]+$/.test(removeFnName)
+			? removeFnName
+			: "";
+		if (safeFnName) {
+			chip.innerHTML += `<button type="button" class="remove_chip" onclick="${safeFnName}(${parseInt(
+				id
+			)})">×</button>`;
+		}
+	}
 
 	return chip;
 }
@@ -59,15 +68,15 @@ function renderComments(comments) {
 		commentDiv.className = "comment_item";
 		commentDiv.innerHTML = `
 			<div class="comment_header">
-				<span class="comment_author">${comment.UserName}</span>
-				<span class="comment_date">${comment.PublishedDate}</span>
+				<span class="comment_author">${escapeHtml(comment.UserName)}</span>
+				<span class="comment_date">${escapeHtml(comment.PublishedDate)}</span>
 			</div>
-			<p class="comment_text">${comment.Text}</p>
+			<p class="comment_text">${escapeHtml(comment.Text)}</p>
 		`;
 
 		if (isLoggedIn) {
 			commentDiv.innerHTML += `
-			<button class="comment_delete_btn" onclick="deleteComment(${comment.Id}, ${comment.GameId})" title="Eliminar comentario">
+			<button class="comment_delete_btn" onclick="deleteComment(${parseInt(comment.Id)}, ${parseInt(comment.GameId)})" title="Eliminar comentario">
 				×
 			</button>`;
 		}
@@ -95,12 +104,18 @@ function buildGenresTables(tableId, genres) {
 
 	for (const currentGenre of genres) {
 		const tr = document.createElement("tr");
+		// Escapar el nombre para prevenir XSS en el atributo onclick
+		const safeName = escapeHtml(currentGenre.Name).replace(/'/g, "\\'");
 		tr.innerHTML = `
-			<td>${currentGenre.Id}</td>
-			<td>${currentGenre.Name}</td>
+			<td>${escapeHtml(currentGenre.Id)}</td>
+			<td>${escapeHtml(currentGenre.Name)}</td>
 			<td>
-				<button onclick="editGenre(${currentGenre.Id}, '${currentGenre.Name}')">Editar</button>
-				<button onclick="deleteGenre(${currentGenre.Id})">Eliminar</button>
+				<button onclick="editGenre(${parseInt(
+					currentGenre.Id
+				)}, '${safeName}')">Editar</button>
+				<button onclick="deleteGenre(${parseInt(
+					currentGenre.Id
+				)})">Eliminar</button>
 			</td>`;
 		table.appendChild(tr);
 	}
@@ -113,15 +128,21 @@ function buildPlatformsTable(tableId, platforms) {
 
 	for (const currentPlatform of platforms) {
 		const tr = document.createElement("tr");
+		// Escapar el nombre para prevenir XSS en el atributo onclick
+		const safeName = escapeHtml(currentPlatform.Name).replace(/'/g, "\\'");
 		tr.innerHTML = `
-			<td>${currentPlatform.Id}</td>
-			<td>${currentPlatform.Name}</td>
-			<td>${currentPlatform.MainPlatformName || "N/A"}</td>
+			<td>${escapeHtml(currentPlatform.Id)}</td>
+			<td>${escapeHtml(currentPlatform.Name)}</td>
+			<td>${escapeHtml(currentPlatform.MainPlatformName || "N/A")}</td>
 			<td>
-				<button onclick="editPlatform(${currentPlatform.Id}, '${
-			currentPlatform.Name
-		}', ${currentPlatform.MainPlatformId})">Editar</button>
-				<button onclick="deletePlatform(${currentPlatform.Id})">Eliminar</button>
+				<button onclick="editPlatform(${parseInt(
+					currentPlatform.Id
+				)}, '${safeName}', ${parseInt(
+			currentPlatform.MainPlatformId
+		)})">Editar</button>
+				<button onclick="deletePlatform(${parseInt(
+					currentPlatform.Id
+				)})">Eliminar</button>
 			</td>`;
 		table.appendChild(tr);
 	}

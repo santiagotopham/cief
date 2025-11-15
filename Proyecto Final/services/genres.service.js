@@ -20,15 +20,30 @@ export async function getGenreById(id) {
 
 //Obtener segun una lista de ids de juegos
 export async function getGenresByGameId(gameIds) {
-	const idsString = arrayToString(gameIds);
+	// Validar y sanitizar los IDs
+	if (!Array.isArray(gameIds) || gameIds.length === 0) {
+		return [];
+	}
+
+	// Filtrar solo valores numéricos válidos
+	const validIds = gameIds
+		.map((id) => parseInt(id, 10))
+		.filter((id) => Number.isInteger(id) && id > 0);
+
+	if (validIds.length === 0) {
+		return [];
+	}
+
+	// Crear placeholders seguros: ?, ?, ?
+	const placeholders = validIds.map(() => "?").join(",");
 
 	const query = `select g.Id as GameId, n.Id as GenreId, n.Name
                     from Games g
                     join GenresPerGame gpg on g.Id = gpg.GameId
                     join Genres n on gpg.GenreId = n.Id
-                    where g.Id in (${idsString})`;
+                    where g.Id in (${placeholders})`;
 
-	let genres = await executeQuery(query);
+	let genres = await executeQuery(query, validIds);
 
 	return genres;
 }

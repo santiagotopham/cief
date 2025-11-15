@@ -48,15 +48,30 @@ export async function getMainPlatformByName(name) {
 
 //Obtener segun una lista de ids de juegos
 export async function getPlatformsByGameId(gameIds) {
-	const idsString = arrayToString(gameIds);
+	// Validar y sanitizar los IDs
+	if (!Array.isArray(gameIds) || gameIds.length === 0) {
+		return [];
+	}
+
+	// Filtrar solo valores numéricos válidos
+	const validIds = gameIds
+		.map((id) => parseInt(id, 10))
+		.filter((id) => Number.isInteger(id) && id > 0);
+
+	if (validIds.length === 0) {
+		return [];
+	}
+
+	// Crear placeholders seguros: ?, ?, ?
+	const placeholders = validIds.map(() => "?").join(",");
 
 	const query = `select g.Id as GameId, p.Id as PlatformId, p.Name
                     from Games g
                     join PlatformsPerGame ppg on g.Id = ppg.GameId
                     join Platforms p on ppg.PlatformId = p.Id
-                    where g.Id in (${idsString})`;
+                    where g.Id in (${placeholders})`;
 
-	let platforms = await executeQuery(query);
+	let platforms = await executeQuery(query, validIds);
 
 	return platforms;
 }
