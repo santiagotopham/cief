@@ -1,4 +1,5 @@
-import { openDbConnection } from "../db/connection.js";
+// import { executeQuery } from "../db/mysql.js";
+import { executeQuery } from "../db/turso.js";
 import {
 	getGenresByGameId,
 	linkGameToGenresDb,
@@ -15,11 +16,8 @@ import {
 
 //Obtener todos
 export async function getGamesList(shouldFormatDate) {
-	const connection = await openDbConnection();
 	const query = `select * from Games g`;
-
-	let [games] = await connection.query(query);
-	await connection.end();
+	let games = await executeQuery(query);
 
 	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 		games
@@ -35,11 +33,8 @@ export async function getGamesList(shouldFormatDate) {
 
 //Obtener por like de nombre
 export async function getGamesByName(name, shouldFormatDate) {
-	const connection = await openDbConnection();
-	const query = `select * from Games g where g.Title like '%${name}%'`;
-
-	let [games] = await connection.query(query);
-	await connection.end();
+	const query = `select * from Games g where g.Title like ?`;
+	let games = await executeQuery(query, [`%${name}%`]);
 
 	if (!games || games.length == 0) return [];
 
@@ -57,36 +52,18 @@ export async function getGamesByName(name, shouldFormatDate) {
 
 //Obtener por id
 export async function getById(id) {
-	const connection = await openDbConnection();
-	const query = `SELECT * FROM Games where Id = ${id}`;
-
-	let [games] = await connection.query(query);
-	await connection.end();
-
-	// if (games[0] == null) {
-	// 	return res.redirect("/404");
-	// }
-
-	// const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
-	// 	games
-	// );
-	// games = await composeGames(games, gameGenres, gamePlatforms);
-
-	// games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
+	const query = `SELECT * FROM Games where Id = ?`;
+	let games = await executeQuery(query, [id]);
 
 	return games;
 }
 
 //Obtener segun lista de ids
 export async function getGamesByIdList(idsList) {
-	const connection = await openDbConnection();
-
 	const idsString = arrayToString(idsList);
-
 	const query = `SELECT * FROM Games where Id in (${idsString})`;
 
-	let [games] = await connection.query(query);
-	await connection.end();
+	let games = await executeQuery(query);
 
 	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 		games
@@ -100,7 +77,6 @@ export async function getGamesByIdList(idsList) {
 
 //Nuevo
 export async function saveGame(newGame) {
-	const connection = await openDbConnection();
 	const sql =
 		"INSERT INTO `Games`(`Title`, `ImageUrl`, `LaunchDate`, `Developer`, `Category`, `Synopsis`, `ThumbsUpCounter`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	const values = [
@@ -113,22 +89,20 @@ export async function saveGame(newGame) {
 		0,
 	];
 
-	const result = await connection.execute(sql, values);
-	await connection.end();
+	const result = await executeQuery(sql, values);
 
-	await linkGameToGenresDb(result[0].insertId, newGame.genres);
-	await linkGameToPlatformsDb(result[0].insertId, newGame.platforms);
+	const insertId = result.insertId || result.lastInsertRowid;
+	await linkGameToGenresDb(insertId, newGame.genres);
+	await linkGameToPlatformsDb(insertId, newGame.platforms);
 }
 
 //Editar
 export async function updateGame(id, updatedGame) {
-	const connection = await openDbConnection();
-
-	await deleteGenresFromGame(connection, id);
-	await deletePlatformsFromGame(connection, id);
+	await deleteGenresFromGame(id);
+	await deletePlatformsFromGame(id);
 
 	const sql =
-		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ? WHERE `Id` = ? LIMIT 1";
+		"UPDATE `Games` SET `Title` = ?, `ImageUrl` = ?, `LaunchDate` = ?, `Developer` = ?, `Category` = ?, `Synopsis` = ? WHERE `Id` = ?";
 	const values = [
 		updatedGame.title || updatedGame.Title,
 		updatedGame.imageUrl || updatedGame.ImageUrl,
@@ -139,8 +113,7 @@ export async function updateGame(id, updatedGame) {
 		id,
 	];
 
-	await connection.execute(sql, values);
-	await connection.end();
+	await executeQuery(sql, values);
 
 	await linkGameToGenresDb(id, updatedGame.genres);
 	await linkGameToPlatformsDb(id, updatedGame.platforms);
@@ -148,38 +121,30 @@ export async function updateGame(id, updatedGame) {
 
 //Votar
 export async function updateGameLikes(id, vote) {
-	const connection = await openDbConnection();
-
 	const query = "SELECT ThumbsUpCounter FROM Games WHERE Id = ? LIMIT 1";
 
-	let [result] = await connection.query(query, [id]);
+	let result = await executeQuery(query, [id]);
 	let likes = result[0].ThumbsUpCounter || 0;
 	likes += vote;
 
 	const sql =
-		"UPDATE `Games` SET `ThumbsUpCounter` = ? WHERE `Id` = ? LIMIT 1";
+		"UPDATE `Games` SET `ThumbsUpCounter` = ? WHERE `Id` = ?";
 	const values = [likes, id];
 
-	await connection.execute(sql, values);
-	await connection.end();
+	await executeQuery(sql, values);
 
 	return likes;
 }
 
 //Eliminar
 export async function deleteGame(id) {
-	const connection = await openDbConnection();
+	await deleteGenresFromGame(id);
+	await deletePlatformsFromGame(id);
 
-	await deleteGenresFromGame(connection, id);
-
-	await deletePlatformsFromGame(connection, id);
-
-	let sql = "DELETE FROM `Games` WHERE `Id` = ? LIMIT 1";
+	let sql = "DELETE FROM `Games` WHERE `Id` = ?";
 	let values = [id];
 
-	await connection.execute(sql, values);
-
-	await connection.end();
+	await executeQuery(sql, values);
 }
 
 //Cargar entidades relacionadas a una lista
@@ -193,36 +158,33 @@ export async function getRelatedEntitesFromGames(games) {
 }
 
 //Disociar generos
-export async function deleteGenresFromGame(connection, gameId) {
-	await deleteRelatedToGame(connection, gameId, "GenresPerGame");
+export async function deleteGenresFromGame(gameId) {
+	await deleteRelatedToGame(gameId, "GenresPerGame");
 }
 
 //Disociar plataformas
-export async function deletePlatformsFromGame(connection, gameId) {
-	await deleteRelatedToGame(connection, gameId, "PlatformsPerGame");
+export async function deletePlatformsFromGame(gameId) {
+	await deleteRelatedToGame(gameId, "PlatformsPerGame");
 }
 
 //Disociar entidades relacionadas
-export async function deleteRelatedToGame(connection, gameId, tableName) {
+export async function deleteRelatedToGame(gameId, tableName) {
 	let sql = `DELETE FROM ${tableName} WHERE GameId = ?`;
 	let values = [gameId];
 
-	await connection.execute(sql, values);
+	await executeQuery(sql, values);
 }
 
 //Obtener segun plataforma principal/padre
 export async function getGamesByMainPlatform(mainPlatformId) {
-	const connection = await openDbConnection();
-
 	const query = `SELECT ppg.GameId FROM mainplatforms mp
 					join Platforms p on mp.Id = p.MainPlatformId
 					join PlatformsPerGame ppg on p.Id = ppg.PlatformId
-					where mp.Id = ${mainPlatformId}`;
+					where mp.Id = ?`;
 
-	let [gameIds] = await connection.query(query);
+	let gameIds = await executeQuery(query, [mainPlatformId]);
 
 	gameIds = gameIds.map((x) => x.GameId);
-	await connection.end();
 
 	const games = await getGamesByIdList(gameIds);
 
@@ -231,16 +193,13 @@ export async function getGamesByMainPlatform(mainPlatformId) {
 
 //Obtener segun genero
 export async function getGamesByGenreId(genreId) {
-	const connection = await openDbConnection();
-
 	const query = `SELECT GameId FROM GenresPerGame gpg where gpg.GenreId = ?`;
 
-	let [gameIds] = await connection.query(query, [genreId]);
+	let gameIds = await executeQuery(query, [genreId]);
 
 	if (gameIds.length == 0) return [];
 
 	gameIds = gameIds.map((x) => x.GameId);
-	await connection.end();
 
 	const games = await getGamesByIdList(gameIds);
 
@@ -249,16 +208,13 @@ export async function getGamesByGenreId(genreId) {
 
 //Obtener segun plataforma
 export async function getGamesByPlatformId(platformId) {
-	const connection = await openDbConnection();
-
 	const query = `SELECT GameId FROM PlatformsPerGame gpg where gpg.PlatformId = ?`;
 
-	let [gameIds] = await connection.query(query, [platformId]);
+	let gameIds = await executeQuery(query, [platformId]);
 
 	if (gameIds.length == 0) return [];
 
 	gameIds = gameIds.map((x) => x.GameId);
-	await connection.end();
 
 	const games = await getGamesByIdList(gameIds);
 

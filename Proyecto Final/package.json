@@ -15,9 +15,13 @@
 	"author": "S.Topham",
 	"license": "ISC",
 	"dependencies": {
+		"@libsql/client": "^0.15.15",
 		"ejs": "3.1.10",
 		"express": "5.1.0",
 		"morgan": "1.10.1",
 		"mysql2": "3.15.3"
+	},
+	"devDependencies": {
+		"dotenv": "^17.2.3"
 	}
 }

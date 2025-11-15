@@ -1,10 +1,10 @@
-import { openDbConnection } from "../db/connection.js";
+// import { executeQuery } from "../db/mysql.js";
+import { executeQuery } from "../db/turso.js";
 import { arrayToString } from "../services/common.service.js";
 
 //Obtener todas
 export async function getPlatformsList() {
-	const connection = await openDbConnection();
-	const query = `SELECT 
+	const query = `SELECT
                     p.Id,
                     p.Name,
                     p.MainPlatformId,
@@ -13,42 +13,35 @@ export async function getPlatformsList() {
                 INNER JOIN MainPlatforms mp ON p.MainPlatformId = mp.Id
                 ORDER BY p.Id`;
 
-	let [platforms] = await connection.query(query);
-	await connection.end();
+	let platforms = await executeQuery(query);
 
 	return platforms;
 }
 
 //Obtener segun id
 export async function getPlatformById(id) {
-	const connection = await openDbConnection();
 	const query = "SELECT * FROM Platforms WHERE Id = ? LIMIT 1";
 
-	let [platforms] = await connection.query(query, [id]);
-	await connection.end();
+	let platforms = await executeQuery(query, [id]);
 
 	return platforms[0];
 }
 
 //Obtener todas plataformas principales/padres
 export async function getMainPlatforms() {
-	const connection = await openDbConnection();
 	const query = "SELECT * FROM `MainPlatforms` ORDER BY Id";
 
-	let [platforms] = await connection.query(query);
-	await connection.end();
+	let platforms = await executeQuery(query);
 
 	return platforms;
 }
 
 //Obtener plataforma principal segun nombre
 export async function getMainPlatformByName(name) {
-	const connection = await openDbConnection();
 	const query =
 		"SELECT * FROM `MainPlatforms` WHERE LOWER(Name) = LOWER(?) LIMIT 1";
 
-	let [platforms] = await connection.query(query, [name]);
-	await connection.end();
+	let platforms = await executeQuery(query, [name]);
 
 	return platforms[0];
 }
@@ -57,22 +50,19 @@ export async function getMainPlatformByName(name) {
 export async function getPlatformsByGameId(gameIds) {
 	const idsString = arrayToString(gameIds);
 
-	const connection = await openDbConnection();
 	const query = `select g.Id as GameId, p.Id as PlatformId, p.Name
                     from Games g
                     join PlatformsPerGame ppg on g.Id = ppg.GameId
                     join Platforms p on ppg.PlatformId = p.Id
                     where g.Id in (${idsString})`;
 
-	let [platforms] = await connection.query(query);
-	await connection.end();
+	let platforms = await executeQuery(query);
 
 	return platforms;
 }
 
 //Nuevo
 export async function savePlatform(newPlatform) {
-	const connection = await openDbConnection();
 	const sql =
 		"INSERT INTO `Platforms`(`Name`, `MainPlatformId`) VALUES (?, ?)";
 	const values = [
@@ -80,41 +70,32 @@ export async function savePlatform(newPlatform) {
 		newPlatform.mainPlatformId || newPlatform.MainPlatformId,
 	];
 
-	await connection.execute(sql, values);
-	await connection.end();
+	await executeQuery(sql, values);
 }
 
 //Editar
 export async function updatePlatform(id, updatedPlatform) {
-	const connection = await openDbConnection();
 	const sql =
-		"UPDATE `Platforms` SET `Name` = ?, `MainPlatformId` = ? WHERE `Id` = ? LIMIT 1";
+		"UPDATE `Platforms` SET `Name` = ?, `MainPlatformId` = ? WHERE `Id` = ?";
 	const values = [
 		updatedPlatform.name || updatedPlatform.Name,
 		updatedPlatform.mainPlatformId || updatedPlatform.MainPlatformId,
 		id,
 	];
 
-	await connection.execute(sql, values);
-	await connection.end();
+	await executeQuery(sql, values);
 }
 
 //Eliminar
 export async function deletePlatform(id) {
-	const connection = await openDbConnection();
-
-	let sql = "DELETE FROM `Platforms` WHERE `Id` = ? LIMIT 1";
+	let sql = "DELETE FROM `Platforms` WHERE `Id` = ?";
 	let values = [id];
 
-	await connection.execute(sql, values);
-
-	await connection.end();
+	await executeQuery(sql, values);
 }
 
 //Asociar a un juego
 export async function linkGameToPlatformsDb(gameId, platformsToLink) {
-	const connection = await openDbConnection();
-
 	const platformArray =
 		typeof platformsToLink === "string"
 			? platformsToLink
@@ -124,7 +105,6 @@ export async function linkGameToPlatformsDb(gameId, platformsToLink) {
 			: platformsToLink;
 
 	if (!Array.isArray(platformArray) || platformArray.length === 0) {
-		await connection.end();
 		return;
 	}
 
@@ -132,8 +112,6 @@ export async function linkGameToPlatformsDb(gameId, platformsToLink) {
 		"INSERT INTO `PlatformsPerGame`(`PlatformId`, `GameId`) VALUES (?, ?)";
 
 	for (const platformId of platformArray) {
-		await connection.execute(sql, [platformId, gameId]);
+		await executeQuery(sql, [platformId, gameId]);
 	}
-
-	await connection.end();
 }
