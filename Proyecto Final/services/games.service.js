@@ -13,7 +13,7 @@ import {
 	arrayToString,
 } from "../services/common.service.js";
 
-//Obtener lista de juegos
+//Obtener todos
 export async function getGamesList(shouldFormatDate) {
 	const connection = await openDbConnection();
 	const query = `select * from Games g`;
@@ -33,7 +33,7 @@ export async function getGamesList(shouldFormatDate) {
 	return games;
 }
 
-//Obtener juego por nombre
+//Obtener por like de nombre
 export async function getGamesByName(name, shouldFormatDate) {
 	const connection = await openDbConnection();
 	const query = `select * from Games g where g.Title like '%${name}%'`;
@@ -55,7 +55,7 @@ export async function getGamesByName(name, shouldFormatDate) {
 	return games;
 }
 
-//Obtener juego por id
+//Obtener por id
 export async function getById(id) {
 	const connection = await openDbConnection();
 	const query = `SELECT * FROM Games where Id = ${id}`;
@@ -77,7 +77,7 @@ export async function getById(id) {
 	return games;
 }
 
-//Obtener lista de juegos segun lista de ids
+//Obtener segun lista de ids
 export async function getGamesByIdList(idsList) {
 	const connection = await openDbConnection();
 
@@ -98,7 +98,7 @@ export async function getGamesByIdList(idsList) {
 	return games;
 }
 
-//Insertar juego
+//Nuevo
 export async function saveGame(newGame) {
 	const connection = await openDbConnection();
 	const sql =
@@ -120,7 +120,7 @@ export async function saveGame(newGame) {
 	await linkGameToPlatformsDb(result[0].insertId, newGame.platforms);
 }
 
-//Actualizar juego
+//Editar
 export async function updateGame(id, updatedGame) {
 	const connection = await openDbConnection();
 
@@ -146,7 +146,7 @@ export async function updateGame(id, updatedGame) {
 	await linkGameToPlatformsDb(id, updatedGame.platforms);
 }
 
-//Actualizar votos
+//Votar
 export async function updateGameLikes(id, vote) {
 	const connection = await openDbConnection();
 
@@ -166,7 +166,7 @@ export async function updateGameLikes(id, vote) {
 	return likes;
 }
 
-//Eliminar juego
+//Eliminar
 export async function deleteGame(id) {
 	const connection = await openDbConnection();
 
@@ -182,7 +182,7 @@ export async function deleteGame(id) {
 	await connection.end();
 }
 
-//Cargar entidades relacionadas a una lista de juegos
+//Cargar entidades relacionadas a una lista
 export async function getRelatedEntitesFromGames(games) {
 	const gameIds = games.map((x) => x.Id);
 
@@ -192,17 +192,17 @@ export async function getRelatedEntitesFromGames(games) {
 	return { gameGenres, gamePlatforms };
 }
 
-//Borrar generos de un juego
+//Disociar generos
 export async function deleteGenresFromGame(connection, gameId) {
 	await deleteRelatedToGame(connection, gameId, "GenresPerGame");
 }
 
-//Borrar plataformas de un juego
+//Disociar plataformas
 export async function deletePlatformsFromGame(connection, gameId) {
 	await deleteRelatedToGame(connection, gameId, "PlatformsPerGame");
 }
 
-//Borrar entidad relacionada a un juego
+//Disociar entidades relacionadas
 export async function deleteRelatedToGame(connection, gameId, tableName) {
 	let sql = `DELETE FROM ${tableName} WHERE GameId = ?`;
 	let values = [gameId];
@@ -210,7 +210,7 @@ export async function deleteRelatedToGame(connection, gameId, tableName) {
 	await connection.execute(sql, values);
 }
 
-//Obtener juegos segun plataforma principal
+//Obtener segun plataforma principal/padre
 export async function getGamesByMainPlatform(mainPlatformId) {
 	const connection = await openDbConnection();
 
@@ -229,7 +229,7 @@ export async function getGamesByMainPlatform(mainPlatformId) {
 	return games;
 }
 
-//Obtener juegos de un genero
+//Obtener segun genero
 export async function getGamesByGenreId(genreId) {
 	const connection = await openDbConnection();
 
@@ -247,7 +247,7 @@ export async function getGamesByGenreId(genreId) {
 	return games;
 }
 
-//Obtener juegos de una plataforma
+//Obtener segun plataforma
 export async function getGamesByPlatformId(platformId) {
 	const connection = await openDbConnection();
 
@@ -265,7 +265,7 @@ export async function getGamesByPlatformId(platformId) {
 	return games;
 }
 
-//Armado de objeto complejo de juego con entidades relacionadas
+//Armado de objeto complejo con entidades relacionadas
 export async function composeGames(games, gameGenres, gamePlatforms) {
 	return games.map((currentGame) => {
 		let currentGameGenres = gameGenres.filter(

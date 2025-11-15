@@ -1,6 +1,5 @@
 import express from "express";
 import {
-	gameGallery,
 	getGameById,
 	createGame,
 	editGame,
@@ -9,7 +8,6 @@ import {
 } from "../controllers/games.controller.js";
 
 const router = express.Router();
-router.get("/", gameGallery);
 router.get("/:id", getGameById);
 router.post("/add", createGame);
 router.put("/edit", editGame);

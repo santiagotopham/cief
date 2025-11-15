@@ -1,8 +1,6 @@
 import {
-	getGamesList,
 	getById,
 	getRelatedEntitesFromGames,
-	getGamesByMainPlatform,
 	composeGames,
 	saveGame,
 	updateGame,
@@ -15,47 +13,25 @@ import {
 } from "../services/common.service.js";
 import { siteName } from "../config/constants.js";
 
-export async function gameGallery(req, res) {
-	try {
-		const games = await getGamesList(true);
-
-		res.render("index", {
-			title: siteName,
-			siteName: siteName,
-			showMessage: true,
-			subTitle: "Collecion de juegos",
-			navBarItems: await buildNavBarMenu(),
-			games: games,
-		});
-	} catch (err) {
-		console.error("Error cargando home:", err);
-		res.status(500).send("Error cargando la página principal");
-	}
-}
-
+//Obtener por id
 export async function getGameById(req, res) {
 	try {
 		const id = req.params.id;
 
-		// Obtener el juego desde la DB (service)
 		let games = await getById(id);
 
 		if (!games || games.length === 0) {
 			return res.redirect("/404");
 		}
 
-		// Obtener géneros y plataformas asociados
 		const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 			games
 		);
 
-		// Componer objeto final
 		games = await composeGames(games, gameGenres, gamePlatforms);
 
-		// Formatear fecha
 		games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
 
-		// Renderizar la vista del detalle
 		return res.render("game_page", {
 			title: siteName,
 			siteName: siteName,
@@ -70,21 +46,25 @@ export async function getGameById(req, res) {
 	}
 }
 
+//Nuevo
 export async function createGame(req, res) {
 	await saveGame(req.body);
 	res.json({ success: true, message: "Juego creado" });
 }
 
+//Editar
 export async function editGame(req, res) {
 	await updateGame(req.body.id || req.body.Id, req.body);
 	res.json({ success: true, message: "Juego editado" });
 }
 
+//Eliminar
 export async function removeGame(req, res) {
 	await deleteGame(req.params.id);
 	res.json({ success: true, message: "Juego borrado" });
 }
 
+//Votar
 export async function voteGame(req, res) {
 	const { vote } = req.body;
 

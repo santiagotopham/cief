@@ -10,6 +10,7 @@ import {
 } from "../services/common.service.js";
 import { siteName } from "../config/constants.js";
 
+//Index
 export async function renderHome(req, res) {
 	try {
 		const games = await getGamesList(true);
@@ -28,29 +29,25 @@ export async function renderHome(req, res) {
 	}
 }
 
+//Pagina individual/detalle
 export async function renderGamePage(req, res) {
 	try {
 		const id = req.params.id;
 
-		// Obtener el juego desde la DB (service)
 		let games = await getById(id);
 
 		if (!games || games.length === 0) {
 			return res.redirect("/404");
 		}
 
-		// Obtener géneros y plataformas asociados
 		const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
 			games
 		);
 
-		// Componer objeto final
 		games = await composeGames(games, gameGenres, gamePlatforms);
 
-		// Formatear fecha
 		games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
 
-		// Renderizar la vista del detalle
 		return res.render("game_page", {
 			title: siteName,
 			siteName: siteName,

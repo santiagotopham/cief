@@ -5,7 +5,10 @@ import {
 	getGamesByMainPlatform,
 } from "../services/games.service.js";
 import { getGenreById } from "../services/genres.service.js";
-import { getPlatformById, getMainPlatformByName } from "../services/platforms.service.js";
+import {
+	getPlatformById,
+	getMainPlatformByName,
+} from "../services/platforms.service.js";
 import { buildNavBarMenu } from "../services/common.service.js";
 import { siteName } from "../config/constants.js";
 
@@ -53,7 +56,7 @@ export async function searchByPlatform(req, res) {
 	});
 }
 
-// Categorias del Navbar (por plataforma principal)
+// Categorias del Navbar (por plataforma principal/padre)
 export async function searchByMainPlatform(req, res) {
 	const mainPlatform = await getMainPlatformByName(req.params.name);
 	const games = await getGamesByMainPlatform(mainPlatform.Id);

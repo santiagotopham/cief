@@ -1,7 +1,7 @@
 import { openDbConnection } from "../db/connection.js";
 import { arrayToString } from "../services/common.service.js";
 
-//Obtener lista de generos
+//Obtener todos
 export async function getGenresList() {
 	const connection = await openDbConnection();
 	const query = "SELECT * FROM Genres order by Id";
@@ -12,7 +12,7 @@ export async function getGenresList() {
 	return genres;
 }
 
-//Obtener genero por id
+//Obtener segun id
 export async function getGenreById(id) {
 	const connection = await openDbConnection();
 	const query = "SELECT * FROM Genres WHERE Id = ? LIMIT 1";
@@ -23,7 +23,7 @@ export async function getGenreById(id) {
 	return genres[0];
 }
 
-//Obtener generos segun una lista de ids de juegos
+//Obtener segun una lista de ids de juegos
 export async function getGenresByGameId(gameIds) {
 	const idsString = arrayToString(gameIds);
 
@@ -40,7 +40,7 @@ export async function getGenresByGameId(gameIds) {
 	return genres;
 }
 
-//Insertar genero
+//Nuevo
 export async function saveGenre(newGenre) {
 	const connection = await openDbConnection();
 	const sql = "INSERT INTO `Genres`(`Name`) VALUES (?)";
@@ -50,7 +50,7 @@ export async function saveGenre(newGenre) {
 	await connection.end();
 }
 
-//Actualizar genero
+//Editar
 export async function updateGenre(id, updatedGenre) {
 	const connection = await openDbConnection();
 	const sql = "UPDATE `Genres` SET `Name` = ? WHERE `Id` = ? LIMIT 1";
@@ -60,7 +60,7 @@ export async function updateGenre(id, updatedGenre) {
 	await connection.end();
 }
 
-//Eliminar genero
+//Eliminar
 export async function deleteGenre(id) {
 	const connection = await openDbConnection();
 
@@ -72,7 +72,7 @@ export async function deleteGenre(id) {
 	await connection.end();
 }
 
-//Insertar relacion de generos a un juego
+//Asociar a un juego
 export async function linkGameToGenresDb(gameId, genresToLink) {
 	const connection = await openDbConnection();
 

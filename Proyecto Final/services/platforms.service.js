@@ -1,7 +1,7 @@
 import { openDbConnection } from "../db/connection.js";
 import { arrayToString } from "../services/common.service.js";
 
-//Obtener lista de plataformas
+//Obtener todas
 export async function getPlatformsList() {
 	const connection = await openDbConnection();
 	const query = `SELECT 
@@ -19,7 +19,7 @@ export async function getPlatformsList() {
 	return platforms;
 }
 
-//Obtener plataforma segun id
+//Obtener segun id
 export async function getPlatformById(id) {
 	const connection = await openDbConnection();
 	const query = "SELECT * FROM Platforms WHERE Id = ? LIMIT 1";
@@ -30,7 +30,7 @@ export async function getPlatformById(id) {
 	return platforms[0];
 }
 
-//Obtener lista de plataformas principales
+//Obtener todas plataformas principales/padres
 export async function getMainPlatforms() {
 	const connection = await openDbConnection();
 	const query = "SELECT * FROM `MainPlatforms` ORDER BY Id";
@@ -41,10 +41,11 @@ export async function getMainPlatforms() {
 	return platforms;
 }
 
-//Obtener plataforma principal por nombre
+//Obtener plataforma principal segun nombre
 export async function getMainPlatformByName(name) {
 	const connection = await openDbConnection();
-	const query = "SELECT * FROM `MainPlatforms` WHERE LOWER(Name) = LOWER(?) LIMIT 1";
+	const query =
+		"SELECT * FROM `MainPlatforms` WHERE LOWER(Name) = LOWER(?) LIMIT 1";
 
 	let [platforms] = await connection.query(query, [name]);
 	await connection.end();
@@ -52,7 +53,7 @@ export async function getMainPlatformByName(name) {
 	return platforms[0];
 }
 
-//Obtener plataformas segun una lista de juegos
+//Obtener segun una lista de ids de juegos
 export async function getPlatformsByGameId(gameIds) {
 	const idsString = arrayToString(gameIds);
 
@@ -69,7 +70,7 @@ export async function getPlatformsByGameId(gameIds) {
 	return platforms;
 }
 
-//Insertar plataforma
+//Nuevo
 export async function savePlatform(newPlatform) {
 	const connection = await openDbConnection();
 	const sql =
@@ -83,7 +84,7 @@ export async function savePlatform(newPlatform) {
 	await connection.end();
 }
 
-//Actualizar plataforma
+//Editar
 export async function updatePlatform(id, updatedPlatform) {
 	const connection = await openDbConnection();
 	const sql =
@@ -98,7 +99,7 @@ export async function updatePlatform(id, updatedPlatform) {
 	await connection.end();
 }
 
-//Eliminar plataforma
+//Eliminar
 export async function deletePlatform(id) {
 	const connection = await openDbConnection();
 
@@ -110,7 +111,7 @@ export async function deletePlatform(id) {
 	await connection.end();
 }
 
-//Insertar relacion de plataformas a un juego
+//Asociar a un juego
 export async function linkGameToPlatformsDb(gameId, platformsToLink) {
 	const connection = await openDbConnection();
 

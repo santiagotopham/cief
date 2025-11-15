@@ -1,7 +1,7 @@
 import { openDbConnection } from "../db/connection.js";
 import { getCorrectDateFormat } from "../services/common.service.js";
 
-//Obtener comentarios de un juego
+//Obtener segun id de juego
 export async function getCommentsByGameId(gameId) {
 	const connection = await openDbConnection();
 	const query = `SELECT * FROM Comments
@@ -19,7 +19,7 @@ export async function getCommentsByGameId(gameId) {
 	return comments;
 }
 
-//Insertar comentario
+//Nuevo
 export async function saveComment(newComment) {
 	const connection = await openDbConnection();
 	const sql = `INSERT INTO Comments (GameId, UserName, PublishedDate, Text) VALUES (?, ?, NOW(), ?)`;
@@ -29,7 +29,7 @@ export async function saveComment(newComment) {
 	await connection.end();
 }
 
-//Eliminar comentario
+//Eliminar
 export async function deleteComment(id) {
 	const connection = await openDbConnection();
 	const sql = "DELETE FROM Comments WHERE Id = ? LIMIT 1";

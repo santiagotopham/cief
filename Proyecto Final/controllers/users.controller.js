@@ -2,6 +2,7 @@ import { isUserValid } from "../services/users.service.js";
 import { buildNavBarMenu } from "../services/common.service.js";
 import { siteName } from "../config/constants.js";
 
+//Pagina login
 export async function renderLogin(req, res) {
 	res.render("login", {
 		title: siteName,
@@ -12,6 +13,7 @@ export async function renderLogin(req, res) {
 	});
 }
 
+//Validacion ususario
 export async function login(req, res) {
 	try {
 		const { username, password } = req.body;
