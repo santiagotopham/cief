@@ -1,0 +1,173 @@
+/* //////////////////////  	INDICE / GALERIA DE JUEGOS	   ////////////////////// */
+
+.game_grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.5rem;
+	justify-items: center;
+}
+
+.game_card {
+	background-color: var(--page_white_color);
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	width: 260px;
+	height: 420px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	padding: 12px;
+	box-sizing: border-box;
+}
+
+.game_card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 12px rgba(145, 71, 255, 0.5);
+}
+
+.game_card a:first-child {
+	width: 100%;
+	height: 320px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
+.game_card a img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.game_card a h3 {
+	font-size: 1.1rem;
+	margin: 0;
+	font-weight: bold;
+	padding: 0.75rem 0 0 0;
+}
+
+.game_card p {
+	font-size: 0.85rem;
+	color: var(--page_main_color);
+}
+
+/* //////////////////////  	PAGINA DE JUEGO	   ////////////////////// */
+
+.game_detail {
+	background-color: var(--page_white_color);
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	width: 90%;
+	max-width: 900px;
+	margin: 0 auto 2rem auto;
+	padding: 2rem;
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	position: relative;
+}
+
+.game_detail a img {
+	width: 300px;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	object-fit: cover;
+}
+
+.game_info {
+	flex: 1;
+	text-align: left;
+}
+
+.game_info h2 {
+	font-size: 1.8rem;
+	margin-bottom: 1rem;
+}
+
+.game_info p {
+	margin-bottom: 0.6rem;
+	font-size: 0.95rem;
+	line-height: 1.5;
+}
+
+.game_info a:hover {
+	text-decoration: underline;
+}
+
+.game_info p strong {
+	color: var(--accent_color);
+}
+
+.game_genres {
+	margin-top: 1rem;
+}
+
+.game_genres strong {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--accent_color);
+	font-size: 0.95rem;
+}
+
+.game_genres ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.game_genres li {
+	color: var(--accent_color);
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+
+.game_genres li:not(:last-child)::after {
+	content: "•";
+	margin-left: 0.5rem;
+	color: var(--page_main_color);
+}
+
+/* //////////////////////  	VOTACION	   ////////////////////// */
+
+.vote_container {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 0.5rem 0.75rem;
+	border-radius: 25px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vote_container span {
+	font-weight: bold;
+	font-size: 1rem;
+	color: var(--page_main_color);
+	min-width: 30px;
+	text-align: center;
+}
+
+.vote_btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	transition: transform 0.2s ease;
+	display: flex;
+	align-items: center;
+}
+
+.vote_btn:hover {
+	transform: scale(1.2);
+}
+
+.vote_btn img {
+	width: 24px;
+	height: 24px;
+}

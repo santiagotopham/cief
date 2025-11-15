@@ -1,0 +1,57 @@
+/* //////////////////////  	CONFIGURACION BASE	   ////////////////////// */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--page_main_color: #323a45;
+	--page_white_color: #f8f9fa;
+	--accent_color: #9147ff;
+	--accent_color_darker: #5300cf;
+	--link_hover_color: #9147ff;
+	--black_color: #000;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--page_white_color);
+	color: var(--page_main_color);
+	line-height: 1.6;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* //////////////////////  	GENERALES	   ////////////////////// */
+
+main {
+	flex: 1;
+	width: 80%;
+	max-width: 1200px;
+	margin: 2rem auto;
+	text-align: center;
+}
+
+hr {
+	margin-bottom: 1rem;
+	border: none;
+	height: 2px;
+	color: var(--page_main_color);
+	background-color: var(--page_main_color);
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.purple_link:hover {
+	color: var(--link_hover_color);
+}
+
+.top_space {
+	margin-top: 2rem;
+}

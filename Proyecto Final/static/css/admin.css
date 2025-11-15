@@ -1,0 +1,199 @@
+/* //////////////////////  	PANEL ADMIN	   ////////////////////// */
+
+.backoffice_main {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	padding: 2rem;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+/* //////////////////////  	FORMULARIOS	   ////////////////////// */
+
+.selector_container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin: 1rem 0;
+}
+
+#genres,
+#platforms {
+	min-width: 200px;
+	padding: 5px;
+}
+
+button[type="button"] {
+	width: fit-content;
+	padding: 5px 10px;
+	background-color: var(--page_main_color);
+	color: var(--page_white_color);
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+button[type="button"]:hover {
+	background-color: var(--link_hover_color);
+}
+
+.category_group {
+	margin: 1rem 0;
+}
+
+.category_options {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+.category_options label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	font-weight: 500;
+	color: var(--page_main_color);
+}
+
+.category_options input[type="radio"] {
+	accent-color: var(--accent_color);
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	margin: 0;
+}
+
+/* //////////////////////  	CHIPS	////////////////////// */
+
+.modal_form .chips_container {
+	display: flex;
+	flex-direction: row !important;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+.item_chip {
+	background-color: var(--page_main_color);
+	color: var(--page_white_color);
+	border-radius: 20px;
+	padding: 4px 10px;
+	font-size: 0.85rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	width: auto;
+}
+
+.item_chip .remove_chip {
+	background: none;
+	border: none;
+	color: var(--page_white_color);
+	font-size: 1rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0;
+}
+.item_chip:hover {
+	color: var(--link_hover_color);
+}
+
+/* //////////////////////  	TABLAS   ////////////////////// */
+
+.data_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1rem;
+}
+
+.data_table th,
+.data_table td {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	text-align: left;
+}
+
+.data_table th {
+	background-color: var(--page_main_color);
+	color: white;
+}
+
+.data_table button {
+	padding: 4px 8px;
+	margin: 2px;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+}
+
+.data_table button:first-of-type {
+	background-color: darkgreen;
+	color: white;
+}
+
+.data_table button:last-of-type {
+	background-color: darkred;
+	color: white;
+}
+
+.game_section,
+.genre_section,
+.platform_section {
+	border: 2px solid var(--page_main_color);
+	border-radius: 10px;
+	padding: 1.5rem;
+	background: var(--page_white_color);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.section_header h2 {
+	color: var(--page_main_color);
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+.new_btn {
+	background-color: var(--accent_color);
+	color: var(--page_white_color);
+	border: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 0.95rem;
+	transition: background-color 0.2s ease;
+}
+
+.new_btn:hover {
+	background-color: var(--accent_color_darker);
+}
+
+.logout_btn {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background-color: #dc2626;
+	color: white;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 0.375rem;
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: background-color 0.2s ease;
+	z-index: 10;
+}
+
+.logout_btn:hover {
+	background-color: #b91c1c;
+}

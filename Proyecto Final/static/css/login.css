@@ -1,0 +1,88 @@
+/* //////////////////////  	LOGIN	////////////////////// */
+
+.login_overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.login_modal {
+	background-color: var(--page_white_color);
+	border-radius: 10px;
+	padding: 2rem;
+	width: 90%;
+	max-width: 400px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.login_modal h2 {
+	color: var(--page_main_color);
+	margin-bottom: 1.5rem;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.login_form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.login_form div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.login_form label {
+	font-weight: bold;
+	color: var(--page_main_color);
+}
+
+.login_form input {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 0.95rem;
+	font-family: inherit;
+}
+
+.login_buttons {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+	flex-direction: row !important;
+}
+
+.login_buttons button {
+	flex: 1;
+	padding: 10px 20px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: opacity 0.2s ease;
+	font-weight: bold;
+}
+
+.login_buttons button[type="submit"] {
+	background-color: var(--accent_color);
+	color: white;
+}
+
+.login_buttons button[type="button"] {
+	background-color: var(--page_main_color);
+	color: white;
+}
+
+.login_buttons button:hover {
+	opacity: 0.8;
+}

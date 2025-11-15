@@ -40,12 +40,12 @@
 -   [x] login
 -   [x] notificaciones Toast
 -   [x] como admin borrar comentarios
+-   [x] separar logica en diferentes archivos
 -   [ ] lista de mejoras pendientes
     -   [ ] manejo de errores completo
     -   [ ] alert bonito de confirmacion
     -   [ ] validacion de duplicados
     -   [ ] manejo real de sesion desde el backend
-    -   [ ] separar logica en diferentes archivos
     -   [ ] responsive
     -   [ ] scroll en tablas panel admin
     -   [ ] que solo pueda votar una vez cada persona
