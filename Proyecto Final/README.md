@@ -42,16 +42,19 @@
 -   [x] como admin borrar comentarios
 -   [x] separar logica en diferentes archivos
 -   [ ] lista de mejoras pendientes
-    -   [ ] manejo de errores completo
-    -   [ ] alert bonito de confirmacion
-    -   [ ] validacion de duplicados
     -   [ ] manejo real de sesion desde el backend
+    -   [ ] manejo real de contraseña no con encriptacion simple
+    -   [ ] aplicar update anti injecciones y XSS (rama en github)
+    -   [ ] manejo de errores completo
+    -   [ ] validacion de duplicados
     -   [ ] responsive
+    -   [ ] alert bonito de confirmacion
     -   [ ] scroll en tablas panel admin
     -   [ ] que solo pueda votar una vez cada persona
     -   [ ] generos y plataformas en pagina detalle sean links a los filtros
     -   [ ] permitir combinar filtros, agregar mas filtros (lanzamiento, like ratio, idioma, etc)
     -   [ ] mas info de los juegos en pag detalle (logros, time to beat, idiomas, links a tiendas oficiales?)
+    -   [ ] localizacion
     -   [ ] mas paginas agregando mas contenido
         -   [ ] proximos lanzamientos
         -   [ ] listas top 100
