@@ -1,3 +1,5 @@
+import { getMainPlatforms } from "../services/platforms.service.js";
+
 //Formateo de fecha para juegos
 export function setGameListDateFormat(games) {
 	games = games.map((currentGame) => {
@@ -17,4 +19,16 @@ export function getCorrectDateFormat(unformattedDate) {
 //Convierte string separado por comas en array
 export function arrayToString(array) {
 	return array.join(",");
+}
+
+//Items del NavBar
+export async function buildNavBarMenu() {
+	let mainPlatforms = await getMainPlatforms();
+	let list = '<ul class="container">';
+	for (const currentPlatform of mainPlatforms) {
+		list += `<li><a href="/mainplatform/${currentPlatform.Name.toLowerCase()}">${
+			currentPlatform.Name
+		}</a></li>`;
+	}
+	return list;
 }

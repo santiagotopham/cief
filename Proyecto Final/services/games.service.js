@@ -15,7 +15,6 @@ import {
 
 //Obtener lista de juegos
 export async function getGamesList(shouldFormatDate) {
-	console.log("games");
 	const connection = await openDbConnection();
 	const query = `select * from Games g`;
 
@@ -57,25 +56,25 @@ export async function getGamesByName(name, shouldFormatDate) {
 }
 
 //Obtener juego por id
-export async function getGameById(id) {
+export async function getById(id) {
 	const connection = await openDbConnection();
 	const query = `SELECT * FROM Games where Id = ${id}`;
 
 	let [games] = await connection.query(query);
 	await connection.end();
 
-	if (games[0] == null) {
-		return res.redirect("/404");
-	}
+	// if (games[0] == null) {
+	// 	return res.redirect("/404");
+	// }
 
-	const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
-		games
-	);
-	games = await composeGames(games, gameGenres, gamePlatforms);
+	// const { gameGenres, gamePlatforms } = await getRelatedEntitesFromGames(
+	// 	games
+	// );
+	// games = await composeGames(games, gameGenres, gamePlatforms);
 
-	games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
+	// games[0].LaunchDate = getCorrectDateFormat(games[0].LaunchDate);
 
-	return games[0];
+	return games;
 }
 
 //Obtener lista de juegos segun lista de ids
@@ -264,46 +263,6 @@ export async function getGamesByPlatformId(platformId) {
 	const games = await getGamesByIdList(gameIds);
 
 	return games;
-}
-
-//////////////////////  	COMENTARIOS	   //////////////////////
-
-//Obtener comentarios de un juego
-export async function getCommentsByGameId(gameId) {
-	const connection = await openDbConnection();
-	const query = `SELECT * FROM Comments 
-					WHERE GameId = ? 
-					ORDER BY PublishedDate DESC`;
-
-	let [comments] = await connection.query(query, [gameId]);
-	await connection.end();
-
-	comments = comments.map((comment) => {
-		comment.PublishedDate = getCorrectDateFormat(comment.PublishedDate);
-		return comment;
-	});
-
-	return comments;
-}
-
-//Insertar comentario
-export async function saveComment(newComment) {
-	const connection = await openDbConnection();
-	const sql = `INSERT INTO Comments (GameId, UserName, PublishedDate, Text) VALUES (?, ?, NOW(), ?)`;
-	const values = [newComment.gameId, newComment.userName, newComment.text];
-
-	await connection.execute(sql, values);
-	await connection.end();
-}
-
-//Eliminar comentario
-export async function deleteComment(id) {
-	const connection = await openDbConnection();
-	const sql = "DELETE FROM Comments WHERE Id = ? LIMIT 1";
-	const values = [id];
-
-	await connection.execute(sql, values);
-	await connection.end();
 }
 
 //Armado de objeto complejo de juego con entidades relacionadas

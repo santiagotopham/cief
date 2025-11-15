@@ -41,6 +41,17 @@ export async function getMainPlatforms() {
 	return platforms;
 }
 
+//Obtener plataforma principal por nombre
+export async function getMainPlatformByName(name) {
+	const connection = await openDbConnection();
+	const query = "SELECT * FROM `MainPlatforms` WHERE LOWER(Name) = LOWER(?) LIMIT 1";
+
+	let [platforms] = await connection.query(query, [name]);
+	await connection.end();
+
+	return platforms[0];
+}
+
 //Obtener plataformas segun una lista de juegos
 export async function getPlatformsByGameId(gameIds) {
 	const idsString = arrayToString(gameIds);

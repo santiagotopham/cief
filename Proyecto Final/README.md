@@ -41,7 +41,7 @@
 -   [x] notificaciones Toast
 -   [x] como admin borrar comentarios
 -   [ ] lista de mejoras pendientes
-    -   [ ] manejo de errores
+    -   [ ] manejo de errores completo
     -   [ ] alert bonito de confirmacion
     -   [ ] validacion de duplicados
     -   [ ] manejo real de sesion desde el backend
